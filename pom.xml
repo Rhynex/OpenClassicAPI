@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>me.steveice10</groupId>
 	<artifactId>openclassicapi</artifactId>
-	<version>dev-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>OpenClassicAPI</name>
