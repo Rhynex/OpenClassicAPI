@@ -19,7 +19,16 @@
 
 	<scm>
 		<url>http://github.com/Steveice10/OpenClassicAPI/</url>
+    		<connection>http://github.com/Steveice10/OpenClassicAPI/</connection>
 	</scm>
+
+  	<developers>
+    		<developer>
+      			<id>steveice10</id>
+      			<name>Steveice10</name>
+      			<email>Steveice10@gmail.com</email>
+    		</developer>
+  	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
