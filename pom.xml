@@ -19,7 +19,7 @@
 
 	<scm>
 		<url>http://github.com/Steveice10/OpenClassicAPI/</url>
-    		<connection>http://github.com/Steveice10/OpenClassicAPI/</connection>
+    		<connection>scm:git:git://github.com/Steveice10/OpenClassicAPI.git</connection>
 	</scm>
 
   	<developers>
