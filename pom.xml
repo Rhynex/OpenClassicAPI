@@ -3,11 +3,11 @@
 	<groupId>me.steveice10</groupId>
 	<artifactId>openclassicapi</artifactId>
 	<version>dev-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>OpenClassicAPI</name>
-	<description></description>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+	<description>The open source API for the custom Minecraft Classic server OpenClassic.</description>
+	<url>http://github.com/Steveice10/OpenClassicAPI/</url>
 
 	<licenses>
 		<license>
@@ -16,6 +16,14 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
+	<scm>
+		<url>http://github.com/Steveice10/OpenClassicAPI/</url>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<!--  Dependencies -->
 	<dependencies>
@@ -26,6 +34,7 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<defaultGoal>clean install</defaultGoal>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
