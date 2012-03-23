@@ -12,7 +12,7 @@ OpenClassicAPI is the API for the custom Minecraft Classic server <b>[OpenClassi
 <b>Building the Source</b>
 --------
 
-OpenClassicAPI uses Maven to manage dependencies. Simply run 'mvn clean install' in the source's directory. You can also download a build <b>[here](http://travis-ci.org/#!/Steveice10/OpenClassicAPI/)</b>.
+OpenClassicAPI uses Maven to manage dependencies. Simply run 'mvn clean install' in the source's directory. You can also download a build <b>(COMING SOON)</b>.
 
 
 <b>License</b>
