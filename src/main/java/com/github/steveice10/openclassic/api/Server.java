@@ -100,10 +100,6 @@ public interface Server {
 	
 	public List<String> getBannedIps();
 	
-	public boolean doOpsIgnoreMaxPlayers();
-	
-	public void setOpsIgnoreMaxPlayers(boolean ignore);
-	
 	public PermissionManager getPermissionManager();
 	
 	public void stop();
