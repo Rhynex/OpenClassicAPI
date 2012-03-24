@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.github.steveice10.openclassic.api.OpenClassic;
 import com.github.steveice10.openclassic.api.config.Configuration;
-import com.github.steveice10.openclassic.api.config.ConfigurationNode;
 import com.github.steveice10.openclassic.api.network.msg.PlayerOpMessage;
 
 public class PermissionManager {

@@ -24,17 +24,21 @@ public class ConfigurationNode {
 	}
 
 	public Object getValue() {
+		return this.getValue(true);
+	}
+	
+	public Object getValue(boolean useDefIfNeeded) {
 		if (value != null) {
 			return value;
 		}
 
-		this.setValue(def, true);
+		if(useDefIfNeeded) this.setValue(def, true);
 		return def;
 	}
 
-	public void setValue(Object value, boolean toMemoryConfig) {
+	public void setValue(Object value, boolean toConfig) {
 		this.value = value;
-		if (this.config != null && toMemoryConfig) {
+		if (this.config != null && toConfig) {
 			this.config.addNode(this);
 		}
 	}

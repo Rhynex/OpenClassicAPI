@@ -178,7 +178,7 @@ public class Configuration {
 	public void addNode(ConfigurationNode node) {
 		Object value = this.getValue(node.getPath());
 		if (value == null) {
-			this.setValue(node.getPath(), node.getValue());
+			this.setValue(node.getPath(), node.getValue(false));
 		} else {
 			node.setValue(value, false);
 		}
