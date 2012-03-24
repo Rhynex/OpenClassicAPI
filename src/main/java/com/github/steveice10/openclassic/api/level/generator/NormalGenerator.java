@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.github.steveice10.openclassic.api.MathHelper;
 import com.github.steveice10.openclassic.api.Position;
 import com.github.steveice10.openclassic.api.block.BlockType;
 import com.github.steveice10.openclassic.api.level.Level;
+import com.github.steveice10.openclassic.api.util.MathHelper;
 import com.github.steveice10.openclassic.api.util.PerlinNoise;
 
+// TODO: Freeze fix
 public class NormalGenerator extends Generator {
-
-	private static final int WATER_HEIGHT = 20;
 
 	@Override
 	public void generate(Level level) {
@@ -22,7 +21,7 @@ public class NormalGenerator extends Generator {
 
 		for (int x = 0; x < level.getWidth(); x++) {
 			for (int z = 0; z < level.getDepth(); z++) {
-				this.generateColumn(level, x, z, level.getWidth(), level.getHeight(), level.getDepth(), treePositions, treeHeights, rand);
+				this.generateColumn(level, x, z, level.getHeight(), treePositions, treeHeights, rand);
 			}
 		}
 
@@ -58,7 +57,7 @@ public class NormalGenerator extends Generator {
 		}
 	}
 
-	private void generateColumn(Level level, int x, int z, short width, short height, short depth, List<Position> treePositions, List<Integer> treeHeights, Random rand) {
+	private void generateColumn(Level level, int x, int z, short height, List<Position> treePositions, List<Integer> treeHeights, Random rand) {
 		double gen = 5;
 
 		int localHeight = 0;
@@ -76,7 +75,7 @@ public class NormalGenerator extends Generator {
 		val = Math.max(0, val);
 		BlockType type = BlockType.STONE;
 		for (int y = localHeight; y < localHeight + val; y++) {
-			if (y <= WATER_HEIGHT + 1) {
+			if (y <= level.getWaterLevel() + 1) {
 				type = BlockType.SAND;
 			}
 			double scaleY = (Math.abs(y - height / 5) + 10.0) / height * 3.5;
@@ -96,7 +95,7 @@ public class NormalGenerator extends Generator {
 
 		int block = level.getBlockIdAt(x, localHeight - 1, z);
 		if (block == 3) {
-			if (localHeight - 1 <= WATER_HEIGHT + 1) {
+			if (localHeight - 1 <= level.getWaterLevel() + 1) {
 				level.setBlockAt(x, localHeight - 1, z, BlockType.SAND);
 			} else {
 				level.setBlockAt(x, localHeight - 1, z, BlockType.GRASS);
@@ -114,8 +113,8 @@ public class NormalGenerator extends Generator {
 			}
 		}
 
-		if (localHeight < WATER_HEIGHT) {
-			for (; localHeight < WATER_HEIGHT; localHeight++) {
+		if (localHeight < level.getWaterLevel()) {
+			for (; localHeight < level.getWaterLevel(); localHeight++) {
 				level.setBlockAt(x, localHeight, z, BlockType.WATER);
 			}
 		}
@@ -160,7 +159,7 @@ public class NormalGenerator extends Generator {
 			} else if (noise3 - scaleY < 0.02) {
 				level.setBlockAt(x, y, z, BlockType.STONE);
 			} else {
-				if (y < WATER_HEIGHT) {
+				if (y < level.getWaterLevel()) {
 					level.setBlockAt(x, y, z, BlockType.WATER);
 				} else {
 					level.setBlockAt(x, y, z, BlockType.AIR);

@@ -17,8 +17,9 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
-import com.github.steveice10.openclassic.api.MathHelper;
 import com.github.steveice10.openclassic.api.OpenClassic;
+import com.github.steveice10.openclassic.api.util.MathHelper;
+
 
 @SuppressWarnings("unchecked")
 public class Configuration {

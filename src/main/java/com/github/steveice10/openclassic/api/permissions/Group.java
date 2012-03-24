@@ -40,7 +40,8 @@ public class Group {
 	}
 	
 	public List<String> getPermissions() {
-		return new ArrayList<String>(this.perms);
+		return this.perms;
+		//return new ArrayList<String>(this.perms);
 	}
 	
 	public void addPermission(String permission) {

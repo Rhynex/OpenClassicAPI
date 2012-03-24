@@ -3,7 +3,7 @@ package com.github.steveice10.openclassic.api.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.steveice10.openclassic.api.MathHelper;
+import com.github.steveice10.openclassic.api.util.MathHelper;
 
 @SuppressWarnings("unchecked")
 public class ConfigurationNode {
