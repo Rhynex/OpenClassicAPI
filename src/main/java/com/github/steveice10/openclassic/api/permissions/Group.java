@@ -40,8 +40,9 @@ public class Group {
 	}
 	
 	public List<String> getPermissions() {
-		return this.perms;
-		//return new ArrayList<String>(this.perms);
+		List<String> result = new ArrayList<String>(); // ArrayList<String>(this.perms) returns blank
+		result.addAll(this.perms);
+		return result;
 	}
 	
 	public void addPermission(String permission) {
@@ -53,7 +54,9 @@ public class Group {
 	}
 	
 	public List<String> getPlayers() {
-		return new ArrayList<String>(this.players);
+		List<String> result = new ArrayList<String>(); // ArrayList<String>(this.players) returns blank
+		result.addAll(this.players);
+		return result;
 	}
 	
 	public void addPlayer(String name) {
