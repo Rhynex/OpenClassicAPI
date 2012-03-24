@@ -210,16 +210,6 @@ public class Configuration {
 		node.setConfiguration(this);
 		return node;
 	}
-	
-	/* public Map<String, Object> getNode(String path) {
-		if(path == "") return this.data;
-		
-		try {
-			return (Map<String, Object>) this.getValue(path);
-		} catch (ClassCastException e) {
-			return null;
-		}
-	} */
 
 	public String getString(String path) {
 		return this.getString(path, "");

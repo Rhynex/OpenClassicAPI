@@ -7,12 +7,14 @@ public class Group {
 
 	private String name;
 	private String inherits;
+	private boolean def;
 	private List<String> perms;
 	private List<String> players = new ArrayList<String>();
 	
-	public Group(String name, String inherits, List<String> perms, List<String> players) {
+	public Group(String name, String inherits, boolean def, List<String> perms, List<String> players) {
 		this.name = name;
 		this.inherits = inherits;
+		this.def = def;
 		this.perms = perms;
 		this.players = players;
 	}
@@ -29,12 +31,36 @@ public class Group {
 		this.inherits = group;
 	}
 	
+	public boolean isDefault() {
+		return this.def;
+	}
+	
+	public void setDefault(boolean def) {
+		this.def = def;
+	}
+	
 	public List<String> getPermissions() {
-		return this.perms;
+		return new ArrayList<String>(this.perms);
+	}
+	
+	public void addPermission(String permission) {
+		this.perms.add(permission);
+	}
+	
+	public void removePermission(String permission) {
+		this.perms.remove(permission);
 	}
 	
 	public List<String> getPlayers() {
-		return this.players;
+		return new ArrayList<String>(this.players);
+	}
+	
+	public void addPlayer(String name) {
+		this.players.add(name);
+	}
+	
+	public void removePlayer(String name) {
+		this.players.remove(name);
 	}
 	
 	public boolean hasPermission(String permission) {

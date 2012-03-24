@@ -9,20 +9,20 @@ import com.github.steveice10.openclassic.api.config.Configuration;
 import com.github.steveice10.openclassic.api.config.ConfigurationNode;
 import com.github.steveice10.openclassic.api.network.msg.PlayerOpMessage;
 
-
 public class PermissionManager {
 	
 	private Configuration perms = new Configuration(new File("permissions.yml"));
 	private List<Group> groups = new ArrayList<Group>();
 	
-	public PermissionManager() {
+	public void load() {
 		this.perms.load();
-		this.loadGroups(); //
+		this.loadGroups();
 	}
 	
 	public void save() {
 		for(Group group : this.groups) {
 			this.perms.setValue(group.getName() + ".inherits", group.getInheritedGroup());
+			this.perms.setValue(group.getName() + ".default", group.isDefault());
 			this.perms.setValue(group.getName() + ".permissions", group.getPermissions());
 			this.perms.setValue(group.getName() + ".players", group.getPlayers());
 		}
@@ -50,15 +50,16 @@ public class PermissionManager {
 	}
 	
 	public void loadGroups() {
-		for(ConfigurationNode node : this.perms.getNodes()) {
-			String name = node.getPath();
+		for(String key : this.perms.getKeys("")) {
+			String name = key;
 			
 			try {
-				String inherits = this.perms.getString(node.getPath() + "inherits");
-				List<String> permissions = this.perms.getStringList(node.getPath() + "permissions");
-				List<String> players = this.perms.getStringList(node.getPath() + "players");
+				String inherits = this.perms.getString(key + ".inherits");
+				boolean def = this.perms.getBoolean(key + ".default");
+				List<String> permissions = this.perms.getStringList(key + ".permissions");
+				List<String> players = this.perms.getStringList(key + ".players");
 				
-				this.groups.add(new Group(name, inherits, permissions, players));
+				this.groups.add(new Group(name, inherits, def, permissions, players));
 			} catch(Exception e) {
 				OpenClassic.getLogger().severe("Exception while loading a permissions entry! It's probably invalid!");
 				e.printStackTrace();
@@ -68,7 +69,7 @@ public class PermissionManager {
 		if(groups.size() <= 0) {
 			OpenClassic.getLogger().info("No groups found! Creating default group...");
 			
-			Group group = new Group("default", "", new ArrayList<String>(), new ArrayList<String>());
+			Group group = new Group("default", "", true, new ArrayList<String>(), new ArrayList<String>());
 			this.addGroup(group);
 			this.save();
 		}
@@ -90,19 +91,30 @@ public class PermissionManager {
 		return null;
 	}
 	
+	public Group getDefaultGroup() {
+		for(Group group : this.groups) {
+			if(group.isDefault()) return group;
+		}
+		
+		OpenClassic.getLogger().severe("No default group found! Expect errors!");
+		return null;
+	}
+	
 	public Group getPlayerGroup(String player) {
 		for(Group group : this.groups) {
 			if(group.getPlayers().contains(player.toLowerCase())) return group;
 		}
 		
-		return null;
+		Group group = this.getDefaultGroup();
+		group.addPlayer(player);
+		return group;
 	}
 	
 	public void setPlayerGroup(String player, Group group) {
 		Group old = this.getPlayerGroup(player);
 		
-		if(old != null) old.getPlayers().remove(player);
-		group.getPlayers().add(player);
+		if(old != null) old.removePlayer(player);
+		group.addPlayer(player);
 		
 		if(OpenClassic.getServer().getPlayer(player) != null) {
 			if(old != null) {

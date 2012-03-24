@@ -11,7 +11,7 @@ public class OpenClassic {
 	}
 	
 	public static void setServer(Server server) {
-		if(server != null) return;
+		if(OpenClassic.server != null || server == null) return;
 		OpenClassic.server = server;
 	}
 	

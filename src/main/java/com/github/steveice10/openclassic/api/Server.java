@@ -132,7 +132,7 @@ public interface Server {
 	
 	public void sendToAllExcept(Player player, Message msg);
 	
-	public boolean isStopping();
+	public boolean isRunning();
 	
 	public Configuration getConfig();
 	
