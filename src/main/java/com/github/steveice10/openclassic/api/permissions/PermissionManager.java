@@ -49,7 +49,7 @@ public class PermissionManager {
 	}
 	
 	public void loadGroups() {
-		for(String key : this.perms.getKeys("")) {
+		for(String key : this.perms.getData().keySet()) {
 			String name = key;
 			
 			try {
@@ -64,7 +64,7 @@ public class PermissionManager {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if(groups.size() <= 0) {
 			OpenClassic.getLogger().info("No groups found! Creating default group...");
 			
@@ -117,12 +117,12 @@ public class PermissionManager {
 		
 		if(OpenClassic.getServer().getPlayer(player) != null) {
 			if(old != null) {
-				if(!old.hasPermission("openclassic.ops.placebedrock") && group.hasPermission("openclassic.ops.placebedrock")) {
+				if(!old.hasPermission("openclassic.commands.solid") && group.hasPermission("openclassic.commands.solid")) {
 					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(PlayerOpMessage.OP));
-				} else if(old.hasPermission("openclassic.ops.placebedrock") && !group.hasPermission("openclassic.ops.placebedrock")) {
+				} else if(old.hasPermission("openclassic.commands.solid") && !group.hasPermission("openclassic.commands.solid")) {
 					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(PlayerOpMessage.DEOP));
 				}
-			} else if(group.hasPermission("openclassic.ops.placebedrock")) {
+			} else if(group.hasPermission("openclassic.commands.solid")) {
 				OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(PlayerOpMessage.OP));
 			}
 		}
