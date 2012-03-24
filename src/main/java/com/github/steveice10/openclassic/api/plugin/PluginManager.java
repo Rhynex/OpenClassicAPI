@@ -17,6 +17,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.github.steveice10.openclassic.api.OpenClassic;
 import com.github.steveice10.openclassic.api.event.Listener;
+import com.github.steveice10.openclassic.api.util.JarFilter;
 
 
 public class PluginManager {
