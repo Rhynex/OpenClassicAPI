@@ -46,11 +46,11 @@ public class Group {
 	}
 	
 	public void addPermission(String permission) {
-		this.perms.add(permission);
+		this.perms.add(permission.toLowerCase());
 	}
 	
 	public void removePermission(String permission) {
-		this.perms.remove(permission);
+		this.perms.remove(permission.toLowerCase());
 	}
 	
 	public List<String> getPlayers() {
@@ -60,11 +60,11 @@ public class Group {
 	}
 	
 	public void addPlayer(String name) {
-		this.players.add(name);
+		this.players.add(name.toLowerCase());
 	}
 	
 	public void removePlayer(String name) {
-		this.players.remove(name);
+		this.players.remove(name.toLowerCase());
 	}
 	
 	public boolean hasPermission(String permission) {
