@@ -23,6 +23,11 @@
 		<url>git@github.com:Steveice10/OpenClassicAPI/</url>
 	</scm>
 
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://ci.spacebase.ch</url>
+	</ciManagement>
+
   	<developers>
     		<developer>
       			<id>steveice10</id>
