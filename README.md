@@ -18,4 +18,4 @@ OpenClassicAPI uses Maven to manage dependencies. Simply run 'mvn clean install'
 <b>License</b>
 ---------
 
-OpenClassicAPI is licensed under the [MIT](http://www.opensource.org/licenses/mit-license.html).
+OpenClassicAPI is licensed under the <b>[MIT license](http://www.opensource.org/licenses/mit-license.html)</b>.
