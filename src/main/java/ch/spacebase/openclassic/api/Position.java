@@ -137,4 +137,12 @@ public class Position implements Cloneable {
 		return new Position(this.level, this.x, this.y, this.z, this.yaw, this.pitch);
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof Position)) return false;
+		
+		Position pos = (Position) o;
+		return this.x == pos.x && this.y == pos.y && this.z == pos.z && this.yaw == pos.yaw && this.pitch == pos.pitch && this.level.getName().equals(pos.getLevel().getName());
+	}
+	
 }

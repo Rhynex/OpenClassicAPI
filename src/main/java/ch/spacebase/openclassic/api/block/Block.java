@@ -1,6 +1,7 @@
 package ch.spacebase.openclassic.api.block;
 
 import ch.spacebase.openclassic.api.Position;
+import ch.spacebase.openclassic.api.entity.Entity;
 
 public class Block {
 
@@ -37,6 +38,14 @@ public class Block {
 		if(pos.getBlockZ() >= this.pos.getLevel().getDepth() || pos.getBlockZ() < 0) return null;
 		
 		return new Block(pos);
+	}
+	
+	public Entity getEntity() {
+		return this.pos.getLevel().getEntity(this.pos);
+	}
+	
+	public boolean isEntity() {
+		return this.getEntity() != null;
 	}
 	
 }

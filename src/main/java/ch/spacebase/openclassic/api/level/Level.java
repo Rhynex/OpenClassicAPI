@@ -5,6 +5,7 @@ import java.util.List;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
+import ch.spacebase.openclassic.api.entity.Entity;
 import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.player.Player;
 
@@ -72,5 +73,17 @@ public interface Level {
 	public void sendToAll(Message message);
 	
 	public void sendToAllExcept(Player skip, Message message);
+	
+	public List<Entity> getEntities();
+	
+	public Entity getEntityFromId(int id);
+	
+	public Entity getEntity(Position pos);
+	
+	public Entity spawnEntity(Entity entity, Position pos);
+	
+	public void removeEntity(Entity entity);
+	
+	public void removeEntity(int id);
 	
 }
