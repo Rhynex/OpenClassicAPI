@@ -9,13 +9,15 @@ public class EventManager {
 
 	public void callEvent(Event event) {
 		for(Listener listen : OpenClassic.getServer().getPluginManager().getListeners()) {
-			Method method = listen.getMethodFor(event);
-			if(method != null) {
-				try {
-					method.invoke(listen, event);
-				} catch(Exception e) {
-					OpenClassic.getLogger().severe("Failed to call event " + event.getType().name() + "!");
-					e.printStackTrace();
+			Method methods[] = listen.getMethodsFor(event.getClass());
+			if(methods != null && methods.length > 0) {
+				for(Method method : methods) {
+					try {
+						method.invoke(listen, event);
+					} catch(Exception e) {
+						OpenClassic.getLogger().severe("Failed to call event " + event.getType().name() + "!");
+						e.printStackTrace();
+					}
 				}
 			}
 		}

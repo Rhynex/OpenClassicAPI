@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
@@ -15,6 +16,7 @@ import java.util.jar.JarFile;
 
 import org.yaml.snakeyaml.Yaml;
 
+import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.event.Listener;
 import ch.spacebase.openclassic.api.util.JarFilter;
@@ -39,6 +41,7 @@ public class PluginManager {
 	
 	public void loadPlugin(File file) {
 		URL url = null;
+		
 		try {
 			url = file.toURI().toURL();
 		} catch (MalformedURLException e) {
@@ -52,6 +55,8 @@ public class PluginManager {
 		if(description == null) return;
 		
 		try {
+			OpenClassic.getLogger().info(Color.GREEN + "Loading " + description.getFullName() + "...");
+			
 			URLClassLoader loader = new URLClassLoader(new URL[] { url }, Thread.currentThread().getContextClassLoader());
 			
 	        Class<?> jarClass = Class.forName(description.getMainClass(), true, loader);
@@ -61,7 +66,16 @@ public class PluginManager {
 	
 	        Plugin p = constructor.newInstance();
 	        
-	        this.enablePlugin(p);
+	        boolean matched = true;
+	        
+	        for(String dependency : p.getDescription().getDependencies()) {
+	        	if(!this.isPluginEnabled(dependency)) matched = false;
+	        }
+	        
+	        if(matched) {
+	        	this.enablePlugin(p);
+	        }
+	        
 	        this.plugins.add(p);
 		} catch(Exception e) {
 			OpenClassic.getLogger().severe("Failed to load plugin from file " + file.getName() + "!");
@@ -70,8 +84,27 @@ public class PluginManager {
 	}
 	
 	public void enablePlugin(Plugin plugin) {
+		if(plugin.isEnabled()) return;
+		
+		OpenClassic.getLogger().info(Color.GREEN + "Enabling " + plugin.getDescription().getFullName() + "...");
+		
 		plugin.setEnabled(true);
 		plugin.onEnable();
+		
+		for(Plugin p : this.plugins) {
+			if(!p.isEnabled()) {
+				List<String> deps = Arrays.asList(p.getDescription().getDependencies());
+				if(deps.contains(plugin.getDescription().getName())) {
+					boolean matched = true;
+					
+					for(String dep : deps) {
+						if(!this.isPluginEnabled(dep)) matched = false;
+					}
+					
+					if(matched) this.enablePlugin(p);
+				}
+			}
+		}
 	}
 	
 	public void disablePlugins() {
@@ -81,6 +114,10 @@ public class PluginManager {
 	}
 	
 	public void disablePlugin(Plugin plugin) {
+		if(!plugin.isEnabled()) return;
+		
+		OpenClassic.getLogger().info(Color.GREEN + "Disabling " + plugin.getDescription().getFullName() + "...");
+		
 		plugin.setEnabled(false);
 		plugin.onDisable();
 	}
@@ -105,6 +142,10 @@ public class PluginManager {
 		return new ArrayList<Plugin>(this.plugins);
 	}
 	
+	public boolean isPluginEnabled(String name) {
+		return this.getPlugin(name) != null;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public PluginDescription getDescription(File file) {
 		if(file == null) return null;
@@ -123,7 +164,7 @@ public class PluginManager {
 
             Map<String, Object> yml = (Map<String, Object>) (new Yaml()).load(jar.getInputStream(entry));
             
-            return new PluginDescription((String) yml.get("name"), (String) yml.get("version"), (String) yml.get("main-class"));
+            return new PluginDescription((String) yml.get("name"), (String) yml.get("version"), (String) yml.get("main-class"), (String) yml.get("depends"));
         } catch (Exception e) {
             OpenClassic.getLogger().severe("Failed to load plugin description!");
             e.printStackTrace();

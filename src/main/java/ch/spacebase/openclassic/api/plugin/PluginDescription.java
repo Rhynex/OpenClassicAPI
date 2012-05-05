@@ -5,11 +5,13 @@ public class PluginDescription {
 	private String name;
 	private String version;
 	private String mainClass;
+	private String depends[];
 	
-	public PluginDescription(String name, String version, String mainClass) {
+	public PluginDescription(String name, String version, String mainClass, String depends) {
 		this.name = name;
 		this.version = version;
 		this.mainClass = mainClass;
+		this.depends = depends.split(", ");
 	}
 	
 	public String getFullName() {
@@ -26,6 +28,10 @@ public class PluginDescription {
 	
 	public String getMainClass() {
 		return this.mainClass;
+	}
+	
+	public String[] getDependencies() {
+		return this.depends;
 	}
 	
 }
