@@ -12,10 +12,10 @@ public enum BlockType {
 	WOOD((byte) 5),
 	SAPLING((byte) 6),
 	BEDROCK((byte) 7),
-	WATER((byte) 8),
-	STATIONARY_WATER((byte) 9),
-	LAVA((byte) 10),
-	STATIONARY_LAVA((byte) 11),
+	WATER((byte) 8, true),
+	STATIONARY_WATER((byte) 9, true),
+	LAVA((byte) 10, true),
+	STATIONARY_LAVA((byte) 11, true),
 	SAND((byte) 12),
 	GRAVEL((byte) 13),
 	GOLD_ORE((byte) 14),
@@ -57,9 +57,15 @@ public enum BlockType {
 	
 	private byte id;
 	private BlockPhysics phys;
+	private boolean liquid;
 	
 	private BlockType(byte id) {
+		this(id, false);
+	}
+	
+	private BlockType(byte id, boolean liquid) {
 		this.id = id;
+		this.liquid = liquid;
 	}
 	
 	public byte getId() {
@@ -72,6 +78,10 @@ public enum BlockType {
 	
 	public void setPhysics(BlockPhysics phys) {
 		this.phys = phys;
+	}
+	
+	public boolean isLiquid() {
+		return this.liquid;
 	}
 	
 	public static BlockType fromId(int id) {

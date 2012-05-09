@@ -16,10 +16,13 @@ import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.permissions.PermissionManager;
 import ch.spacebase.openclassic.api.player.Player;
 import ch.spacebase.openclassic.api.plugin.PluginManager;
+import ch.spacebase.openclassic.api.scheduler.Scheduler;
 
 
 public interface Server {
 
+	public Scheduler getScheduler();
+	
 	public void broadcastMessage(String message);
 	
 	public List<Player> getPlayers();
@@ -102,7 +105,7 @@ public interface Server {
 	
 	public PermissionManager getPermissionManager();
 	
-	public void stop();
+	public void shutdown();
 	
 	public Level createLevel(LevelInfo info, Generator generator);
 	

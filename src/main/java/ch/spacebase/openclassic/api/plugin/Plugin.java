@@ -1,11 +1,8 @@
 package ch.spacebase.openclassic.api.plugin;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import ch.spacebase.openclassic.api.config.Configuration;
-import ch.spacebase.openclassic.api.event.Listener;
 
 
 public abstract class Plugin {
@@ -14,7 +11,6 @@ public abstract class Plugin {
 	private Configuration config;
 	private File dataFolder;
 	private boolean enabled;
-	private List<Listener> listeners = new ArrayList<Listener>();
 	
 	public Plugin(PluginDescription description) {
 		this.description = description;
@@ -46,12 +42,9 @@ public abstract class Plugin {
 		this.enabled = enable;
 	}
 	
-	protected void addListener(Listener listener) {
-		this.listeners.add(listener);
-	}
-	
-	public List<Listener> getListeners() {
-		return this.listeners;
+	@Override
+	public String toString() {
+		return this.getDescription().getFullName();
 	}
 	
 }

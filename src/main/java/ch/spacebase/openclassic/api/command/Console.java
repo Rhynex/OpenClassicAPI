@@ -2,7 +2,7 @@ package ch.spacebase.openclassic.api.command;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 
-public class ConsoleCommandSender implements Sender {
+public class Console implements Sender {
 
 	@Override
 	public void sendMessage(String message) {

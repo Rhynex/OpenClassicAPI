@@ -9,6 +9,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
@@ -25,6 +27,7 @@ import ch.spacebase.openclassic.api.util.JarFilter;
 public class PluginManager {
 	
 	private List<Plugin> plugins = new ArrayList<Plugin>();
+	private Map<Listener, Plugin> listeners = new HashMap<Listener, Plugin>();
 
 	public void loadPlugins() {
 		File plugins = new File("plugins");
@@ -185,18 +188,24 @@ public class PluginManager {
         }
 	}
 	
-	public List<Listener> getListeners() {
+	public Collection<Listener> getListeners() {
+		return this.listeners.keySet();
+	}
+	
+	public List<Listener> getListeners(String plugin) {
 		List<Listener> result = new ArrayList<Listener>();
 		
-		for(Plugin plugin : this.plugins) {
-			result.addAll(plugin.getListeners());
+		for(Listener listener : this.listeners.keySet()) {
+			if(this.listeners.get(listener).getDescription().getName().equals(plugin)) {
+				result.add(listener);
+			}
 		}
 		
 		return result;
 	}
 	
 	public void registerListener(Listener listener, Plugin plugin) {
-		plugin.addListener(listener);
+		this.listeners.put(listener, plugin);
 	}
 	
 }

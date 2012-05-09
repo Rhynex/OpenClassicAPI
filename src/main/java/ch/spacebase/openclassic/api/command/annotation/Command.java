@@ -13,6 +13,8 @@ import ch.spacebase.openclassic.api.command.Sender;
 public @interface Command {
 
 	public String[] aliases();
+	
+	public String desc();
 
 	public String usage() default "";
 

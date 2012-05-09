@@ -16,6 +16,10 @@ public interface Level {
 	
 	public void removePlayer(String player);
 	
+	public boolean getPhysicsEnabled();
+	
+	public void setPhysicsEnabled(boolean enabled);
+	
 	public List<Player> getPlayers();
 	
 	public String getName();

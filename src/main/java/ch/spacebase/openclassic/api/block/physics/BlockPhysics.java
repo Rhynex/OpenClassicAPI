@@ -8,4 +8,6 @@ public interface BlockPhysics {
 	
 	public void onPlace(Block block);
 	
+	public void onBreak(Block block);
+	
 }
