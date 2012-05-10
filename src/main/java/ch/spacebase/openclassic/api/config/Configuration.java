@@ -200,6 +200,10 @@ public class Configuration {
 		}
 	}
 
+	public ConfigurationNode getNode(String path) {
+		return this.getNode(path, null);
+	}
+	
 	public ConfigurationNode getNode(String path, Object def) {
 		ConfigurationNode node = new ConfigurationNode(path, def);
 		Object value = this.getValue(node.getPath());

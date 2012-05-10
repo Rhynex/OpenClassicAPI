@@ -14,6 +14,7 @@ import ch.spacebase.openclassic.api.level.LevelInfo;
 import ch.spacebase.openclassic.api.level.generator.Generator;
 import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.permissions.PermissionManager;
+import ch.spacebase.openclassic.api.pkg.PackageManager;
 import ch.spacebase.openclassic.api.player.Player;
 import ch.spacebase.openclassic.api.plugin.PluginManager;
 import ch.spacebase.openclassic.api.scheduler.Scheduler;
@@ -21,6 +22,8 @@ import ch.spacebase.openclassic.api.scheduler.Scheduler;
 
 public interface Server {
 
+	public PackageManager getPackageManager();
+	
 	public Scheduler getScheduler();
 	
 	public void broadcastMessage(String message);
