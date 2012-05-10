@@ -17,6 +17,10 @@ public interface PackageManager {
 	
 	public void remove(String name, Sender executor);
 	
+	public void update(String name);
+	
+	public void update(String name, Sender executor);
+	
 	public void addSource(String id, String url);
 	
 	public void addSource(String id, String url, Sender executor);
