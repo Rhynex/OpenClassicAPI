@@ -75,11 +75,11 @@ public class NormalGenerator extends Generator {
 		int index = 0;
 		for (Position pos : treePositions) {
 			int treeHeight = treeHeights.get(index++);
-			this.addTree(level, pos, treeHeight, rand);
+			addTree(level, pos, treeHeight, rand);
 		}
 	}
 
-	private void addTree(Level level, Position pos, int treeHeight, Random rand) {
+	private static void addTree(Level level, Position pos, int treeHeight, Random rand) {
 		for (int y = 0; y < treeHeight; y++) {
 			level.setBlockAt((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY() + y), (int) Math.floor(pos.getZ()), BlockType.LOG);
 		}

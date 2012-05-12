@@ -2,7 +2,6 @@ package ch.spacebase.openclassic.api.plugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -154,7 +153,6 @@ public class PluginManager {
 		if(file == null) return null;
 		
         JarFile jar = null;
-        InputStream stream = null;
 
         try {
             jar = new JarFile(file);
@@ -176,12 +174,6 @@ public class PluginManager {
             if (jar != null) {
                 try {
                     jar.close();
-                } catch (IOException e) {
-                }
-            }
-            if (stream != null) {
-                try {
-                    stream.close();
                 } catch (IOException e) {
                 }
             }
