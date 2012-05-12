@@ -8,7 +8,6 @@ import ch.spacebase.openclassic.api.command.Command;
 import ch.spacebase.openclassic.api.command.CommandExecutor;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
-import ch.spacebase.openclassic.api.event.EventManager;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.LevelInfo;
 import ch.spacebase.openclassic.api.level.generator.Generator;
@@ -67,8 +66,6 @@ public interface Server {
 	 * @return The server's plugin manager.
 	 */
 	public PluginManager getPluginManager();
-	
-	public EventManager getEventManager();
 	
 	public void registerCommand(String alias, Command command);
 	

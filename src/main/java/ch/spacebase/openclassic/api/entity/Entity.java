@@ -1,7 +1,5 @@
 package ch.spacebase.openclassic.api.entity;
 
-import java.util.Random;
-
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
@@ -10,7 +8,7 @@ import ch.spacebase.openclassic.api.player.Player;
 
 public abstract class Entity {
 
-	private static final Random rand = new Random();
+	private static int nextId = 0;
 	
 	private int entityId;
 	private Position pos;
@@ -70,20 +68,14 @@ public abstract class Entity {
 	
 	public abstract BlockType getBlock();
 	
-	private static int assignId(Entity entity) {
-		int id = rand.nextInt();
-		for(Entity e : entity.getLevel().getEntities()) {
-			if(e.getEntityId() == id) return assignId(entity);
-		}
-		
-		return id;
-	}
-	
 	public void die() {
 		this.pos.getLevel().removeEntity(this);
 	}
 	
-	public void onDeath() {
+	public abstract void onDeath();
+	
+	private static int assignId(Entity entity) {
+		return nextId++;
 	}
 	
 	public enum BlockRemoveCause {

@@ -139,6 +139,10 @@ public class Configuration {
 		}
 	}
 	
+	public void applyDefault(String path, Object def) {
+		if(this.getValue(path) == null) this.setValue(path, def);
+	}
+	
 	public void remove(String path) {
 		if (!path.contains(".")) {
 			data.remove(path);

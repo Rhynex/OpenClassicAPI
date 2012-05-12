@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class Listener {
 
-	protected final Method[] getMethodsFor(Class<? extends Event> clazz) {
+	public final Method[] getMethodsFor(Class<? extends Event> clazz) {
 		List<Method> methods = new ArrayList<Method>();
 		
 		for(Method method : this.getClass().getMethods()) {

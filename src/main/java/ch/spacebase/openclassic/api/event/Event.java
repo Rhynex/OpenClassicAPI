@@ -13,7 +13,8 @@ public abstract class Event {
 	}
 	
 	public enum EventType {
-		
+		PLUGIN_ENABLE,
+		PLUGIN_DISABLE;
 	}
 	
 }

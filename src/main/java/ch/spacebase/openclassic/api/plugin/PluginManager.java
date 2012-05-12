@@ -19,7 +19,10 @@ import org.yaml.snakeyaml.Yaml;
 
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.event.EventFactory;
 import ch.spacebase.openclassic.api.event.Listener;
+import ch.spacebase.openclassic.api.event.plugin.PluginDisableEvent;
+import ch.spacebase.openclassic.api.event.plugin.PluginEnableEvent;
 import ch.spacebase.openclassic.api.util.JarFilter;
 
 
@@ -92,6 +95,7 @@ public class PluginManager {
 		
 		plugin.setEnabled(true);
 		plugin.onEnable();
+		EventFactory.callEvent(new PluginEnableEvent(plugin));
 		
 		for(Plugin p : this.plugins) {
 			if(!p.isEnabled()) {
@@ -122,6 +126,7 @@ public class PluginManager {
 		
 		plugin.setEnabled(false);
 		plugin.onDisable();
+		EventFactory.callEvent(new PluginDisableEvent(plugin));
 	}
 	
 	public void removePlugin(Plugin plugin) {
@@ -138,6 +143,10 @@ public class PluginManager {
 		}
 		
 		return null;
+	}
+	
+	public Plugin getPlugin(Listener listen) {
+		return this.listeners.get(listen);
 	}
 	
 	public List<Plugin> getPlugins() {
