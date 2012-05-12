@@ -7,17 +7,27 @@ import java.util.List;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.network.msg.PlayerOpMessage;
+import ch.spacebase.openclassic.api.util.Constants;
 
+/**
+ * Manages the server's permissions.
+ */
 public class PermissionManager {
 	
 	private Configuration perms = new Configuration(new File("permissions.yml"));
 	private List<Group> groups = new ArrayList<Group>();
 	
+	/**
+	 * Loads the server's permissions and groups.
+	 */
 	public void load() {
 		this.perms.load();
 		this.loadGroups();
 	}
 	
+	/**
+	 * Saves the server's permissions and groups.
+	 */
 	public void save() {
 		for(Group group : this.groups) {
 			this.perms.setValue(group.getName() + ".inherits", group.getInheritedGroup());
@@ -42,12 +52,18 @@ public class PermissionManager {
 		this.perms.save();
 	}
 	
+	/**
+	 * Reloads the server's permissions and groups.
+	 */
 	public void reload() {
 		this.save();
 		this.perms.load();
 		this.loadGroups();
 	}
 	
+	/**
+	 * Loads the server's groups.
+	 */
 	public void loadGroups() {
 		for(String key : this.perms.getData().keySet()) {
 			String name = key;
@@ -74,14 +90,27 @@ public class PermissionManager {
 		}
 	}
 	
+	/**
+	 * Adds a group to the group list.
+	 * @param Group to add.
+	 */
 	public void addGroup(Group group) {
 		this.groups.add(group);
 	}
 	
+	/**
+	 * Removes a group from the group list.
+	 * @param Group to remove.
+	 */
 	public void removeGroup(Group group) {
 		this.groups.remove(group);
 	}
 	
+	/**
+	 * Gets the group with the given name.
+	 * @param Name to look for.
+	 * @return Group with the name.
+	 */
 	public Group getGroup(String name) {
 		for(Group group : this.groups) {
 			if(group.getName().equalsIgnoreCase(name)) return group;
@@ -90,6 +119,10 @@ public class PermissionManager {
 		return null;
 	}
 	
+	/**
+	 * Gets the default group.
+	 * @return The default group.
+	 */
 	public Group getDefaultGroup() {
 		for(Group group : this.groups) {
 			if(group.isDefault()) return group;
@@ -99,6 +132,11 @@ public class PermissionManager {
 		return null;
 	}
 	
+	/**
+	 * Gets the group of the given player.
+	 * @param Player to get the group of.
+	 * @return The player's group.
+	 */
 	public Group getPlayerGroup(String player) {
 		for(Group group : this.groups) {
 			if(group.getPlayers().contains(player.toLowerCase())) return group;
@@ -109,6 +147,11 @@ public class PermissionManager {
 		return group;
 	}
 	
+	/**
+	 * Sets the player's group.
+	 * @param Player to set the group of.
+	 * @param Group to set the player to.
+	 */
 	public void setPlayerGroup(String player, Group group) {
 		Group old = this.getPlayerGroup(player);
 		
@@ -118,16 +161,22 @@ public class PermissionManager {
 		if(OpenClassic.getServer().getPlayer(player) != null) {
 			if(old != null) {
 				if(!old.hasPermission("openclassic.commands.solid") && group.hasPermission("openclassic.commands.solid")) {
-					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(PlayerOpMessage.OP));
+					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(Constants.OP));
 				} else if(old.hasPermission("openclassic.commands.solid") && !group.hasPermission("openclassic.commands.solid")) {
-					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(PlayerOpMessage.DEOP));
+					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(Constants.NOT_OP));
 				}
 			} else if(group.hasPermission("openclassic.commands.solid")) {
-				OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(PlayerOpMessage.OP));
+				OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(Constants.OP));
 			}
 		}
 	}
 	
+	/**
+	 * Checks if the player has the given permission.
+	 * @param Player to check.
+	 * @param Permission to check for.
+	 * @return True if the player has the given permission.
+	 */
 	public boolean hasPermission(String player, String permission) {
 		if(this.getPlayerGroup(player) != null) {
 			return this.getPlayerGroup(player).hasPermission(permission);
@@ -136,6 +185,12 @@ public class PermissionManager {
 		return false;
 	}
 	
+	/**
+	 * Checks if the group has the given permission.
+	 * @param Group to check.
+	 * @param Permission to check for.
+	 * @return True if the group has the given permission.
+	 */
 	public boolean hasPermission(Group group, String permission) {
 		if(group != null) return group.hasPermission(permission);
 		

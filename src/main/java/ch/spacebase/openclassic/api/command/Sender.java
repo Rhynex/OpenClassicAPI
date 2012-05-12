@@ -1,15 +1,39 @@
 package ch.spacebase.openclassic.api.command;
 
+/**
+ * Represents a command sender.
+ */
 public interface Sender {
 
+	/**
+	 * Sends a message to the command sender.
+	 * @param Message to send.
+	 */
 	public void sendMessage(String message);
 	
+	/**
+	 * Gets the name of the sender.
+	 * @return The sender's name.
+	 */
 	public String getName();
 	
+	/**
+	 * Gets the sender's display name.
+	 * @return The sender's display name.
+	 */
 	public String getDisplayName();
 	
-	public boolean hasPermission(String command);
+	/**
+	 * Checks whether the sender has the given permssion.
+	 * @param Permission to check for.
+	 * @return True if the sender has the permission.
+	 */
+	public boolean hasPermission(String permission);
 	
-	public String getDelimiter();
+	/**
+	 * Gets the command prefix for this sender.
+	 * @return The command prefix.
+	 */
+	public String getCommandPrefix();
 	
 }

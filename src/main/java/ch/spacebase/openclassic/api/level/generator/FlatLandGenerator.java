@@ -3,6 +3,9 @@ package ch.spacebase.openclassic.api.level.generator;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.level.Level;
 
+/**
+ * Generates a flat map.
+ */
 public class FlatLandGenerator extends Generator {
 
 	@Override

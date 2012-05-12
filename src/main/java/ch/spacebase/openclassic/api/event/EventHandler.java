@@ -7,6 +7,13 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
+/**
+ * An annotation representing an event handling method.
+ */
 public @interface EventHandler {
+	/**
+	 * Gets the priority of the event handler.
+	 * @return The handler's priority.
+	 */
 	Priority priority() default Priority.NORMAL;
 }

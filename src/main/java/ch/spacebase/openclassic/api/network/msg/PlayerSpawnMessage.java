@@ -1,5 +1,8 @@
 package ch.spacebase.openclassic.api.network.msg;
 
+/**
+ * Sent when a player is spawned.
+ */
 public class PlayerSpawnMessage extends Message {
 	
 	private byte playerId;
@@ -20,34 +23,63 @@ public class PlayerSpawnMessage extends Message {
 		this.pitch = pitch;
 	}
 	
+	/**
+	 * Gets the player ID of the spawned player.
+	 * @return The player's ID.
+	 */
 	public byte getPlayerId() {
 		return this.playerId;
 	}
 	
+	/**
+	 * Gets the name of the spawned player.
+	 * @return The player's name.
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * Gets the X of the spawned player.
+	 * @return The player's X.
+	 */
 	public double getX() {
 		return this.x;
 	}
 	
+	/**
+	 * Gets the Y of the spawned player.
+	 * @return The player's Y.
+	 */
 	public double getY() {
 		return this.y;
 	}
 	
+	/**
+	 * Gets the Z of the spawned player.
+	 * @return The player's Z.
+	 */
 	public double getZ() {
 		return this.z;
 	}
 	
+	/**
+	 * Gets the yaw of the spawned player.
+	 * @return The player's yaw.
+	 */
 	public byte getYaw() {
 		return this.yaw;
 	}
 	
+	/**
+	 * Gets the pitch of the spawned player.
+	 * @return The player's pitch.
+	 */
 	public byte getPitch() {
 		return this.pitch;
 	}
 	
+	@Override
 	public String toString() {
 		return "PlayerSpawnMessage{playerid=" + playerId + ",name=" + name + ",x=" + x + ",y=" + y + ",z=" + z + ",yaw=" + yaw + ",pitch=" + pitch + "}";
 	}

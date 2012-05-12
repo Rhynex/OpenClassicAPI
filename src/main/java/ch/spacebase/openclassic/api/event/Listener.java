@@ -4,8 +4,16 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that listens to events.
+ */
 public abstract class Listener {
 
+	/**
+	 * Gets the methods that handle the given event class.
+	 * @param Class to look for.
+	 * @return Methods that handle the event.
+	 */
 	public final Method[] getMethodsFor(Class<? extends Event> clazz) {
 		List<Method> methods = new ArrayList<Method>();
 		

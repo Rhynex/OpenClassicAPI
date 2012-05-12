@@ -20,7 +20,9 @@ import org.yaml.snakeyaml.constructor.SafeConstructor;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.util.MathHelper;
 
-
+/**
+ * Represents a YAML configuration.
+ */
 @SuppressWarnings("unchecked")
 public class Configuration {
 
@@ -43,6 +45,9 @@ public class Configuration {
 		this.yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
 	}
 
+	/**
+	 * Loads the configuration.
+	 */
 	public void load() {
 		try {
 			if (!this.configFile.exists()) {
@@ -60,6 +65,9 @@ public class Configuration {
 		}
 	}
 
+	/**
+	 * Saves the configuration.
+	 */
 	public void save() {
 		try {
 			if (!this.configFile.exists()) {
@@ -81,6 +89,11 @@ public class Configuration {
 		}
 	}
 
+	/**
+	 * Gets the value at the given path.
+	 * @param Path of the value.
+	 * @return The value.
+	 */
 	public Object getValue(String path) {
 		if(path.equals("")) return new HashMap<String, Object>(this.data);
 		
@@ -113,6 +126,11 @@ public class Configuration {
 		return null;
 	}
 
+	/**
+	 * Sets the value of the given path.
+	 * @param Path to set the value of.
+	 * @param Value to set.
+	 */
 	public void setValue(String path, Object value) {
 		if (!path.contains(".")) {
 			data.put(path, value);
@@ -139,10 +157,19 @@ public class Configuration {
 		}
 	}
 	
+	/**
+	 * Applies the given default to the path if the path's value is null.
+	 * @param Path to apply the default to.
+	 * @param Default to apply.
+	 */
 	public void applyDefault(String path, Object def) {
 		if(this.getValue(path) == null) this.setValue(path, def);
 	}
 	
+	/**
+	 * Removes the node at the given path.
+	 * @param Path to remove from.
+	 */
 	public void remove(String path) {
 		if (!path.contains(".")) {
 			data.remove(path);
@@ -168,10 +195,18 @@ public class Configuration {
 		}
 	}
 
+	/**
+	 * Gets all the nodes belonging to this configuration.
+	 * @return All the configuration's nodes.
+	 */
 	public Set<ConfigurationNode> getNodes() {
 		return new HashSet<ConfigurationNode>(nodes);
 	}
 
+	/**
+	 * Removes the node at the given path.
+	 * @param Path to remove from.
+	 */
 	public void removeNode(String path) {
 		for (ConfigurationNode node : nodes) {
 			if (node.getPath().equalsIgnoreCase(path)) {
@@ -180,6 +215,10 @@ public class Configuration {
 		}
 	}
 
+	/**
+	 * Adds a node.
+	 * @param Node to add.
+	 */
 	public void addNode(ConfigurationNode node) {
 		Object value = this.getValue(node.getPath());
 		if (value == null) {
@@ -192,22 +231,43 @@ public class Configuration {
 		node.config = this;
 	}
 
+	/**
+	 * Adds a node with the given path and value.
+	 * @param Path of the node.
+	 * @param Value of the node.
+	 * @return The newly added node.
+	 */
 	public ConfigurationNode addNode(String path, Object value) {
 		ConfigurationNode node = new ConfigurationNode(path, value);
 		node.setConfiguration(this);
 		return node;
 	}
 
+	/**
+	 * Adds multiple nodes.
+	 * @param Nodes to add.
+	 */
 	public void addNodes(ConfigurationNode... nodes) {
 		for (ConfigurationNode node : nodes) {
 			node.setConfiguration(this);
 		}
 	}
 
+	/**
+	 * Gets the node at the given path.
+	 * @param Path of the node.
+	 * @return The node.
+	 */
 	public ConfigurationNode getNode(String path) {
 		return this.getNode(path, null);
 	}
 	
+	/**
+	 * Gets a node at the given path, assigning the given default if it isn't found.
+	 * @param Path of the node.
+	 * @param The default to use if it isn't found.
+	 * @return The node.
+	 */
 	public ConfigurationNode getNode(String path, Object def) {
 		ConfigurationNode node = new ConfigurationNode(path, def);
 		Object value = this.getValue(node.getPath());
@@ -220,10 +280,21 @@ public class Configuration {
 		return node;
 	}
 
+	/**
+	 * Gets the string value of the given path.
+	 * @param Path of the value.
+	 * @return The path's string value.
+	 */
 	public String getString(String path) {
 		return this.getString(path, "");
 	}
 
+	/**
+	 * Gets the string value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's string value.
+	 */
 	public String getString(String path, String def) {
 		Object value = this.getValue(path);
 
@@ -239,10 +310,21 @@ public class Configuration {
 		return def;
 	}
 
+	/**
+	 * Gets the integer value of the given path.
+	 * @param Path of the value.
+	 * @return The path's integer value.
+	 */
 	public int getInteger(String path) {
 		return this.getInteger(path, 0);
 	}
 
+	/**
+	 * Gets the integer value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's integer value.
+	 */
 	public int getInteger(String path, int def) {
 		Object value = this.getValue(path);
 		Integer intValue = MathHelper.castInt(this.getValue(path));
@@ -259,10 +341,21 @@ public class Configuration {
 		return def;
 	}
 
+	/**
+	 * Gets the double value of the given path.
+	 * @param Path of the value.
+	 * @return The path's double value.
+	 */
 	public double getDouble(String path) {
 		return this.getDouble(path, 0);
 	}
 
+	/**
+	 * Gets the double value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's double value.
+	 */
 	public double getDouble(String path, double def) {
 		Object value = this.getValue(path);
 		Double doubleValue = MathHelper.castDouble(value);
@@ -279,10 +372,21 @@ public class Configuration {
 		return def;
 	}
 
+	/**
+	 * Gets the float value of the given path.
+	 * @param Path of the value.
+	 * @return The path's float value.
+	 */
 	public float getFloat(String path) {
 		return this.getFloat(path, 0);
 	}
 
+	/**
+	 * Gets the float value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's float value.
+	 */
 	public float getFloat(String path, float def) {
 		Object value = this.getValue(path);
 		Float floatValue = MathHelper.castFloat(value);
@@ -299,10 +403,21 @@ public class Configuration {
 		return def;
 	}
 
+	/**
+	 * Gets the boolean value of the given path.
+	 * @param Path of the value.
+	 * @return The path's boolean value.
+	 */
 	public boolean getBoolean(String path) {
 		return this.getBoolean(path, false);
 	}
 
+	/**
+	 * Gets the boolean value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's boolean value.
+	 */
 	public boolean getBoolean(String path, boolean def) {
 		Object value = this.getValue(path);
 		Boolean booleanValue = MathHelper.castBoolean(value);
@@ -319,10 +434,21 @@ public class Configuration {
 		return def;
 	}
 
+	/**
+	 * Gets the List value of the given path.
+	 * @param Path of the value.
+	 * @return The path's List value.
+	 */
 	public List<Object> getList(String path) {
 		return this.getList(path, null);
 	}
 
+	/**
+	 * Gets the List value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's List value.
+	 */
 	public List<Object> getList(String path, List<Object> def) {
 		Object value = this.getValue(path);
 
@@ -342,6 +468,12 @@ public class Configuration {
 		return this.getStringList(path, null);
 	}
 
+	/**
+	 * Gets the List<String> value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's List<String> value.
+	 */
 	public List<String> getStringList(String path, List<String> def) {
 		List<Object> raw = this.getList(path);
 
@@ -354,14 +486,28 @@ public class Configuration {
 
 			return list;
 		}
-
+		
+		this.setValue(path, def);
+		save();
+		
 		return def;
 	}
 
+	/**
+	 * Gets the List<Integer> value of the given path.
+	 * @param Path of the value.
+	 * @return The path's List<Integer> value.
+	 */
 	public List<Integer> getIntegerList(String path) {
 		return this.getIntegerList(path, null);
 	}
 
+	/**
+	 * Gets the List<Integer> value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's List<Integer> value.
+	 */
 	public List<Integer> getIntegerList(String path, List<Integer> def) {
 		List<Object> raw = this.getList(path);
 
@@ -376,14 +522,28 @@ public class Configuration {
 
 			return list;
 		}
+		
+		this.setValue(path, def);
+		save();
 
 		return def;
 	}
 
+	/**
+	 * Gets the List<Double> value of the given path.
+	 * @param Path of the value.
+	 * @return The path's List<Double> value.
+	 */
 	public List<Double> getDoubleList(String path) {
 		return this.getDoubleList(path, null);
 	}
 
+	/**
+	 * Gets the List<Double> value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's List<Double> value.
+	 */
 	public List<Double> getDoubleList(String path, List<Double> def) {
 		List<Object> raw = this.getList(path);
 
@@ -398,14 +558,28 @@ public class Configuration {
 
 			return list;
 		}
+		
+		this.setValue(path, def);
+		save();
 
 		return def;
 	}
 
+	/**
+	 * Gets the List<Float> value of the given path.
+	 * @param Path of the value.
+	 * @return The path's List<Float> value.
+	 */
 	public List<Float> getFloatList(String path) {
 		return this.getFloatList(path, null);
 	}
 
+	/**
+	 * Gets the List<Float> value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's List<Float> value.
+	 */
 	public List<Float> getFloatList(String path, List<Float> def) {
 		List<Object> raw = this.getList(path);
 
@@ -420,14 +594,28 @@ public class Configuration {
 
 			return list;
 		}
+		
+		this.setValue(path, def);
+		save();
 
 		return def;
 	}
 
+	/**
+	 * Gets the List<Boolean> value of the given path.
+	 * @param Path of the value.
+	 * @return The path's List<Boolean> value.
+	 */
 	public List<Boolean> getBooleanList(String path) {
 		return this.getBooleanList(path, null);
 	}
 
+	/**
+	 * Gets the List<Boolean> value of the given path.
+	 * @param Path of the value.
+	 * @param Default for if the value isn't assigned.
+	 * @return The path's List<Boolean> value.
+	 */
 	public List<Boolean> getBooleanList(String path, List<Boolean> def) {
 		List<Object> raw = this.getList(path);
 
@@ -442,10 +630,18 @@ public class Configuration {
 
 			return list;
 		}
+		
+		this.setValue(path, def);
+		save();
 
 		return def;
 	}
 
+	/**
+	 * Gets all the keys at the given path.
+	 * @param Path to look at.
+	 * @return Keys at the path.
+	 */
 	public Set<String> getKeys(String path) {
 		Set<String> keys = new HashSet<String>();
 		String[] sections = path.split("\\.");
@@ -469,6 +665,10 @@ public class Configuration {
 		return keys;
 	}
 	
+	/**
+	 * Gets all of the configuration's data.
+	 * @return The configuration's data.
+	 */
 	public Map<String, Object> getData() {
 		return new HashMap<String, Object>(this.data);
 	}

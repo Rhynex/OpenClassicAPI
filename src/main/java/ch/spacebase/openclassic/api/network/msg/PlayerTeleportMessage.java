@@ -1,5 +1,8 @@
 package ch.spacebase.openclassic.api.network.msg;
 
+/**
+ * Sent/Recieved when a player is moved.
+ */
 public class PlayerTeleportMessage extends Message {
 	
 	private byte playerId;
@@ -18,30 +21,55 @@ public class PlayerTeleportMessage extends Message {
 		this.pitch = pitch;
 	}
 	
+	/**
+	 * Gets the ID of the moved player.
+	 * @return The player's ID.
+	 */
 	public byte getPlayerId() {
 		return this.playerId;
 	}
 	
+	/**
+	 * Gets the player's new X.
+	 * @return The new X.
+	 */
 	public double getX() {
 		return this.x;
 	}
 	
+	/**
+	 * Gets the player's new Y.
+	 * @return The new Y.
+	 */
 	public double getY() {
 		return this.y;
 	}
 	
+	/**
+	 * Gets the player's new Z.
+	 * @return The new Z.
+	 */
 	public double getZ() {
 		return this.z;
 	}
 	
+	/**
+	 * Gets the player's new yaw.
+	 * @return The new yaw.
+	 */
 	public byte getYaw() {
 		return this.yaw;
 	}
 	
+	/**
+	 * Gets the player's new pitch.
+	 * @return The new pitch.
+	 */
 	public byte getPitch() {
 		return this.pitch;
 	}
 	
+	@Override
 	public String toString() {
 		return "PlayerTeleportMessage{playerid=" + playerId + ",x=" + x + ",y=" + y + ",z=" + z + ",yaw=" + yaw + ",pitch=" + pitch + "}";
 	}

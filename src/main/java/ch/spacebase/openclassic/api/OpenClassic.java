@@ -28,14 +28,20 @@ public class OpenClassic {
 	}
 	
 	/**
+	 * Returns true if the server is running.
+	 * @return True if the server is running.
+	 */
+	public static boolean isRunning() {
+		if(server == null) return false;
+		return server.isRunning();
+	}
+	
+	/**
 	 * Gets the server's logger.
 	 * @return The logger.
 	 */
 	public static Logger getLogger() {
-		if(server == null) {
-			return temp;
-		}
-		
+		if(server == null) return temp;
 		return server.getLogger();
 	}
 	

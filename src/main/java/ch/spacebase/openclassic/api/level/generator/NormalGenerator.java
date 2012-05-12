@@ -12,6 +12,11 @@ import ch.spacebase.openclassic.api.util.MathHelper;
 import ch.spacebase.openclassic.api.util.PerlinNoise;
 
 // TODO: Needs improvement
+/**
+ * Generates a normal map.
+ * @author steven
+ *
+ */
 public class NormalGenerator extends Generator {
 
 	private static final int CHUNK_SIZE = 16;
@@ -61,7 +66,7 @@ public class NormalGenerator extends Generator {
 		}
 	}
 	
-	public void generateChunk(Level level, int chX, int chZ, int sizeX, int sizeZ) {
+	private void generateChunk(Level level, int chX, int chZ, int sizeX, int sizeZ) {
 		List<Position> treePositions = new ArrayList<Position>();
 		List<Integer> treeHeights = new ArrayList<Integer>();
 		Random rand = new Random(chX * 10000 + chZ);

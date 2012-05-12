@@ -1,5 +1,8 @@
 package ch.spacebase.openclassic.api.network.msg;
 
+/**
+ * Sent when a player changes their rotation.
+ */
 public class PlayerRotationMessage extends Message {
 	
 	private byte playerId;
@@ -12,18 +15,31 @@ public class PlayerRotationMessage extends Message {
 		this.pitch = pitch;
 	}
 	
+	/**
+	 * Gets the ID of the affected player.
+	 * @return The player's ID.
+	 */
 	public byte getPlayerId() {
 		return this.playerId;
 	}
 	
+	/**
+	 * Gets the new yaw of the player.
+	 * @return The player's new yaw.
+	 */
 	public byte getYaw() {
 		return this.yaw;
 	}
 	
+	/**
+	 * Gets the new pitch of the player.
+	 * @return The player's new pitch.
+	 */
 	public byte getPitch() {
 		return this.pitch;
 	}
 	
+	@Override
 	public String toString() {
 		return "PlayerRotationMessage{playerid=" + playerId + ",yaw=" + yaw + ",pitch=" + pitch + "}";
 	}

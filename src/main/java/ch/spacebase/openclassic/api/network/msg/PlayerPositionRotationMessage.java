@@ -1,5 +1,8 @@
 package ch.spacebase.openclassic.api.network.msg;
 
+/**
+ * Sent to update a player's position and rotation.
+ */
 public class PlayerPositionRotationMessage extends Message {
 	
 	private byte playerId;
@@ -18,30 +21,55 @@ public class PlayerPositionRotationMessage extends Message {
 		this.pitch = pitch;
 	}
 	
+	/**
+	 * Gets the ID of the affected player.
+	 * @return The player's ID.
+	 */
 	public byte getPlayerId() {
 		return this.playerId;
 	}
 	
+	/**
+	 * Gets the X change of the player.
+	 * @return The X change.
+	 */
 	public double getXChange() {
 		return this.xChange;
 	}
 	
+	/**
+	 * Gets the Y change of the player.
+	 * @return The Y change.
+	 */
 	public double getYChange() {
 		return this.yChange;
 	}
 	
+	/**
+	 * Gets the Z change of the player.
+	 * @return The Z change.
+	 */
 	public double getZChange() {
 		return this.zChange;
 	}
 	
+	/**
+	 * Gets the new yaw of the player.
+	 * @return The player's new yaw.
+	 */
 	public byte getYaw() {
 		return this.yaw;
 	}
 	
+	/**
+	 * Gets the new pitch of the player.
+	 * @return The player's new pitch.
+	 */
 	public byte getPitch() {
 		return this.pitch;
 	}
 	
+	@Override
 	public String toString() {
 		return "PlayerPositionRotationMessage{playerid=" + playerId + ",xchange=" + xChange + ",ychange=" + yChange + ",zchange=" + zChange + ",yaw=" + yaw + ",pitch=" + pitch + "}";
 	}

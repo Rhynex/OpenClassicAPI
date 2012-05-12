@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.command;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 
+/**
+ * Represents the console when it sends a command.
+ */
 public class Console implements Sender {
 
 	@Override
@@ -25,7 +28,7 @@ public class Console implements Sender {
 	}
 	
 	@Override
-	public String getDelimiter() {
+	public String getCommandPrefix() {
 		return "";
 	}
 	

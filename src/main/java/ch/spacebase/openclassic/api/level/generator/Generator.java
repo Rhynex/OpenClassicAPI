@@ -6,13 +6,24 @@ import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.level.Level;
 
-
+/**
+ * Represents a map generator.
+ */
 public abstract class Generator {
 
 	protected static Random rand = new Random();
 	
+	/**
+	 * Generates the level.
+	 * @param Level to generate.
+	 */
 	public abstract void generate(Level level);
 	
+	/**
+	 * Finds a spawn for the level.
+	 * @param The level to find a spawn for.
+	 * @return The spawn found for the level.
+	 */
 	public Position findSpawn(Level level) {
 		int x = level.getWidth() / 2;
 		int y = level.getWaterLevel() + 2;

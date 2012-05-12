@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.level;
 
 import ch.spacebase.openclassic.api.Position;
 
+/**
+ * The basic info for creating a level.
+ */
 public class LevelInfo {
 
 	private String name;
@@ -18,22 +21,42 @@ public class LevelInfo {
 		this.depth = depth;
 	}
 	
+	/**
+	 * Gets the name of the level.
+	 * @return The level's name.
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * Gets the level's spawn.
+	 * @return The level's spawn.
+	 */
 	public Position getSpawn() {
 		return this.spawn;
 	}
 	
+	/**
+	 * Gets the width of the level.
+	 * @return The level's width.
+	 */
 	public short getWidth() {
 		return this.width;
 	}
 	
+	/**
+	 * Gets the height of the level.
+	 * @return The level's height.
+	 */
 	public short getHeight() {
 		return this.height;
 	}
 	
+	/**
+	 * Gets the depth of the level.
+	 * @return The level's depth.
+	 */
 	public short getDepth() {
 		return this.depth;
 	}

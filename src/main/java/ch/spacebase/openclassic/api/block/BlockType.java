@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.block;
 
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Represents a block type.
+ */
 public enum BlockType {
 
 	AIR((byte) 0),
@@ -68,22 +71,43 @@ public enum BlockType {
 		this.liquid = liquid;
 	}
 	
+	/**
+	 * Gets the block's id.
+	 * @return The block's id.
+	 */
 	public byte getId() {
 		return this.id;
 	}
 	
+	/**
+	 * Gets the block's physics if applicable.
+	 * @return The block's physics.
+	 */
 	public BlockPhysics getPhysics() {
 		return this.phys;
 	}
 	
+	/**
+	 * Sets the block's physics.
+	 * @param The physics to set.
+	 */
 	public void setPhysics(BlockPhysics phys) {
 		this.phys = phys;
 	}
 	
+	/**
+	 * Gets whether the block is a liquid.
+	 * @return True if the block is a liquid.
+	 */
 	public boolean isLiquid() {
 		return this.liquid;
 	}
 	
+	/**
+	 * Gets a BlockType from the given block ID.
+	 * @param ID to get a type for.
+	 * @return The BlockType with the given ID.
+	 */
 	public static BlockType fromId(int id) {
 		for(BlockType block : values()) {
 			if(block.getId() == id) return block;

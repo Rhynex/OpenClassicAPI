@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.util.set;
 
 import java.util.HashSet;
 
+/**
+ * A HashSet that stores 3 integers.
+ */
 public class TripleIntHashSet extends HashSet<Integer> {
 
 	private static final long serialVersionUID = 1L;

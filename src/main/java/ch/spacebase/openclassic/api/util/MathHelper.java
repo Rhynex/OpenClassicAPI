@@ -1,5 +1,8 @@
 package ch.spacebase.openclassic.api.util;
 
+/**
+ * A math utility class.
+ */
 public class MathHelper {
 
 	public static final double DBL_EPSILON = Double.longBitsToDouble(0x3cb0000000000000L);
@@ -134,6 +137,11 @@ public class MathHelper {
 		}
 	}
 
+	/**
+	 * Casts the given object to an integer if applicable.
+	 * @param Object to cast.
+	 * @return The resulting integer.
+	 */
 	public static Integer castInt(Object o) {
 		if (o instanceof Number) {
 			return ((Number) o).intValue();
@@ -142,6 +150,11 @@ public class MathHelper {
 		return null;
 	}
 
+	/**
+	 * Casts the given object to a double if applicable.
+	 * @param Object to cast.
+	 * @return The resulting double.
+	 */
 	public static Double castDouble(Object o) {
 		if (o instanceof Number) {
 			return ((Number) o).doubleValue();
@@ -150,6 +163,11 @@ public class MathHelper {
 		return null;
 	}
 
+	/**
+	 * Casts the given object to a float if applicable.
+	 * @param Object to cast.
+	 * @return The resulting float.
+	 */
 	public static Float castFloat(Object obj) {
 		if (obj instanceof Number) {
 			return ((Number) obj).floatValue();
@@ -158,6 +176,11 @@ public class MathHelper {
 		return null;
 	}
 
+	/**
+	 * Casts the given object to a boolean if applicable.
+	 * @param Object to cast.
+	 * @return The resulting boolean.
+	 */
 	public static Boolean castBoolean(Object o) {
 		if (o instanceof Boolean) {
 			return (Boolean) o;

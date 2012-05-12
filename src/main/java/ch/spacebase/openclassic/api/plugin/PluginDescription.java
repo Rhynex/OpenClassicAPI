@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.plugin;
 
 import ch.spacebase.openclassic.api.plugin.PluginManager.LoadOrder;
 
+/**
+ * Represents the data stored in plugin.yml.
+ */
 public class PluginDescription {
 
 	private String name;
@@ -18,26 +21,50 @@ public class PluginDescription {
 		this.order = LoadOrder.valueOf(order.toUpperCase());
 	}
 	
+	/**
+	 * Returns a string containing the plugin's name and version.
+	 * @return The plugin's full name.
+	 */
 	public String getFullName() {
 		return this.getName() + " v" + this.getVersion();
 	}
 	
+	/**
+	 * Gets the plugin's name.
+	 * @return The plugin's name.
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * Gets the plugin's version.
+	 * @return The plugin's version.
+	 */
 	public String getVersion() {
 		return this.version;
 	}
 	
+	/**
+	 * Gets the plugin's main class.
+	 * @return The plugin's main class.
+	 */
 	public String getMainClass() {
 		return this.mainClass;
 	}
 	
+	/**
+	 * Gets the plugin's dependencies.
+	 * @return The plugin's dependencies.
+	 */
 	public String[] getDependencies() {
 		return this.depends;
 	}
 	
+	/**
+	 * Gets during what part of the server's startup the plugin loads.
+	 * @return The plugin's load order.
+	 */
 	public LoadOrder getLoadOrder() {
 		return this.order;
 	}

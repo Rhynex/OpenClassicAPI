@@ -10,13 +10,19 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Represent;
 import org.yaml.snakeyaml.representer.Representer;
 
+/**
+ * An empty null representer.
+ */
 public class EmptyNullRepresenter extends Representer {
 
 	public EmptyNullRepresenter() {
 		super();
-		nullRepresenter = new EmptyRepresentNull();
+		this.nullRepresenter = new EmptyRepresentNull();
 	}
 
+	/**
+	 * A null representer.
+	 */
 	protected class EmptyRepresentNull implements Represent {
 		@Override
 		public Node representData(Object data) {

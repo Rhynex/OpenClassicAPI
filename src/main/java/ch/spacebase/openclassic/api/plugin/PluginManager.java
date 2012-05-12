@@ -25,12 +25,18 @@ import ch.spacebase.openclassic.api.event.plugin.PluginDisableEvent;
 import ch.spacebase.openclassic.api.event.plugin.PluginEnableEvent;
 import ch.spacebase.openclassic.api.util.JarFilter;
 
-
+/**
+ * Manages the server's plugins.
+ */
 public class PluginManager {
 	
 	private List<Plugin> plugins = new ArrayList<Plugin>();
 	private Map<Listener, Plugin> listeners = new HashMap<Listener, Plugin>();
 
+	/**
+	 * Loads plugins with the specified load order step.
+	 * @param Load order to load for.
+	 */
 	public void loadPlugins(LoadOrder order) {
 		File plugins = new File("plugins");
 		if(!plugins.exists()) plugins.mkdirs();
@@ -49,6 +55,10 @@ public class PluginManager {
 		OpenClassic.getLogger().info(this.plugins.size() + " plugins loaded!");
 	}
 	
+	/**
+	 * Loads a plugin from the given file if the file is a plugin.
+	 * @param File to load from.
+	 */
 	public void loadPlugin(File file) {
 		PluginDescription description = this.getDescription(file);
 		if(description == null) return;
@@ -56,6 +66,11 @@ public class PluginManager {
 		this.loadPlugin(file, description);
 	}
 	
+	/**
+	 * Loads a plugin from the given file using the given description.
+	 * @param File to load from.
+	 * @param PluginDescription to use.
+	 */
 	public void loadPlugin(File file, PluginDescription description) {
 		URL url = null;
 		
@@ -97,6 +112,10 @@ public class PluginManager {
 		}
 	}
 	
+	/**
+	 * Enables the plugin and any plugins that now have their dependencies met.
+	 * @param Plugin to enable.
+	 */
 	public void enablePlugin(Plugin plugin) {
 		if(plugin.isEnabled()) return;
 		
@@ -122,12 +141,19 @@ public class PluginManager {
 		}
 	}
 	
+	/**
+	 * Disables all plugins.
+	 */
 	public void disablePlugins() {
 		for(Plugin plugin : this.plugins) {
 			this.disablePlugin(plugin);
 		}
 	}
 	
+	/**
+	 * Disables the plugin and any plugins that require it.
+	 * @param Plugin to disable.
+	 */
 	public void disablePlugin(Plugin plugin) {
 		if(!plugin.isEnabled()) return;
 		
@@ -136,16 +162,37 @@ public class PluginManager {
 		plugin.setEnabled(false);
 		plugin.onDisable();
 		EventFactory.callEvent(new PluginDisableEvent(plugin));
+		
+		for(Plugin p : this.plugins) {
+			if(p.isEnabled()) {
+				List<String> deps = Arrays.asList(p.getDescription().getDependencies());
+				if(deps.contains(plugin.getDescription().getName())) {		
+					this.disablePlugin(p);
+				}
+			}
+		}
 	}
 	
+	/**
+	 * Removes the plugin instance from the plugin list.
+	 * @param Plugin to remove.
+	 */
 	public void removePlugin(Plugin plugin) {
 		this.plugins.remove(plugin);
 	}
 	
+	/**
+	 * Clears the plugin list.
+	 */
 	public void clearPlugins() {
 		this.plugins.clear();
 	}
 	
+	/**
+	 * Gets the plugin with the given name.
+	 * @param Name of the plugin.
+	 * @return The plugin.
+	 */
 	public Plugin getPlugin(String name) {
 		for(Plugin plugin : this.plugins) {
 			if(plugin.getDescription().getName().equalsIgnoreCase(name)) return plugin;
@@ -154,18 +201,37 @@ public class PluginManager {
 		return null;
 	}
 	
+	/**
+	 * Gets the plugin which the listener belongs to, if it is registered.
+	 * @param Listener that belongs to the plugin.
+	 * @return The plugin it belongs to.
+	 */
 	public Plugin getPlugin(Listener listen) {
 		return this.listeners.get(listen);
 	}
 	
+	/**
+	 * Gets a list of all the loaded (not necessarily enabled) plugins.
+	 * @return A list of loaded plugins.
+	 */
 	public List<Plugin> getPlugins() {
 		return new ArrayList<Plugin>(this.plugins);
 	}
 	
+	/**
+	 * Returns true if the plugin is enabled.
+	 * @param Plugin to check for.
+	 * @return True if the plugin is enabled.
+	 */
 	public boolean isPluginEnabled(String name) {
 		return this.getPlugin(name) != null;
 	}
 	
+	/**
+	 * Loads the PluginDescription from the given file (must be a plugin jar)
+	 * @param File to load the description from.
+	 * @return The loaded plugin description.
+	 */
 	@SuppressWarnings("unchecked")
 	public PluginDescription getDescription(File file) {
 		if(file == null) return null;
@@ -200,10 +266,19 @@ public class PluginManager {
         }
 	}
 	
+	/**
+	 * Gets a list of all registered listeners.
+	 * @return A list of all listeners.
+	 */
 	public Collection<Listener> getListeners() {
 		return this.listeners.keySet();
 	}
 	
+	/**
+	 * Gets a list of all listeners registered to the given plugin.
+	 * @param Plugin to get listeners for.
+	 * @return Listeners registered to the plugin.
+	 */
 	public List<Listener> getListeners(String plugin) {
 		List<Listener> result = new ArrayList<Listener>();
 		
@@ -216,12 +291,22 @@ public class PluginManager {
 		return result;
 	}
 	
+	/**
+	 * Registers a listener to the plugin.
+	 * @param Listener to register.
+	 * @param Plugin the listener belongs to.
+	 */
 	public void registerListener(Listener listener, Plugin plugin) {
 		this.listeners.put(listener, plugin);
 	}
 	
+	/**
+	 * Represents when in the loading process a plugin should be loaded.
+	 */
 	public enum LoadOrder {
+		/** Load before worlds are loaded */
 		PREWORLD,
+		/** Load after worlds are loaded */
 		POSTWORLD;
 	}
 	

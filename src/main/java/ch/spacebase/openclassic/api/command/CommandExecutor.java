@@ -6,9 +6,16 @@ import java.util.List;
 
 import ch.spacebase.openclassic.api.command.annotation.Command;
 
-
+/**
+ * A class containing command methods to execute.
+ */
 public abstract class CommandExecutor {
 
+	/**
+	 * Gets the method for the given command.
+	 * @param The command to look for.
+	 * @return The method for the command.
+	 */
 	public final Method getCommand(String command) {
 		for(Method method : this.getClass().getMethods()) {
 			Class<?> params[] = method.getParameterTypes();
@@ -22,6 +29,10 @@ public abstract class CommandExecutor {
 		return null;
 	}
 	
+	/**
+	 * Gets a list of command methods.
+	 * @return A list of command methods.
+	 */
 	public final List<Method> getCommands() {
 		List<Method> result = new ArrayList<Method>();
 		
