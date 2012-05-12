@@ -23,7 +23,7 @@ import ch.spacebase.openclassic.api.event.EventFactory;
 import ch.spacebase.openclassic.api.event.Listener;
 import ch.spacebase.openclassic.api.event.plugin.PluginDisableEvent;
 import ch.spacebase.openclassic.api.event.plugin.PluginEnableEvent;
-import ch.spacebase.openclassic.api.util.JarFilter;
+import ch.spacebase.openclassic.api.util.io.JarFilter;
 
 /**
  * Manages the server's plugins.

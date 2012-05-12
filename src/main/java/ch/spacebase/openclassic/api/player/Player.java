@@ -5,7 +5,6 @@ import java.net.SocketAddress;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.level.Level;
-import ch.spacebase.openclassic.api.network.session.Session;
 import ch.spacebase.openclassic.api.permissions.Group;
 
 /**

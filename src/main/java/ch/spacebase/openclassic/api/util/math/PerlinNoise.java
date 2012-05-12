@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.util;
+package ch.spacebase.openclassic.api.util.math;
 
 /**
  * A set of methods providing perlin noise.

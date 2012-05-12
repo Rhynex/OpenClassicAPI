@@ -1,9 +1,8 @@
-package ch.spacebase.openclassic.api.network.session;
+package ch.spacebase.openclassic.api.player;
 
 import java.net.SocketAddress;
 
 import ch.spacebase.openclassic.api.network.msg.Message;
-import ch.spacebase.openclassic.api.player.Player;
 
 /**
  * Represents a network session.

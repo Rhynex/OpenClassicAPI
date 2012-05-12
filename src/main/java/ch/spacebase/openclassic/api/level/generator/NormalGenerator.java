@@ -8,8 +8,8 @@ import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.level.Level;
-import ch.spacebase.openclassic.api.util.MathHelper;
-import ch.spacebase.openclassic.api.util.PerlinNoise;
+import ch.spacebase.openclassic.api.util.math.MathHelper;
+import ch.spacebase.openclassic.api.util.math.PerlinNoise;
 
 // TODO: Needs improvement
 /**

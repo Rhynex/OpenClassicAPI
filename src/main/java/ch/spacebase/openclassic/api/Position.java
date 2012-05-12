@@ -149,6 +149,8 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Adds the specified position's coordinates to this position's coordinates.
+	 * @param Position to add.
+	 * @return This position after adding.
 	 */
 	public Position add(Position pos) {
 		return this.add(pos.getX(), pos.getY(), pos.getZ());
@@ -156,6 +158,10 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Adds the specified coordinates to this position's coordinates.
+	 * @param X to add.
+	 * @param Y to add.
+	 * @param Z to add.
+	 * @return This position after adding.
 	 */
 	public Position add(double x, double y, double z) {
 		this.x += x;
@@ -167,6 +173,8 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Subtracts the specified position's coordinates from this position's coordinates.
+	 * @param Position to subtract.
+	 * @return This position after subtracting.
 	 */
 	public Position subtract(Position pos) {
 		return this.subtract(pos.getX(), pos.getY(), pos.getZ());
@@ -174,6 +182,10 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Subtracts the specified coordinates from this position's coordinates.
+	 * @param X to subtract.
+	 * @param Y to subtract.
+	 * @param Z to subtract.
+	 * @return This position after subtracting.
 	 */
 	public Position subtract(double x, double y, double z) {
 		this.x -= x;
@@ -185,6 +197,8 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Multiplies this position's coordinates by the specified position's coordinates.
+	 * @param Position to multiply by.
+	 * @return This position after multiplying.
 	 */
 	public Position multiply(Position pos) {
 		return this.multiply(pos.getX(), pos.getY(), pos.getZ());
@@ -192,6 +206,10 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Multiplies this position's coordinates by the specified coordinates.
+	 * @param X to multiply by.
+	 * @param Y to multiply by.
+	 * @param Z to multiply by.
+	 * @return This position after multiplying.
 	 */
 	public Position multiply(double x, double y, double z) {
 		this.x *= x;
@@ -203,6 +221,8 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Divides this position's coordinates by the specified position's coordinates.
+	 * @param Position to divide by.
+	 * @return This position after dividing.
 	 */
 	public Position divide(Position pos) {
 		return this.divide(pos.getX(), pos.getY(), pos.getZ());
@@ -210,6 +230,10 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Divides this position's coordinates by the specified coordinates.
+	 * @param X to divide by.
+	 * @param Y to divide by.
+	 * @param Z to divide by.
+	 * @return This position after dividing.
 	 */
 	public Position divide(double x, double y, double z) {
 		this.x /= x;
@@ -218,6 +242,38 @@ public class Position implements Cloneable {
 		
 		return this;
 	}
+
+    /**
+     * Gets the distance between this position and another.
+     * WARNING: Very costly.
+	 *
+     * @param Other position.
+     * @return Distance between the positions.
+     */
+    public double distance(Position pos) {
+        return Math.sqrt(this.distanceSquared(pos));
+    }
+
+    /**
+     * Get the squared distance between this position and another.
+     * @param Other position.
+     * @return Square distance between the positions.
+     */
+    public double distanceSquared(Position pos) {
+        return Math.pow(this.x - pos.x, 2) + Math.pow(this.y - pos.y, 2) + Math.pow(this.z - pos.z, 2);
+    }
+    
+    /**
+     * Zeros all the values of this position.
+     * @return This position after zeroing.
+     */
+    public Position zero() {
+    	this.x = 0;
+    	this.y = 0;
+    	this.z = 0;
+    	
+    	return this;
+    }
 	
 	/**
 	 * Clones this Position.

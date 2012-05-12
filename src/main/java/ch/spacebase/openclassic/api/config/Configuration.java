@@ -18,7 +18,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.util.MathHelper;
+import ch.spacebase.openclassic.api.util.math.MathHelper;
 
 /**
  * Represents a YAML configuration.
@@ -171,6 +171,8 @@ public class Configuration {
 	 * @param Path to remove from.
 	 */
 	public void remove(String path) {
+		this.removeNode(path);
+		
 		if (!path.contains(".")) {
 			data.remove(path);
 			return;
@@ -208,9 +210,11 @@ public class Configuration {
 	 * @param Path to remove from.
 	 */
 	public void removeNode(String path) {
-		for (ConfigurationNode node : nodes) {
-			if (node.getPath().equalsIgnoreCase(path)) {
-				nodes.remove(node);
+		synchronized(nodes) {
+			for (ConfigurationNode node : nodes) {
+				if (node.getPath().equalsIgnoreCase(path)) {
+					nodes.remove(node);
+				}
 			}
 		}
 	}
@@ -272,6 +276,10 @@ public class Configuration {
 		ConfigurationNode node = new ConfigurationNode(path, def);
 		Object value = this.getValue(node.getPath());
 		if (value == null) {
+			if(def == null) {
+				return null;
+			}
+			
 			value = def;
 		}
 

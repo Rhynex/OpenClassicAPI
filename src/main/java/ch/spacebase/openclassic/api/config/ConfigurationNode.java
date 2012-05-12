@@ -3,7 +3,7 @@ package ch.spacebase.openclassic.api.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.spacebase.openclassic.api.util.MathHelper;
+import ch.spacebase.openclassic.api.util.math.MathHelper;
 
 /**
  * Represents a node at a configuration path.

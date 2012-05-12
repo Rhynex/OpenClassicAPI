@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.util;
+package ch.spacebase.openclassic.api.util.io;
 
 import java.io.File;
 import java.io.FilenameFilter;
