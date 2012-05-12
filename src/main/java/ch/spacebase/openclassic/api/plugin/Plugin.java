@@ -18,9 +18,14 @@ public abstract class Plugin {
 		this.config = new Configuration(new File(this.dataFolder, "config.yml"));
 	}
 	
-	public abstract void onEnable();
+	public void onLoad() {
+	}
 	
-	public abstract void onDisable();
+	public void onEnable() {
+	}
+	
+	public void onDisable() {
+	}
 	
 	public PluginDescription getDescription() {
 		return this.description;

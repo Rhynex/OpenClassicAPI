@@ -31,20 +31,32 @@ public class PluginManager {
 	private List<Plugin> plugins = new ArrayList<Plugin>();
 	private Map<Listener, Plugin> listeners = new HashMap<Listener, Plugin>();
 
-	public void loadPlugins() {
+	public void loadPlugins(LoadOrder order) {
 		File plugins = new File("plugins");
 		if(!plugins.exists()) plugins.mkdirs();
 		
 		File jars[] = plugins.listFiles(new JarFilter());
 		
-		for(File file : jars) {	
-			this.loadPlugin(file);
+		for(File file : jars) {
+			PluginDescription description = this.getDescription(file);
+			if(description == null) continue;
+			
+			if(description.getLoadOrder() == order) {
+				this.loadPlugin(file, description);
+			}
 		}
 		
 		OpenClassic.getLogger().info(this.plugins.size() + " plugins loaded!");
 	}
 	
 	public void loadPlugin(File file) {
+		PluginDescription description = this.getDescription(file);
+		if(description == null) return;
+		
+		this.loadPlugin(file, description);
+	}
+	
+	public void loadPlugin(File file, PluginDescription description) {
 		URL url = null;
 		
 		try {
@@ -54,10 +66,6 @@ public class PluginManager {
 			e.printStackTrace();
 			return;
 		}
-		
-		PluginDescription description = this.getDescription(file);
-		
-		if(description == null) return;
 		
 		try {
 			OpenClassic.getLogger().info(Color.GREEN + "Loading " + description.getFullName() + "...");
@@ -70,6 +78,7 @@ public class PluginManager {
 	        Constructor<? extends Plugin> constructor = plugin.getConstructor();
 	
 	        Plugin p = constructor.newInstance();
+	        p.onLoad();
 	        
 	        boolean matched = true;
 	        
@@ -174,7 +183,7 @@ public class PluginManager {
 
             Map<String, Object> yml = (Map<String, Object>) (new Yaml()).load(jar.getInputStream(entry));
             
-            return new PluginDescription((String) yml.get("name"), (String) yml.get("version"), (String) yml.get("main-class"), (String) yml.get("depends"));
+            return new PluginDescription((String) yml.get("name"), (String) yml.get("version"), (String) yml.get("main-class"), (String) yml.get("depends"), (String) yml.get("order"));
         } catch (Exception e) {
             OpenClassic.getLogger().severe("Failed to load plugin description!");
             e.printStackTrace();
@@ -184,6 +193,8 @@ public class PluginManager {
                 try {
                     jar.close();
                 } catch (IOException e) {
+                    OpenClassic.getLogger().severe("Failed to close jar after getting plugin description!");
+                    e.printStackTrace();
                 }
             }
         }
@@ -207,6 +218,11 @@ public class PluginManager {
 	
 	public void registerListener(Listener listener, Plugin plugin) {
 		this.listeners.put(listener, plugin);
+	}
+	
+	public enum LoadOrder {
+		PREWORLD,
+		POSTWORLD;
 	}
 	
 }
