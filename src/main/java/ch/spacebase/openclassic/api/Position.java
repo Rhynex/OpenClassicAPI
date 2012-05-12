@@ -229,10 +229,24 @@ public class Position implements Cloneable {
 	
 	@Override
 	public boolean equals(Object o) {
-		if(!(o instanceof Position)) return false;
+		if(o == null || !(o instanceof Position)) return false;
+		if(this == o) return true;
 		
 		Position pos = (Position) o;
-		return this.x == pos.x && this.y == pos.y && this.z == pos.z && this.yaw == pos.yaw && this.pitch == pos.pitch && this.level.getName().equals(pos.getLevel().getName());
+		return Double.doubleToLongBits(this.x) == Double.doubleToLongBits(pos.x) && Double.doubleToLongBits(this.y) == Double.doubleToLongBits(pos.y) && Double.doubleToLongBits(this.z) == Double.doubleToLongBits(pos.z) && this.yaw == pos.yaw && this.pitch == pos.pitch && (this.level == null || pos.level == null ? this.level == pos.level : this.level.getName().equals(pos.level.getName()));
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 31 * hash + (int) Double.doubleToLongBits(this.x);
+		hash = 31 * hash + (int) Double.doubleToLongBits(this.y);
+		hash = 31 * hash + (int) Double.doubleToLongBits(this.z);
+		hash = 31 * hash + this.yaw;
+		hash = 31 * hash + this.pitch;
+		hash = 31 * hash + (this.level == null || this.level.getName() == null ? 0 : this.level.getName().hashCode());
+		
+		return hash;
 	}
 	
 }

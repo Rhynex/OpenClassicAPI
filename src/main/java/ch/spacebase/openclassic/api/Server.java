@@ -30,16 +30,42 @@ public interface Server {
 	 */
 	public PackageManager getPackageManager();
 	
+	/**
+	 * Gets the server's scheduler.
+	 * @return The server's scheduler.
+	 */
 	public Scheduler getScheduler();
 	
+	/**
+	 * Broadcasts a message via chat.
+	 * @param The message to broadcast.
+	 */
 	public void broadcastMessage(String message);
 	
+	/**
+	 * Gets a list of online players.
+	 * @return Online players.
+	 */
 	public List<Player> getPlayers();
 	
+	/**
+	 * Returns the player with the given name.
+	 * @param The name of the player.
+	 * @return The player.
+	 */
 	public Player getPlayer(String name);
 	
+	/**
+	 * Returns a list of players that have a name with the given string in it.
+	 * @param Name to look for.
+	 * @return Players with the string in their name.
+	 */
 	public List<Player> matchPlayer(String name);
 	
+	/**
+	 * Gets the server's plugin manager.
+	 * @return The server's plugin manager.
+	 */
 	public PluginManager getPluginManager();
 	
 	public EventManager getEventManager();
