@@ -122,7 +122,11 @@ public class Group {
 	 * @return True if this group has the given permission.
 	 */
 	public boolean hasPermission(String permission) {
-		if(!this.perms.contains(permission.toLowerCase()) && this.inherits != null && !this.inherits.equals("")) {
+		if(this.perms.contains(permission.toLowerCase())) {
+			return true;
+		}
+		
+		if(this.inherits != null && !this.inherits.equals("")) {
 			return OpenClassic.getServer().getPermissionManager().getGroup(this.inherits).hasPermission(permission);
 		}
 		

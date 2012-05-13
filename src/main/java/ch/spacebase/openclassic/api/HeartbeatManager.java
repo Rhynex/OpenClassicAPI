@@ -26,13 +26,22 @@ public final class HeartbeatManager {
 
 	private static final long salt = new SecureRandom().nextLong();
 	private static final Map<String, Runnable> customBeats = new HashMap<String, Runnable>();
-
+	private static String url = "";
+	
 	/**
 	 * Gets the server's current salt.
 	 * @return The server's salt.
 	 */
 	public static long getSalt() {
 		return salt;
+	}
+	
+	/**
+	 * Gets the server's minecraft.net url.
+	 * @return The url.
+	 */
+	public static String getURL() {
+		return url;
 	}
 	
 	/**
@@ -109,25 +118,27 @@ public final class HeartbeatManager {
 			
 			InputStream input = conn.getInputStream();
 			
-			try {
-				File file = new File("server-address.txt");
-				if(!file.exists()) file.createNewFile();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+			String result = reader.readLine();
+			
+			reader.close();
+			input.close();
+			
+			if(!HeartbeatManager.url.equals(result)) {
+				HeartbeatManager.url = result;
+				OpenClassic.getLogger().info(Color.GREEN + "The server's URL is now \"" + result + "\".");
 				
-				BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-				BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-				
-				String line = "";
-				
-				while((line = reader.readLine()) != null) {
-					writer.write(line);
+				try {
+					File file = new File("server-address.txt");
+					if(!file.exists()) file.createNewFile();
+					
+					BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+					writer.write(result);
+					writer.close();
+				} catch(IOException e) {
+					OpenClassic.getLogger().severe("Failed to save server address!");
+					e.printStackTrace();
 				}
-				
-				writer.close();
-				reader.close();
-				input.close();
-			} catch(IOException e) {
-				OpenClassic.getLogger().severe("Failed to get and save server address!");
-				e.printStackTrace();
 			}
 		} catch (IOException e) {
 			OpenClassic.getLogger().severe("Exception while performing minecraft.net heartbeat!");

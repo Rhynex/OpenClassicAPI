@@ -8,11 +8,11 @@ import ch.spacebase.openclassic.api.block.Block;
 public interface BlockPhysics {
 
 	/**
-	 * Called when a tick update occurs on the block.
+	 * Called when a update occurs on the block.
 	 * @param Block to update.
 	 * @return Whether anything was changed.
 	 */
-	public boolean tick(Block block);
+	public boolean update(Block block);
 	
 	/**
 	 * Called when the block is placed.

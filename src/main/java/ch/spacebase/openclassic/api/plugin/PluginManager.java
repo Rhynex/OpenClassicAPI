@@ -52,7 +52,7 @@ public class PluginManager {
 			}
 		}
 		
-		OpenClassic.getLogger().info(this.plugins.size() + " plugins loaded!");
+		if(order == LoadOrder.POSTWORLD) OpenClassic.getLogger().info(this.plugins.size() + " plugins loaded!");
 	}
 	
 	/**

@@ -24,8 +24,6 @@ import ch.spacebase.openclassic.api.scheduler.Scheduler;
  */
 public interface Server {
 
-	// TODO: More docs
-	
 	/**
 	 * Gets the server's package manager.
 	 * @return The server's package manager.
