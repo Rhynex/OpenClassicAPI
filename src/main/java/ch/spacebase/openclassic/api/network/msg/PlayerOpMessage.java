@@ -23,5 +23,15 @@ public class PlayerOpMessage extends Message {
 	public String toString() {
 		return "PlayerOpMessage{op=" + op + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.op };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 15;
+	}
 	
 }

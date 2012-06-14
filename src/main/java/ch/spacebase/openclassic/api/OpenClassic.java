@@ -7,33 +7,53 @@ import java.util.logging.Logger;
  */
 public class OpenClassic {
 
-	private static final Logger temp = Logger.getLogger("OpenClassic");
-	private static Server server;
+	private static final Logger logger = Logger.getLogger("OpenClassic");
+	private static Game game;
+	
+	/**
+	 * Gets the current game instance.
+	 * @return The game instance.
+	 */
+	public static Game getGame() {
+		return game;
+	}
 	
 	/**
 	 * Gets the current server instance.
-	 * @return The server instance.
+	 * @return The server instance (null if the game instance isn't a server).
 	 */
 	public static Server getServer() {
-		return server;
+		if(!(game instanceof Server)) return null;
+		
+		return (Server) game;
 	}
 	
 	/**
-	 * Sets the current server instance.
-	 * @param The server instance.
+	 * Gets the current client instance.
+	 * @return The client instance (null if the game instance isn't a client).
 	 */
-	public static void setServer(Server server) {
-		if(OpenClassic.server != null || server == null) return;
-		OpenClassic.server = server;
+	public static Client getClient() {
+		if(!(game instanceof Client)) return null;
+		
+		return (Client) game;
 	}
 	
 	/**
-	 * Returns true if the server is running.
-	 * @return True if the server is running.
+	 * Sets the current game instance.
+	 * @param The game instance.
+	 */
+	public static void setGame(Game game) {
+		if(OpenClassic.game != null || game == null) return;
+		OpenClassic.game = game;
+	}
+	
+	/**
+	 * Returns true if the game is running.
+	 * @return True if the game is running.
 	 */
 	public static boolean isRunning() {
-		if(server == null) return false;
-		return server.isRunning();
+		if(game == null) return false;
+		return game.isRunning();
 	}
 	
 	/**
@@ -41,8 +61,7 @@ public class OpenClassic {
 	 * @return The logger.
 	 */
 	public static Logger getLogger() {
-		if(server == null) return temp;
-		return server.getLogger();
+		return logger;
 	}
 	
 	private OpenClassic() {

@@ -1,35 +1,40 @@
 package ch.spacebase.openclassic.api.util.set;
 
-import java.util.HashSet;
+import java.util.HashMap;
 
 /**
- * A HashSet that stores 3 integers.
+ * A HashMap that uses a key of 3 integers.
  */
-public class TripleIntHashSet extends HashSet<Integer> {
+public class TripleIntHashMap<T> extends HashMap<Integer, T> {
 
 	private static final long serialVersionUID = 1L;
 
-	public TripleIntHashSet() {
+	public TripleIntHashMap() {
 		super(100);
 	}
 
-	public TripleIntHashSet(int capacity) {
+	public TripleIntHashMap(int capacity) {
 		super(capacity);
 	}
 
-	public boolean add(int key1, int key2, int key3) {
+	public T put(int key1, int key2, int key3, T value) {
 		int key = key(key1, key2, key3);
-		return super.add(key);
+		return super.put(key, value);
 	}
 
-	public boolean contains(int key1, int key2, int key3) {
+	public boolean containsKey(int key1, int key2, int key3) {
 		int key = key(key1, key2, key3);
-		return super.contains(key);
+		return super.containsKey(key);
 	}
 
-	public boolean remove(int key1, int key2, int key3) {
+	public T remove(int key1, int key2, int key3) {
 		int key = key(key1, key2, key3);
 		return super.remove(key);
+	}
+	
+	public T get(int key1, int key2, int key3) {
+		int key = key(key1, key2, key3);
+		return super.get(key);
 	}
 
 	protected static final int key(int x, int y, int z) {

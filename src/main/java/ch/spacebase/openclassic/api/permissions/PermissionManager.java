@@ -14,13 +14,14 @@ import ch.spacebase.openclassic.api.util.Constants;
  */
 public class PermissionManager {
 	
-	private Configuration perms = new Configuration(new File("permissions.yml"));
+	private Configuration perms;
 	private List<Group> groups = new ArrayList<Group>();
 	
 	/**
 	 * Loads the server's permissions and groups.
 	 */
 	public void load() {
+		if(this.perms == null) this.perms = new Configuration(new File(OpenClassic.getGame().getDirectory(), "permissions.yml"));
 		this.perms.load();
 		this.loadGroups();
 	}

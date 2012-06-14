@@ -1,6 +1,5 @@
 package ch.spacebase.openclassic.api.event;
 
-// TODO: Ignored while calling events - use this
 /**
  * Represents how early or late an event handler should be called.
  */

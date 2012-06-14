@@ -1,101 +1,154 @@
 package ch.spacebase.openclassic.api.pkg;
 
+import java.io.File;
+
+import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.pkg.task.PackageInstallTask;
+import ch.spacebase.openclassic.api.pkg.task.PackageRemoveTask;
+import ch.spacebase.openclassic.api.pkg.task.PackageUpdateTask;
+import ch.spacebase.openclassic.api.pkg.task.SourceAddTask;
+import ch.spacebase.openclassic.api.pkg.task.SourceRemoveTask;
+import ch.spacebase.openclassic.api.pkg.task.SourceUpdateTask;
 
 /**
  * Manages the installed packages and sources on the server.
  */
-public interface PackageManager {
+public class PackageManager {
 
+	private final Configuration sources;
+	private final Configuration installed;
+	
+	public PackageManager() {
+		this.sources = new Configuration(new File(OpenClassic.getGame().getDirectory(), "sources.yml"));
+		this.installed = new Configuration(new File(OpenClassic.getGame().getDirectory(), "installed.yml"));
+		
+		this.sources.load();
+		this.installed.load();
+	}
+	
 	/**
 	 * Gets the YAML configuration containing all the installed sources.
 	 * @return A YAML configuration containing all of the installed sources.
 	 */
-	public Configuration getSourcesList();
+	public Configuration getSourcesList() {
+		return this.sources;
+	}
 	
 	/**
 	 * Gets the YAML configuration containing all the installed packages.
 	 * @return A YAML configuration containing all of the installed packages.
 	 */
-	public Configuration getInstalled();
-	
+	public Configuration getInstalled() {
+		return this.installed;
+	}
+
 	/**
 	 * Installs a package.
 	 * @param Package name.
 	 */
-	public void install(String name);
-	
+	public void install(String name) {
+		this.install(name, null);
+	}
+
 	/**
 	 * Installs a package.
 	 * @param Package name.
 	 * @param Sender executing the install.
 	 */
-	public void install(String name, Sender executor);
-	
+	public void install(String name, Sender executor) {
+		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new PackageInstallTask(name, executor));
+	}
+
 	/**
 	 * Removes a package.
 	 * @param Package name.
 	 */
-	public void remove(String name);
-	
+	public void remove(String name) {
+		this.remove(name, null);
+	}
+
 	/**
 	 * Removes a package.
 	 * @param Package name.
 	 * @param Sender executing the removal.
 	 */
-	public void remove(String name, Sender executor);
+	public void remove(String name, Sender executor) {
+		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new PackageRemoveTask(name, executor));
+	}
 	
 	/**
 	 * Updates a package.
 	 * @param Package name.
 	 */
-	public void update(String name);
-	
+	public void update(String name) {
+		this.update(name, null);
+	}
+
 	/**
 	 * Updates a package.
 	 * @param Package name.
 	 * @param Sender executing the update.
 	 */
-	public void update(String name, Sender executor);
-	
+	public void update(String name, Sender executor) {
+		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new PackageUpdateTask(name, executor));
+	}
+
 	/**
 	 * Adds a source.
 	 * @param ID for the source.
 	 * @param URL of the source.
 	 */
-	public void addSource(String id, String url);
-	
+	public void addSource(String id, String url) {
+		this.addSource(id, url, null);
+	}
+
 	/**
 	 * Adds a source.
 	 * @param ID for the source.
 	 * @param URL of the source.
 	 * @param Sender executing the addition.
 	 */
-	public void addSource(String id, String url, Sender executor);
-	
+	public void addSource(String id, String url, Sender executor) {
+		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new SourceAddTask(id, url, executor));
+	}
+
 	/**
 	 * Removes a source.
 	 * @param ID of the source.
 	 */
-	public void removeSource(String id);
-	
+	public void removeSource(String id) {
+		this.removeSource(id, null);
+	}
+
 	/**
 	 * Removes a source.
 	 * @param ID of the source.
 	 * @param Sender executing the removal.
 	 */
-	public void removeSource(String id, Sender executor);
-	
+	public void removeSource(String id, Sender executor) {
+		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new SourceRemoveTask(id, executor));
+	}
+
 	/**
 	 * Updates the source cache.
 	 */
-	public void updateSources();
-	
+	public void updateSources() {
+		this.updateSources(null);
+	}
+
 	/**
 	 * Updates the source cache.
 	 * @param Sender executing the update.
 	 */
-	public void updateSources(Sender executor);
+	public void updateSources(Sender executor) {
+		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new SourceUpdateTask(executor));
+	}
+	
+	@Override
+	public String toString() {
+		return "ClassicPackageManager";
+	}
 	
 }

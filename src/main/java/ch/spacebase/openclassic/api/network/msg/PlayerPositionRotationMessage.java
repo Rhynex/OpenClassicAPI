@@ -73,5 +73,15 @@ public class PlayerPositionRotationMessage extends Message {
 	public String toString() {
 		return "PlayerPositionRotationMessage{playerid=" + playerId + ",xchange=" + xChange + ",ychange=" + yChange + ",zchange=" + zChange + ",yaw=" + yaw + ",pitch=" + pitch + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.playerId, this.xChange, this.yChange, this.zChange, this.yaw, this.pitch };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 9;
+	}
 	
 }

@@ -83,5 +83,15 @@ public class PlayerSpawnMessage extends Message {
 	public String toString() {
 		return "PlayerSpawnMessage{playerid=" + playerId + ",name=" + name + ",x=" + x + ",y=" + y + ",z=" + z + ",yaw=" + yaw + ",pitch=" + pitch + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.playerId, this.name, this.x, this.y, this.z, this.yaw, this.pitch };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 7;
+	}
 	
 }

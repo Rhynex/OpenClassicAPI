@@ -43,5 +43,15 @@ public class LevelFinalizeMessage extends Message {
 	public String toString() {
 		return "LevelFinalizeMessage{width=" + width + ",height=" + height + ",depth=" + depth + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.width, this.height, this.depth };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 4;
+	}
 	
 }

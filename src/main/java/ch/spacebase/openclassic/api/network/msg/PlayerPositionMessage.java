@@ -53,5 +53,15 @@ public class PlayerPositionMessage extends Message {
 	public String toString() {
 		return "PlayerPositionMessage{playerid=" + playerId + ",xchange=" + xChange + ",ychange=" + yChange + ",zchange=" + zChange + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.playerId, this.xChange, this.yChange, this.zChange };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 10;
+	}
 	
 }

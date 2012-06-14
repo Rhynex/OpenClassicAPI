@@ -1,23 +1,29 @@
 package ch.spacebase.openclassic.api.plugin;
 
 import java.io.File;
+import java.util.logging.Logger;
 
+import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.data.NBTData;
 
 /**
  * Represents a plugin.
  */
 public abstract class Plugin {
 
+	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 	private PluginDescription description;
 	private Configuration config;
 	private File dataFolder;
 	private boolean enabled;
+	private NBTData data;
 	
-	public Plugin(PluginDescription description) {
+	protected void init(PluginDescription description) {
 		this.description = description;
-		this.dataFolder = new File("plugins/" + description.getName());
+		this.dataFolder = new File(OpenClassic.getGame().getDirectory(), "plugins/" + description.getName());
 		this.config = new Configuration(new File(this.dataFolder, "config.yml"));
+		this.data = new NBTData(description.getName());
 	}
 	
 	/**
@@ -36,6 +42,12 @@ public abstract class Plugin {
 	 * Called when the plugin is disabled.
 	 */
 	public void onDisable() {
+	}
+	
+	/**
+	 * Called when a tick occurs.
+	 */
+	public void tick() {
 	}
 	
 	/**
@@ -76,6 +88,22 @@ public abstract class Plugin {
 	 */
 	public void setEnabled(boolean enable) {
 		this.enabled = enable;
+	}
+	
+	/**
+	 * Gets the logger belonging to this plugin.
+	 * @return This plugin's logger.
+	 */
+	public Logger getLogger() {
+		return this.logger;
+	}
+	
+	/**
+	 * Gets this plugin's NBTData.
+	 * @return This plugin's NBTData.
+	 */
+	public NBTData getData() {
+		return this.data;
 	}
 	
 	@Override

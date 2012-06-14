@@ -129,7 +129,7 @@ public final class HeartbeatManager {
 				OpenClassic.getLogger().info(Color.GREEN + "The server's URL is now \"" + result + "\".");
 				
 				try {
-					File file = new File("server-address.txt");
+					File file = new File(OpenClassic.getGame().getDirectory(), "server-address.txt");
 					if(!file.exists()) file.createNewFile();
 					
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file));

@@ -17,8 +17,8 @@ public class PluginDescription {
 		this.name = name;
 		this.version = version;
 		this.mainClass = mainClass;
-		this.depends = (depends != null ? depends.split(", ") : new String[] { });
-		this.order = LoadOrder.valueOf(order.toUpperCase());
+		this.depends = (depends != null && !depends.equals("null") ? depends.split(", ") : new String[] { });
+		this.order = order == null || order.equals("") || order.equals("null") ? LoadOrder.POSTWORLD : LoadOrder.valueOf(order.toUpperCase());
 	}
 	
 	/**

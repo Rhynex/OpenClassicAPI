@@ -38,7 +38,7 @@ public class PluginManager {
 	 * @param Load order to load for.
 	 */
 	public void loadPlugins(LoadOrder order) {
-		File plugins = new File("plugins");
+		File plugins = new File(OpenClassic.getGame().getDirectory(), "plugins");
 		if(!plugins.exists()) plugins.mkdirs();
 		
 		File jars[] = plugins.listFiles(new JarFilter());
@@ -52,7 +52,7 @@ public class PluginManager {
 			}
 		}
 		
-		if(order == LoadOrder.POSTWORLD) OpenClassic.getLogger().info(this.plugins.size() + " plugins loaded!");
+		if(order == LoadOrder.POSTWORLD) OpenClassic.getLogger().info(this.plugins.size() + " plugin(s) loaded!");
 	}
 	
 	/**
@@ -93,6 +93,7 @@ public class PluginManager {
 	        Constructor<? extends Plugin> constructor = plugin.getConstructor();
 	
 	        Plugin p = constructor.newInstance();
+	        p.init(description);
 	        p.onLoad();
 	        
 	        boolean matched = true;
@@ -123,6 +124,8 @@ public class PluginManager {
 		
 		plugin.setEnabled(true);
 		plugin.onEnable();
+		
+		OpenClassic.getLogger().info(plugin.getDescription().getFullName() + " has been enabled!");
 		EventFactory.callEvent(new PluginEnableEvent(plugin));
 		
 		for(Plugin p : this.plugins) {
@@ -158,9 +161,18 @@ public class PluginManager {
 		if(!plugin.isEnabled()) return;
 		
 		OpenClassic.getLogger().info(Color.GREEN + "Disabling " + plugin.getDescription().getFullName() + "...");
-		
 		plugin.setEnabled(false);
 		plugin.onDisable();
+		for(Listener listener : this.listeners.keySet()) {
+			if(this.listeners.get(listener).getDescription().getName().equals(plugin.getDescription().getName())) {
+				this.listeners.remove(listener);
+			}
+		}
+		
+		OpenClassic.getGame().unregisterCommands(plugin);
+		OpenClassic.getGame().unregisterExecutors(plugin);
+		
+		OpenClassic.getLogger().info(plugin.getDescription().getFullName() + " has been disabled!");
 		EventFactory.callEvent(new PluginDisableEvent(plugin));
 		
 		for(Plugin p : this.plugins) {
@@ -249,7 +261,7 @@ public class PluginManager {
 
             Map<String, Object> yml = (Map<String, Object>) (new Yaml()).load(jar.getInputStream(entry));
             
-            return new PluginDescription((String) yml.get("name"), (String) yml.get("version"), (String) yml.get("main-class"), (String) yml.get("depends"), (String) yml.get("order"));
+            return new PluginDescription(String.valueOf(yml.get("name")), String.valueOf(yml.get("version")), String.valueOf(yml.get("main-class")), String.valueOf(yml.get("depends")), String.valueOf(yml.get("order")));
         } catch (Exception e) {
             OpenClassic.getLogger().severe("Failed to load plugin description!");
             e.printStackTrace();

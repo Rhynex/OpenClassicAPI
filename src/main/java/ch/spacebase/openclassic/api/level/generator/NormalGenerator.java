@@ -6,7 +6,8 @@ import java.util.Random;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.block.BlockType;
+import ch.spacebase.openclassic.api.block.VanillaBlock;
+import ch.spacebase.openclassic.api.block.Blocks;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.util.math.MathHelper;
 import ch.spacebase.openclassic.api.util.math.PerlinNoise;
@@ -86,7 +87,7 @@ public class NormalGenerator extends Generator {
 
 	private static void addTree(Level level, Position pos, int treeHeight, Random rand) {
 		for (int y = 0; y < treeHeight; y++) {
-			level.setBlockAt((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY() + y), (int) Math.floor(pos.getZ()), BlockType.LOG);
+			level.setBlockAt((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY() + y), (int) Math.floor(pos.getZ()), VanillaBlock.LOG);
 		}
 
 		for (int x = 0; x < treeHeight; x++) {
@@ -101,7 +102,7 @@ public class NormalGenerator extends Generator {
 					double test = Math.sqrt((double) xx * xx + yy * yy + zz * zz);
 					if (test < (treeHeight - 1.0) / 2.0) {
 						if (rand.nextDouble() < 0.8) {
-							level.setBlockAt((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY() + y), (int) Math.floor(pos.getZ()), BlockType.LEAVES);
+							level.setBlockAt((int) Math.floor(pos.getX()), (int) Math.floor(pos.getY() + y), (int) Math.floor(pos.getZ()), VanillaBlock.LEAVES);
 						}
 					}
 				}
@@ -114,9 +115,9 @@ public class NormalGenerator extends Generator {
 
 		int localHeight = 0;
 
-		localHeight = generateLayer(x, z, gen, 0.1, 0, 1, BlockType.BEDROCK, 0.2f, height, level, rand);
-		localHeight = generateLayer(x, z, gen + 0.2, 1.5, localHeight, 0.08f * height + 1.5f * (localHeight - 10), BlockType.STONE, 0.8f, height, level, rand);
-		localHeight = generateLayer(x, z, gen + 0.5, 2.0, localHeight, 0.06f * height + 0.3f * (localHeight - 5), BlockType.DIRT, 0.6f, height, level, rand);
+		localHeight = generateLayer(x, z, gen, 0.1, 0, 1, VanillaBlock.BEDROCK, 0.2f, height, level, rand);
+		localHeight = generateLayer(x, z, gen + 0.2, 1.5, localHeight, 0.08f * height + 1.5f * (localHeight - 10), VanillaBlock.STONE, 0.8f, height, level, rand);
+		localHeight = generateLayer(x, z, gen + 0.5, 2.0, localHeight, 0.06f * height + 0.3f * (localHeight - 5), VanillaBlock.DIRT, 0.6f, height, level, rand);
 
 		double noise1 = PerlinNoise.noise(x * 0.01, 20, z * 0.01) + 0.5;
 		double noise3 = PerlinNoise.noise(x * 0.01, 20, z * 0.01) + 0.5;
@@ -125,22 +126,22 @@ public class NormalGenerator extends Generator {
 		mul = 10.0 * MathHelper.clamp(mul, 0.0, 1.0);
 		int val = (int) (mul * noise1 * noise3 * (noise2 > 0.2 ? 1.0 : 0.0));
 		val = Math.max(0, val);
-		BlockType type = BlockType.STONE;
+		VanillaBlock type = VanillaBlock.STONE;
 		for (int y = localHeight; y < localHeight + val; y++) {
 			if (y <= level.getWaterLevel() + 1) {
-				type = BlockType.SAND;
+				type = VanillaBlock.SAND;
 			}
 			double scaleY = (Math.abs(y - height / 5) + 10.0) / height * 3.5;
 			double scale = 0.05;
 			double noise4 = PerlinNoise.noise(x * scale, y * scale * 2.5, z * scale);
 			if (noise4 < scaleY) {
 				if (rand.nextDouble() < 0.1) {
-					level.setBlockAt(x, y, z, BlockType.GRAVEL);
+					level.setBlockAt(x, y, z, VanillaBlock.GRAVEL);
 				} else {
 					level.setBlockAt(x, y, z, type);
 				}
 			} else {
-				level.setBlockAt(x, y, z, BlockType.AIR);
+				level.setBlockAt(x, y, z, VanillaBlock.AIR);
 			}
 		}
 		localHeight += val;
@@ -148,9 +149,9 @@ public class NormalGenerator extends Generator {
 		int block = level.getBlockIdAt(x, localHeight - 1, z);
 		if (block == 3) {
 			if (localHeight - 1 <= level.getWaterLevel() + 1) {
-				level.setBlockAt(x, localHeight - 1, z, BlockType.SAND);
+				level.setBlockAt(x, localHeight - 1, z, VanillaBlock.SAND);
 			} else {
-				level.setBlockAt(x, localHeight - 1, z, BlockType.GRASS);
+				level.setBlockAt(x, localHeight - 1, z, VanillaBlock.GRASS);
 			}
 
 			if (noise2 < -0.4) {
@@ -158,7 +159,7 @@ public class NormalGenerator extends Generator {
 				if (noiseTree > 0.4) {
 					int mountainHeight = (int) ((noiseTree - 0.4) * 10);
 					for (int y = localHeight; y < localHeight + mountainHeight; y++) {
-						level.setBlockAt(x, y, z, BlockType.STONE);
+						level.setBlockAt(x, y, z, VanillaBlock.STONE);
 					}
 					localHeight += mountainHeight;
 				}
@@ -167,16 +168,16 @@ public class NormalGenerator extends Generator {
 
 		if (localHeight < level.getWaterLevel()) {
 			for (; localHeight < level.getWaterLevel(); localHeight++) {
-				level.setBlockAt(x, localHeight, z, BlockType.WATER);
+				level.setBlockAt(x, localHeight, z, VanillaBlock.WATER);
 			}
 		}
 
 		for (int y = localHeight; y < height; y++) {
-			level.setBlockAt(x, y, z, BlockType.AIR);
+			level.setBlockAt(x, y, z, VanillaBlock.AIR);
 		}
 	}
 
-	private int generateLayer(int x, int z, double noiseVal, double noiseScale, int startheight, float layerheight, BlockType type, float adder, int height, Level level, Random rand) {
+	private int generateLayer(int x, int z, double noiseVal, double noiseScale, int startheight, float layerheight, VanillaBlock type, float adder, int height, Level level, Random rand) {
 		layerheight = Math.max(0.0f, layerheight);
 
 		double noise = PerlinNoise.noise(x * 0.01 * noiseScale, noiseVal, z * 0.01 * noiseScale) + adder;
@@ -192,16 +193,16 @@ public class NormalGenerator extends Generator {
 
 		for (int y = startheight; y < startheight + localHeight; y++) {
 			if (y <= 1) {
-				level.setBlockAt(x, y, z, BlockType.SAND);
+				level.setBlockAt(x, y, z, VanillaBlock.SAND);
 			}
 			double scaleY = (Math.abs(y - height / 3) + 15.0) / height * 1.5;
 			double scale = 0.05;
 			double noise3 = PerlinNoise.noise(x * scale, y * scale * 2.0, z * scale);
 			if (noise3 < scaleY) {
-				if (type == BlockType.STONE) {
+				if (type == VanillaBlock.STONE) {
 					int r = rand.nextInt(100);
 					if (r < 3) {
-						level.setBlockAt(x, y, z, BlockType.fromId((BlockType.GOLD_ORE.getId() + r)));
+						level.setBlockAt(x, y, z, Blocks.fromId(VanillaBlock.GOLD_ORE.getId() + r));
 					} else {
 						level.setBlockAt(x, y, z, type);
 					}
@@ -209,12 +210,12 @@ public class NormalGenerator extends Generator {
 					level.setBlockAt(x, y, z, type);
 				}
 			} else if (noise3 - scaleY < 0.02) {
-				level.setBlockAt(x, y, z, BlockType.STONE);
+				level.setBlockAt(x, y, z, VanillaBlock.STONE);
 			} else {
 				if (y < level.getWaterLevel()) {
-					level.setBlockAt(x, y, z, BlockType.WATER);
+					level.setBlockAt(x, y, z, VanillaBlock.WATER);
 				} else {
-					level.setBlockAt(x, y, z, BlockType.AIR);
+					level.setBlockAt(x, y, z, VanillaBlock.AIR);
 				}
 			}
 		}

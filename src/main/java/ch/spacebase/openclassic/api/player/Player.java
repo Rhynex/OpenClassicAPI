@@ -4,6 +4,7 @@ import java.net.SocketAddress;
 
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.command.Sender;
+import ch.spacebase.openclassic.api.data.NBTData;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.permissions.Group;
 
@@ -132,6 +133,24 @@ public interface Player extends Sender {
 	 * Kicks the player.
 	 * @param The reason the player is being kicked.
 	 */
-	public void kick(String reason);
+	public void disconnect(String reason);
+	
+	/**
+	 * Returns true if the player is using the OpenClassic client.
+	 * @return True if the player has the custom client.
+	 */
+	public boolean hasCustomClient();
+	
+	/**
+	 * Gets the version of the player's OpenClassic client. ("unknown" if not using the custom client)
+	 * @return The player's client version.
+	 */
+	public String getClientVersion();
+	
+	/**
+	 * Gets the player's NBTData.
+	 * @return The player's NBTData.
+	 */
+	public NBTData getData();
 	
 }

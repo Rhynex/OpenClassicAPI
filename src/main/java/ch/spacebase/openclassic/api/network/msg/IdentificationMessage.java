@@ -53,5 +53,15 @@ public class IdentificationMessage extends Message {
 	public String toString() {
 		return "IdentificationMessage{protocol=" + protocolVersion + ",usernameorservername=" + usernameOrServerName + ",verificationkeyormotd=" + verificationKeyOrMotd + ",op=" + op + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.usernameOrServerName, this.verificationKeyOrMotd, this.protocolVersion, this.op };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 0;
+	}
 	
 }

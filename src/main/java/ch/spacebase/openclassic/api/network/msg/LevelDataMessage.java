@@ -45,5 +45,15 @@ public class LevelDataMessage extends Message {
 	public String toString() {
 		return "LevelDataMessage{length=" + length + ",data=" + Arrays.toString(data) + ",percent=" + percent + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.length, this.data, this.percent };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 3;
+	}
 	
 }

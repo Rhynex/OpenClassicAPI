@@ -5,7 +5,8 @@ import java.util.List;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.entity.Entity;
+import ch.spacebase.openclassic.api.data.NBTData;
+import ch.spacebase.openclassic.api.entity.BlockEntity;
 import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.player.Player;
 
@@ -153,11 +154,37 @@ public interface Level {
 	public Block getBlockAt(int x, int y, int z);
 	
 	/**
+	 * Gets the highest block Y at the given X and Z.
+	 * @param X to check.
+	 * @param Z to check.
+	 * @return The Y of the heighest non-air block.
+	 */
+	public int getHighestBlockY(int x, int z);
+	
+	/**
+	 * Returns true if there are no higher blocks at the given X and Z than the one at the given Y.
+	 * @param X of the block.
+	 * @param Y of the block.
+	 * @param Z of the block.
+	 * @return True if it is the highest.
+	 */
+	public boolean isHighest(int x, int y, int z);
+	
+	/**
+	 * Returns true if the given block would be lit.
+	 * @param X of the block.
+	 * @param Y of the block.
+	 * @param Z of the block.
+	 * @return Whether the block would be lit.
+	 */
+	public boolean isLit(int x, int y, int z);
+	
+	/**
 	 * Sets the block ID at the given position to the given byte.
 	 * @param Position of the block.
 	 * @param Type ID to set.
 	 */
-	public void setBlockIdAt(Position pos, byte type);
+	public boolean setBlockIdAt(Position pos, byte type);
 	
 	/**
 	 * Sets the block ID at the given position to the given byte.
@@ -165,7 +192,7 @@ public interface Level {
 	 * @param Type ID to set.
 	 * @param Whether to apply physics.
 	 */
-	public void setBlockIdAt(Position pos, byte type, boolean physics);
+	public boolean setBlockIdAt(Position pos, byte type, boolean physics);
 	
 	/**
 	 * Sets the block ID at the given coordinates to the given byte.
@@ -174,7 +201,7 @@ public interface Level {
 	 * @param Z of the block.
 	 * @param Type ID to set.
 	 */
-	public void setBlockIdAt(int x, int y, int z, byte type);
+	public boolean setBlockIdAt(int x, int y, int z, byte type);
 	
 	/**
 	 * Sets the block ID at the given coordinates to the given byte.
@@ -184,41 +211,41 @@ public interface Level {
 	 * @param Type ID to set.
 	 * @param Whether to apply physics.
 	 */
-	public void setBlockIdAt(int x, int y, int z, byte type, boolean physics);
+	public boolean setBlockIdAt(int x, int y, int z, byte type, boolean physics);
 	
 	/**
 	 * Sets the BlockType at the given position to the given BlockType.
 	 * @param Position of the block.
-	 * @param BlockType to set.
+	 * @param VanillaBlock to set.
 	 */
-	public void setBlockAt(Position pos, BlockType type);
+	public boolean setBlockAt(Position pos, BlockType type);
 	
 	/**
 	 * Sets the BlockType at the given position to the given BlockType.
 	 * @param Position of the block.
-	 * @param BlockType to set.
+	 * @param VanillaBlock to set.
 	 * @param Whether to use physics.
 	 */
-	public void setBlockAt(Position pos, BlockType type, boolean physics);
+	public boolean setBlockAt(Position pos, BlockType type, boolean physics);
 	
 	/**
 	 * Sets the BlockType at the given coordinates to the given BlockType.
 	 * @param X of the block.
 	 * @param Y of the block.
 	 * @param Z of the block.
-	 * @param BlockType to set.
+	 * @param VanillaBlock to set.
 	 */
-	public void setBlockAt(int x, int y, int z, BlockType type);
+	public boolean setBlockAt(int x, int y, int z, BlockType type);
 	
 	/**
 	 * Sets the BlockType at the given coordinates to the given BlockType.
 	 * @param X of the block.
 	 * @param Y of the block.
 	 * @param Z of the block.
-	 * @param BlockType to set.
+	 * @param VanillaBlock to set.
 	 * @param Whether to use physics.
 	 */
-	public void setBlockAt(int x, int y, int z, BlockType type, boolean physics);
+	public boolean setBlockAt(int x, int y, int z, BlockType type, boolean physics);
 	
 	/**
 	 * Returns true if the level is generating.
@@ -231,6 +258,12 @@ public interface Level {
 	 * @param Whether the level is generating.
 	 */
 	public void setGenerating(boolean generating);
+	
+	/**
+	 * Returns true if tree physics are enabled.
+	 * @return True if tree physics are enabled.
+	 */
+	public boolean treePhysics();
 	
 	/**
 	 * Sends a network message to all players in the level.
@@ -249,40 +282,62 @@ public interface Level {
 	 * Gets all the entities in the level.
 	 * @return All the entities.
 	 */
-	public List<Entity> getEntities();
+	public List<BlockEntity> getBlockEntities();
 	
 	/**
 	 * Gets the entity with the given ID.
 	 * @param ID to look for.
 	 * @return The entity.
 	 */
-	public Entity getEntityFromId(int id);
+	public BlockEntity getBlockEntityFromId(int id);
 	
 	/**
 	 * Gets the entity at the given position.
 	 * @param Position of the entity.
 	 * @return The entity.
 	 */
-	public Entity getEntity(Position pos);
+	public BlockEntity getBlockEntity(Position pos);
 	
 	/**
 	 * Spawns an entity.
-	 * @param Entity to spawn.
+	 * @param BlockEntity to spawn.
 	 * @param Position to spawn the entity in.
 	 * @return The spawned entity.
 	 */
-	public Entity spawnEntity(Entity entity, Position pos);
+	public BlockEntity spawnBlockEntity(BlockEntity entity, Position pos);
 	
 	/**
 	 * Removes the entity from the level.
-	 * @param Entity to remove.
+	 * @param BlockEntity to remove.
 	 */
-	public void removeEntity(Entity entity);
+	public void removeBlockEntity(BlockEntity entity);
 	
 	/**
 	 * Removes the entity with the given ID from the level.
 	 * @param ID to remove.
 	 */
-	public void removeEntity(int id);
+	public void removeBlockEntity(int id);
+
+	/**
+	 * Schedules a block to be ticked next time the server ticks.
+	 * @param Position to schedule.
+	 * @param ID of the block to tick.
+	 */
+	public void delayTick(Position pos, byte id);
+
+	/**
+	 * Attempts to grow a tree at the given coordinates.
+	 * @param X of the tree.
+	 * @param Y of the tree.
+	 * @param Z of the tree.
+	 * @return Whether the attempt was successful.
+	 */
+	public boolean growTree(int x, int y, int z);
+	
+	/**
+	 * Gets this level's NBTData.
+	 * @return This level's NBTData.
+	 */
+	public NBTData getData();
 	
 }

@@ -74,4 +74,14 @@ public class PlayerTeleportMessage extends Message {
 		return "PlayerTeleportMessage{playerid=" + playerId + ",x=" + x + ",y=" + y + ",z=" + z + ",yaw=" + yaw + ",pitch=" + pitch + "}";
 	}
 	
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.playerId, this.x, this.y, this.z, this.yaw, this.pitch };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 8;
+	}
+	
 }

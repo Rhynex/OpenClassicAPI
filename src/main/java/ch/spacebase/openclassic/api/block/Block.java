@@ -1,7 +1,8 @@
 package ch.spacebase.openclassic.api.block;
 
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.entity.Entity;
+import ch.spacebase.openclassic.api.entity.BlockEntity;
+import ch.spacebase.openclassic.api.level.Level;
 
 /**
  * Represents a block.
@@ -26,8 +27,17 @@ public class Block {
 	 * Sets the block's ID.
 	 * @param Block ID to set.
 	 */
-	public void setTypeId(byte id) {
-		this.pos.getLevel().setBlockIdAt(pos, id);
+	public boolean setTypeId(byte id) {
+		return this.pos.getLevel().setBlockIdAt(pos, id);
+	}
+	
+	/**
+	 * Sets the block's ID.
+	 * @param Block ID to set.
+	 * @param Whether or not to apply physics.
+	 */
+	public boolean setTypeId(byte id, boolean physics) {
+		return this.pos.getLevel().setBlockIdAt(pos, id, physics);
 	}
 	
 	/**
@@ -35,15 +45,24 @@ public class Block {
 	 * @return The block's type.
 	 */
 	public BlockType getType() {
-		return BlockType.fromId(this.getTypeId());
+		return Blocks.fromId(this.getTypeId());
 	}
 	
 	/**
 	 * Sets the block's type.
-	 * @param BlockType to set.
+	 * @param VanillaBlock to set.
 	 */
-	public void setType(BlockType type) {
-		this.setTypeId(type.getId());
+	public boolean setType(VanillaBlock type) {
+		return this.setTypeId(type.getId());
+	}
+	
+	/**
+	 * Sets the block's type.
+	 * @param VanillaBlock to set.
+	 * @param Whether or not to apply physics.
+	 */
+	public boolean setType(VanillaBlock type, boolean physics) {
+		return this.setTypeId(type.getId(), physics);
 	}
 	
 	/**
@@ -52,6 +71,14 @@ public class Block {
 	 */
 	public Position getPosition() {
 		return this.pos;
+	}
+	
+	/**
+	 * Gets the block's level.
+	 * @return The block's level.
+	 */
+	public Level getLevel() {
+		return this.pos.getLevel();
 	}
 	
 	/**
@@ -72,8 +99,8 @@ public class Block {
 	 * Gets the entity of this block, if there is one.
 	 * @return The block's entity.
 	 */
-	public Entity getEntity() {
-		return this.pos.getLevel().getEntity(this.pos);
+	public BlockEntity getBlockEntity() {
+		return this.pos.getLevel().getBlockEntity(this.pos);
 	}
 	
 	/**
@@ -81,7 +108,7 @@ public class Block {
 	 * @return Whether the block is an entity.
 	 */
 	public boolean isEntity() {
-		return this.getEntity() != null;
+		return this.getBlockEntity() != null;
 	}
 	
 }

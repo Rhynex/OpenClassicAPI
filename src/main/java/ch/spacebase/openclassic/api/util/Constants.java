@@ -8,7 +8,12 @@ public class Constants {
 	/**
 	 * The server's current version.
 	 */
-	public static final String VERSION = "0.1";
+	public static final String SERVER_VERSION = "0.1";
+	
+	/**
+	 * The client's current version.
+	 */
+	public static final String CLIENT_VERSION = "0.1";
 	
 	/**
 	 * The server's protocol version.
@@ -18,7 +23,12 @@ public class Constants {
 	/**
 	 * Number of milliseconds between each tick
 	 */
-	public static final int TICK_MILLISECONDS = 50;
+	public static final int TICK_MILLISECONDS = 100;
+	
+	/**
+	 * Number of milliseconds between each physics tick
+	 */
+	public static final int PHYSICS_TICK_MILLISECONDS = 200;
 	
 	/**
 	 * Represents the packet code for a player who isn't an op.

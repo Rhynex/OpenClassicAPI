@@ -3,7 +3,7 @@ package ch.spacebase.openclassic.api.level.generator;
 import java.util.Random;
 
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.block.BlockType;
+import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.level.Level;
 
 /**
@@ -29,7 +29,7 @@ public abstract class Generator {
 		int y = level.getWaterLevel() + 2;
 		int z = level.getDepth() / 2;
 		
-		while(level.getBlockTypeAt(x, y, z) != BlockType.AIR || level.getBlockTypeAt(x, y - 1, z) != BlockType.AIR || level.getBlockTypeAt(x, y - 2, z) == BlockType.AIR) {
+		while(level.getBlockTypeAt(x, y, z) != VanillaBlock.AIR || level.getBlockTypeAt(x, y - 1, z) != VanillaBlock.AIR || level.getBlockTypeAt(x, y - 2, z) == VanillaBlock.AIR) {
 			if(y >= level.getHeight() - 1) {
 				x = rand.nextInt(level.getWidth());
 				y = level.getWaterLevel() + 2;

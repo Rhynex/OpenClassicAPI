@@ -6,19 +6,12 @@ package ch.spacebase.openclassic.api.util.math;
 public class MathHelper {
 
 	public static final double DBL_EPSILON = Double.longBitsToDouble(0x3cb0000000000000L);
-
 	public static final float FLT_EPSILON = Float.intBitsToFloat(0x34000000);
-
 	public static final double PI = Math.PI;
-
 	public static final double SQUARED_PI = PI * PI;
-
 	public static final double HALF_PI = 0.5 * PI;
-
 	public static final double QUATER_PI = 0.5 * HALF_PI;
-
 	public static final double TWO_PI = 2.0 * PI;
-
 	public static final double THREE_PI_HALVES = TWO_PI - HALF_PI;
 
 	public static double lerp(double a, double b, double percent) {
@@ -89,19 +82,12 @@ public class MathHelper {
 	}
 
 	private static final double sin_a = -4 / SQUARED_PI;
-
 	private static final double sin_b = 4 / PI;
-
 	private static final double sin_p = 9d / 40;
-
 	private final static double asin_a = -0.0481295276831013447d;
-
 	private final static double asin_b = -0.343835993947915197d;
-
 	private final static double asin_c = 0.962761848425913169d;
-
 	private final static double asin_d = 1.00138940860107040d;
-
 	private final static double atan_a = 0.280872d;
 
 	public static int floor(double x) {

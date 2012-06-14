@@ -1,40 +1,16 @@
 package ch.spacebase.openclassic.api;
 
-import java.util.Hashtable;
 import java.util.List;
-import java.util.logging.Logger;
 
-import ch.spacebase.openclassic.api.command.Command;
-import ch.spacebase.openclassic.api.command.CommandExecutor;
-import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.level.Level;
-import ch.spacebase.openclassic.api.level.LevelInfo;
-import ch.spacebase.openclassic.api.level.generator.Generator;
 import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.permissions.PermissionManager;
-import ch.spacebase.openclassic.api.pkg.PackageManager;
 import ch.spacebase.openclassic.api.player.Player;
-import ch.spacebase.openclassic.api.plugin.PluginManager;
-import ch.spacebase.openclassic.api.scheduler.Scheduler;
-
 
 /**
  * Represents the server.
  */
-public interface Server {
-
-	/**
-	 * Gets the server's package manager.
-	 * @return The server's package manager.
-	 */
-	public PackageManager getPackageManager();
-	
-	/**
-	 * Gets the server's scheduler.
-	 * @return The server's scheduler.
-	 */
-	public Scheduler getScheduler();
+public interface Server extends Game {
 	
 	/**
 	 * Broadcasts a message via chat.
@@ -61,45 +37,6 @@ public interface Server {
 	 * @return Players with the string in their name.
 	 */
 	public List<Player> matchPlayer(String name);
-	
-	/**
-	 * Gets the server's plugin manager.
-	 * @return The server's plugin manager.
-	 */
-	public PluginManager getPluginManager();
-	
-	/**
-	 * Registers a command.
-	 * @param Alias of the command.
-	 * @param Command to register.
-	 */
-	public void registerCommand(String alias, Command command);
-	
-	/**
-	 * Registers a command with multiple aliases.
-	 * @param Aliases of the command.
-	 * @param Command to register.
-	 */
-	public void registerCommand(String aliases[], Command command);
-	
-	/**
-	 * Registers a command executor.
-	 * @param Executor to register.
-	 */
-	public void registerExecutor(CommandExecutor executor);
-	
-	/**
-	 * Processes a sent command.
-	 * @param Sender that is calling the command.
-	 * @param Command to send.
-	 */
-	public void processCommand(Sender sender, String command);
-	
-	/**
-	 * Gets a list of all non-executor commands registered.
-	 * @return All non-executor commands.
-	 */
-	public Hashtable<String, Command> getCommands();
 	
 	/**
 	 * Gets the server's MOTD.
@@ -289,17 +226,23 @@ public interface Server {
 	public PermissionManager getPermissionManager();
 	
 	/**
-	 * Shuts down the server.
+	 * Gets the default level.
+	 * @return The default level.
 	 */
-	public void shutdown();
+	public Level getDefaultLevel();
 	
 	/**
-	 * Creates a level with the given info.
-	 * @param Info to use.
-	 * @param Generator to generate with.
-	 * @return The created level.
+	 * Gets the level with the given name.
+	 * @param Name of the level.
+	 * @return The level.
 	 */
-	public Level createLevel(LevelInfo info, Generator generator);
+	public Level getLevel(String name);
+	
+	/**
+	 * Gets all the levels loaded onto the server.
+	 * @return All the levels loaded.
+	 */
+	public List<Level> getLevels();
 	
 	/**
 	 * Loads the level with the given name.
@@ -323,21 +266,16 @@ public interface Server {
 	public void unloadLevel(String name);
 	
 	/**
-	 * Gets the default level.
-	 * @return The default level.
+	 * Unloads the level with the given name.
+	 * @param Level to unload.
+	 * @param Whether to announce the level being unloaded.
 	 */
-	public Level getDefaultLevel();
+	public void unloadLevel(String name, boolean announce);
 	
 	/**
 	 * Saves all the loaded levels.
 	 */
 	public void saveLevels();
-	
-	/**
-	 * Saves the given level.
-	 * @param Level to save.
-	 */
-	public void saveLevel(Level level);
 	
 	/**
 	 * Saves the level with the given name.
@@ -346,17 +284,10 @@ public interface Server {
 	public void saveLevel(String name);
 	
 	/**
-	 * Gets the level with the given name.
-	 * @param Name of the level.
-	 * @return The level.
+	 * Saves the given level.
+	 * @param Level to save.
 	 */
-	public Level getLevel(String name);
-	
-	/**
-	 * Gets all the levels loaded onto the server.
-	 * @return All the levels loaded.
-	 */
-	public List<Level> getLevels();
+	public void saveLevel(Level level);
 	
 	/**
 	 * Sends a network message to all players on the server.
@@ -370,50 +301,5 @@ public interface Server {
 	 * @param Message to send.
 	 */
 	public void sendToAllExcept(Player player, Message msg);
-	
-	/**
-	 * Returns true if the server is running.
-	 * @return True if the server is running.
-	 */
-	public boolean isRunning();
-	
-	/**
-	 * Gets the server's configuration.
-	 * @return The servers' configuration.
-	 */
-	public Configuration getConfig();
-	
-	/**
-	 * Gets the server's logger.
-	 * @return The server's logger.
-	 */
-	public Logger getLogger();
-	
-	/**
-	 * Returns true if the server was started with the "debug" flag.
-	 * @return True if the server is in debug mode.
-	 */
-	public boolean isInDebugMode();
-	
-	/**
-	 * Registers a generator to the given name.
-	 * @param Name to register to.
-	 * @param Generator to register.
-	 */
-	public void registerGenerator(String name, Generator generator);
-	
-	/**
-	 * Gets the generator registered to the given name,
-	 * @param Name to look for.
-	 * @return The generator.
-	 */
-	public Generator getGenerator(String name);
-	
-	/**
-	 * Returns true if a generator by this name exists.
-	 * @param Name to look for.
-	 * @return True if the generator exists.
-	 */
-	public boolean isGenerator(String name);
 	
 }

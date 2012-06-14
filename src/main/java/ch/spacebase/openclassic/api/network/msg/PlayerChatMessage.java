@@ -33,5 +33,15 @@ public class PlayerChatMessage extends Message {
 	public String toString() {
 		return "PlayerChatMessage{playerid=" + playerId + ",message=" + message + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.playerId, this.message };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 13;
+	}
 	
 }

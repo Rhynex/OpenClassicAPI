@@ -54,4 +54,14 @@ public class BlockChangeMessage extends Message {
 		return "BlockChangeMessage{x=" + x + ",y=" + y + ",z=" + z + ",block=" + type + "}";
 	}
 	
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.x, this.y, this.z, this.type };
+	}
+
+	@Override
+	public byte getOpcode() {
+		return 6;
+	}
+	
 }

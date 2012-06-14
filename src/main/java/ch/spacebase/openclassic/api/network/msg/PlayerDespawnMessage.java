@@ -23,5 +23,15 @@ public class PlayerDespawnMessage extends Message {
 	public String toString() {
 		return "PlayerDespawnMessage{playerid=" + playerId + "}";
 	}
+
+	@Override
+	public Object[] getParams() {
+		return new Object[] { this.playerId };
+	}
+	
+	@Override
+	public byte getOpcode() {
+		return 12;
+	}
 	
 }

@@ -5,32 +5,34 @@ package ch.spacebase.openclassic.api.command;
  */
 public abstract class Command {
 
+	private String aliases[];
 	private String permission;
 	private int minArgs;
 	private int maxArgs;
 	private Class<? extends Sender> senders[];
 	
-	public Command(String permission) {
-		this(permission, null);
+	public Command(String aliases[], String permission) {
+		this(aliases, permission, null);
 	}
 	
-	public Command(String permission, Class<? extends Sender> senders[]) {
-		this(permission, 0, senders);
+	public Command(String aliases[], String permission, Class<? extends Sender> senders[]) {
+		this(aliases, permission, 0, senders);
 	}
 	
-	public Command(String permission, int minArgs) {
-		this(permission, minArgs, null);
+	public Command(String aliases[], String permission, int minArgs) {
+		this(aliases, permission, minArgs, null);
 	}
 	
-	public Command(String permission, int minArgs, Class<? extends Sender> senders[]) {
-		this(permission, 0, 64, senders);
+	public Command(String aliases[], String permission, int minArgs, Class<? extends Sender> senders[]) {
+		this(aliases, permission, 0, 64, senders);
 	}
 	
-	public Command(String permission, int minArgs, int maxArgs) {
-		this(permission, minArgs, maxArgs, null);
+	public Command(String aliases[], String permission, int minArgs, int maxArgs) {
+		this(aliases, permission, minArgs, maxArgs, null);
 	}
 	
-	public Command(String permission, int minArgs, int maxArgs, Class<? extends Sender> senders[]) {
+	public Command(String aliases[], String permission, int minArgs, int maxArgs, Class<? extends Sender> senders[]) {
+		this.aliases = aliases;
 		this.permission = permission;
 		this.minArgs = minArgs;
 		this.maxArgs = maxArgs;
@@ -75,6 +77,14 @@ public abstract class Command {
 	 */
 	public String getUsage() {
 		return "";
+	}
+	
+	/**
+	 * Gets this command's aliases.
+	 * @return This command's aliases.
+	 */
+	public String[] getAliases() {
+		return this.aliases;
 	}
 	
 	/**
