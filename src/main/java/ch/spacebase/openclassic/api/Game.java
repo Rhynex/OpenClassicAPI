@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.Map;
 
 import ch.spacebase.openclassic.api.command.Command;
 import ch.spacebase.openclassic.api.command.CommandExecutor;
@@ -118,6 +119,12 @@ public interface Game {
 	 * @return The generator.
 	 */
 	public Generator getGenerator(String name);
+	
+	/**
+	 * Gets the generators registered.
+	 * @return The registered generators.
+	 */
+	public Map<String, Generator> getGenerators();
 	
 	/**
 	 * Returns true if a generator by this name exists.
