@@ -1,3 +1,4 @@
+<center><img src="http://i.imgur.com/OPmKV.png" /></center>
 <b><center><h1>OpenClassicAPI</h></center></b>
 ==========
 
@@ -6,7 +7,7 @@
 <b>About OpenClassicAPI</b>
 --------
 
-OpenClassicAPI is the API for the custom Minecraft Classic server <b>[OpenClassic](http://github.com/Steveice10/OpenClassic/)</b>
+OpenClassicAPI is the API for the custom Minecraft Classic server <b>[OpenClassic](http://github.com/Steveice10/OpenClassic/)</b> and the Minecraft Classic client <b>[OpenClassic Client](http://github.com/Steveice10/OpenClassic-Client/)</b>
 
 
 <b>Building the Source</b>
