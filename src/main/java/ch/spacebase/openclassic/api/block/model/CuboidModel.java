@@ -122,7 +122,7 @@ public class CuboidModel extends Model {
 	}
 	
 	public static BlockFace quadToFace(CuboidModel model, int quad) {
-		if(model instanceof LiquidModel) {
+		if(model instanceof TransparentModel) {
 			switch(quad) {
 			case 0: case 1: return BlockFace.DOWN;
 			case 2: case 3: return BlockFace.UP;

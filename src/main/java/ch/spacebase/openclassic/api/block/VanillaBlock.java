@@ -4,7 +4,7 @@ import ch.spacebase.openclassic.api.block.model.CubeModel;
 import ch.spacebase.openclassic.api.block.model.CuboidModel;
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.PlantModel;
-import ch.spacebase.openclassic.api.block.model.LiquidModel;
+import ch.spacebase.openclassic.api.block.model.TransparentModel;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
 /**
@@ -20,17 +20,17 @@ public enum VanillaBlock implements BlockType {
 	WOOD((byte) 5, StepSound.WOOD, 4),
 	SAPLING((byte) 6, StepSound.GRASS, new PlantModel(TERRAIN, 15)),
 	BEDROCK((byte) 7, StepSound.STONE, 17),
-	WATER((byte) 8, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
-	STATIONARY_WATER((byte) 9, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
-	LAVA((byte) 10, StepSound.NONE, new LiquidModel(TERRAIN, 30), 5, true, true),
-	STATIONARY_LAVA((byte) 11, StepSound.NONE, new LiquidModel(TERRAIN, 30), true, true),
+	WATER((byte) 8, StepSound.NONE, new TransparentModel(TERRAIN, 14), true, true),
+	STATIONARY_WATER((byte) 9, StepSound.NONE, new TransparentModel(TERRAIN, 14), true, true),
+	LAVA((byte) 10, StepSound.NONE, new TransparentModel(TERRAIN, 30), 5, true, true),
+	STATIONARY_LAVA((byte) 11, StepSound.NONE, new TransparentModel(TERRAIN, 30), true, true),
 	SAND((byte) 12, StepSound.SAND, 18),
 	GRAVEL((byte) 13, StepSound.GRAVEL, 19),
 	GOLD_ORE((byte) 14, StepSound.STONE, 32),
 	IRON_ORE((byte) 15, StepSound.STONE, 33),
 	COAL_ORE((byte) 16, StepSound.STONE, 34),
 	LOG((byte) 17, StepSound.WOOD, new CubeModel(TERRAIN, new int[] { 21, 21, 20, 20, 20, 20 })),
-	LEAVES((byte) 18, StepSound.GRASS, 22, false),
+	LEAVES((byte) 18, StepSound.GRASS, new TransparentModel(TERRAIN, 22), false),
 	SPONGE((byte) 19, StepSound.GRASS, 48),
 	GLASS((byte) 20, StepSound.METAL, 49, false),
 	RED_CLOTH((byte) 21, StepSound.CLOTH, 64),
@@ -85,6 +85,10 @@ public enum VanillaBlock implements BlockType {
 	
 	private VanillaBlock(byte id, StepSound sound, int texture, boolean opaque) {
 		this(id, sound, texture, 0, opaque, false);
+	}
+	
+	private VanillaBlock(byte id, StepSound sound, Model model, boolean opaque) {
+		this(id, sound, model, 0, opaque, false);
 	}
 	
 	private VanillaBlock(byte id, StepSound sound, boolean opaque, Model model) {
