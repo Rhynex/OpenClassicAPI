@@ -30,7 +30,7 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
 	
 	/**
 	 * Gets the block held by the player breaking the block.
-	 * @return
+	 * @return The block held by the player.
 	 */
 	public BlockType getHeldBlock() {
 		return this.held;

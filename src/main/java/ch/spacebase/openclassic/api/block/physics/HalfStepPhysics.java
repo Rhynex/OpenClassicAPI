@@ -5,6 +5,9 @@ import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Physics used to make half steps join.
+ */
 public class HalfStepPhysics implements BlockPhysics {
 
 	@Override

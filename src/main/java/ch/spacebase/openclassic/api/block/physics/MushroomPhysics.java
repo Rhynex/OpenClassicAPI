@@ -4,6 +4,9 @@ import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Physics used in mushrooms.
+ */
 public class MushroomPhysics implements BlockPhysics {
 
 	@Override

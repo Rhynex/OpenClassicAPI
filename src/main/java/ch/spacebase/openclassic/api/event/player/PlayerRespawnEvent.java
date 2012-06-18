@@ -27,7 +27,7 @@ public class PlayerRespawnEvent extends PlayerEvent implements Cancellable {
     
     /**
      * Sets the location the player is respawning at.
-     * @return The new respawn location.
+     * @param pos The new respawn location.
      */
     public void setPosition(Position pos) {
     	this.pos = pos;

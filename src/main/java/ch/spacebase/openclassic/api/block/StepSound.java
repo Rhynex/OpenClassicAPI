@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.block;
 
 import java.util.Random;
 
+/**
+ * Represents a step sound.
+ */
 public enum StepSound {
 
 	NONE("", 0, 0),
@@ -25,14 +28,27 @@ public enum StepSound {
 		this.pitch = pitch;
 	}
 	
+	/**
+	 * Gets the identifier of this StepSound's sound/
+	 * @return This StepSound's sound identifier.
+	 */
 	public String getSound() {
 		return this.sound;
 	}
 	
+	/**
+	 * Gets the next play volume of this StepSound.
+	 * @return The next play volume of the StepSound.
+	 */
 	public float getVolume() {
 		return this.volume / (rand.nextFloat() * 0.4F + 1) * 0.5F;
 	}
 	
+	
+	/**
+	 * Gets the next play pitch of this StepSound.
+	 * @return The next play pitch of the StepSound.
+	 */
 	public float getPitch() {
 		return this.pitch / (rand.nextFloat() * 0.2F + 0.9F);
 	}

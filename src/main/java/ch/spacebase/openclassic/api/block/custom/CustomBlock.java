@@ -7,6 +7,9 @@ import ch.spacebase.openclassic.api.block.model.CubeModel;
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Represents a custom block.
+ */
 public class CustomBlock implements BlockType {
 	
 	private byte id;
@@ -103,10 +106,18 @@ public class CustomBlock implements BlockType {
 		return this.model;
 	}
 	
+	/**
+	 * Gets the block to be sent to clients if the client isn't custom.
+	 * @return The block's fallback.
+	 */
 	public VanillaBlock getFallback() {
 		return this.fallback;
 	}
 	
+	/**
+	 * Sets the block to be sent to clients if the client isn't custom.
+	 * @param fallback The block's new fallback.
+	 */
 	public void setFallback(VanillaBlock fallback) {
 		this.fallback = fallback;
 	}

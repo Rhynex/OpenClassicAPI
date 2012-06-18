@@ -17,13 +17,13 @@ public interface Level {
 	
 	/**
 	 * Adds a player to the level.
-	 * @param Player to add.
+	 * @param player Player to add.
 	 */
 	public void addPlayer(Player player);
 	
 	/**
 	 * Removes a player from this level.
-	 * @param Player to remove.
+	 * @param player Player to remove.
 	 */
 	public void removePlayer(String player);
 	
@@ -35,7 +35,7 @@ public interface Level {
 	
 	/**
 	 * Sets whether physics are enabled on this world.
-	 * @param Whether physics are enabled.
+	 * @param enabled Whether physics are enabled.
 	 */
 	public void setPhysicsEnabled(boolean enabled);
 	
@@ -71,9 +71,9 @@ public interface Level {
 	
 	/**
 	 * Sets the spawn of this level.
-	 * @param New spawn.
+	 * @param pos New spawn.
 	 */
-	public void setSpawn(Position position);
+	public void setSpawn(Position pos);
 
 	/**
 	 * Gets the width of the level. Width is the length along the X axis.
@@ -107,143 +107,143 @@ public interface Level {
 	
 	/**
 	 * Gets the ID of the block at the given position.
-	 * @param Position of the block.
+	 * @param pos Position of the block.
 	 * @return The block ID.
 	 */
 	public byte getBlockIdAt(Position pos);
 	
 	/**
 	 * Gets the ID of the block at the given coordinates.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
 	 * @return The block ID.
 	 */
 	public byte getBlockIdAt(int x, int y, int z);
 	
 	/**
 	 * Gets the BlockType of the block at the given position.
-	 * @param Position of the block.
+	 * @param pos Position of the block.
 	 * @return The BlockType.
 	 */
 	public BlockType getBlockTypeAt(Position pos);
 	
 	/**
 	 * Gets the BlockType of the block at the given coordinates.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
 	 * @return The BlockType.
 	 */
 	public BlockType getBlockTypeAt(int x, int y, int z);
 	
 	/**
 	 * Gets the block at the given position.
-	 * @param Position of the block.
+	 * @param pos Position of the block.
 	 * @return The block.
 	 */
 	public Block getBlockAt(Position pos);
 	
 	/**
 	 * Gets the block at the given coordinates.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
 	 * @return The block.
 	 */
 	public Block getBlockAt(int x, int y, int z);
 	
 	/**
 	 * Gets the highest block Y at the given X and Z.
-	 * @param X to check.
-	 * @param Z to check.
+	 * @param x X to check.
+	 * @param z Z to check.
 	 * @return The Y of the heighest non-air block.
 	 */
 	public int getHighestBlockY(int x, int z);
 	
 	/**
 	 * Returns true if there are no higher blocks at the given X and Z than the one at the given Y.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
 	 * @return True if it is the highest.
 	 */
 	public boolean isHighest(int x, int y, int z);
 	
 	/**
 	 * Returns true if the given block would be lit.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
 	 * @return Whether the block would be lit.
 	 */
 	public boolean isLit(int x, int y, int z);
 	
 	/**
 	 * Sets the block ID at the given position to the given byte.
-	 * @param Position of the block.
-	 * @param Type ID to set.
+	 * @param pos Position of the block.
+	 * @param type Type ID to set.
 	 */
 	public boolean setBlockIdAt(Position pos, byte type);
 	
 	/**
 	 * Sets the block ID at the given position to the given byte.
-	 * @param Position of the block.
-	 * @param Type ID to set.
-	 * @param Whether to apply physics.
+	 * @param pos Position of the block.
+	 * @param type Type ID to set.
+	 * @param physics Whether to apply physics.
 	 */
 	public boolean setBlockIdAt(Position pos, byte type, boolean physics);
 	
 	/**
 	 * Sets the block ID at the given coordinates to the given byte.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
-	 * @param Type ID to set.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @param type Type ID to set.
 	 */
 	public boolean setBlockIdAt(int x, int y, int z, byte type);
 	
 	/**
 	 * Sets the block ID at the given coordinates to the given byte.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
-	 * @param Type ID to set.
-	 * @param Whether to apply physics.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @param type Type ID to set.
+	 * @param physics Whether to apply physics.
 	 */
 	public boolean setBlockIdAt(int x, int y, int z, byte type, boolean physics);
 	
 	/**
 	 * Sets the BlockType at the given position to the given BlockType.
-	 * @param Position of the block.
-	 * @param VanillaBlock to set.
+	 * @param pos Position of the block.
+	 * @param type BlockType to set.
 	 */
 	public boolean setBlockAt(Position pos, BlockType type);
 	
 	/**
 	 * Sets the BlockType at the given position to the given BlockType.
-	 * @param Position of the block.
-	 * @param VanillaBlock to set.
-	 * @param Whether to use physics.
+	 * @param pos Position of the block.
+	 * @param type BlockType to set.
+	 * @param physics Whether to use physics.
 	 */
 	public boolean setBlockAt(Position pos, BlockType type, boolean physics);
 	
 	/**
 	 * Sets the BlockType at the given coordinates to the given BlockType.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
-	 * @param VanillaBlock to set.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @param type BlockType to set.
 	 */
 	public boolean setBlockAt(int x, int y, int z, BlockType type);
 	
 	/**
 	 * Sets the BlockType at the given coordinates to the given BlockType.
-	 * @param X of the block.
-	 * @param Y of the block.
-	 * @param Z of the block.
-	 * @param VanillaBlock to set.
-	 * @param Whether to use physics.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @param type BlockType to set.
+	 * @param physics Whether to use physics.
 	 */
 	public boolean setBlockAt(int x, int y, int z, BlockType type, boolean physics);
 	
@@ -255,7 +255,7 @@ public interface Level {
 	
 	/**
 	 * Sets whether the level is generating.
-	 * @param Whether the level is generating.
+	 * @param generating Whether the level is generating.
 	 */
 	public void setGenerating(boolean generating);
 	
@@ -267,14 +267,14 @@ public interface Level {
 	
 	/**
 	 * Sends a network message to all players in the level.
-	 * @param Message to send.
+	 * @param message Message to send.
 	 */
 	public void sendToAll(Message message);
 	
 	/**
 	 * Sends a network message to all players in the level except the given player.
-	 * @param Player to skip.
-	 * @param Message to send.
+	 * @param skip Player to skip.
+	 * @param message Message to send.
 	 */
 	public void sendToAllExcept(Player skip, Message message);
 	
@@ -286,50 +286,50 @@ public interface Level {
 	
 	/**
 	 * Gets the entity with the given ID.
-	 * @param ID to look for.
+	 * @param id ID to look for.
 	 * @return The entity.
 	 */
 	public BlockEntity getBlockEntityFromId(int id);
 	
 	/**
 	 * Gets the entity at the given position.
-	 * @param Position of the entity.
+	 * @param pos Position of the entity.
 	 * @return The entity.
 	 */
 	public BlockEntity getBlockEntity(Position pos);
 	
 	/**
 	 * Spawns an entity.
-	 * @param BlockEntity to spawn.
-	 * @param Position to spawn the entity in.
+	 * @param entity BlockEntity to spawn.
+	 * @param pos Position to spawn the entity in.
 	 * @return The spawned entity.
 	 */
 	public BlockEntity spawnBlockEntity(BlockEntity entity, Position pos);
 	
 	/**
 	 * Removes the entity from the level.
-	 * @param BlockEntity to remove.
+	 * @param entity BlockEntity to remove.
 	 */
 	public void removeBlockEntity(BlockEntity entity);
 	
 	/**
 	 * Removes the entity with the given ID from the level.
-	 * @param ID to remove.
+	 * @param id ID of the BlockEntity to remove.
 	 */
 	public void removeBlockEntity(int id);
 
 	/**
 	 * Schedules a block to be ticked next time the server ticks.
-	 * @param Position to schedule.
-	 * @param ID of the block to tick.
+	 * @param pos Position to schedule.
+	 * @param id ID of the block to tick.
 	 */
 	public void delayTick(Position pos, byte id);
 
 	/**
 	 * Attempts to grow a tree at the given coordinates.
-	 * @param X of the tree.
-	 * @param Y of the tree.
-	 * @param Z of the tree.
+	 * @param x X of the tree.
+	 * @param y Y of the tree.
+	 * @param z Z of the tree.
 	 * @return Whether the attempt was successful.
 	 */
 	public boolean growTree(int x, int y, int z);

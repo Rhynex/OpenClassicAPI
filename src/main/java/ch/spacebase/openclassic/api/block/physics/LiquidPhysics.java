@@ -6,6 +6,9 @@ import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 import ch.spacebase.openclassic.api.level.Level;
 
+/**
+ * Physics used in liquids to make it flow.
+ */
 public class LiquidPhysics implements BlockPhysics {
 
 	private byte id;
@@ -44,9 +47,7 @@ public class LiquidPhysics implements BlockPhysics {
 			moving = moving | this.canFlow(block.getLevel(), x - 1, yy, z) | this.canFlow(block.getLevel(), x + 1, yy, z) | this.canFlow(block.getLevel(), x, yy, z - 1) | this.canFlow(block.getLevel(), x, yy, z + 1);
 		}
 
-		if (!moving) {
-			block.setTypeId((byte) (this.id + 1));
-		} else {
+		if (moving) {
 			block.getLevel().delayTick(b.getPosition(), this.id);
 		}
 	}

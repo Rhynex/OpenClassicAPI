@@ -42,7 +42,7 @@ public class Group {
 	
 	/**
 	 * Sets the group inherited by this group.
-	 * @param Group to inherit.
+	 * @param group Group to inherit.
 	 */
 	public void setInheritedGroup(String group) {
 		this.inherits = group;
@@ -58,7 +58,7 @@ public class Group {
 	
 	/**
 	 * Sets whether this group is default.
-	 * @param Whether this group is default.
+	 * @param def Whether this group is default.
 	 */
 	public void setDefault(boolean def) {
 		this.def = def;
@@ -76,7 +76,7 @@ public class Group {
 	
 	/**
 	 * Adds a permission to this group.
-	 * @param Permission to add.
+	 * @param permission Permission to add.
 	 */
 	public void addPermission(String permission) {
 		this.perms.add(permission.toLowerCase());
@@ -84,7 +84,7 @@ public class Group {
 	
 	/**
 	 * Removes a permission from this group.
-	 * @param Permission to remove.
+	 * @param permission Permission to remove.
 	 */
 	public void removePermission(String permission) {
 		this.perms.remove(permission.toLowerCase());
@@ -102,7 +102,7 @@ public class Group {
 	
 	/**
 	 * Adds a player to this group.
-	 * @param Player to add.
+	 * @param name Player to add.
 	 */
 	public void addPlayer(String name) {
 		this.players.add(name.toLowerCase());
@@ -110,7 +110,7 @@ public class Group {
 	
 	/**
 	 * Removes a player from this group.
-	 * @param Player to remove.
+	 * @param name Player to remove.
 	 */
 	public void removePlayer(String name) {
 		this.players.remove(name.toLowerCase());
@@ -118,7 +118,7 @@ public class Group {
 	
 	/**
 	 * Checks if this group has a permission.
-	 * @param Permission to check for.
+	 * @param permission Permission to check for.
 	 * @return True if this group has the given permission.
 	 */
 	public boolean hasPermission(String permission) {

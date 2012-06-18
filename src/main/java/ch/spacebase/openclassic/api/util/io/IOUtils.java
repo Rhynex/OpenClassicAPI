@@ -11,7 +11,7 @@ public class IOUtils {
 
 	/**
 	 * Reads a string from a DataInputStream.
-	 * @param DataInputStream to read from.
+	 * @param in DataInputStream to read from.
 	 * @return The string read from the stream.
 	 * @throws IOException if an I/O error occurs.
 	 */
@@ -27,8 +27,8 @@ public class IOUtils {
 	
 	/**
 	 * Writes a string to a DataInputStream.
-	 * @param DataOutputStream to write to.
-	 * @param The string to write.
+	 * @param out DataOutputStream to write to.
+	 * @param str The string to write.
 	 * @throws IOException if an I/O error occurs.
 	 */
 	public static void writeString(DataOutputStream out, String str) throws IOException {

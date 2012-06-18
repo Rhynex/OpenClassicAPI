@@ -13,7 +13,7 @@ public abstract class CommandExecutor {
 
 	/**
 	 * Gets the method for the given command.
-	 * @param The command to look for.
+	 * @param command The command to look for.
 	 * @return The method for the command.
 	 */
 	public final Method getCommand(String command) {

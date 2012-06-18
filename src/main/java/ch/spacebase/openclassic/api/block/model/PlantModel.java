@@ -1,5 +1,8 @@
 package ch.spacebase.openclassic.api.block.model;
 
+/**
+ * A model used in plant blocks.
+ */
 public class PlantModel extends Model {
 	
 	private int quadCount = 0;

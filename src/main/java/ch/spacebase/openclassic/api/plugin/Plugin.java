@@ -84,7 +84,7 @@ public abstract class Plugin {
 	
 	/**
 	 * Sets whether the plugin is enabled.
-	 * @param Whether the plugin is enabled.
+	 * @param enable Whether the plugin is enabled.
 	 */
 	public void setEnabled(boolean enable) {
 		this.enabled = enable;

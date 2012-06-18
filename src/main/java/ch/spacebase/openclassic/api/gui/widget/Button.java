@@ -31,7 +31,7 @@ public class Button extends Widget {
 	
 	/**
 	 * Sets the button's text.
-	 * @param Text to set.
+	 * @param text Text to set.
 	 */
 	public void setText(String text) {
 		this.text = text;
@@ -48,7 +48,7 @@ public class Button extends Widget {
 	
 	/**
 	 * Sets whether the button is active.
-	 * @param Whether the button is active.
+	 * @param active Whether the button is active.
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
@@ -85,8 +85,8 @@ public class Button extends Widget {
 			state = 2;
 		}
 
-		RenderHelper.getHelper().drawImage(this.x, this.y, 0, 46 + state * 20, this.width / 2, this.height);
-		RenderHelper.getHelper().drawImage(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + state * 20, this.width / 2, this.height);
+		RenderHelper.getHelper().drawImage(this.x, this.y, 0, 0, 46 + state * 20, this.width / 2, this.height);
+		RenderHelper.getHelper().drawImage(this.x + this.width / 2, 0, this.y, 200 - this.width / 2, 46 + state * 20, this.width / 2, this.height);
 		
 		String message = this.text;
 		if(message.length() > 30) {

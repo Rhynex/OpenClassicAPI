@@ -5,6 +5,9 @@ import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
+/**
+ * A cuboid-shaped model.
+ */
 public class CuboidModel extends Model {
 	
 	public CuboidModel(Texture texture, int[] textureIds, float x1, float y1, float z1, float x2, float y2, float z2) {
@@ -104,14 +107,17 @@ public class CuboidModel extends Model {
 		return result;
 	}
 	
-	public boolean renderAll(int x, int y, int z, float brightness) {
-		return super.render(x, y, z, brightness);
+	@Override
+	public void renderAll(int x, int y, int z, float brightness) {
+		super.render(x, y, z, brightness);
 	}
 	
+	@Override
 	public String getType() {
 		return "CuboidModel";
 	}
 	
+	@Override
 	public void renderFullbright(int x, int y, int z) {
 		this.getQuad(0).render(x, y, z, 0.5F);
 		this.getQuad(1).render(x, y, z, 1);
@@ -121,6 +127,12 @@ public class CuboidModel extends Model {
 		this.getQuad(5).render(x, y, z, 0.6F);
 	}
 	
+	/**
+	 * Converts a quad ID to a BlockFace.
+	 * @param model Model the quad belongs to.
+	 * @param quad Quad ID to convert.
+	 * @return The BlockFace the quad ID converts to.
+	 */
 	public static BlockFace quadToFace(CuboidModel model, int quad) {
 		if(model instanceof TransparentModel) {
 			switch(quad) {
@@ -145,6 +157,11 @@ public class CuboidModel extends Model {
 		}
 	}
 	
+	/**
+	 * Converts a BlockFace to a quad ID.
+	 * @param face BlockFace to convert.
+	 * @return The quad ID the BlockFace converts to.
+	 */
 	public static int faceToQuad(BlockFace face) {
 		switch(face) {
 			case DOWN: return 0;

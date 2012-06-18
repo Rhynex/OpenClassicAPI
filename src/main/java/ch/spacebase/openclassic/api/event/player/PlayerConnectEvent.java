@@ -38,7 +38,7 @@ public class PlayerConnectEvent extends Event {
     
     /**
      * Gets the login result.
-     * @return The login result..
+     * @return The login result.
      */
     public Result getResult() {
     	return this.result;
@@ -46,7 +46,7 @@ public class PlayerConnectEvent extends Event {
     
     /**
      * Sets the login result.
-     * @param The new login result.
+     * @param result The new login result.
      */
     public void setResult(Result result) {
     	this.result = result;
@@ -62,7 +62,7 @@ public class PlayerConnectEvent extends Event {
     
     /**
      * Sets the kick message.
-     * @param The new kick message.
+     * @param message The new kick message.
      */
     public void setKickMessage(String message) {
     	this.message = message;
@@ -78,8 +78,8 @@ public class PlayerConnectEvent extends Event {
 
     /**
      * Disallows the player from logging in.
-     * @param Result of the login.
-     * @param Message to kick the player with.
+     * @param result Result of the login.
+     * @param message Message to kick the player with.
      */
     public void disallow(Result result, String message) {
         this.result = result;
@@ -90,25 +90,15 @@ public class PlayerConnectEvent extends Event {
      * The result of a login attempt.
      */
     public enum Result {
-        /**
-         * The player is allowed to login.
-         */
+        /** The player is allowed to login. */
         ALLOWED,
-        /**
-         * The player isn't allowed to login since the server is full.
-         */
+        /** The player isn't allowed to login since the server is full. */
         KICK_FULL,
-        /**
-         * The player isn't allowed to login since they are banned.
-         */
+        /** The player isn't allowed to login since they are banned. */
         KICK_BANNED,
-        /**
-         * The player isn't allowed to login since they aren't on the whitelist.
-         */
+        /** The player isn't allowed to login since they aren't on the whitelist. */
         KICK_WHITELIST,
-        /**
-         * The player isn't allowed to login due to other reasons.
-         */
+        /** The player isn't allowed to login due to other reasons. */
         KICK_OTHER
     }
 	

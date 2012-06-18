@@ -45,7 +45,7 @@ public interface Player extends Sender {
 	
 	/**
 	 * Sets the player's display name.
-	 * @param Display name to set.
+	 * @param name Display name to set.
 	 */
 	public void setDisplayName(String name);
 	
@@ -57,51 +57,51 @@ public interface Player extends Sender {
 	
 	/**
 	 * Sets the block ID of the current block placement mode the player has.
-	 * @param Block ID to set it to.
+	 * @param type Block ID to set it to.
 	 */
 	public void setPlaceMode(int type);
 	
 	/**
 	 * Moves the player to the given position.
-	 * @param Position to move to.
+	 * @param pos Position to move to.
 	 */
 	public void moveTo(Position pos);
 	
 	/**
 	 * Moves the player to the given coordinates.
-	 * @param X to move to.
-	 * @param Y to move to.
-	 * @param Z to move to.
+	 * @param x X to move to.
+	 * @param y Y to move to.
+	 * @param z Z to move to.
 	 */
 	public void moveTo(double x, double y, double z);
 	
 	/**
 	 * Moves the player to the given coordinates and rotation.
-	 * @param X to move to.
-	 * @param Y to move to.
-	 * @param Z to move to.
-	 * @param Yaw to move to.
-	 * @param Pitch to move to.
+	 * @param x X to move to.
+	 * @param y Y to move to.
+	 * @param z Z to move to.
+	 * @param yaw Yaw to move to.
+	 * @param pitch Pitch to move to.
 	 */
 	public void moveTo(double x, double y, double z, byte yaw, byte pitch);
 	
 	/**
 	 * Moves the player to the given level and coordinates.
-	 * @param Level to move to.
-	 * @param X to move to.
-	 * @param Y to move to.
-	 * @param Z to move to.
+	 * @param level Level to move to.
+	 * @param x X to move to.
+	 * @param y Y to move to.
+	 * @param z Z to move to.
 	 */
 	public void moveTo(Level level, double x, double y, double z);
 	
 	/**
 	 * Moves the player to the given level, coordinates, and rotation.
-	 * @param Level to move to.
-	 * @param X to move to.
-	 * @param Y to move to.
-	 * @param Z to move to.
-	 * @param Yaw to move to.
-	 * @param Pitch to move to.
+	 * @param level Level to move to.
+	 * @param x X to move to.
+	 * @param y Y to move to.
+	 * @param z Z to move to.
+	 * @param yaw Yaw to move to.
+	 * @param pitch Pitch to move to.
 	 */
 	public void moveTo(Level level, double x, double y, double z, byte yaw, byte pitch);
 	
@@ -113,7 +113,7 @@ public interface Player extends Sender {
 
 	/**
 	 * Sets the player's group.
-	 * @param The group to set the player to.
+	 * @param group The group to set the player to.
 	 */
 	public void setGroup(Group group);
 	
@@ -131,7 +131,7 @@ public interface Player extends Sender {
 	
 	/**
 	 * Kicks the player.
-	 * @param The reason the player is being kicked.
+	 * @param reason The reason the player is being kicked.
 	 */
 	public void disconnect(String reason);
 	

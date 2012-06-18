@@ -17,7 +17,7 @@ public abstract class InputHelper {
 	
 	/**
 	 * Sets the current InputHelper instance.
-	 * @param New instance.
+	 * @param helper The new instance.
 	 */
 	public static void setHelper(InputHelper helper) {
 		if(InputHelper.helper != null || helper == null) return;
@@ -26,14 +26,14 @@ public abstract class InputHelper {
 	
 	/**
 	 * Returns true if the given mouse button is down.
-	 * @param Button to check.
+	 * @param button Button to check.
 	 * @return True if the button is down.
 	 */
 	public abstract boolean isMouseButtonDown(int button);
 	
 	/**
 	 * Returns true if the given key is down.
-	 * @param Key to check.
+	 * @param key Key to check.
 	 * @return True if the key is down.
 	 */
 	public abstract boolean isKeyDown(int key);

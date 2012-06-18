@@ -8,13 +8,13 @@ import ch.spacebase.openclassic.api.permissions.PermissionManager;
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
- * Represents the server.
+ * Represents the OpenClassic Server.
  */
 public interface Server extends Game {
 	
 	/**
 	 * Broadcasts a message via chat.
-	 * @param The message to broadcast.
+	 * @param message The message to broadcast.
 	 */
 	public void broadcastMessage(String message);
 	
@@ -26,14 +26,14 @@ public interface Server extends Game {
 	
 	/**
 	 * Returns the player with the given name.
-	 * @param The name of the player.
+	 * @param name The name of the player.
 	 * @return The player.
 	 */
 	public Player getPlayer(String name);
 	
 	/**
 	 * Returns a list of players that have a name with the given string in it.
-	 * @param Name to look for.
+	 * @param name Name to look for.
 	 * @return Players with the string in their name.
 	 */
 	public List<Player> matchPlayer(String name);
@@ -46,7 +46,7 @@ public interface Server extends Game {
 	
 	/**
 	 * Sets the server's MOTD.
-	 * @param The server's new MOTD.
+	 * @param motd The server's new MOTD.
 	 */
 	public void setMotd(String motd);
 	
@@ -58,7 +58,7 @@ public interface Server extends Game {
 	
 	/**
 	 * Sets the server's name.
-	 * @param The server's new name.
+	 * @param name The server's new name.
 	 */
 	public void setServerName(String name);
 	
@@ -70,7 +70,7 @@ public interface Server extends Game {
 	
 	/**
 	 * Sets the maximum amount of players allowed to be on at once.
-	 * @param The new maximum.
+	 * @param max The new maximum.
 	 */
 	public void setMaxPlayers(int max);
 	
@@ -82,7 +82,7 @@ public interface Server extends Game {
 	
 	/**
 	 * Sets the server's network port.
-	 * @param The server's new network port.
+	 * @param post The server's new network port.
 	 */
 	public void setPort(int port);
 	
@@ -94,7 +94,7 @@ public interface Server extends Game {
 	
 	/**
 	 * Sets whether the server will display on the minecraft.net server list.
-	 * @return Whether the server will display.
+	 * @return serverPublic Whether the server will display.
 	 */
 	public void setPublic(boolean serverPublic);
 	
@@ -106,7 +106,7 @@ public interface Server extends Game {
 	
 	/**
 	 * Sets whether the server verifies names on minecraft.net
-	 * @param Whether the server verifies names.
+	 * @param online Whether the server verifies names.
 	 */
 	public void setOnlineMode(boolean online);
 	
@@ -118,91 +118,91 @@ public interface Server extends Game {
 	
 	/**
 	 * Sets whether the server uses a whitelist.
-	 * @param Whether the server uses a whitelist.
+	 * @param whitelist Whether the server uses a whitelist.
 	 */
 	public void setUseWhitelist(boolean whitelist);
 	
 	/**
 	 * Returns true if the given player is whitelisted.
 	 * @param Player to check.
-	 * @return Whether the player is whitelisted.
+	 * @return player Whether the player is whitelisted.
 	 */
 	public boolean isWhitelisted(String player);
 	
 	/**
 	 * Returns true if the given player is banned.
 	 * @param Player to check.
-	 * @return Whether the player is banned.
+	 * @return player Whether the player is banned.
 	 */
 	public boolean isBanned(String player);
 	
 	/**
 	 * Returns true if the given IP address is banned.
 	 * @param IP address to check.
-	 * @return Whether the IP address is banned.
+	 * @return player Whether the IP address is banned.
 	 */
 	public boolean isIpBanned(String address);
 	
 	/**
 	 * Bans the given player.
-	 * @param Player to ban.
+	 * @param player Player to ban.
 	 */
 	public void banPlayer(String player);
 	
 	/**
 	 * Bans the given player using the given reason.
-	 * @param Player to ban.
-	 * @param Reason for the ban.
+	 * @param player Player to ban.
+	 * @param reason Reason for the ban.
 	 */
 	public void banPlayer(String player, String reason);
 	
 	/**
 	 * Unbans the given player.
-	 * @param Player to unban.
+	 * @param player Player to unban.
 	 */
 	public void unbanPlayer(String player);
 	
 	/**
 	 * Bans the given IP address.
-	 * @param Address to ban.
+	 * @param address Address to ban.
 	 */
 	public void banIp(String address);
 	
 	/**
 	 * Bans the given IP address with the given reason.
-	 * @param Address to ban.
-	 * @param Reason for the ban.
+	 * @param address Address to ban.
+	 * @param reason Reason for the ban.
 	 */
 	public void banIp(String address, String reason);
 	
 	/**
 	 * Unbans the given IP address.
-	 * @param Address to unban.
+	 * @param address Address to unban.
 	 */
 	public void unbanIp(String address);
 	
 	/**
 	 * Allows the given player to logging in to this server if whitelisting is enabled.
-	 * @param Player to allow.
+	 * @param player Player to allow.
 	 */
 	public void whitelist(String player);
 	
 	/**
 	 * Denies the given player from logging in to this server if whitelisting is enabled.
-	 * @param Player to deny.
+	 * @param player Player to deny.
 	 */
 	public void unwhitelist(String player);
 	
 	/**
 	 * Gets the reason for the given player's ban.
-	 * @param Player to get the ban reason for.
+	 * @param player Player to get the ban reason for.
 	 * @return The player's ban reason.
 	 */
 	public String getBanReason(String player);
 	
 	/**
 	 * Gets the reason for the given IP address's IP ban.
-	 * @param IP address to get the ban reason for.
+	 * @param address IP address to get the ban reason for.
 	 * @return The IP's ban reason.
 	 */
 	public String getIpBanReason(String address);
@@ -233,7 +233,7 @@ public interface Server extends Game {
 	
 	/**
 	 * Gets the level with the given name.
-	 * @param Name of the level.
+	 * @param name Name of the level.
 	 * @return The level.
 	 */
 	public Level getLevel(String name);
@@ -246,29 +246,29 @@ public interface Server extends Game {
 	
 	/**
 	 * Loads the level with the given name.
-	 * @param Name of the level.
+	 * @param name Name of the level.
 	 * @return The loaded level.
 	 */
 	public Level loadLevel(String name);
 	
 	/**
 	 * Loads the level with the given name.
-	 * @param Name of the level.
-	 * @param Whether to create the level if it isn't found.
+	 * @param name Name of the level.
+	 * @param create Whether to create the level if it isn't found.
 	 * @return The loaded level.
 	 */
 	public Level loadLevel(String name, boolean create);
 	
 	/**
 	 * Unloads the level with the given name.
-	 * @param Level to unload.
+	 * @param name Level to unload.
 	 */
 	public void unloadLevel(String name);
 	
 	/**
 	 * Unloads the level with the given name.
-	 * @param Level to unload.
-	 * @param Whether to announce the level being unloaded.
+	 * @param name Level to unload.
+	 * @param announce Whether to announce the level being unloaded.
 	 */
 	public void unloadLevel(String name, boolean announce);
 	
@@ -279,26 +279,26 @@ public interface Server extends Game {
 	
 	/**
 	 * Saves the level with the given name.
-	 * @param Level to save.
+	 * @param name Level to save.
 	 */
 	public void saveLevel(String name);
 	
 	/**
 	 * Saves the given level.
-	 * @param Level to save.
+	 * @param level Level to save.
 	 */
 	public void saveLevel(Level level);
 	
 	/**
 	 * Sends a network message to all players on the server.
-	 * @param Message to send.
+	 * @param msg Message to send.
 	 */
 	public void sendToAll(Message msg);
 	
 	/**
 	 * Sends a network message to all players on the server except the given player.
-	 * @param Player to skip.
-	 * @param Message to send.
+	 * @param player Player to skip.
+	 * @param msg Message to send.
 	 */
 	public void sendToAllExcept(Player player, Message msg);
 	

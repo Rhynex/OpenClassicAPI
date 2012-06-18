@@ -7,7 +7,7 @@ public interface Sender {
 
 	/**
 	 * Sends a message to the command sender.
-	 * @param Message to send.
+	 * @param message Message to send.
 	 */
 	public void sendMessage(String message);
 	
@@ -25,7 +25,7 @@ public interface Sender {
 	
 	/**
 	 * Checks whether the sender has the given permssion.
-	 * @param Permission to check for.
+	 * @param permission Permission to check for.
 	 * @return True if the sender has the permission.
 	 */
 	public boolean hasPermission(String permission);

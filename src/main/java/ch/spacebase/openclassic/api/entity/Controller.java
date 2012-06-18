@@ -5,6 +5,10 @@ import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.entity.BlockEntity.BlockRemoveCause;
 import ch.spacebase.openclassic.api.player.Player;
 
+// TODO: Call stuff on client.
+/**
+ * A Controller that handles actions on a BlockEntity.
+ */
 public abstract class Controller {
 
 	private BlockEntity parent;
@@ -29,20 +33,20 @@ public abstract class Controller {
 	
 	/**
 	 * Called when the controller is attached to an entity.
-	 * @param Entity being attached to.
+	 * @param entity Entity being attached to.
 	 */
 	public abstract void onAttached(BlockEntity entity);
 	
 	/**
 	 * Called when the controller is detached from an entity.
-	 * @param Entity being detached from.
+	 * @param entity Entity being detached from.
 	 */
 	public abstract void onDetached(BlockEntity entity);
 	
 	/**
 	 * Called when the entity's block is removed.
-	 * @param Cause of the block's removal.
-	 * @param Block that was removed.
+	 * @param cause Cause of the block's removal.
+	 * @param block Block that was removed.
 	 * @return Whether to allow the removal.
 	 */
 	public boolean onBlockRemoval(BlockRemoveCause cause, Block block) {
@@ -55,7 +59,7 @@ public abstract class Controller {
 	
 	/**
 	 * Called when the entity's block is set at a location.
-	 * @param Block being set.
+	 * @param block Block being set.
 	 * @return Whether to allow the set.
 	 */
 	public boolean onBlockSet(Block block) {	
@@ -65,7 +69,7 @@ public abstract class Controller {
 	// TODO: Call this
 	/**
 	 * Called when the entity's block is right clicked.
-	 * @param Player that right clicked the block.
+	 * @param player Player that right clicked the block.
 	 * @return Whether to continue as normal.
 	 */
 	public boolean onRightClick(Player player) {

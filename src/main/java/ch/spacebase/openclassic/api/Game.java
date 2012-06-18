@@ -16,6 +16,9 @@ import ch.spacebase.openclassic.api.plugin.Plugin;
 import ch.spacebase.openclassic.api.plugin.PluginManager;
 import ch.spacebase.openclassic.api.scheduler.Scheduler;
 
+/**
+ * Represents a Minecraft game.
+ */
 public interface Game {
 
 	/**
@@ -38,34 +41,34 @@ public interface Game {
 	
 	/**
 	 * Registers a command.
-	 * @param Plugin the command belongs to.
-	 * @param Command to register.
+	 * @param plugin Plugin the command belongs to.
+	 * @param command Command to register.
 	 */
 	public void registerCommand(Plugin plugin, Command command);
 	
 	/**
 	 * Registers a command executor.
-	 * @param Plugin the executor belongs to.
-	 * @param Executor to register.
+	 * @param plugin Plugin the executor belongs to.
+	 * @param executor Executor to register.
 	 */
 	public void registerExecutor(Plugin plugin, CommandExecutor executor);
 	
 	/**
 	 * Unregisters a plugins commands.
-	 * @param Plugin the commands belongs to.
+	 * @param plugin Plugin the commands belongs to.
 	 */
 	public void unregisterCommands(Plugin plugin);
 	
 	/**
 	 * Unregisters a plugins executors.
-	 * @param Plugin the executors belongs to.
+	 * @param plugin Plugin the executors belongs to.
 	 */
 	public void unregisterExecutors(Plugin plugin);
 	
 	/**
 	 * Processes a sent command.
-	 * @param Sender that is calling the command.
-	 * @param Command to send.
+	 * @param sender Sender that is calling the command.
+	 * @param command Command to send.
 	 */
 	public void processCommand(Sender sender, String command);
 	
@@ -82,8 +85,8 @@ public interface Game {
 	
 	/**
 	 * Creates a level with the given info.
-	 * @param Info to use.
-	 * @param Generator to generate with.
+	 * @param info Info to use.
+	 * @param generator Generator to generate with.
 	 * @return The created level.
 	 */
 	public Level createLevel(LevelInfo info, Generator generator);
@@ -108,14 +111,14 @@ public interface Game {
 	
 	/**
 	 * Registers a generator to the given name.
-	 * @param Name to register to.
-	 * @param Generator to register.
+	 * @param name Name to register to.
+	 * @param generator Generator to register.
 	 */
 	public void registerGenerator(String name, Generator generator);
 	
 	/**
 	 * Gets the generator registered to the given name,
-	 * @param Name to look for.
+	 * @param name Name to look for.
 	 * @return The generator.
 	 */
 	public Generator getGenerator(String name);
@@ -128,7 +131,7 @@ public interface Game {
 	
 	/**
 	 * Returns true if a generator by this name exists.
-	 * @param Name to look for.
+	 * @param name Name to look for.
 	 * @return True if the generator exists.
 	 */
 	public boolean isGenerator(String name);

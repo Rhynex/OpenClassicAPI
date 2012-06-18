@@ -9,13 +9,16 @@ import ch.spacebase.openclassic.api.event.EventFactory;
 import ch.spacebase.openclassic.api.event.block.BlockRegisterEvent;
 import ch.spacebase.openclassic.api.event.block.BlockUnregisterEvent;
 
+/**
+ * The block registry.
+ */
 public class Blocks {
 	
 	private static final SortedMap<Byte, BlockType> registry = new TreeMap<Byte, BlockType>();
 	
 	/**
 	 * Gets the block with the given ID.
-	 * @param ID of the block.
+	 * @param id ID of the block.
 	 * @return The block with the given ID.
 	 */
 	public static BlockType fromId(int id) {
@@ -24,7 +27,7 @@ public class Blocks {
 	
 	/**
 	 * Registers a block.
-	 * @param Block to register.
+	 * @param block Block to register.
 	 */
 	public static void register(BlockType block) {
 		EventFactory.callEvent(new BlockRegisterEvent(block));
@@ -33,7 +36,7 @@ public class Blocks {
 	
 	/**
 	 * Unregisters a block.
-	 * @param ID of the Block to unregister.
+	 * @param id ID of the Block to unregister.
 	 */
 	public static void unregister(int id) {
 		EventFactory.callEvent(new BlockUnregisterEvent(fromId(id)));

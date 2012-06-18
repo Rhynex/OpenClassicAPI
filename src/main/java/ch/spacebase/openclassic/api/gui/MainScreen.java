@@ -15,7 +15,7 @@ public interface MainScreen extends Screen {
 	
 	/**
 	 * Adds a chat message to the chat history.
-	 * @param Message to add.
+	 * @param message Message to add.
 	 */
 	public void addChat(String message);
 	
@@ -27,7 +27,7 @@ public interface MainScreen extends Screen {
 
 	/**
 	 * Gets the chat message at the given index. (0 = bottom, 50 = max)
-	 * @param Index to look in
+	 * @param index Index to look in
 	 * @return Message at the given index.
 	 */
 	public String getChatMessage(int index);

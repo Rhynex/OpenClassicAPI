@@ -1,5 +1,10 @@
 package ch.spacebase.openclassic.api.block.model;
 
+/**
+ * A model that is transparent and has all sides showing while looking inside it.
+ * @author steven
+ *
+ */
 public class TransparentModel extends CubeModel {
 
 	private int quadCount = 0;

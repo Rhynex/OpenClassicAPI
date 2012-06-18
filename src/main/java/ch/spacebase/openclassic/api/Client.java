@@ -6,6 +6,9 @@ import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.player.Player;
 import ch.spacebase.openclassic.api.sound.AudioManager;
 
+/**
+ * Represents the OpenClassic Client.
+ */
 public interface Client extends Game {
 
 	/**
@@ -22,7 +25,7 @@ public interface Client extends Game {
 	
 	/**
 	 * Loads and enters the given level.
-	 * @return The level to load.
+	 * @return name The level to load.
 	 */
 	public Level openLevel(String name);
 	
@@ -39,7 +42,7 @@ public interface Client extends Game {
 
 	/**
 	 * Sets the current visible GuiScreen.
-	 * @param Screen to set visible.
+	 * @param screen Screen to set visible.
 	 */
 	public void setCurrentScreen(GuiScreen screen);
 	
@@ -68,7 +71,7 @@ public interface Client extends Game {
 	
 	/**
 	 * Exits the current level and returns to the main menu.
-	 * @param Whether to save before exiting.
+	 * @param save Whether to save before exiting.
 	 */
 	public void exitLevel(boolean save);
 	

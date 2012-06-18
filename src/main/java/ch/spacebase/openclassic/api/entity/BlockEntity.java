@@ -37,7 +37,7 @@ public class BlockEntity {
 	
 	/**
 	 * Attaches a controller to this entity.
-	 * @param Controller to attach.
+	 * @param controller Controller to attach.
 	 */
 	public void attach(Controller controller) {
 		if(this.controller != null) {
@@ -80,7 +80,7 @@ public class BlockEntity {
 	
 	/**
 	 * Sets the entity's position.
-	 * @param Position to set.
+	 * @param pos Position to set.
 	 */
 	public void setPosition(Position pos) {
 		if(this.controller == null) return;

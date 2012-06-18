@@ -89,9 +89,9 @@ public abstract class Command {
 	
 	/**
 	 * Executes the command.
-	 * @param The sender using the command.
-	 * @param The alias being executed.
-	 * @param The arguments of the command.
+	 * @param sender The sender using the command.
+	 * @param command The alias being executed.
+	 * @param args The arguments of the command.
 	 */
 	public abstract void execute(Sender sender, String command, String args[]);
 	

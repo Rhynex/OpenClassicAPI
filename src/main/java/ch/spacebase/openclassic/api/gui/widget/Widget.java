@@ -43,7 +43,7 @@ public abstract class Widget {
 	
 	/**
 	 * Sets whether this widget is visible.
-	 * @param Whether this widget is visible.
+	 * @param visible Whether this widget is visible.
 	 */
 	public void setVisible(boolean visible) {
 		this.visible = visible;
@@ -91,7 +91,7 @@ public abstract class Widget {
 	
 	/**
 	 * Sets this widget's parent.
-	 * @param This widget's new parent.
+	 * @param screen This widget's new parent.
 	 */
 	public void setParent(GuiScreen screen) {
 		this.parent = screen;
@@ -104,8 +104,8 @@ public abstract class Widget {
 	
 	/**
 	 * Called when a key has been pressed.
-	 * @param Character resulting from the key press if applicable.
-	 * @param Key that was pressed.
+	 * @param c Character resulting from the key press if applicable.
+	 * @param key Key that was pressed.
 	 */
 	public void onKeyPress(char c, int key) {
 	}
@@ -118,23 +118,23 @@ public abstract class Widget {
 	
 	/**
 	 * Called when the mouse is clicked.
-	 * @param X of the mouse.
-	 * @param Y of the mouse.
-	 * @param ID of the clicked button.
+	 * @param x X of the mouse.
+	 * @param y Y of the mouse.
+	 * @param button ID of the clicked button.
 	 */
 	public void onMouseClick(int x, int y, int button) {
 	}
 
 	/**
 	 * Called when this widget is attached to a GuiScreen.
-	 * @param GuiScreen the widget is being attached to.
+	 * @param screen GuiScreen the widget is being attached to.
 	 */
 	public void onAttached(GuiScreen screen) {
 	}
 	
 	/**
 	 * Called when this widget is removed from a GuiScreen.
-	 * @param GuiScreen the widget is being removed from.
+	 * @param screen GuiScreen the widget is being removed from.
 	 */
 	public void onRemoved(GuiScreen screen) {
 	}

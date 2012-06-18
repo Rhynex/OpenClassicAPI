@@ -29,7 +29,7 @@ public class PlayerKickEvent extends PlayerEvent implements Cancellable {
     
     /**
      * Sets the logout message.
-     * @param The new logout message.
+     * @param message The new logout message.
      */
     public void setMessage(String message) {
     	this.message = message;
@@ -45,7 +45,7 @@ public class PlayerKickEvent extends PlayerEvent implements Cancellable {
     
     /**
      * Sets the kick reason.
-     * @param The new kick reason.
+     * @param reason The new kick reason.
      */
     public void setReason(String reason) {
     	String old = this.reason;

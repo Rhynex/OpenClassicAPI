@@ -93,7 +93,7 @@ public class PermissionManager {
 	
 	/**
 	 * Adds a group to the group list.
-	 * @param Group to add.
+	 * @param group Group to add.
 	 */
 	public void addGroup(Group group) {
 		this.groups.add(group);
@@ -101,7 +101,7 @@ public class PermissionManager {
 	
 	/**
 	 * Removes a group from the group list.
-	 * @param Group to remove.
+	 * @param group Group to remove.
 	 */
 	public void removeGroup(Group group) {
 		this.groups.remove(group);
@@ -109,7 +109,7 @@ public class PermissionManager {
 	
 	/**
 	 * Gets the group with the given name.
-	 * @param Name to look for.
+	 * @param name Name to look for.
 	 * @return Group with the name.
 	 */
 	public Group getGroup(String name) {
@@ -135,7 +135,7 @@ public class PermissionManager {
 	
 	/**
 	 * Gets the group of the given player.
-	 * @param Player to get the group of.
+	 * @param player Player to get the group of.
 	 * @return The player's group.
 	 */
 	public Group getPlayerGroup(String player) {
@@ -150,8 +150,8 @@ public class PermissionManager {
 	
 	/**
 	 * Sets the player's group.
-	 * @param Player to set the group of.
-	 * @param Group to set the player to.
+	 * @param player Player to set the group of.
+	 * @param group Group to set the player to.
 	 */
 	public void setPlayerGroup(String player, Group group) {
 		Group old = this.getPlayerGroup(player);
@@ -174,8 +174,8 @@ public class PermissionManager {
 	
 	/**
 	 * Checks if the player has the given permission.
-	 * @param Player to check.
-	 * @param Permission to check for.
+	 * @param player Player to check.
+	 * @param permission Permission to check for.
 	 * @return True if the player has the given permission.
 	 */
 	public boolean hasPermission(String player, String permission) {
@@ -188,8 +188,8 @@ public class PermissionManager {
 	
 	/**
 	 * Checks if the group has the given permission.
-	 * @param Group to check.
-	 * @param Permission to check for.
+	 * @param group Group to check.
+	 * @param permission Permission to check for.
 	 * @return True if the group has the given permission.
 	 */
 	public boolean hasPermission(Group group, String permission) {

@@ -1,12 +1,16 @@
 package ch.spacebase.openclassic.api.pkg.task;
 
 import java.io.File;
+
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.plugin.Plugin;
 
+/**
+ * A task that removes a package.
+ */
 public class PackageRemoveTask implements Runnable {
 
 	private String name;

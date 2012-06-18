@@ -11,80 +11,80 @@ public interface Scheduler {
 
 	/**
 	 * Schedules a sync task.
-	 * @param Object this task belongs to.
-	 * @param The task to schedule.
+	 * @param obj Object this task belongs to.
+	 * @param task The task to schedule.
 	 * @return The task's id.
 	 */
 	public int scheduleTask(Object obj, Runnable task);
 	
 	/**
 	 * Schedules a delayed sync task.
-	 * @param Object this task belongs to.
-	 * @param The task to schedule.
-	 * @param The period to delay the task by.
+	 * @param obj Object this task belongs to.
+	 * @param task The task to schedule.
+	 * @param delay The period to delay the task by.
 	 * @return The task's id.
 	 */
 	public int scheduleDelayedTask(Object obj, Runnable task, long delay);
 	
 	/**
 	 * Schedules a repeating sync task.
-	 * @param Object this task belongs to.
-	 * @param The task to schedule.
-	 * @param The period to delay the task by.
-	 * @param The period the task will last for.
+	 * @param obj Object this task belongs to.
+	 * @param task The task to schedule.
+	 * @param delay The period to delay the task by.
+	 * @param period The period the task will last for.
 	 * @return The task's id.
 	 */
 	public int scheduleRepeatingTask(Object obj, Runnable task, long delay, long period);
 	
 	/**
 	 * Schedules an async task.
-	 * @param Object this task belongs to.
-	 * @param The task to schedule.
+	 * @param obj Object this task belongs to.
+	 * @param task The task to schedule.
 	 * @return The task's id.
 	 */
 	public int scheduleAsyncTask(Object obj, Runnable task);
 	
 	/**
 	 * Schedules a delayed async task.
-	 * @param Object this task belongs to.
-	 * @param The task to schedule.
-	 * @param The period to delay the task by.
+	 * @param obj Object this task belongs to.
+	 * @param task The task to schedule.
+	 * @param delay The period to delay the task by.
 	 * @return The task's id.
 	 */
 	public int scheduleAsyncDelayedTask(Object obj, Runnable task, long delay);
 	
 	/**
 	 * Schedules a repeating async task.
-	 * @param Object this task belongs to.
-	 * @param The task to schedule.
-	 * @param The period to delay the task by.
-	 * @param The period the task will last for.
+	 * @param obj Object this task belongs to.
+	 * @param task The task to schedule.
+	 * @param delay The period to delay the task by.
+	 * @param period The period the task will last for.
 	 * @return The task's id.
 	 */
 	public int scheduleAsyncRepeatingTask(Object obj, Runnable task, long delay, long period);
 	
     /**
      * Calls a method on the main thread and returns a Future object
-     * This task will be executed by the main server thread
+     * This task will be executed by the main thread
      * 
      * Do NOT call the Future.get() method from the main thread.
      * Additionally, there is at least an average of 10ms latency until the isDone() method returns true
      *
-     * @param Object this task belongs to.
-     * @param The task to be executed
+     * @param obj Object this task belongs to.
+     * @param task The task to be executed
      * @return The future object related to the task
      */
 	public <T> Future<T> callSyncMethod(Object obj, Callable<T> task);
 	
 	/**
 	 * Cancels a task with the given ID.
-	 * @param ID of the task to cancel.
+	 * @param id ID of the task to cancel.
 	 */
 	public void cancelTask(int id);
 	
 	/**
 	 * Cancels all tasks belonging to the given object.
-	 * @param Owner to cancel the tasks of.
+	 * @param obj Owner to cancel the tasks of.
 	 */
 	public void cancelTasks(Object obj);
 	

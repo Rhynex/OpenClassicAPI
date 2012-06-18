@@ -13,7 +13,7 @@ public interface Cancellable {
 	
 	/**
 	 * Sets whether the event is cancelled.
-	 * @param Whether the event is cancelled.
+	 * @param cancel Whether the event is cancelled.
 	 */
 	public void setCancelled(boolean cancel);
 	

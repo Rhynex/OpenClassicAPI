@@ -36,7 +36,7 @@ public class PreCommandEvent extends GameEvent implements Cancellable {
 	
 	/**
 	 * Sets the command being sent.
-	 * @param The new command to send.
+	 * @param command The new command to send.
 	 */
 	public void setCommand(String command) {
 		this.command = command;

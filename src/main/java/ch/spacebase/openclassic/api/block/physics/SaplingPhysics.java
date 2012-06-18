@@ -7,6 +7,9 @@ import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Physics used in saplings to grow trees.
+ */
 public class SaplingPhysics implements BlockPhysics {
 
 	private static final Random rand = new Random();

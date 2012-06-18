@@ -69,7 +69,7 @@ public enum Color {
 	
 	/**
 	 * Strips a message of all color codes.
-	 * @param Message to strip from.
+	 * @param message Message to strip from.
 	 * @return Message without color codes.
 	 */
 	public static String stripColor(String message) {

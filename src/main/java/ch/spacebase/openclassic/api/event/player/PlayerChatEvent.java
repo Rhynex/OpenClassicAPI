@@ -32,7 +32,7 @@ public class PlayerChatEvent extends PlayerEvent implements Cancellable {
     
     /**
      * Sets the message being sent.
-     * @param Message to send.
+     * @param message Message to send.
      */
     public void setMessage(String message) {
     	this.message = message;
@@ -48,7 +48,7 @@ public class PlayerChatEvent extends PlayerEvent implements Cancellable {
     
     /**
      * Sets the format of the chat output.
-     * @param The new chat format.
+     * @param format The new chat format.
      */
     public void setFormat(String format) {
     	this.format = format;

@@ -25,7 +25,7 @@ public class Block {
 	
 	/**
 	 * Sets the block's ID.
-	 * @param Block ID to set.
+	 * @param id Block ID to set.
 	 */
 	public boolean setTypeId(byte id) {
 		return this.pos.getLevel().setBlockIdAt(pos, id);
@@ -33,8 +33,8 @@ public class Block {
 	
 	/**
 	 * Sets the block's ID.
-	 * @param Block ID to set.
-	 * @param Whether or not to apply physics.
+	 * @param id Block ID to set.
+	 * @param physics Whether or not to apply physics.
 	 */
 	public boolean setTypeId(byte id, boolean physics) {
 		return this.pos.getLevel().setBlockIdAt(pos, id, physics);
@@ -50,7 +50,7 @@ public class Block {
 	
 	/**
 	 * Sets the block's type.
-	 * @param VanillaBlock to set.
+	 * @param type VanillaBlock to set.
 	 */
 	public boolean setType(VanillaBlock type) {
 		return this.setTypeId(type.getId());
@@ -58,8 +58,8 @@ public class Block {
 	
 	/**
 	 * Sets the block's type.
-	 * @param VanillaBlock to set.
-	 * @param Whether or not to apply physics.
+	 * @param type VanillaBlock to set.
+	 * @param physics Whether or not to apply physics.
 	 */
 	public boolean setType(VanillaBlock type, boolean physics) {
 		return this.setTypeId(type.getId(), physics);
@@ -83,7 +83,7 @@ public class Block {
 	
 	/**
 	 * Gets the block relative the given face.
-	 * @param Face to get the block relative from.
+	 * @param face Face to get the block relative from.
 	 * @return The block relative from the given face.
 	 */
 	public Block getRelative(BlockFace face) {

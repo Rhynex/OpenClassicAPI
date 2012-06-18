@@ -15,13 +15,13 @@ public abstract class Generator {
 	
 	/**
 	 * Generates the level.
-	 * @param Level to generate.
+	 * @param level Level to generate.
 	 */
 	public abstract void generate(Level level);
 	
 	/**
 	 * Finds a spawn for the level.
-	 * @param The level to find a spawn for.
+	 * @param level The level to find a spawn for.
 	 * @return The spawn found for the level.
 	 */
 	public Position findSpawn(Level level) {

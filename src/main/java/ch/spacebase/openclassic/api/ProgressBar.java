@@ -10,7 +10,7 @@ public interface ProgressBar {
 	
 	/**
 	 * Sets the text of the progress bar for the next setProgress call.
-	 * @param Text to set.
+	 * @param text Text to set.
 	 */
 	public void setText(String text);
 	
@@ -22,7 +22,7 @@ public interface ProgressBar {
 	
 	/**
 	 * Sets the title of the progress bar for the next setProgress call.
-	 * @param Title to set.
+	 * @param title Title to set.
 	 */
 	public void setTitle(String title);
 	
@@ -34,7 +34,7 @@ public interface ProgressBar {
 	
 	/**
 	 * Sets the progress bar's progress and updates the display.
-	 * @param Progress to set.
+	 * @param progress Progress to set.
 	 */
 	public void setProgress(int progress);
 	

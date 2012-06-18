@@ -35,7 +35,7 @@ public class PluginManager {
 
 	/**
 	 * Loads plugins with the specified load order step.
-	 * @param Load order to load for.
+	 * @param prder Load order to load for.
 	 */
 	public void loadPlugins(LoadOrder order) {
 		File plugins = new File(OpenClassic.getGame().getDirectory(), "plugins");
@@ -57,7 +57,7 @@ public class PluginManager {
 	
 	/**
 	 * Loads a plugin from the given file if the file is a plugin.
-	 * @param File to load from.
+	 * @param file File to load from.
 	 */
 	public void loadPlugin(File file) {
 		PluginDescription description = this.getDescription(file);
@@ -68,8 +68,8 @@ public class PluginManager {
 	
 	/**
 	 * Loads a plugin from the given file using the given description.
-	 * @param File to load from.
-	 * @param PluginDescription to use.
+	 * @param file File to load from.
+	 * @param description PluginDescription to use.
 	 */
 	public void loadPlugin(File file, PluginDescription description) {
 		URL url = null;
@@ -115,7 +115,7 @@ public class PluginManager {
 	
 	/**
 	 * Enables the plugin and any plugins that now have their dependencies met.
-	 * @param Plugin to enable.
+	 * @param plugin Plugin to enable.
 	 */
 	public void enablePlugin(Plugin plugin) {
 		if(plugin.isEnabled()) return;
@@ -155,7 +155,7 @@ public class PluginManager {
 	
 	/**
 	 * Disables the plugin and any plugins that require it.
-	 * @param Plugin to disable.
+	 * @param plugin Plugin to disable.
 	 */
 	public void disablePlugin(Plugin plugin) {
 		if(!plugin.isEnabled()) return;
@@ -187,7 +187,7 @@ public class PluginManager {
 	
 	/**
 	 * Removes the plugin instance from the plugin list.
-	 * @param Plugin to remove.
+	 * @param plugin Plugin to remove.
 	 */
 	public void removePlugin(Plugin plugin) {
 		this.plugins.remove(plugin);
@@ -202,7 +202,7 @@ public class PluginManager {
 	
 	/**
 	 * Gets the plugin with the given name.
-	 * @param Name of the plugin.
+	 * @param name Name of the plugin.
 	 * @return The plugin.
 	 */
 	public Plugin getPlugin(String name) {
@@ -215,7 +215,7 @@ public class PluginManager {
 	
 	/**
 	 * Gets the plugin which the listener belongs to, if it is registered.
-	 * @param Listener that belongs to the plugin.
+	 * @param listen Listener that belongs to the plugin.
 	 * @return The plugin it belongs to.
 	 */
 	public Plugin getPlugin(Listener listen) {
@@ -232,16 +232,16 @@ public class PluginManager {
 	
 	/**
 	 * Returns true if the plugin is enabled.
-	 * @param Plugin to check for.
+	 * @param name Plugin to check for.
 	 * @return True if the plugin is enabled.
 	 */
 	public boolean isPluginEnabled(String name) {
-		return this.getPlugin(name) != null;
+		return this.getPlugin(name) != null && this.getPlugin(name).isEnabled();
 	}
 	
 	/**
 	 * Loads the PluginDescription from the given file (must be a plugin jar)
-	 * @param File to load the description from.
+	 * @param file File to load the description from.
 	 * @return The loaded plugin description.
 	 */
 	@SuppressWarnings("unchecked")
@@ -288,7 +288,7 @@ public class PluginManager {
 	
 	/**
 	 * Gets a list of all listeners registered to the given plugin.
-	 * @param Plugin to get listeners for.
+	 * @param plugin Plugin to get listeners for.
 	 * @return Listeners registered to the plugin.
 	 */
 	public List<Listener> getListeners(String plugin) {
@@ -305,8 +305,8 @@ public class PluginManager {
 	
 	/**
 	 * Registers a listener to the plugin.
-	 * @param Listener to register.
-	 * @param Plugin the listener belongs to.
+	 * @param listener Listener to register.
+	 * @param plugin Plugin the listener belongs to.
 	 */
 	public void registerListener(Listener listener, Plugin plugin) {
 		this.listeners.put(listener, plugin);

@@ -40,7 +40,7 @@ public class ConfigurationNode {
 	
 	/**
 	 * Gets the value of this node, falling back to the node's default if needed.
-	 * @param Whether to use the default value if needed.
+	 * @param useDefIfNeeded Whether to use the default value if needed.
 	 * @return The node's value.
 	 */
 	public Object getValue(boolean useDefIfNeeded) {
@@ -54,8 +54,8 @@ public class ConfigurationNode {
 
 	/**
 	 * Sets the node's value.
-	 * @param The value to set.
-	 * @param Whether to apply it to the parent configuration.
+	 * @param value The value to set.
+	 * @param toConfig Whether to apply it to the parent configuration.
 	 */
 	public void setValue(Object value, boolean toConfig) {
 		this.value = value;
@@ -66,7 +66,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Sets the node's default value.
-	 * @param Default value to set.
+	 * @param def Default value to set.
 	 */
 	public void setDefaultValue(Object def) {
 		this.def = def;
@@ -78,7 +78,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Sets the configuration this node belongs to.
-	 * @param Configuration this node belongs to.
+	 * @param config Configuration this node belongs to.
 	 */
 	public void setConfiguration(Configuration config) {
 		config.addNode(this);
@@ -94,7 +94,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a string.
-	 * @param A default value for if the value is null.
+	 * @param def A default value for if the value is null.
 	 * @return This node's string value.
 	 */
 	public String getString(String def) {
@@ -117,7 +117,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as an integer.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's integer value.
 	 */
 	public int getInteger(int def) {
@@ -142,7 +142,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a double.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's double value.
 	 */
 	public double getDouble(double def) {
@@ -167,7 +167,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a float.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's float value.
 	 */
 	public float getFloat(float def) {
@@ -192,7 +192,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a boolean.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's boolean value.
 	 */
 	public boolean getBoolean(boolean def) {
@@ -217,7 +217,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a List.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's List value.
 	 */
 	public List<Object> getList(List<Object> def) {
@@ -241,7 +241,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a List<String>.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's List<String> value.
 	 */
 	public List<String> getStringList(List<String> def) {
@@ -272,7 +272,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a List<Integer>.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's List<Integer> value.
 	 */
 	public List<Integer> getIntegerList(List<Integer> def) {
@@ -306,7 +306,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a List<Double>.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's List<Double> value.
 	 */
 	public List<Double> getDoubleList(List<Double> def) {
@@ -340,7 +340,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a List<Float>.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's List<Float> value.
 	 */
 	public List<Float> getFloatList(List<Float> def) {
@@ -374,7 +374,7 @@ public class ConfigurationNode {
 
 	/**
 	 * Gets this node's value as a List<Boolean>.
-	 * @param Default if the value isn't set.
+	 * @param def Default if the value isn't set.
 	 * @return This node's List<Boolean> value.
 	 */
 	public List<Boolean> getBooleanList(List<Boolean> def) {

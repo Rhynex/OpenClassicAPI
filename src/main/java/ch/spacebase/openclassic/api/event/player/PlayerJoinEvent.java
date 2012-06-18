@@ -24,7 +24,7 @@ public class PlayerJoinEvent extends PlayerEvent {
     
     /**
      * Sets the login message.
-     * @param The new login message.
+     * @param message The new login message.
      */
     public void setMessage(String message) {
     	this.message = message;

@@ -6,6 +6,9 @@ import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
 
+/**
+ * A task that removes a source.
+ */
 public class SourceRemoveTask implements Runnable {
 
 	private String id;

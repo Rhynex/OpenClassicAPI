@@ -46,7 +46,7 @@ public class PackageManager {
 
 	/**
 	 * Installs a package.
-	 * @param Package name.
+	 * @param name Package name.
 	 */
 	public void install(String name) {
 		this.install(name, null);
@@ -54,8 +54,8 @@ public class PackageManager {
 
 	/**
 	 * Installs a package.
-	 * @param Package name.
-	 * @param Sender executing the install.
+	 * @param name Package name.
+	 * @param executor Sender executing the install.
 	 */
 	public void install(String name, Sender executor) {
 		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new PackageInstallTask(name, executor));
@@ -63,7 +63,7 @@ public class PackageManager {
 
 	/**
 	 * Removes a package.
-	 * @param Package name.
+	 * @param name Package name.
 	 */
 	public void remove(String name) {
 		this.remove(name, null);
@@ -71,8 +71,8 @@ public class PackageManager {
 
 	/**
 	 * Removes a package.
-	 * @param Package name.
-	 * @param Sender executing the removal.
+	 * @param name Package name.
+	 * @param executor Sender executing the removal.
 	 */
 	public void remove(String name, Sender executor) {
 		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new PackageRemoveTask(name, executor));
@@ -80,7 +80,7 @@ public class PackageManager {
 	
 	/**
 	 * Updates a package.
-	 * @param Package name.
+	 * @param name Package name.
 	 */
 	public void update(String name) {
 		this.update(name, null);
@@ -88,8 +88,8 @@ public class PackageManager {
 
 	/**
 	 * Updates a package.
-	 * @param Package name.
-	 * @param Sender executing the update.
+	 * @param name Package name.
+	 * @param executor Sender executing the update.
 	 */
 	public void update(String name, Sender executor) {
 		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new PackageUpdateTask(name, executor));
@@ -97,8 +97,8 @@ public class PackageManager {
 
 	/**
 	 * Adds a source.
-	 * @param ID for the source.
-	 * @param URL of the source.
+	 * @param id ID for the source.
+	 * @param url URL of the source.
 	 */
 	public void addSource(String id, String url) {
 		this.addSource(id, url, null);
@@ -106,9 +106,9 @@ public class PackageManager {
 
 	/**
 	 * Adds a source.
-	 * @param ID for the source.
-	 * @param URL of the source.
-	 * @param Sender executing the addition.
+	 * @param id ID for the source.
+	 * @param url URL of the source.
+	 * @param executor Sender executing the addition.
 	 */
 	public void addSource(String id, String url, Sender executor) {
 		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new SourceAddTask(id, url, executor));
@@ -116,7 +116,7 @@ public class PackageManager {
 
 	/**
 	 * Removes a source.
-	 * @param ID of the source.
+	 * @param id ID of the source.
 	 */
 	public void removeSource(String id) {
 		this.removeSource(id, null);
@@ -124,8 +124,8 @@ public class PackageManager {
 
 	/**
 	 * Removes a source.
-	 * @param ID of the source.
-	 * @param Sender executing the removal.
+	 * @param id ID of the source.
+	 * @param sender Sender executing the removal.
 	 */
 	public void removeSource(String id, Sender executor) {
 		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new SourceRemoveTask(id, executor));
@@ -140,7 +140,7 @@ public class PackageManager {
 
 	/**
 	 * Updates the source cache.
-	 * @param Sender executing the update.
+	 * @param sender Sender executing the update.
 	 */
 	public void updateSources(Sender executor) {
 		OpenClassic.getGame().getScheduler().scheduleAsyncTask(this, new SourceUpdateTask(executor));

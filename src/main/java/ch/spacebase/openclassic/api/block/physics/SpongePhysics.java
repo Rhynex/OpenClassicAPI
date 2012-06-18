@@ -5,6 +5,9 @@ import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Physics used in sponges to soak water.
+ */
 public class SpongePhysics implements BlockPhysics {
 
 	@Override
@@ -26,7 +29,7 @@ public class SpongePhysics implements BlockPhysics {
 					if(b != null) {
 						for(BlockFace face : BlockFace.values()) {
 							Block relative = b.getRelative(face);
-							if(relative != null && relative.getType().getPhysics() != null && (relative.getType().getPhysics() instanceof LiquidPhysics || relative.getType().getPhysics() instanceof StillLiquidPhysics)) {
+							if(relative != null && relative.getType().getPhysics() != null && relative.getType().getPhysics() instanceof LiquidPhysics) {
 								relative.getType().getPhysics().onNeighborChange(relative, block);
 							}
 						}

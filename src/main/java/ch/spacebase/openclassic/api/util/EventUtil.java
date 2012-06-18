@@ -12,7 +12,8 @@ public class EventUtil {
 
 	/**
 	 * Gets the methods that handle the given event class.
-	 * @param Class to look for.
+	 * @param listen Listener to look in.
+	 * @param clazz Class to look for.
 	 * @return Methods that handle the event.
 	 */
 	public static Method[] getMethodsFor(Listener listen, Class<? extends Event> clazz) {

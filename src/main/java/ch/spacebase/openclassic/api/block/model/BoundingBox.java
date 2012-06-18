@@ -18,26 +18,51 @@ public class BoundingBox {
 		this.z2 = z2;
 	}
 	
+	/**
+	 * Gets the X of the first point of the bounding box.
+	 * @return The X of the first point.
+	 */
 	public float getX1() {
 		return this.x1;
 	}
 	
+	
+	/**
+	 * Gets the Y of the first point of the bounding box.
+	 * @return The Y of the first point.
+	 */
 	public float getY1() {
 		return this.y1;
 	}
 	
+	/**
+	 * Gets the Z of the first point of the bounding box.
+	 * @return The Z of the first point.
+	 */
 	public float getZ1() {
 		return this.z1;
 	}
 	
+	/**
+	 * Gets the X of the second point of the bounding box.
+	 * @return The X of the second point.
+	 */
 	public float getX2() {
 		return this.x2;
 	}
 	
+	/**
+	 * Gets the Y of the second point of the bounding box.
+	 * @return The Y of the second point.
+	 */
 	public float getY2() {
 		return this.y2;
 	}
 	
+	/**
+	 * Gets the Z of the second point of the bounding box.
+	 * @return The Z of the second point.
+	 */
 	public float getZ2() {
 		return this.z2;
 	}

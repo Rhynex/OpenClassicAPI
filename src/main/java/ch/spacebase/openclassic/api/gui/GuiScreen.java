@@ -22,7 +22,7 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Attaches a widget to this GuiScreen.
-	 * @param Widget to attach.
+	 * @param widget Widget to attach.
 	 */
 	public void attachWidget(Widget widget) {
 		this.widgets.add(widget);
@@ -32,7 +32,7 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Removes a widget from this GuiScreen.
-	 * @param ID of the widget.
+	 * @param id ID of the widget.
 	 */
 	public void removeWidget(int id) {
 		for(Widget widget : this.widgets) {
@@ -42,7 +42,7 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Removes a widget from this GuiScreen.
-	 * @param Widget to remove.
+	 * @param widget Widget to remove.
 	 */
 	public void removeWidget(Widget widget) {
 		this.widgets.remove(widget);
@@ -59,7 +59,7 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Gets the widget with the given ID.
-	 * @param ID to look for.
+	 * @param id ID to look for.
 	 * @return The widget.
 	 */
 	public Widget getWidget(int id) {
@@ -72,8 +72,8 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Gets the widget with the given ID and type.
-	 * @param ID to look for.
-	 * @param Type of widget to look for.
+	 * @param id ID to look for.
+	 * @param type Type of widget to look for.
 	 * @return The widget.
 	 */
 	@SuppressWarnings("unchecked")
@@ -95,8 +95,8 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Opens the GUI screen.
-	 * @param Width of the screen.
-	 * @param Height of the screen.
+	 * @param width Width of the screen.
+	 * @param height Height of the screen.
 	 */
 	public void open(int width, int height) {
 		this.width = width;
@@ -122,7 +122,7 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Sets whether the screen grabs the mouse.
-	 * @param Whether the screen grabs the mouse.
+	 * @param grab Whether the screen grabs the mouse.
 	 */
 	public void setGrabsInput(boolean grab) {
 		this.grab = grab;
@@ -142,24 +142,24 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Called when a button widget is clicked.
-	 * @param Button that was clicked.
+	 * @param button Button that was clicked.
 	 */
 	public void onButtonClick(Button button) {
 	}
 	
 	/**
 	 * Called when a button belonging to a ButtonList widget is clicked.
-	 * @param ButtonList the button belongs to.
-	 * @param Button that was clicked.
+	 * @param list ButtonList the button belongs to.
+	 * @param button Button that was clicked.
 	 */
 	public void onButtonListClick(ButtonList list, Button button) {
 	}
 	
 	/**
 	 * Called when the mouse is clicked.
-	 * @param X of the mouse.
-	 * @param Y of the mouse.
-	 * @param ID of the clicked button.
+	 * @param x X of the mouse.
+	 * @param y Y of the mouse.
+	 * @param button ID of the clicked button.
 	 */
 	public void onMouseClick(int x, int y, int button) {
 		for (Widget curr : this.widgets) {
@@ -177,8 +177,8 @@ public abstract class GuiScreen implements Screen {
 	
 	/**
 	 * Called when a key is pressed.
-	 * @param Character resulting from the key press if applicable.
-	 * @param ID of the pressed key.
+	 * @param c Character resulting from the key press if applicable.
+	 * @param key ID of the pressed key.
 	 */
 	public void onKeyPress(char c, int key) {
 		if (key == Keyboard.KEY_ESCAPE && OpenClassic.getClient().isInGame()) {

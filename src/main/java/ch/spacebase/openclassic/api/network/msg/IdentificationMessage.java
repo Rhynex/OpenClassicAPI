@@ -35,7 +35,7 @@ public class IdentificationMessage extends Message {
 	
 	/**
 	 * Gets the verification key if the message is being recieved or the motd if it is being sent.
-	 * @return
+	 * @return The verification key or motd.
 	 */
 	public String getVerificationKeyOrMotd() {
 		return this.verificationKeyOrMotd;

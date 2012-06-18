@@ -20,6 +20,9 @@ import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
 
+/**
+ * A task that updates a package.
+ */
 public class PackageUpdateTask implements Runnable {
 
 	private String name;

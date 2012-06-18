@@ -1,5 +1,8 @@
 package ch.spacebase.openclassic.api.block.model;
 
+/**
+ * A model shaped like a cube.
+ */
 public class CubeModel extends CuboidModel {
 
 	public CubeModel(Texture texture, int textureIds[]) {
@@ -14,6 +17,7 @@ public class CubeModel extends CuboidModel {
 		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
 	}
 	
+	@Override
 	public String getType() {
 		return "CubeModel";
 	}

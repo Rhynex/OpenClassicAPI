@@ -4,6 +4,9 @@ import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.Texture;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Represents a block type.
+ */
 public interface BlockType {
 	
 	public static final Texture TERRAIN = new Texture("/terrain.png", true, 256, 256, 16);
@@ -40,7 +43,7 @@ public interface BlockType {
 	
 	/**
 	 * Sets the block's physics.
-	 * @param The physics to set.
+	 * @param phys The physics to set.
 	 */
 	public void setPhysics(BlockPhysics phys);
 	
@@ -58,7 +61,7 @@ public interface BlockType {
 	
 	/**
 	 * Sets the tick delay of this block.
-	 * @return The block's new tick delay.
+	 * @return tickDelay The block's new tick delay.
 	 */
 	public void setTickDelay(int tickDelay);
 	

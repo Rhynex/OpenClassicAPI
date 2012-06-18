@@ -24,7 +24,7 @@ public class PlayerQuitEvent extends PlayerEvent {
     
     /**
      * Sets the logout message.
-     * @param The new logout message.
+     * @param message The new logout message.
      */
     public void setMessage(String message) {
     	this.message = message;

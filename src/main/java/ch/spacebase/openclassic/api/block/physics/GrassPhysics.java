@@ -6,6 +6,9 @@ import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
+/**
+ * Physics used for grass.
+ */
 public class GrassPhysics implements BlockPhysics {
 
 	private static final Random rand = new Random();

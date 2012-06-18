@@ -13,6 +13,9 @@ import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
 
+/**
+ * A task that adds a source.
+ */
 public class SourceAddTask implements Runnable {
 
 	private String id;

@@ -40,7 +40,7 @@ public class ButtonList extends Widget {
 	
 	/**
 	 * Sets the contents of this list.
-	 * @param The list's new contents.
+	 * @param contents The list's new contents.
 	 */
 	public void setContents(List<String> contents) {
 		this.contents = contents;
@@ -65,7 +65,7 @@ public class ButtonList extends Widget {
 	
 	/**
 	 * Called when a button on this list is clicked.
-	 * @param Button that was clicked.
+	 * @param button Button that was clicked.
 	 */
 	public void onButtonClick(Button button) {
 		if (button.getId() == this.getBackButton().getId()) {
@@ -100,7 +100,7 @@ public class ButtonList extends Widget {
 	
 	/**
 	 * Gets the button with the given ID. (0 = top of page, 4 = bottom, 5 = back, 6 = next)
-	 * @param Button to look for.
+	 * @param button Button to look for.
 	 * @return The button with the given ID.
 	 */
 	public Button getButton(int button) {

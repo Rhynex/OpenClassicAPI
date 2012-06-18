@@ -73,7 +73,7 @@ public class TextBox extends Widget {
 	
 	/**
 	 * Sets whether the text box has the keyboard's focus.
-	 * @param Whether the text box has focus.
+	 * @param focus Whether the text box has focus.
 	 */
 	public void setFocus(boolean focus) {
 		this.focus = focus;
@@ -89,7 +89,7 @@ public class TextBox extends Widget {
 	
 	/**
 	 * Sets the text in this text box.
-	 * @param The text to set.
+	 * @param text The text to set.
 	 */
 	public void setText(String text) {
 		this.text = text;

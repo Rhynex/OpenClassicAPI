@@ -101,7 +101,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Sets the level this position is located in.
-	 * @param The level.
+	 * @param level The level.
 	 */
 	public void setLevel(Level level) {
 		this.level = level;
@@ -109,7 +109,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Sets the X coordinate of this position.
-	 * @param The X coordinate.
+	 * @param x The X coordinate.
 	 */
 	public void setX(double x) {
 		this.x = x;
@@ -117,7 +117,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Sets the Y coordinate of this position.
-	 * @param The Y coordinate.
+	 * @param y The Y coordinate.
 	 */
 	public void setY(double y) {
 		this.y = y;
@@ -125,7 +125,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Sets the Z coordinate of this position.
-	 * @param The Z coordinate.
+	 * @param z The Z coordinate.
 	 */
 	public void setZ(double z) {
 		this.z = z;
@@ -133,7 +133,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Sets the yaw of this position.
-	 * @param The yaw.
+	 * @param yaw The yaw.
 	 */
 	public void setYaw(byte yaw) {
 		this.yaw = yaw;
@@ -141,7 +141,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Sets the pitch of this position.
-	 * @param The pitch.
+	 * @param pitch The pitch.
 	 */
 	public void setPitch(byte pitch) {
 		this.pitch = pitch;
@@ -149,7 +149,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Adds the specified position's coordinates to this position's coordinates.
-	 * @param Position to add.
+	 * @param pos Position to add.
 	 * @return This position after adding.
 	 */
 	public Position add(Position pos) {
@@ -158,9 +158,9 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Adds the specified coordinates to this position's coordinates.
-	 * @param X to add.
-	 * @param Y to add.
-	 * @param Z to add.
+	 * @param x X to add.
+	 * @param y Y to add.
+	 * @param z Z to add.
 	 * @return This position after adding.
 	 */
 	public Position add(double x, double y, double z) {
@@ -173,7 +173,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Subtracts the specified position's coordinates from this position's coordinates.
-	 * @param Position to subtract.
+	 * @param pos Position to subtract.
 	 * @return This position after subtracting.
 	 */
 	public Position subtract(Position pos) {
@@ -182,9 +182,9 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Subtracts the specified coordinates from this position's coordinates.
-	 * @param X to subtract.
-	 * @param Y to subtract.
-	 * @param Z to subtract.
+	 * @param x X to subtract.
+	 * @param y Y to subtract.
+	 * @param z Z to subtract.
 	 * @return This position after subtracting.
 	 */
 	public Position subtract(double x, double y, double z) {
@@ -197,7 +197,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Multiplies this position's coordinates by the specified position's coordinates.
-	 * @param Position to multiply by.
+	 * @param pos Position to multiply by.
 	 * @return This position after multiplying.
 	 */
 	public Position multiply(Position pos) {
@@ -206,9 +206,9 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Multiplies this position's coordinates by the specified coordinates.
-	 * @param X to multiply by.
-	 * @param Y to multiply by.
-	 * @param Z to multiply by.
+	 * @param x X to multiply by.
+	 * @param y Y to multiply by.
+	 * @param z Z to multiply by.
 	 * @return This position after multiplying.
 	 */
 	public Position multiply(double x, double y, double z) {
@@ -221,7 +221,7 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Divides this position's coordinates by the specified position's coordinates.
-	 * @param Position to divide by.
+	 * @param pos Position to divide by.
 	 * @return This position after dividing.
 	 */
 	public Position divide(Position pos) {
@@ -230,9 +230,9 @@ public class Position implements Cloneable {
 	
 	/**
 	 * Divides this position's coordinates by the specified coordinates.
-	 * @param X to divide by.
-	 * @param Y to divide by.
-	 * @param Z to divide by.
+	 * @param x X to divide by.
+	 * @param y Y to divide by.
+	 * @param z Z to divide by.
 	 * @return This position after dividing.
 	 */
 	public Position divide(double x, double y, double z) {
@@ -246,8 +246,7 @@ public class Position implements Cloneable {
     /**
      * Gets the distance between this position and another.
      * WARNING: Very costly.
-	 *
-     * @param Other position.
+     * @param pos Other position.
      * @return Distance between the positions.
      */
     public double distance(Position pos) {
@@ -256,7 +255,7 @@ public class Position implements Cloneable {
 
     /**
      * Get the squared distance between this position and another.
-     * @param Other position.
+     * @param pos Other position.
      * @return Square distance between the positions.
      */
     public double distanceSquared(Position pos) {

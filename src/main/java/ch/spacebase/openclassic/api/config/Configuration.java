@@ -91,7 +91,7 @@ public class Configuration {
 
 	/**
 	 * Gets the value at the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The value.
 	 */
 	public Object getValue(String path) {
@@ -128,8 +128,8 @@ public class Configuration {
 
 	/**
 	 * Sets the value of the given path.
-	 * @param Path to set the value of.
-	 * @param Value to set.
+	 * @param path Path to set the value of.
+	 * @param value Value to set.
 	 */
 	public void setValue(String path, Object value) {
 		if (!path.contains(".")) {
@@ -159,8 +159,8 @@ public class Configuration {
 	
 	/**
 	 * Applies the given default to the path if the path's value is null.
-	 * @param Path to apply the default to.
-	 * @param Default to apply.
+	 * @param path Path to apply the default to.
+	 * @param def Default to apply.
 	 */
 	public void applyDefault(String path, Object def) {
 		if(this.getValue(path) == null) this.setValue(path, def);
@@ -168,7 +168,7 @@ public class Configuration {
 	
 	/**
 	 * Removes the node at the given path.
-	 * @param Path to remove from.
+	 * @param path Path to remove from.
 	 */
 	public void remove(String path) {
 		this.removeNode(path);
@@ -207,7 +207,7 @@ public class Configuration {
 
 	/**
 	 * Removes the node at the given path.
-	 * @param Path to remove from.
+	 * @param path Path to remove from.
 	 */
 	public void removeNode(String path) {
 		synchronized(nodes) {
@@ -221,7 +221,7 @@ public class Configuration {
 
 	/**
 	 * Adds a node.
-	 * @param Node to add.
+	 * @param node Node to add.
 	 */
 	public void addNode(ConfigurationNode node) {
 		Object value = this.getValue(node.getPath());
@@ -237,8 +237,8 @@ public class Configuration {
 
 	/**
 	 * Adds a node with the given path and value.
-	 * @param Path of the node.
-	 * @param Value of the node.
+	 * @param path Path of the node.
+	 * @param value Value of the node.
 	 * @return The newly added node.
 	 */
 	public ConfigurationNode addNode(String path, Object value) {
@@ -249,7 +249,7 @@ public class Configuration {
 
 	/**
 	 * Adds multiple nodes.
-	 * @param Nodes to add.
+	 * @param nodes Nodes to add.
 	 */
 	public void addNodes(ConfigurationNode... nodes) {
 		for (ConfigurationNode node : nodes) {
@@ -259,7 +259,7 @@ public class Configuration {
 
 	/**
 	 * Gets the node at the given path.
-	 * @param Path of the node.
+	 * @param path Path of the node.
 	 * @return The node.
 	 */
 	public ConfigurationNode getNode(String path) {
@@ -268,8 +268,8 @@ public class Configuration {
 	
 	/**
 	 * Gets a node at the given path, assigning the given default if it isn't found.
-	 * @param Path of the node.
-	 * @param The default to use if it isn't found.
+	 * @param path Path of the node.
+	 * @param def The default to use if it isn't found.
 	 * @return The node.
 	 */
 	public ConfigurationNode getNode(String path, Object def) {
@@ -290,7 +290,7 @@ public class Configuration {
 
 	/**
 	 * Gets the string value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's string value.
 	 */
 	public String getString(String path) {
@@ -299,8 +299,8 @@ public class Configuration {
 
 	/**
 	 * Gets the string value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's string value.
 	 */
 	public String getString(String path, String def) {
@@ -320,7 +320,7 @@ public class Configuration {
 
 	/**
 	 * Gets the integer value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's integer value.
 	 */
 	public int getInteger(String path) {
@@ -329,8 +329,8 @@ public class Configuration {
 
 	/**
 	 * Gets the integer value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's integer value.
 	 */
 	public int getInteger(String path, int def) {
@@ -351,7 +351,7 @@ public class Configuration {
 
 	/**
 	 * Gets the double value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's double value.
 	 */
 	public double getDouble(String path) {
@@ -360,8 +360,8 @@ public class Configuration {
 
 	/**
 	 * Gets the double value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's double value.
 	 */
 	public double getDouble(String path, double def) {
@@ -382,7 +382,7 @@ public class Configuration {
 
 	/**
 	 * Gets the float value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's float value.
 	 */
 	public float getFloat(String path) {
@@ -391,8 +391,8 @@ public class Configuration {
 
 	/**
 	 * Gets the float value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's float value.
 	 */
 	public float getFloat(String path, float def) {
@@ -413,7 +413,7 @@ public class Configuration {
 
 	/**
 	 * Gets the boolean value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's boolean value.
 	 */
 	public boolean getBoolean(String path) {
@@ -422,8 +422,8 @@ public class Configuration {
 
 	/**
 	 * Gets the boolean value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's boolean value.
 	 */
 	public boolean getBoolean(String path, boolean def) {
@@ -444,7 +444,7 @@ public class Configuration {
 
 	/**
 	 * Gets the List value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's List value.
 	 */
 	public List<Object> getList(String path) {
@@ -453,8 +453,8 @@ public class Configuration {
 
 	/**
 	 * Gets the List value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's List value.
 	 */
 	public List<Object> getList(String path, List<Object> def) {
@@ -478,8 +478,8 @@ public class Configuration {
 
 	/**
 	 * Gets the List<String> value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's List<String> value.
 	 */
 	public List<String> getStringList(String path, List<String> def) {
@@ -503,7 +503,7 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Integer> value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's List<Integer> value.
 	 */
 	public List<Integer> getIntegerList(String path) {
@@ -512,8 +512,8 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Integer> value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's List<Integer> value.
 	 */
 	public List<Integer> getIntegerList(String path, List<Integer> def) {
@@ -539,7 +539,7 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Double> value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's List<Double> value.
 	 */
 	public List<Double> getDoubleList(String path) {
@@ -548,8 +548,8 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Double> value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's List<Double> value.
 	 */
 	public List<Double> getDoubleList(String path, List<Double> def) {
@@ -575,7 +575,7 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Float> value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's List<Float> value.
 	 */
 	public List<Float> getFloatList(String path) {
@@ -584,8 +584,8 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Float> value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's List<Float> value.
 	 */
 	public List<Float> getFloatList(String path, List<Float> def) {
@@ -611,7 +611,7 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Boolean> value of the given path.
-	 * @param Path of the value.
+	 * @param path Path of the value.
 	 * @return The path's List<Boolean> value.
 	 */
 	public List<Boolean> getBooleanList(String path) {
@@ -620,8 +620,8 @@ public class Configuration {
 
 	/**
 	 * Gets the List<Boolean> value of the given path.
-	 * @param Path of the value.
-	 * @param Default for if the value isn't assigned.
+	 * @param path Path of the value.
+	 * @param def Default for if the value isn't assigned.
 	 * @return The path's List<Boolean> value.
 	 */
 	public List<Boolean> getBooleanList(String path, List<Boolean> def) {
@@ -647,7 +647,7 @@ public class Configuration {
 
 	/**
 	 * Gets all the keys at the given path.
-	 * @param Path to look at.
+	 * @param path Path to look at.
 	 * @return Keys at the path.
 	 */
 	public Set<String> getKeys(String path) {

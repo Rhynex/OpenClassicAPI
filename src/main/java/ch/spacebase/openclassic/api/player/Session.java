@@ -23,13 +23,13 @@ public interface Session {
 	
 	/**
 	 * Sends a network message to the session's client.
-	 * @param The message to send.
+	 * @param message The message to send.
 	 */
 	public void send(Message message);
 	
 	/**
 	 * Disconnects the session.
-	 * @param The reason to disconnect the session.
+	 * @param reason The reason to disconnect the session.
 	 */
 	public void disconnect(String reason);
 	

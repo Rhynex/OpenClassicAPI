@@ -14,7 +14,7 @@ public class EventFactory {
 
 	/**
 	 * Calls the given event.
-	 * @param Event to call.
+	 * @param event Event to call.
 	 */
 	public static <T extends Event> T callEvent(T event) {
 		if(OpenClassic.getGame() == null || OpenClassic.getGame().getPluginManager() == null) return event;

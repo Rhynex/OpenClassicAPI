@@ -3,6 +3,9 @@ package ch.spacebase.openclassic.api.event;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 
+/**
+ * Sorts event methods by priority.
+ */
 public class PrioritySorter implements Comparator<Method> {
 
 	@Override

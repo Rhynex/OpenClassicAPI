@@ -7,9 +7,9 @@ public class PerlinNoise {
 
 	/**
 	 * Generates noise for the given x, y, and z.
-	 * @param X to use.
-	 * @param Y to use.
-	 * @param Z to use.
+	 * @param x X to use.
+	 * @param y Y to use.
+	 * @param z Z to use.
 	 * @return The resulting noise.
 	 */
 	public static double noise(double x, double y, double z) {
@@ -47,8 +47,8 @@ public class PerlinNoise {
 
 	/**
 	 * Generates 2D noise for the given x and y.
-	 * @param X to use.
-	 * @param Y to use.
+	 * @param x X to use.
+	 * @param y Y to use.
 	 * @return The resulting noise.
 	 */
 	public static double noise2d(final double x, final double y, final int nbOctave) {

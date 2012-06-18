@@ -63,8 +63,8 @@ public final class HeartbeatManager {
 	
 	/**
 	 * Adds a custom heartbeat to run when {@link beat()} is called.
-	 * @param ID of the custom heartbeat.
-	 * @param Runnable to call when beating.
+	 * @param id ID of the custom heartbeat.
+	 * @param run Runnable to call when beating.
 	 */
 	public static void addBeat(String id, Runnable run) {
 		customBeats.put(id, run);
@@ -72,7 +72,7 @@ public final class HeartbeatManager {
 	
 	/**
 	 * Removes a custom heartbeat.
-	 * @param ID of the heartbeat.
+	 * @param id ID of the heartbeat.
 	 */
 	public static void removeBeat(String id) {
 		customBeats.remove(id);

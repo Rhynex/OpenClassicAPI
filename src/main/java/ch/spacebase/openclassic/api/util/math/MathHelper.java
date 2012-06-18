@@ -125,7 +125,7 @@ public class MathHelper {
 
 	/**
 	 * Casts the given object to an integer if applicable.
-	 * @param Object to cast.
+	 * @param o Object to cast.
 	 * @return The resulting integer.
 	 */
 	public static Integer castInt(Object o) {
@@ -138,7 +138,7 @@ public class MathHelper {
 
 	/**
 	 * Casts the given object to a double if applicable.
-	 * @param Object to cast.
+	 * @param o Object to cast.
 	 * @return The resulting double.
 	 */
 	public static Double castDouble(Object o) {
@@ -151,7 +151,7 @@ public class MathHelper {
 
 	/**
 	 * Casts the given object to a float if applicable.
-	 * @param Object to cast.
+	 * @param o Object to cast.
 	 * @return The resulting float.
 	 */
 	public static Float castFloat(Object obj) {
@@ -164,7 +164,7 @@ public class MathHelper {
 
 	/**
 	 * Casts the given object to a boolean if applicable.
-	 * @param Object to cast.
+	 * @param o Object to cast.
 	 * @return The resulting boolean.
 	 */
 	public static Boolean castBoolean(Object o) {

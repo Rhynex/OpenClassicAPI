@@ -14,6 +14,9 @@ import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.config.ConfigurationNode;
 
+/**
+ * A task that updates a source.
+ */
 public class SourceUpdateTask implements Runnable {
 
 	private Sender executor;

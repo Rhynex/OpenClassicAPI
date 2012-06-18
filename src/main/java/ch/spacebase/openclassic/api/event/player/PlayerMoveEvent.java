@@ -33,7 +33,7 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     
     /**
      * Sets the location this move is from.
-     * @return The location the move is from.
+     * @param from The location the move is from.
      */
     public void setFrom(Position from) {
     	this.from = from;
@@ -49,7 +49,7 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     
     /**
      * Sets the location this move is to.
-     * @return The location the move is to.
+     * @param to The location the move is to.
      */
     public void setTo(Position to) {
     	this.to = to;

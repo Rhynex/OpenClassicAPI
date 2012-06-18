@@ -40,7 +40,7 @@ public class OpenClassic {
 	
 	/**
 	 * Sets the current game instance.
-	 * @param The game instance.
+	 * @param game The game instance.
 	 */
 	public static void setGame(Game game) {
 		if(OpenClassic.game != null || game == null) return;
