@@ -86,7 +86,7 @@ public class Button extends Widget {
 		}
 
 		RenderHelper.getHelper().drawImage(this.x, this.y, 0, 0, 46 + state * 20, this.width / 2, this.height);
-		RenderHelper.getHelper().drawImage(this.x + this.width / 2, 0, this.y, 200 - this.width / 2, 46 + state * 20, this.width / 2, this.height);
+		RenderHelper.getHelper().drawImage(this.x + this.width / 2, this.y, 0, 200 - this.width / 2, 46 + state * 20, this.width / 2, this.height);
 		
 		String message = this.text;
 		if(message.length() > 30) {
