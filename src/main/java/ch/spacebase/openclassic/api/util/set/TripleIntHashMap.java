@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * A HashMap that uses a key of 3 integers.
  */
-public class TripleIntHashMap<T> extends HashMap<Integer, T> {
+public class TripleIntHashMap<T> extends HashMap<String, T> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -18,39 +18,31 @@ public class TripleIntHashMap<T> extends HashMap<Integer, T> {
 	}
 
 	public T put(int key1, int key2, int key3, T value) {
-		int key = key(key1, key2, key3);
-		return super.put(key, value);
+		return super.put(key1 + "_" + key2 + "_" + key3, value);
 	}
 
 	public boolean containsKey(int key1, int key2, int key3) {
-		int key = key(key1, key2, key3);
-		return super.containsKey(key);
+		return super.containsKey(key1 + "_" + key2 + "_" + key3);
 	}
 
 	public T remove(int key1, int key2, int key3) {
-		int key = key(key1, key2, key3);
-		return super.remove(key);
+		return super.remove(key1 + "_" + key2 + "_" + key3);
 	}
 	
 	public T get(int key1, int key2, int key3) {
-		int key = key(key1, key2, key3);
-		return super.get(key);
+		return super.get(key1 + "_" + key2 + "_" + key3);
 	}
 
-	protected static final int key(int x, int y, int z) {
-		return (x & 0xFF) << 16 | (z & 0xFF) << 8 | y & 0xFF;
+	public static final int key1(String key) {
+		return Integer.parseInt(key.split("_")[0]);
 	}
 
-	public static final int key1(int key) {
-		return key >> 16 & 0xFF;
+	public static final int key2(String key) {
+		return Integer.parseInt(key.split("_")[1]);
 	}
 
-	public static final int key2(int key) {
-		return key & 0xFF;
-	}
-
-	public static final int key3(int key) {
-		return key >> 8 & 0xFF;
+	public static final int key3(String key) {
+		return Integer.parseInt(key.split("_")[2]);
 	}
 	
 }
