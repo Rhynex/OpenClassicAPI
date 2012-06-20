@@ -143,7 +143,7 @@ public class CuboidModel extends Model {
 			case 8: case 9: return BlockFace.SOUTH;
 			case 10: case 11: return BlockFace.NORTH;
 			default: return null;
-		}
+			}
 		} else {
 			switch(quad) {
 				case 0: return BlockFace.DOWN;

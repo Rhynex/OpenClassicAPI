@@ -17,8 +17,10 @@ import java.util.jar.JarFile;
 
 import org.yaml.snakeyaml.Yaml;
 
+import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.Server;
 import ch.spacebase.openclassic.api.event.EventFactory;
 import ch.spacebase.openclassic.api.event.Listener;
 import ch.spacebase.openclassic.api.event.plugin.PluginDisableEvent;
@@ -92,6 +94,16 @@ public class PluginManager {
 	
 	        Constructor<? extends Plugin> constructor = plugin.getConstructor();
 	
+	        if(ClientPlugin.class.isAssignableFrom(plugin) && !(OpenClassic.getGame() instanceof Client)) {
+	        	OpenClassic.getLogger().info(Color.RED + "Plugin " + description.getFullName() + " is client-only. Skipping...");
+	        	return;
+	        }
+	        
+	        if(ServerPlugin.class.isAssignableFrom(plugin) && !(OpenClassic.getGame() instanceof Server)) {
+	        	OpenClassic.getLogger().info(Color.RED + "Plugin " + description.getFullName() + " is server-only. Skipping...");
+	        	return;
+	        }
+	        
 	        Plugin p = constructor.newInstance();
 	        p.init(description);
 	        p.onLoad();
