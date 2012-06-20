@@ -99,5 +99,13 @@ public class Texture {
 	public int getHeight() {
 		return this.height;
 	}
+
+	/**
+	 * Gets the number of subtextures in this texture.
+	 * @return The number of subtextures in this texture.
+	 */
+	public int getSubTextures() {
+		return this.subTextures.size();
+	}
 	
 }
