@@ -7,12 +7,11 @@ import java.lang.annotation.Target;
 
 import ch.spacebase.openclassic.api.command.Sender;
 
-
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
 /**
  * This annotation represents a command method.
  */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Command {
 
 	/**

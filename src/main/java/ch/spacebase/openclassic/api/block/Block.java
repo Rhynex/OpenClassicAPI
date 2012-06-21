@@ -52,7 +52,7 @@ public class Block {
 	 * Sets the block's type.
 	 * @param type VanillaBlock to set.
 	 */
-	public boolean setType(VanillaBlock type) {
+	public boolean setType(BlockType type) {
 		return this.setTypeId(type.getId());
 	}
 	
@@ -61,7 +61,7 @@ public class Block {
 	 * @param type VanillaBlock to set.
 	 * @param physics Whether or not to apply physics.
 	 */
-	public boolean setType(VanillaBlock type, boolean physics) {
+	public boolean setType(BlockType type, boolean physics) {
 		return this.setTypeId(type.getId(), physics);
 	}
 	
