@@ -74,7 +74,9 @@ public abstract class Event {
 		/** Called when a plugin is disabled. */
 		PLUGIN_DISABLE,
 		/** Called when a command is executed. */
-		PRE_COMMAND;
+		PRE_COMMAND,
+		/** Called when the state of a key is changed on the client. (custom client only) */
+		PLAYER_KEY_CHANGE;
 	}
 	
 }

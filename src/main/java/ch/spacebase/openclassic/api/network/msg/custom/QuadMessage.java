@@ -23,7 +23,7 @@ public class QuadMessage extends Message {
 	
 	@Override
 	public String toString() {
-		return "BlockModelMessage{block=" + block + "}";
+		return "QuadMessage{block=" + block + "}";
 	}
 
 	@Override
