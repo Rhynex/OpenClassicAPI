@@ -60,7 +60,7 @@ public abstract class Event {
 		PLAYER_KICK,
 		/** Called when a player logs in. */
 		PLAYER_LOGIN,
-		// TODO: Call player move, teleport on client, GameEvent -> KeyPress/KeyReleaseEvent
+		// TODO: Call player move, teleport on client
 		/** Called when a player moves. */
 		PLAYER_MOVE,
 		/** Called when a player leaves the game. */
