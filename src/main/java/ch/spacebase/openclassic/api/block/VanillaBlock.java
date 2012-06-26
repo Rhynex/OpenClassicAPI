@@ -30,7 +30,7 @@ public enum VanillaBlock implements BlockType {
 	IRON_ORE((byte) 15, StepSound.STONE, 33),
 	COAL_ORE((byte) 16, StepSound.STONE, 34),
 	LOG((byte) 17, StepSound.WOOD, new CubeModel(TERRAIN, new int[] { 21, 21, 20, 20, 20, 20 })),
-	LEAVES((byte) 18, StepSound.GRASS, new TransparentModel(TERRAIN, 22), false),
+	LEAVES((byte) 18, StepSound.GRASS, 22, false),
 	SPONGE((byte) 19, StepSound.GRASS, 48),
 	GLASS((byte) 20, StepSound.METAL, 49, false),
 	RED_CLOTH((byte) 21, StepSound.CLOTH, 64),
