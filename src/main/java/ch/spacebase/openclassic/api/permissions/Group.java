@@ -133,4 +133,26 @@ public class Group {
 		return false;
 	}
 	
+	/**
+	 * Returns true if the given group is or inherits this group.
+	 * @param group Group to check for.
+	 * @return Whether the group is or inherits this group.
+	 */
+	public boolean isSubGroup(Group group) {
+		if(group.getName().equals(this.getName())) {
+			return true;
+		}
+		
+		Group g = OpenClassic.getServer().getPermissionManager().getGroup(this.getInheritedGroup());
+		while(g != null) {
+			if(group.getName().equals(g.getName())) {
+				return true;
+			}
+			
+			g = OpenClassic.getServer().getPermissionManager().getGroup(g.getInheritedGroup());
+		}
+		
+		return false;
+	}
+	
 }
