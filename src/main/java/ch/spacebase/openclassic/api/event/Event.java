@@ -34,7 +34,6 @@ public abstract class Event {
 		/** Called when a block is unregistered. */
 		BLOCK_UNREGISTER,
 		/** Called when an entity's block is removed. */
-		// TODO: Client entity events
 		ENTITY_BLOCK_REMOVE,
 		/** Called when an entity's block is set at a location. */
 		ENTITY_BLOCK_SET,
@@ -60,7 +59,6 @@ public abstract class Event {
 		PLAYER_KICK,
 		/** Called when a player logs in. */
 		PLAYER_LOGIN,
-		// TODO: Call player move, teleport on client
 		/** Called when a player moves. */
 		PLAYER_MOVE,
 		/** Called when a player leaves the game. */

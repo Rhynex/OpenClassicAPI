@@ -3,9 +3,7 @@ package ch.spacebase.openclassic.api.entity;
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.entity.BlockEntity.BlockRemoveCause;
-import ch.spacebase.openclassic.api.player.Player;
 
-// TODO: Call stuff on client.
 /**
  * A Controller that handles actions on a BlockEntity.
  */
@@ -63,16 +61,6 @@ public abstract class Controller {
 	 * @return Whether to allow the set.
 	 */
 	public boolean onBlockSet(Block block) {	
-		return true;
-	}
-	
-	// TODO: Call this
-	/**
-	 * Called when the entity's block is right clicked.
-	 * @param player Player that right clicked the block.
-	 * @return Whether to continue as normal.
-	 */
-	public boolean onRightClick(Player player) {
 		return true;
 	}
 	
