@@ -45,6 +45,12 @@ public abstract class Plugin {
 	}
 	
 	/**
+	 * Called when the game is reloading. Plugins may reload themselves here.
+	 */
+	public void reload() {
+	}
+	
+	/**
 	 * Called when a tick occurs.
 	 */
 	public void tick() {

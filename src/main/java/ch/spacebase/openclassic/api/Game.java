@@ -142,4 +142,9 @@ public interface Game {
 	 */
 	public File getDirectory();
 	
+	/**
+	 * Reloads the game.
+	 */
+	public void reload();
+	
 }
