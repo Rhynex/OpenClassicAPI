@@ -16,8 +16,9 @@ public abstract class Generator {
 	/**
 	 * Generates the level.
 	 * @param level Level to generate.
+	 * @param blocks Generated block IDs.
 	 */
-	public abstract void generate(Level level);
+	public abstract void generate(Level level, byte blocks[]);
 	
 	/**
 	 * Finds a spawn for the level.
@@ -42,6 +43,13 @@ public abstract class Generator {
 		}
 		
 		return new Position(level, x, y + 0.5, z);	
+	}
+	
+	public static int coordsToBlockIndex(Level level, int x, int y, int z) {
+		if (x < 0 || y < 0 || z < 0 || x > level.getWidth() || y > level.getHeight() || z > level.getDepth())
+			return -1;
+
+		return x + (z * level.getWidth()) + (y * level.getWidth() * level.getDepth());
 	}
 	
 }
