@@ -42,6 +42,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<repositories>
+              <repository>
+                    <id>spacebase</id>
+                    <url>http://repo.spacebase.ch</url>
+              </repository>
+	</repositories>
+
 	<!--  Dependencies -->
 	<dependencies>
 		<dependency>
