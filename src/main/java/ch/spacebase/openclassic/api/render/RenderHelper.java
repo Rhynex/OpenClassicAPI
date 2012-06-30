@@ -234,9 +234,9 @@ public abstract class RenderHelper {
 	public abstract float getBrightness(BlockType main, int x, int y, int z);
 	
 	/**
-	 * Renders a preview of the model as seen in the block selection screen.
+	 * Renders a preview of the model as seen in the player's hand.
 	 * @param model Model to render.
 	 */
-	public abstract void renderPreview(Model model);
+	public abstract void renderPreview(Model model, float brightness);
 	
 }

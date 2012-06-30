@@ -13,7 +13,7 @@ public class Constants {
 	/**
 	 * The client's current version.
 	 */
-	public static final String CLIENT_VERSION = "1.0.2";
+	public static final String CLIENT_VERSION = "1.0.3";
 	
 	/**
 	 * The server's protocol version.

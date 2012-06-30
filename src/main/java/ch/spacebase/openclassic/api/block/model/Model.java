@@ -136,8 +136,8 @@ public class Model {
 	/**
 	 * Renders a "preview" of the model.
 	 */
-	public void renderPreview() {
-		RenderHelper.getHelper().renderPreview(this);
+	public void renderPreview(float brightness) {
+		RenderHelper.getHelper().renderPreview(this, brightness);
 	}
 	
 	/**
