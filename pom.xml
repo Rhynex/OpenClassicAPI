@@ -23,10 +23,12 @@
 		<url>git@github.com:Steveice10/OpenClassicAPI/</url>
 	</scm>
 
-	<ciManagement>
-		<system>jenkins</system>
-		<url>http://ci.spacebase.ch</url>
-	</ciManagement>
+       <distributionManagement>        
+                <repository>            
+                        <id>dropbox</id>                        
+                        <url>file:///home/steven/Dropbox/Public/maven</url>                      
+                </repository>           
+        </distributionManagement> 
 
   	<developers>
     		<developer>
@@ -39,12 +41,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-  	<parent>
-    		<groupId>org.sonatype.oss</groupId>
-    		<artifactId>oss-parent</artifactId>
-    		<version>7</version>
-  	</parent>
 
 	<!--  Dependencies -->
 	<dependencies>
