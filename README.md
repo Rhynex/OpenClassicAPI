@@ -13,7 +13,7 @@ OpenClassicAPI is the API for the custom Minecraft Classic server <b>[OpenClassi
 <b>Building the Source</b>
 --------
 
-OpenClassicAPI uses Maven to manage dependencies. Simply run 'mvn clean install' in the source's directory. You can also download a build <b>[here](http://ci.spacebase.ch/job/OpenClassicAPI/)</b>.
+OpenClassicAPI uses Maven to manage dependencies. Simply run 'mvn clean install' in the source's directory. OpenClassic does not have a Maven repository yet, so you will have to build OpenNBT before you build this.
 
 
 <b>License</b>
