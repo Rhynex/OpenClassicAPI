@@ -44,6 +44,11 @@ public class ButtonList extends Widget {
 	 */
 	public void setContents(List<String> contents) {
 		this.contents = contents;
+		this.pages = (int) Math.ceil(this.contents.size() / 5);
+		if(this.pages > 0 && this.contents.size() > (this.pages - 1) * 5) {
+			this.getNextButton().setActive(true);
+		}
+		
 		this.updateContents();
 	}
 	
@@ -84,11 +89,6 @@ public class ButtonList extends Widget {
 	}
 	
 	private void updateContents() {
-		this.pages = (int) Math.ceil(this.contents.size() / 5);
-		if(this.pages > 0 && this.contents.size() > this.pages * 5) {
-			this.getNextButton().setActive(true);
-		}
-		
 		for (int curr = this.index * 5; curr < (this.index + 1) * 5; curr++) {
 			boolean content = curr <= this.contents.size() - 1 && curr >= 0 && !this.contents.get(curr).equals("");
 			int button = curr - this.index * 5;

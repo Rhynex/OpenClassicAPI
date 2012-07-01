@@ -1,5 +1,6 @@
 package ch.spacebase.openclassic.api.data;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -57,6 +58,9 @@ public class NBTData {
 			for(String name : tag.keySet()) {
 				this.data.put(name, tag.get(name));
 			}
+		} catch (EOFException e) {
+			this.data.clear();
+			return;
 		} catch (IOException e) {
 			OpenClassic.getLogger().severe("Failed to open stream for NBTData " + this.data.getName() + "!");
 			e.printStackTrace();
