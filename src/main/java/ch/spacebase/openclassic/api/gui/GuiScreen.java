@@ -99,17 +99,35 @@ public abstract class GuiScreen implements Screen {
 	 * @param height Height of the screen.
 	 */
 	public void open(int width, int height) {
-		this.width = width;
-		this.height = height;
+		this.width = width * 240 / height;
+		this.height = height * 240 / height;
 		this.onOpen();
 	}
 	
+	/**
+	 * Gets the screen's width.
+	 * @return The screen's width.
+	 */
 	public int getWidth() {
 		return this.width;
 	}
 	
+	/**
+	 * Gets the screen's height.
+	 * @return The screen's height.
+	 */
 	public int getHeight() {
 		return this.height;
+	}
+	
+	/**
+	 * Sets the size of this screen.
+	 * @param width The screen's new width.
+	 * @param height The screen's new height.
+	 */
+	public void setSize(int width, int height) {
+		this.width = width * 240 / height;
+		this.height = height * 240 / height;
 	}
 	
 	/**
