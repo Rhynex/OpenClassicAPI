@@ -340,4 +340,40 @@ public interface Level {
 	 */
 	public NBTData getData();
 	
+	/**
+	 * Gets the sky color of the level.
+	 * @return The level's sky color.
+	 */
+	public int getSkyColor();
+	
+	/**
+	 * Sets the sky color of the level.
+	 * @param color Sky color to set.
+	 */
+	public void setSkyColor(int color);
+	
+	/**
+	 * Gets the fog color of the level.
+	 * @return The level's fog color.
+	 */
+	public int getFogColor();
+	
+	/**
+	 * Sets the fog color of the level.
+	 * @param color Fog color to set.
+	 */
+	public void setFogColor(int color);
+	
+	/**
+	 * Gets the cloud color of the level.
+	 * @return The level's cloud color.
+	 */
+	public int getCloudColor();
+	
+	/**
+	 * Sets the cloud color of the level.
+	 * @param color Cloud color to set.
+	 */
+	public void setCloudColor(int color);
+	
 }
