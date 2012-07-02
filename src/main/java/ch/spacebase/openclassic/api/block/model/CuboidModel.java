@@ -1,8 +1,8 @@
 package ch.spacebase.openclassic.api.block.model;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockFace;
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -71,14 +71,14 @@ public class CuboidModel extends Model {
 	
 	@Override
 	public boolean render(int x, int y, int z, float brightness) {
-		Block block = OpenClassic.getClient().getLevel().getBlockAt(x, y, z);
+		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt(x, y, z);
 		if(block == null) return false;
 		boolean result = false;
 		
 		int count = 0;
 		for(Quad quad : this.getQuads()) {
 			BlockFace face = quadToFace(this, count);
-			if (RenderHelper.getHelper().canRenderSide(block, face)) {
+			if (RenderHelper.getHelper().canRenderSide(block, x, y, z, face)) {
 				float mod = 0;
 				switch(face) {
 					case DOWN:
@@ -97,7 +97,7 @@ public class CuboidModel extends Model {
 						break;
 				}
 				
-				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block.getType(), x + face.getModX(), y + face.getModY(), z + face.getModZ()) * mod);
+				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, x + face.getModX(), y + face.getModY(), z + face.getModZ()) * mod);
 				result = true;
 			}
 			

@@ -1,6 +1,5 @@
 package ch.spacebase.openclassic.api.render;
 
-import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.block.model.Model;
@@ -218,10 +217,13 @@ public abstract class RenderHelper {
 	/**
 	 * Returns true if the side of the block can be rendered.
 	 * @param block Block being rendered.
+	 * @param z 
+	 * @param y 
+	 * @param x 
 	 * @param face Face being checked.
 	 * @return Whether the side can be rendered.
 	 */
-	public abstract boolean canRenderSide(Block block, BlockFace face);
+	public abstract boolean canRenderSide(BlockType block, int x, int y, int z, BlockFace face);
 	
 	/**
 	 * Gets the brightness of the given block.

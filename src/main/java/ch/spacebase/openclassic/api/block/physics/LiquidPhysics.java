@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api.block.physics;
 
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.Block;
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 import ch.spacebase.openclassic.api.level.Level;
@@ -20,26 +21,26 @@ public class LiquidPhysics implements BlockPhysics {
 	@Override
 	public void update(Block block) {
 		boolean moving = false;
-		boolean cont = true;
 		int y = block.getPosition().getBlockY();
 		
-		while (cont) {
+		while (true) {
 			y--;
-			if (block.getLevel().getBlockTypeAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()) != VanillaBlock.AIR || !this.canMove(block.getLevel().getBlockAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()))) {
+			if (block.getLevel().getBlockTypeAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()) != VanillaBlock.AIR || !this.canMove(block.getLevel(), block.getPosition().getBlockX(), y, block.getPosition().getBlockZ())) {
 				break;
 			}
 
-			if (cont = block.getLevel().setBlockIdAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ(), this.id)) {
+			if (block.getLevel().setBlockIdAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ(), this.id)) {
 				moving = true;
+			} else {
+				break;
 			}
 			
 			if(this.id == VanillaBlock.LAVA.getId()) {
-				cont = false;
+				break;
 			}
 		}
 
 		y++;
-		Block b = block.getLevel().getBlockAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ());
 		if (this.id == VanillaBlock.WATER.getId() || !moving) {
 			int x = block.getPosition().getBlockX();
 			int yy = block.getPosition().getBlockY();
@@ -48,19 +49,17 @@ public class LiquidPhysics implements BlockPhysics {
 		}
 
 		if (moving) {
-			block.getLevel().delayTick(b.getPosition(), this.id);
+			block.getLevel().delayTick(new Position(block.getLevel(), block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()), this.id);
 		}
 	}
 	
-	private boolean canMove(Block block) {
-		if(block == null) return false;
-		
+	private boolean canMove(Level level, int x, int y, int z) {
 		if (this.id == VanillaBlock.WATER.getId()) {
-			for (int x = block.getPosition().getBlockX() - 2; x <= block.getPosition().getBlockX() + 2; x++) {
-				for (int y = block.getPosition().getBlockY() - 2; y <= block.getPosition().getBlockY() + 2; y++) {
-					for (int z = block.getPosition().getBlockZ() - 2; z <= block.getPosition().getBlockZ() + 2; z++) {
-						Block b = block.getLevel().getBlockAt(x, y, z);
-						if (b != null && b.getType() == VanillaBlock.SPONGE) {
+			for (int bx = x - 2; bx <= x + 2; bx++) {
+				for (int by = y - 2; by <= y + 2; by++) {
+					for (int bz = z - 2; bz <= z + 2; bz++) {
+						BlockType block = level.getBlockTypeAt(bx, by, bz);
+						if (block != null && block == VanillaBlock.SPONGE) {
 							return false;
 						}
 					}
@@ -73,7 +72,7 @@ public class LiquidPhysics implements BlockPhysics {
 
 	private boolean canFlow(Level level, int x, int y, int z) {
 		if (level.getBlockTypeAt(x, y, z) == VanillaBlock.AIR) {
-			if (!this.canMove(level.getBlockAt(x, y, z))) {
+			if (!this.canMove(level, x, y, z)) {
 				return false;
 			}
 
