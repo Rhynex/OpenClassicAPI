@@ -17,7 +17,7 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
  */
 public class TextBox extends Widget {
 
-	private static final String ALLOWED = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.:;-_\'*!\"#@%$/()=+?[]{}<>^";
+	private static final String ALLOWED = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.:;-_\'*!\"#@%$/()=+?[]{}<>£^";
 	
 	private String text = "";
 	private boolean focus;
