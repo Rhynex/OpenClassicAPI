@@ -74,7 +74,9 @@ public abstract class Event {
 		/** Called when a command is executed. */
 		PRE_COMMAND,
 		/** Called when the state of a key is changed on the client. (custom client only) */
-		PLAYER_KEY_CHANGE;
+		PLAYER_KEY_CHANGE,
+		/** Called when a custom message is recieved. */
+		CUSTOM_MESSAGE;
 	}
 	
 }

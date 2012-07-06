@@ -39,7 +39,7 @@ public class PluginMessage extends Message {
 	
 	@Override
 	public String toString() {
-		return "ClientInfoMessage{name=" + name + ",version=" + version + "}";
+		return "PluginMessage{name=" + name + ",version=" + version + "}";
 	}
 	
 	@Override
