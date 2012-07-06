@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.network.msg.custom;
 
 import ch.spacebase.openclassic.api.network.msg.Message;
 
+/**
+ * Sent/Recieved when a key's state is changed.
+ */
 public class KeyChangeMessage extends Message {
 
 	private int key;
@@ -12,10 +15,18 @@ public class KeyChangeMessage extends Message {
 		this.pressed = pressed;
 	}
 	
+	/**
+	 * Gets the changed key.
+	 * @return The changed key.
+	 */
 	public int getKey() {
 		return this.key;
 	}
 	
+	/**
+	 * Returns true if the key has been pressed.
+	 * @return True if the key has been pressed.
+	 */
 	public boolean isPressed() {
 		return this.pressed;
 	}

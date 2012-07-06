@@ -3,6 +3,9 @@ package ch.spacebase.openclassic.api.network.msg.custom;
 import ch.spacebase.openclassic.api.block.model.Quad;
 import ch.spacebase.openclassic.api.network.msg.Message;
 
+/**
+ * Contains a model's quad.
+ */
 public class QuadMessage extends Message {
 
 	private byte block;
@@ -13,10 +16,18 @@ public class QuadMessage extends Message {
 		this.quad = quad;
 	}
 	
+	/**
+	 * Gets the block the quad belongs to.
+	 * @return The block the quad belongs to.
+	 */
 	public byte getBlock() {
 		return this.block;
 	}
 	
+	/**
+	 * Gets the quad contained in this message.
+	 * @return The contained quad.
+	 */
 	public Quad getQuad() {
 		return this.quad;
 	}

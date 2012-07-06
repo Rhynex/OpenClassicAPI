@@ -3,6 +3,9 @@ package ch.spacebase.openclassic.api.network.msg.custom;
 import ch.spacebase.openclassic.api.block.custom.CustomBlock;
 import ch.spacebase.openclassic.api.network.msg.Message;
 
+/**
+ * Contains a custom block.
+ */
 public class CustomBlockMessage extends Message {
 
 	private CustomBlock block;
@@ -11,6 +14,10 @@ public class CustomBlockMessage extends Message {
 		this.block = block;
 	}
 	
+	/**
+	 * Gets the block contained in the message.
+	 * @return The contained block.
+	 */
 	public CustomBlock getBlock() {
 		return this.block;
 	}

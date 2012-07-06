@@ -3,6 +3,9 @@ package ch.spacebase.openclassic.api.network.msg.custom;
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.network.msg.Message;
 
+/**
+ * Contains a block's model.
+ */
 public class BlockModelMessage extends Message {
 
 	private byte block;
@@ -13,10 +16,18 @@ public class BlockModelMessage extends Message {
 		this.model = model;
 	}
 	
+	/**
+	 * Gets the block the model belongs to.
+	 * @return The block the model belongs to.
+	 */
 	public byte getBlock() {
 		return this.block;
 	}
 	
+	/**
+	 * Gets the model contained in the message.
+	 * @return The contained model.
+	 */
 	public Model getModel() {
 		return this.model;
 	}

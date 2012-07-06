@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.network.msg.custom;
 
 import ch.spacebase.openclassic.api.network.msg.Message;
 
+/**
+ * Changes the colors of certain aspects of a level on the client.
+ */
 public class LevelColorMessage extends Message {
 
 	private String type;
@@ -12,10 +15,18 @@ public class LevelColorMessage extends Message {
 		this.value = value;
 	}
 	
+	/**
+	 * Gets the type of change this message contains.
+	 * @return The type of change.
+	 */
 	public String getType() {
 		return this.type;
 	}
 	
+	/**
+	 * Gets the value being changed to.
+	 * @return The new value.
+	 */
 	public int getValue() {
 		return this.value;
 	}

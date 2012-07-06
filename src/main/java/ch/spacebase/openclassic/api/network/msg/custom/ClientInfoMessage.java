@@ -2,6 +2,9 @@ package ch.spacebase.openclassic.api.network.msg.custom;
 
 import ch.spacebase.openclassic.api.network.msg.Message;
 
+/**
+ * Contains info about a custom client.
+ */
 public class ClientInfoMessage extends Message {
 
 	private String version;
@@ -10,6 +13,10 @@ public class ClientInfoMessage extends Message {
 		this.version = version;
 	}
 	
+	/**
+	 * Gets the version of the client.
+	 * @return The client's version.
+	 */
 	public String getVersion() {
 		return this.version;
 	}
