@@ -75,6 +75,12 @@ public interface Client extends Game {
 	public boolean isConnectedToOpenClassic();
 	
 	/**
+	 * Gets the version of the OpenClassic server this client is connected to, if applicable.
+	 * @return The server's version
+	 */
+	public String getServerVersion();
+	
+	/**
 	 * Gets the client's progress bar display.
 	 * @return The client's progress bar display.
 	 */

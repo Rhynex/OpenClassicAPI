@@ -1,12 +1,14 @@
 package ch.spacebase.openclassic.api.player;
 
 import java.net.SocketAddress;
+import java.util.List;
 
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.data.NBTData;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.permissions.Group;
+import ch.spacebase.openclassic.api.plugin.RemotePluginInfo;
 
 /**
  * Represents a player.
@@ -152,5 +154,11 @@ public interface Player extends Sender {
 	 * @return The player's NBTData.
 	 */
 	public NBTData getData();
+	
+	/**
+	 * Gets a list of plugins from the client/server the player is connected to/from.
+	 * @return A list of the player's plugins.
+	 */
+	public List<RemotePluginInfo> getPlugins();
 	
 }

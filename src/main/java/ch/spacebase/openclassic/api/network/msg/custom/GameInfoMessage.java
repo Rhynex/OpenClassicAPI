@@ -5,11 +5,11 @@ import ch.spacebase.openclassic.api.network.msg.Message;
 /**
  * Contains info about a custom client.
  */
-public class ClientInfoMessage extends Message {
+public class GameInfoMessage extends Message {
 
 	private String version;
 	
-	public ClientInfoMessage(String version) {
+	public GameInfoMessage(String version) {
 		this.version = version;
 	}
 	
