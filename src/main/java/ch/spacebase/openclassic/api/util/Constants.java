@@ -8,12 +8,12 @@ public class Constants {
 	/**
 	 * The server's current version.
 	 */
-	public static final String SERVER_VERSION = "1.0.1";
+	public static final String SERVER_VERSION = "1.0.2";
 	
 	/**
 	 * The client's current version.
 	 */
-	public static final String CLIENT_VERSION = "1.0.7";
+	public static final String CLIENT_VERSION = "1.0.8";
 	
 	/**
 	 * The server's protocol version.
