@@ -28,37 +28,36 @@ public class TextBox extends Widget {
 	
 	private boolean chatbox;
 	
-	public TextBox(int id, int x, int y, GuiScreen parent, boolean visible, boolean focus) {
-		this(id, x, y, parent, visible, focus, 0);
+	public TextBox(int id, int x, int y, GuiScreen parent) {
+		this(id, x, y, parent, 0);
 	}
 	
-	public TextBox(int id, int x, int y, GuiScreen parent, boolean visible, boolean focus, int max) {
-		this(id, x, y, 200, 20, parent, visible, focus, max);
+	public TextBox(int id, int x, int y, GuiScreen parent, int max) {
+		this(id, x, y, 200, 20, parent, max);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, boolean visible, boolean focus) {
-		this(id, x, y, width, height, parent, visible, focus, false);
+	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent) {
+		this(id, x, y, width, height, parent, false);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, boolean visible, boolean focus, int max) {
-		this(id, x, y, width, height, parent, visible, focus, max, false);
+	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, int max) {
+		this(id, x, y, width, height, parent, max, false);
 	}
 	
-	public TextBox(int id, int x, int y, GuiScreen parent, boolean visible, boolean focus, boolean chatbox) {
-		this(id, x, y, 200, 20, parent, visible, focus, chatbox);
+	public TextBox(int id, int x, int y, GuiScreen parent, boolean chatbox) {
+		this(id, x, y, 200, 20, parent, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, GuiScreen parent, boolean visible, boolean focus, int max, boolean chatbox) {
-		this(id, x, y, 200, 20, parent, visible, focus, chatbox);
+	public TextBox(int id, int x, int y, GuiScreen parent, int max, boolean chatbox) {
+		this(id, x, y, 200, 20, parent, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, boolean visible, boolean focus, boolean chatbox) {
-		this(id, x, y, width, height, parent, visible, focus, 0, chatbox);
+	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, boolean chatbox) {
+		this(id, x, y, width, height, parent, 0, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, boolean visible, boolean focus, int max, boolean chatbox) {
-		super(id, x, y, width, height, parent, visible);
-		this.focus = focus;
+	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, int max, boolean chatbox) {
+		super(id, x, y, width, height, parent);
 		this.chatbox = chatbox;
 		this.max = max;
 	}

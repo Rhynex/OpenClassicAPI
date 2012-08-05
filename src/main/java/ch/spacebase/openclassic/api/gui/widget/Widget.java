@@ -8,21 +8,20 @@ import ch.spacebase.openclassic.api.gui.GuiScreen;
 public abstract class Widget {
 
 	private int id;
-	protected boolean visible;
+	protected boolean visible = true;
 	protected GuiScreen parent;
 	protected int x;
 	protected int y;
 	protected int width;
 	protected int height;
 	
-	public Widget(int id, int x, int y, int width, int height, GuiScreen parent, boolean visible) {
+	public Widget(int id, int x, int y, int width, int height, GuiScreen parent) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.parent = parent;
-		this.visible = visible;
 	}
 	
 	/**

@@ -12,12 +12,12 @@ public class Button extends Widget {
 	private String text;
 	private boolean active = true;
 
-	public Button(int id, int x, int y, GuiScreen parent, boolean visible, String text) {
-		this(id, x, y, 200, 20, parent, visible, text);
+	public Button(int id, int x, int y, GuiScreen parent, String text) {
+		this(id, x, y, 200, 20, parent, text);
 	}
 	
-	public Button(int id, int x, int y, int width, int height, GuiScreen parent, boolean visible, String text) {
-		super(id, x, y, width, height, parent, visible);
+	public Button(int id, int x, int y, int width, int height, GuiScreen parent, String text) {
+		super(id, x, y, width, height, parent);
 		this.text = text;
 	}
 	

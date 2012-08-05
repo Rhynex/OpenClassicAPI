@@ -241,4 +241,27 @@ public abstract class RenderHelper {
 	 */
 	public abstract void renderPreview(Model model, float brightness);
 	
+	/**
+	 * Gets the width of a string.
+	 * @return The width of a string.
+	 */
+	public abstract int getStringWidth(String string);
+
+	/**
+	 * Draws a rotated block like in the quickbar.
+	 * @param X to draw at.
+	 * @param Y to draw at.
+	 * @param Block to draw.
+	 */
+	public abstract void drawRotatedBlock(int x, int y, BlockType block);
+	
+	/**
+	 * Draws a rotated block like in the quickbar.
+	 * @param X to draw at.
+	 * @param Y to draw at.
+	 * @param Block to draw.
+	 * @param Scale to draw at.
+	 */
+	public abstract void drawRotatedBlock(int x, int y, BlockType block, float scale);
+	
 }

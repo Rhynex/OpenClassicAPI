@@ -16,16 +16,17 @@ public class ButtonList extends Widget {
 	private int pages = 0;
 	private int index = 0;
 	
-	public ButtonList(int id, int parentWidth, int parentHeight, GuiScreen parent, boolean visible) {
-		super(id, 0, 0, parentWidth, parentHeight, parent, visible);
+	public ButtonList(int id, int parentWidth, int parentHeight, GuiScreen parent) {
+		super(id, 0, 0, parentWidth, parentHeight, parent);
 		
 		for (int button = 0; button < 5; button++) {
-			this.buttons.add(new Button(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, false, "---"));
+			this.buttons.add(new Button(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, "---"));
+			this.buttons.get(id).setVisible(false);
 			this.buttons.get(id).setActive(false);
 		}
 		
-		this.buttons.add(new Button(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, true, "Back"));
-		this.buttons.add(new Button(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, true, "Next"));
+		this.buttons.add(new Button(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, "Back"));
+		this.buttons.add(new Button(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, "Next"));
 		this.getBackButton().setActive(false);
 		this.getNextButton().setActive(false);
 	}
