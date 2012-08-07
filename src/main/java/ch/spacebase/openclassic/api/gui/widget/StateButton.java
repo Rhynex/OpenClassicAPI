@@ -28,7 +28,7 @@ public final class StateButton extends Button {
 	
 	/**
 	 * Sets the state of this button.
-	 * @param The new state of this button.
+	 * @param state The new state of this button.
 	 */
 	public void setState(String state) {
 		this.state = state;

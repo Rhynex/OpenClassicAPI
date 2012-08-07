@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.network.msg.custom;
+package ch.spacebase.openclassic.api.network.msg.custom.block;
 
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.network.msg.Message;
@@ -39,7 +39,7 @@ public class BlockModelMessage extends Message {
 
 	@Override
 	public Object[] getParams() {
-		return new Object[] { this.block, this.model.getClass().getSimpleName(), this.model.getCollisionBox().getX1(), this.model.getCollisionBox().getX2(), this.model.getCollisionBox().getY1(), this.model.getCollisionBox().getY2(), this.model.getCollisionBox().getZ1(), this.model.getCollisionBox().getZ2(), this.model.getSelectionBox().getX1(), this.model.getSelectionBox().getX2(), this.model.getSelectionBox().getY1(), this.model.getSelectionBox().getY2(), this.model.getSelectionBox().getZ1(), this.model.getSelectionBox().getZ2() };
+		return new Object[] { this.block, this.model.getClass().getSimpleName(), this.model.getDefaultCollisionBox().getX1(), this.model.getDefaultCollisionBox().getX2(), this.model.getDefaultCollisionBox().getY1(), this.model.getDefaultCollisionBox().getY2(), this.model.getDefaultCollisionBox().getZ1(), this.model.getDefaultCollisionBox().getZ2(), this.model.getDefaultSelectionBox().getX1(), this.model.getDefaultSelectionBox().getX2(), this.model.getDefaultSelectionBox().getY1(), this.model.getDefaultSelectionBox().getY2(), this.model.getDefaultSelectionBox().getZ1(), this.model.getDefaultSelectionBox().getZ2() };
 	}
 	
 	@Override

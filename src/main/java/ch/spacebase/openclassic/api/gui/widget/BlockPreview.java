@@ -32,7 +32,7 @@ public class BlockPreview extends Widget {
 	
 	/**
 	 * Sets the block being previewed.
-	 * @param The new block being previewed.
+	 * @param block The new block being previewed.
 	 */
 	public void setBlock(BlockType block) {
 		this.type = block;

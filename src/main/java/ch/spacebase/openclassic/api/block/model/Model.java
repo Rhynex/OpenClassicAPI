@@ -51,9 +51,20 @@ public class Model {
 	
 	/**
 	 * Gets this model's collision box.
+	 * @param x X of the model.
+	 * @param y Y of the model.
+	 * @param z Z of the model.
 	 * @return This model's collision box.
 	 */
-	public BoundingBox getCollisionBox() {
+	public BoundingBox getCollisionBox(int x, int y, int z) {
+		return this.collision;
+	}
+	
+	/**
+	 * Gets this model's default collision box.
+	 * @return This model's default collision box.
+	 */
+	public BoundingBox getDefaultCollisionBox() {
 		return this.collision;
 	}
 	
@@ -80,9 +91,20 @@ public class Model {
 	
 	/**
 	 * Gets this model's selection box.
+	 * @param x X of the model.
+	 * @param y Y of the model.
+	 * @param z Z of the model.
 	 * @return This model's selection box.
 	 */
-	public BoundingBox getSelectionBox() {
+	public BoundingBox getSelectionBox(int x, int y, int z) {
+		return this.selection;
+	}
+	
+	/**
+	 * Gets this model's default selection box.
+	 * @return This model's default selection box.
+	 */
+	public BoundingBox getDefaultSelectionBox() {
 		return this.selection;
 	}
 	

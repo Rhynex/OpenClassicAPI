@@ -4,7 +4,7 @@ import ch.spacebase.openclassic.api.block.model.CubeModel;
 import ch.spacebase.openclassic.api.block.model.CuboidModel;
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.PlantModel;
-import ch.spacebase.openclassic.api.block.model.TransparentModel;
+import ch.spacebase.openclassic.api.block.model.LiquidModel;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
 /**
@@ -20,10 +20,10 @@ public enum VanillaBlock implements BlockType {
 	WOOD((byte) 5, StepSound.WOOD, 4),
 	SAPLING((byte) 6, StepSound.GRASS, new PlantModel(TERRAIN, 15)),
 	BEDROCK((byte) 7, StepSound.STONE, 17),
-	WATER((byte) 8, StepSound.NONE, new TransparentModel(TERRAIN, 14), true, true),
-	STATIONARY_WATER((byte) 9, StepSound.NONE, new TransparentModel(TERRAIN, 14), true, true),
-	LAVA((byte) 10, StepSound.NONE, new TransparentModel(TERRAIN, 30), 5, true, true),
-	STATIONARY_LAVA((byte) 11, StepSound.NONE, new TransparentModel(TERRAIN, 30), true, true),
+	WATER((byte) 8, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
+	STATIONARY_WATER((byte) 9, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
+	LAVA((byte) 10, StepSound.NONE, new LiquidModel(TERRAIN, 30), 5, true, true),
+	STATIONARY_LAVA((byte) 11, StepSound.NONE, new LiquidModel(TERRAIN, 30), true, true),
 	SAND((byte) 12, StepSound.SAND, 18),
 	GRAVEL((byte) 13, StepSound.GRAVEL, 19),
 	GOLD_ORE((byte) 14, StepSound.STONE, 32),

@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.network.msg.custom;
+package ch.spacebase.openclassic.api.network.msg.custom.audio;
 
 import ch.spacebase.openclassic.api.network.msg.Message;
 

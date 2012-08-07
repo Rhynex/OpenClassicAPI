@@ -75,9 +75,8 @@ public class CuboidModel extends Model {
 		if(block == null) return false;
 		boolean result = false;
 		
-		int count = 0;
 		for(Quad quad : this.getQuads()) {
-			BlockFace face = quadToFace(this, count);
+			BlockFace face = quadToFace(this, quad.getId());
 			if (RenderHelper.getHelper().canRenderSide(block, x, y, z, face)) {
 				float mod = 0;
 				switch(face) {
@@ -100,8 +99,6 @@ public class CuboidModel extends Model {
 				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, x + face.getModX(), y + face.getModY(), z + face.getModZ()) * mod);
 				result = true;
 			}
-			
-			count++;
 		}
 		
 		return result;
@@ -134,7 +131,7 @@ public class CuboidModel extends Model {
 	 * @return The BlockFace the quad ID converts to.
 	 */
 	public static BlockFace quadToFace(CuboidModel model, int quad) {
-		if(model instanceof TransparentModel) {
+		if(model instanceof LiquidModel) {
 			switch(quad) {
 			case 0: case 1: return BlockFace.DOWN;
 			case 2: case 3: return BlockFace.UP;
@@ -154,23 +151,6 @@ public class CuboidModel extends Model {
 				case 5: return BlockFace.NORTH;
 				default: return null;
 			}
-		}
-	}
-	
-	/**
-	 * Converts a BlockFace to a quad ID.
-	 * @param face BlockFace to convert.
-	 * @return The quad ID the BlockFace converts to.
-	 */
-	public static int faceToQuad(BlockFace face) {
-		switch(face) {
-			case DOWN: return 0;
-			case UP: return 1;
-			case WEST: return 2;
-			case EAST: return 3;
-			case SOUTH: return 4;
-			case NORTH: return 5;
-			default: return -1;
 		}
 	}
 	

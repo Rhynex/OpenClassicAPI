@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.network.msg.custom;
+package ch.spacebase.openclassic.api.network.msg.custom.block;
 
 import ch.spacebase.openclassic.api.block.model.Quad;
 import ch.spacebase.openclassic.api.network.msg.Message;

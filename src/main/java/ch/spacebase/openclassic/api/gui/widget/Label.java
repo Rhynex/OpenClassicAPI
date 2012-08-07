@@ -25,7 +25,7 @@ public class Label extends Widget {
 	
 	/**
 	 * Sets the text in this label.
-	 * @param The new text in this label.
+	 * @param text The new text in this label.
 	 */
 	public void setText(String text) {
 		this.text = text;

@@ -25,7 +25,7 @@ public class Image extends Widget {
 	
 	/**
 	 * Sets the texture being displayed.
-	 * @param The new texture being displayed.
+	 * @param tex The new texture being displayed.
 	 */
 	public void setTexture(SubTexture tex) {
 		this.tex = tex;
