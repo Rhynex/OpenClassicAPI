@@ -36,8 +36,15 @@ public abstract class RenderHelper {
 	 * Binds the given texture to the GL buffer.
 	 * @param file File to bind.
 	 * @param jar Whether the file is in the client jar or not.
+	 * @return The binded texture's id.
 	 */
-	public abstract void bindTexture(String file, boolean jar);
+	public abstract int bindTexture(String file, boolean jar);
+	
+	/**
+	 * Binds the given texture to the GL buffer.
+	 * @param id The texture id to bind.
+	 */
+	public abstract void bindTexture(int id);
 	
 	/**
 	 * Draws the dirt block background.
