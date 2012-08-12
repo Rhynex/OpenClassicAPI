@@ -21,14 +21,14 @@ public class Constants {
 	public static final byte PROTOCOL_VERSION = 0x07;
 	
 	/**
-	 * Number of milliseconds between each tick
+	 * Number of ticks per second
 	 */
-	public static final int TICK_MILLISECONDS = 100;
+	public static final int TICKS_PER_SECOND = 20;
 	
 	/**
 	 * Number of milliseconds between each physics tick
 	 */
-	public static final int PHYSICS_TICK_MILLISECONDS = 200;
+	public static final int PHYSICS_PER_SECOND = 10;
 	
 	/**
 	 * Represents the packet code for a player who isn't an op.
