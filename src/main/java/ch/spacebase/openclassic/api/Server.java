@@ -208,7 +208,7 @@ public interface Server extends Game {
 	public String getIpBanReason(String address);
 
 	/**
-	 * Gets all the playerss banned on this server.
+	 * Gets all the players banned on this server.
 	 * @return All the banned players.
 	 */
 	public List<String> getBannedPlayers();
@@ -218,6 +218,12 @@ public interface Server extends Game {
 	 * @return All the banned IPs.
 	 */
 	public List<String> getBannedIps();
+	
+	/**
+	 * Gets all the players whitelisted on this server.
+	 * @return All the whitelisted players.
+	 */
+	public List<String> getWhitelistedPlayers();
 	
 	/**
 	 * Gets the server's permission manager.

@@ -23,7 +23,7 @@ public class Console implements Sender {
 	}
 	
 	@Override
-	public boolean hasPermission(String command) {
+	public boolean hasPermission(String permission) {
 		return true;
 	}
 	
