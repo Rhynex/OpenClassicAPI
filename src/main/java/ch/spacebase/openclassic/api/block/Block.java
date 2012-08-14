@@ -82,12 +82,23 @@ public class Block {
 	}
 	
 	/**
-	 * Gets the block relative the given face.
-	 * @param face Face to get the block relative from.
-	 * @return The block relative from the given face.
+	 * Gets the block relative to the given face.
+	 * @param face Face to get the block relative to.
+	 * @return The block relative.
 	 */
 	public Block getRelative(BlockFace face) {
-		Position pos = this.pos.clone().add(face.getModX(), face.getModY(), face.getModZ());
+		return this.getRelative(face.getModX(), face.getModY(), face.getModZ());
+	}
+	
+	/**
+	 * Gets the block relative to the given coordinates.
+	 * @param x X to get the block relative to.
+	 * @param y Y to get the block relative to.
+	 * @param z Z to get the block relative to.
+	 * @return The block relative.
+	 */
+	public Block getRelative(int x, int y, int z) {
+		Position pos = this.pos.clone().add(x, y, z);
 		if(pos.getBlockX() >= this.pos.getLevel().getWidth() || pos.getBlockX() < 0) return null;
 		if(pos.getBlockY() >= this.pos.getLevel().getHeight() || pos.getBlockY() < 0) return null;
 		if(pos.getBlockZ() >= this.pos.getLevel().getDepth() || pos.getBlockZ() < 0) return null;

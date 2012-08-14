@@ -41,6 +41,10 @@ public abstract class Event {
 		ENTITY_DEATH,
 		/** Called when an entity moves. */
 		ENTITY_MOVE,
+		/** Called when an event is dispatched. */
+		EVENT_DISPATCH,
+		/** Called when a level is created. */
+		LEVEL_CREATE,
 		/** Called when a level is loaded. */
 		LEVEL_LOAD,
 		/** Called when a level is saved. */

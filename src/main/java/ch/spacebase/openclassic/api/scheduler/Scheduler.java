@@ -94,6 +94,18 @@ public interface Scheduler {
 	public void cancelAllTasks();
 	
 	/**
+	 * Returns true if a task is running.
+	 * @return True if a task is running.
+	 */
+	public boolean isRunning(int id);
+	
+	/**
+	 * Returns true if a task is queued.
+	 * @return True if a task is queued.
+	 */
+	public boolean isQueued(int id);
+	
+	/**
 	 * Gets a list of active async workers.
 	 * @return A list of active async workers.
 	 */

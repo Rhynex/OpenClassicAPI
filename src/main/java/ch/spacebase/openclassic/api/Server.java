@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api;
 
 import java.util.List;
 
+import ch.spacebase.openclassic.api.command.Console;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.permissions.PermissionManager;
@@ -109,6 +110,18 @@ public interface Server extends Game {
 	 * @param online Whether the server verifies names.
 	 */
 	public void setOnlineMode(boolean online);
+	
+	/**
+	 * Returns true if the server allows flight.
+	 * @return True if the server allows flight.
+	 */
+	public boolean isFlightAllowed();
+	
+	/**
+	 * Sets whether the server allows flight.
+	 * @param flight Whether the server allows flight.
+	 */
+	public void setAllowFlight(boolean flight);
 	
 	/**
 	 * Returns true if the server uses a whitelist.
@@ -307,5 +320,18 @@ public interface Server extends Game {
 	 * @param msg Message to send.
 	 */
 	public void sendToAllExcept(Player player, Message msg);
+
+	/**
+	 * Gets the sender used to send console commands.
+	 * @return The console command sender.
+	 */
+	public Console getConsoleSender();
+
+	/**
+	 * Gets the player with the given player ID.
+	 * @param id ID to look for.
+	 * @return The player with the given ID.
+	 */
+	public Player getPlayer(byte id);
 	
 }

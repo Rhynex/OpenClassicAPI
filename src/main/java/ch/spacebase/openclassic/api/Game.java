@@ -80,6 +80,12 @@ public interface Game {
 	public Collection<Command> getCommands();
 	
 	/**
+	 * Gets a list of all executors registered.
+	 * @return All executors.
+	 */
+	public Collection<CommandExecutor> getCommandExecutors();
+	
+	/**
 	 * Shuts down the game.
 	 */
 	public void shutdown();

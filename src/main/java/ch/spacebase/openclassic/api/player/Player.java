@@ -160,5 +160,30 @@ public interface Player extends Sender {
 	 * @return A list of the player's plugins.
 	 */
 	public List<RemotePluginInfo> getPlugins();
+
+	/**
+	 * Sends a message or command from the player.
+	 * @param message Message to send.
+	 */
+	public void chat(String message);
+	
+	/**
+	 * Hides the given player from this player.
+	 * @param player Player to hide.
+	 */
+	public void hidePlayer(Player player);
+	
+	/**
+	 * Shows the given player to this player.
+	 * @param player Player to show.
+	 */
+	public void showPlayer(Player player);
+	
+	/**
+	 * Returns true if this player can see the given player.
+	 * @param player Player to check for.
+	 * @return If this player can see the other player.
+	 */
+	public boolean canSee(Player player);
 	
 }
