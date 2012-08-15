@@ -7,6 +7,7 @@ import java.util.List;
 import ch.spacebase.openclassic.api.event.Event;
 import ch.spacebase.openclassic.api.event.EventHandler;
 import ch.spacebase.openclassic.api.event.Listener;
+import ch.spacebase.openclassic.api.event.Priority;
 
 public class EventUtil {
 
@@ -16,12 +17,12 @@ public class EventUtil {
 	 * @param clazz Class to look for.
 	 * @return Methods that handle the event.
 	 */
-	public static Method[] getMethodsFor(Listener listen, Class<? extends Event> clazz) {
+	public static Method[] getMethodsFor(Listener listen, Class<? extends Event> clazz, Priority pri) {
 		List<Method> methods = new ArrayList<Method>();
 		
 		for(Method method : listen.getClass().getMethods()) {
 			Class<?> params[] = method.getParameterTypes();
-			if(params.length == 1 && params[0] == clazz && method.getAnnotation(EventHandler.class) != null) methods.add(method);
+			if(params.length == 1 && params[0] == clazz && method.getAnnotation(EventHandler.class) != null && method.getAnnotation(EventHandler.class).priority() == pri) methods.add(method);
 		}
 		
 		return methods.toArray(new Method[methods.size()]);

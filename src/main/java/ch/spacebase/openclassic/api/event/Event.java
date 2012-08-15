@@ -75,6 +75,8 @@ public abstract class Event {
 		PLUGIN_ENABLE,
 		/** Called when a plugin is disabled. */
 		PLUGIN_DISABLE,
+		/** Called when a command is not found. */
+		COMMAND_NOT_FOUND,
 		/** Called when a command is executed. */
 		PRE_COMMAND,
 		/** Called when the state of a key is changed on the client. (custom client only) */

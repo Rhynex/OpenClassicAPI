@@ -109,7 +109,6 @@ public class PluginManager {
 	        p.onLoad();
 	        
 	        boolean matched = true;
-	        
 	        for(String dependency : p.getDescription().getDependencies()) {
 	        	if(!this.isPluginEnabled(dependency)) matched = false;
 	        }

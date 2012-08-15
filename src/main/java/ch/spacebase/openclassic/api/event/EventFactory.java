@@ -1,8 +1,6 @@
 package ch.spacebase.openclassic.api.event;
 
 import java.lang.reflect.Method;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.event.game.EventDispatchEvent;
@@ -20,18 +18,18 @@ public class EventFactory {
 	public static <T extends Event> T callEvent(T event) {
 		if(OpenClassic.getGame() == null || OpenClassic.getGame().getPluginManager() == null) return event;
 		for(Priority pri : Priority.values()) {
-			callEventInternal(new EventDispatchEvent(event, pri));
-			callEventInternal(event);
+			callEventInternal(new EventDispatchEvent(event, pri), pri);
+			callEventInternal(event, pri);
 		}
 		
 		return event;
 	}
 	
-	public static void callEventInternal(Event event) {
+	public static void callEventInternal(Event event, Priority pri) {
 		for(Listener listen : OpenClassic.getGame().getPluginManager().getListeners()) {
 			if(!OpenClassic.getGame().getPluginManager().getPlugin(listen).isEnabled()) continue;
 			
-			Method methods[] = EventUtil.getMethodsFor(listen, event.getClass());
+			Method methods[] = EventUtil.getMethodsFor(listen, event.getClass(), pri);
 			if(methods != null && methods.length > 0) {
 				for(Method method : methods) {
 					try {
