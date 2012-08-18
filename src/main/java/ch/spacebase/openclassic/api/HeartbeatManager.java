@@ -45,6 +45,14 @@ public final class HeartbeatManager {
 	}
 	
 	/**
+	 * Sets the server's known minecraft.net url.
+	 * @param url The url.
+	 */
+	public static void setURL(String url) {
+		HeartbeatManager.url = url;
+	}
+	
+	/**
 	 * Triggers a heartbeat.
 	 */
 	public static void beat() {
@@ -126,7 +134,7 @@ public final class HeartbeatManager {
 			
 			if(!HeartbeatManager.url.equals(result)) {
 				HeartbeatManager.url = result;
-				OpenClassic.getLogger().info(Color.GREEN + "The server's URL is now \"" + result + "\".");
+				OpenClassic.getLogger().info(Color.GREEN + "The server's URL is now \"" + getURL() + "\".");
 				
 				try {
 					File file = new File(OpenClassic.getGame().getDirectory(), "server-address.txt");

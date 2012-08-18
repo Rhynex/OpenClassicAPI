@@ -19,14 +19,14 @@ public class TextBox extends Widget {
 
 	private static final String ALLOWED = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.:;-_\'*!\"#@%$/()=+?[]{}<>£^";
 	
-	private String text = "";
-	private boolean focus;
-	private int cursor = 0;
-	private boolean blink = true;
-	private int blinkDelay = 6;
-	private int max;
+	protected String text = "";
+	protected boolean focus;
+	protected int cursor = 0;
+	protected boolean blink = true;
+	protected int blinkDelay = 6;
+	protected int max;
 	
-	private boolean chatbox;
+	protected boolean chatbox;
 	
 	public TextBox(int id, int x, int y, GuiScreen parent) {
 		this(id, x, y, parent, 0);
@@ -172,7 +172,6 @@ public class TextBox extends Widget {
 	public void render() {
 		if(!this.chatbox) RenderHelper.getHelper().drawBox(this.x - 1, this.y - 1, this.x + this.width + 1, this.y + this.height + 1, -6250336);
 		RenderHelper.getHelper().drawBox(this.x, this.y, this.x + this.width, this.y + this.height, (!this.chatbox ? -16777216 : Integer.MIN_VALUE));
-		
 		RenderHelper.getHelper().renderText(this.text.substring(0, this.cursor) + (this.blink && this.focus ? "|" : "") + this.text.substring(this.cursor, this.text.length()), this.x + 4, (this.chatbox ? this.y + 2 : this.y + 6), 14737632, false);
 	}
 

@@ -1,5 +1,6 @@
 package ch.spacebase.openclassic.api.level.generator;
 
+import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.level.Level;
@@ -27,7 +28,7 @@ public class FlatLandGenerator extends Generator {
 					}
 					
 					count++;
-					if(OpenClassic.getClient() != null) {
+					if(OpenClassic.getGame() instanceof Client) {
 						OpenClassic.getClient().getProgressBar().setProgress((int) (((double) count / (double) level.getBlocks().length) * 100) * 2);
 					}
 				}

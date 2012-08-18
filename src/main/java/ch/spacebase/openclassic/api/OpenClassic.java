@@ -8,43 +8,53 @@ import java.util.logging.Logger;
 public class OpenClassic {
 
 	private static final Logger logger = Logger.getLogger("OpenClassic");
-	private static Game game;
+	private static Client client;
+	private static Server server;
 	
 	/**
 	 * Gets the current game instance.
 	 * @return The game instance.
 	 */
 	public static Game getGame() {
-		return game;
+		if(Thread.currentThread().getName().contains("Client")) {
+			return client;
+		} else {
+			return server;
+		}
 	}
 	
 	/**
 	 * Gets the current server instance.
-	 * @return The server instance (null if the game instance isn't a server).
+	 * @return The server instance (null if the server instance doesn't exist).
 	 */
 	public static Server getServer() {
-		if(!(game instanceof Server)) return null;
-		
-		return (Server) game;
+		return server;
 	}
 	
 	/**
 	 * Gets the current client instance.
-	 * @return The client instance (null if the game instance isn't a client).
+	 * @return The client instance (null if the client instance doesn't exist).
 	 */
 	public static Client getClient() {
-		if(!(game instanceof Client)) return null;
-		
-		return (Client) game;
+		return client;
 	}
 	
 	/**
-	 * Sets the current game instance.
-	 * @param game The game instance.
+	 * Sets the current client instance.
+	 * @param client The client instance.
 	 */
-	public static void setGame(Game game) {
-		if(OpenClassic.game != null || game == null) return;
-		OpenClassic.game = game;
+	public static void setClient(Client client) {
+		if(OpenClassic.client != null && client != null) return;
+		OpenClassic.client = client;
+	}
+	
+	/**
+	 * Sets the current server instance.
+	 * @param server The server instance.
+	 */
+	public static void setServer(Server server) {
+		if(OpenClassic.server != null && server != null) return;
+		OpenClassic.server = server;
 	}
 	
 	/**
@@ -52,12 +62,17 @@ public class OpenClassic {
 	 * @return True if the game is running.
 	 */
 	public static boolean isRunning() {
-		if(game == null) return false;
-		return game.isRunning();
+		if(Thread.currentThread().getName().contains("Client")) {
+			if(client == null) return false;
+			return client.isRunning();
+		} else {
+			if(server == null) return false;
+			return server.isRunning();
+		}
 	}
 	
 	/**
-	 * Gets the server's logger.
+	 * Gets OpenClassic's logger.
 	 * @return The logger.
 	 */
 	public static Logger getLogger() {

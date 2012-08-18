@@ -111,12 +111,6 @@ public interface Game {
 	public Configuration getConfig();
 	
 	/**
-	 * Returns true if the game was started with the "debug" flag.
-	 * @return True if the game is in debug mode.
-	 */
-	public boolean isInDebugMode();
-	
-	/**
 	 * Registers a generator to the given name.
 	 * @param name Name to register to.
 	 * @param generator Generator to register.

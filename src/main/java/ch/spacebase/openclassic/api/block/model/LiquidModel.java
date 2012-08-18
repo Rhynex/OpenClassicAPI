@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.block.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
@@ -104,7 +105,7 @@ public class LiquidModel extends CubeModel {
 	
 	@Override
 	public BoundingBox getSelectionBox(int x, int y, int z) {
-		if(OpenClassic.getClient() != null && OpenClassic.getClient().getLevel() != null && OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z).isLiquid()) {
+		if(OpenClassic.getGame() instanceof Client && OpenClassic.getClient().getLevel() != null && OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z).isLiquid()) {
 			return this.top;
 		}
 		
