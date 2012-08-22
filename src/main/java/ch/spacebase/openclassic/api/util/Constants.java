@@ -8,15 +8,15 @@ public class Constants {
 	/**
 	 * The server's current version.
 	 */
-	public static final String SERVER_VERSION = "1.0.3";
+	public static final String SERVER_VERSION = "1.1";
 	
 	/**
 	 * The client's current version.
 	 */
-	public static final String CLIENT_VERSION = "1.0.10";
+	public static final String CLIENT_VERSION = "1.1";
 	
 	/**
-	 * The server's protocol version.
+	 * The protocol version.
 	 */
 	public static final byte PROTOCOL_VERSION = 0x07;
 	

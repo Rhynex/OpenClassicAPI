@@ -2,11 +2,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ch.spacebase</groupId>
 	<artifactId>openclassicapi</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>OpenClassicAPI</name>
-	<description>The open source API for the custom Minecraft Classic server OpenClassic.</description>
+	<description>The open source API for the custom Minecraft Classic client/server OpenClassic.</description>
 	<url>http://github.com/Steveice10/OpenClassicAPI/</url>
 
 	<licenses>
