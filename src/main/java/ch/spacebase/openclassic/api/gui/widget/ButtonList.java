@@ -12,11 +12,18 @@ public class ButtonList extends Widget {
 
 	private List<Button> buttons = new ArrayList<Button>();
 	private List<String> contents = new ArrayList<String>();
+	private List<String> visible = new ArrayList<String>();
+	private TextBox search;
 	
+	private boolean useSearch;
 	private int pages = 0;
 	private int index = 0;
 	
 	public ButtonList(int id, int parentWidth, int parentHeight, GuiScreen parent) {
+		this(id, parentWidth, parentHeight, parent, false);
+	}
+	
+	public ButtonList(int id, int parentWidth, int parentHeight, GuiScreen parent, boolean search) {
 		super(id, 0, 0, parentWidth, parentHeight, parent);
 		
 		for (int button = 0; button < 5; button++) {
@@ -27,8 +34,10 @@ public class ButtonList extends Widget {
 		
 		this.buttons.add(new Button(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, "Back"));
 		this.buttons.add(new Button(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, "Next"));
+		this.search = new TextBox(7, this.width / 2 - 100, this.height / 6 + 120, this.parent);
 		this.getBackButton().setActive(false);
 		this.getNextButton().setActive(false);
+		this.useSearch = search;
 	}
 	
 	/**
@@ -45,8 +54,11 @@ public class ButtonList extends Widget {
 	 */
 	public void setContents(List<String> contents) {
 		this.contents = contents;
-		this.pages = (int) Math.ceil(this.contents.size() / 5);
-		if(this.pages > 0 && this.contents.size() > (this.pages - 1) * 5) {
+		this.visible = contents;
+		this.search.setText("");
+		this.index = 0;
+		this.pages = (int) Math.ceil(this.visible.size() / 5);
+		if(this.pages > 0 && this.visible.size() > (this.pages - 1) * 5) {
 			this.getNextButton().setActive(true);
 		}
 		
@@ -89,12 +101,34 @@ public class ButtonList extends Widget {
 		}
 	}
 	
+	/**
+	 * Called when this list's search box was typed in.
+	 */
+	public void onType() {
+		if(!this.useSearch) return;
+		List<String> cont = new ArrayList<String>();
+		for(String content : this.contents) {
+			if(content.toLowerCase().contains(this.search.getText().toLowerCase())) {
+				cont.add(content);
+			}
+		}
+		
+		this.visible = cont;
+		this.index = 0;
+		this.pages = (int) Math.ceil(this.visible.size() / 5);
+		if(this.pages > 0 && this.visible.size() > (this.pages - 1) * 5) {
+			this.getNextButton().setActive(true);
+		}
+		
+		this.updateContents();
+	}
+	
 	private void updateContents() {
 		for (int curr = this.index * 5; curr < (this.index + 1) * 5; curr++) {
-			boolean content = curr <= this.contents.size() - 1 && curr >= 0 && !this.contents.get(curr).equals("");
+			boolean content = curr <= this.visible.size() - 1 && curr >= 0 && !this.visible.get(curr).equals("");
 			int button = curr - this.index * 5;
 			this.getButton(button).setActive(content);
-			this.getButton(button).setText(content ? this.contents.get(curr) : "-");
+			this.getButton(button).setText(content ? this.visible.get(curr) : "-");
 			this.getButton(button).setVisible(true);
 		}
 	}
@@ -131,11 +165,39 @@ public class ButtonList extends Widget {
 	public List<Button> getButtons() {
 		return this.buttons;
 	}
+	
+	/**
+	 * Gets the search box of this button list.
+	 * @return This button list's search box.
+	 */
+	public TextBox getSearchBox() {
+		return this.search;
+	}
+	
+	@Override
+	public void onKeyPress(char c, int key) {
+		this.search.onKeyPress(c, key);
+	}
 
+	@Override
+	public void onMouseClick(int x, int y, int button) {
+		for(Button b : this.getButtons()) {
+			if (x >= b.getX() && y >= b.getY() && x < b.getX() + b.getWidth() && y < b.getY() + b.getHeight()) {
+				b.onMouseClick(x, y, button);
+			}
+		}
+		
+		this.search.onMouseClick(x, y, button);
+	}
+	
 	@Override
 	public void render() {
 		for(Button button : this.buttons) {
 			button.render();
+		}
+		
+		if(this.useSearch) {
+			this.search.render();
 		}
 	}
 	

@@ -119,6 +119,11 @@ public class TextBox extends Widget {
 		if (key == Keyboard.KEY_BACK && this.text.length() > 0 && this.cursor > 0) {
 			this.text = this.text.substring(0, this.cursor - 1) + this.text.substring(this.cursor);
 			this.cursor--;
+			for(Widget widget : this.parent.getWidgets()) {
+				if(widget instanceof ButtonList && ((ButtonList) widget).getSearchBox().equals(this)) {
+					((ButtonList) widget).onType();
+				}
+			}
 		}
 		
 		if(key == Keyboard.KEY_V && InputHelper.getHelper().isKeyDown(Keyboard.KEY_LCONTROL)) {
@@ -126,10 +131,19 @@ public class TextBox extends Widget {
 			Transferable transfer = clipboard.getContents(null);
 			if(transfer != null) {
 				try {
+					String old = this.text;
 					for(char ch : ((String) transfer.getTransferData(DataFlavor.stringFlavor)).toCharArray()) {
 						if (ALLOWED.indexOf(ch) >= 0) {
 							this.text = this.text.substring(0, this.cursor) + ch + this.text.substring(this.cursor, this.text.length());
 							this.cursor++;
+						}
+					}
+					
+					if(!old.equals(this.text)) {
+						for(Widget widget : this.parent.getWidgets()) {
+							if(widget instanceof ButtonList && ((ButtonList) widget).getSearchBox().equals(this)) {
+								((ButtonList) widget).onType();
+							}
 						}
 					}
 				} catch (UnsupportedFlavorException e) {
@@ -151,6 +165,11 @@ public class TextBox extends Widget {
 		if (ALLOWED.indexOf(c) >= 0 && !((this.chatbox && this.text.length() >= 64) || (this.max > 0 && this.text.length() >= this.max))) {
 			this.text = this.text.substring(0, this.cursor) + c + this.text.substring(this.cursor, this.text.length());
 			this.cursor++;
+			for(Widget widget : this.parent.getWidgets()) {
+				if(widget instanceof ButtonList && ((ButtonList) widget).getSearchBox().equals(this)) {
+					((ButtonList) widget).onType();
+				}
+			}
 		}
 	}
 	

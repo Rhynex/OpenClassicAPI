@@ -181,13 +181,7 @@ public abstract class GuiScreen implements Screen {
 	 */
 	public void onMouseClick(int x, int y, int button) {
 		for (Widget curr : this.widgets) {
-			if(curr instanceof ButtonList) {
-				for(Button b : ((ButtonList) curr).getButtons()) {
-					if (x >= b.getX() && y >= b.getY() && x < b.getX() + b.getWidth() && y < b.getY() + b.getHeight()) {
-						b.onMouseClick(x, y, button);
-					}
-				}
-			} else if (x >= curr.getX() && y >= curr.getY() && x < curr.getX() + curr.getWidth() && y < curr.getY() + curr.getHeight()) {
+			if (x >= curr.getX() && y >= curr.getY() && x < curr.getX() + curr.getWidth() && y < curr.getY() + curr.getHeight()) {
 				curr.onMouseClick(x, y, button);
 			}
 		}
