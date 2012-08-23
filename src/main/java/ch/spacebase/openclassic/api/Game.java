@@ -16,6 +16,7 @@ import ch.spacebase.openclassic.api.plugin.Plugin;
 import ch.spacebase.openclassic.api.plugin.PluginManager;
 import ch.spacebase.openclassic.api.scheduler.Scheduler;
 import ch.spacebase.openclassic.api.sound.AudioManager;
+import ch.spacebase.openclassic.api.translate.Translator;
 
 /**
  * Represents a Minecraft game.
@@ -149,9 +150,15 @@ public interface Game {
 	public void reload();
 	
 	/**
-	 * Gets the client's audio manager.
-	 * @return The client's audio manager.
+	 * Gets the game's audio manager.
+	 * @return The game's audio manager.
 	 */
 	public AudioManager getAudioManager();
+	
+	/**
+	 * Gets the game's translator.
+	 * @return The game's translator.
+	 */
+	public Translator getTranslator();
 	
 }

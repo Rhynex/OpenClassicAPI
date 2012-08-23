@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,8 +31,22 @@ public class Configuration {
 	protected Set<ConfigurationNode> nodes;
 	
 	private File configFile;
+	private InputStream in;
 	private Yaml yaml;
 
+	public Configuration(InputStream in) {
+		this.data = new HashMap<String, Object>();
+		this.nodes = new HashSet<ConfigurationNode>();
+		this.in = in;
+		
+		DumperOptions options = new DumperOptions();
+
+		options.setIndent(4);
+		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+
+		this.yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
+	}
+	
 	public Configuration(File file) {
 		this.data = new HashMap<String, Object>();
 		this.nodes = new HashSet<ConfigurationNode>();
@@ -49,43 +64,51 @@ public class Configuration {
 	 * Loads the configuration.
 	 */
 	public void load() {
-		try {
-			if (!this.configFile.exists()) {
-				if(this.configFile.getParentFile() != null) this.configFile.getParentFile().mkdirs();
-				this.configFile.createNewFile();
+		InputStream in = null;
+		if(this.in != null) {
+			in = this.in;
+		} else {		
+			try {
+				if (!this.configFile.exists()) {
+					if(this.configFile.getParentFile() != null) this.configFile.getParentFile().mkdirs();
+					this.configFile.createNewFile();
+				}
+	
+				in = new FileInputStream(this.configFile);
+			} catch (IOException e) {
+				OpenClassic.getLogger().severe("Failed to load config file " + this.configFile.getName() + "!");
+				e.printStackTrace();
+				return;
 			}
-
-			FileInputStream in = new FileInputStream(configFile);
-			this.data = (Map<String, Object>) yaml.load(in);
-			
-			if(this.data == null) this.data = new HashMap<String, Object>();
-		} catch (IOException e) {
-			OpenClassic.getLogger().severe("Failed to load config file " + this.configFile.getName() + "!");
-			e.printStackTrace();
 		}
+		
+		this.data = (Map<String, Object>) this.yaml.load(in);
+		if(this.data == null) this.data = new HashMap<String, Object>();
 	}
 
 	/**
 	 * Saves the configuration.
 	 */
 	public void save() {
-		try {
-			if (!this.configFile.exists()) {
-				if(this.configFile.getParentFile() != null) this.configFile.getParentFile().mkdirs();
-				this.configFile.createNewFile();
+		if(this.configFile != null) {
+			try {
+				if (!this.configFile.exists()) {
+					if(this.configFile.getParentFile() != null) this.configFile.getParentFile().mkdirs();
+					this.configFile.createNewFile();
+				}
+	
+				FileOutputStream out = new FileOutputStream(configFile);
+				OutputStreamWriter writer = new OutputStreamWriter(out, "UTF-8");
+	
+				for (ConfigurationNode node : nodes) {
+					node.setConfiguration(this);
+				}
+				
+				this.yaml.dump(data, writer);
+			} catch (IOException e) {
+				OpenClassic.getLogger().severe("Failed to save config file " + this.configFile.getName() + "!");
+				e.printStackTrace();
 			}
-
-			FileOutputStream out = new FileOutputStream(configFile);
-			OutputStreamWriter writer = new OutputStreamWriter(out, "UTF-8");
-
-			for (ConfigurationNode node : nodes) {
-				node.setConfiguration(this);
-			}
-			
-			this.yaml.dump(data, writer);
-		} catch (IOException e) {
-			OpenClassic.getLogger().severe("Failed to save config file " + this.configFile.getName() + "!");
-			e.printStackTrace();
 		}
 	}
 
@@ -98,12 +121,12 @@ public class Configuration {
 		if(path.equals("")) return new HashMap<String, Object>(this.data);
 		
 		if (!path.contains(".")) {
-			Object value = data.get(path);
+			Object value = this.data.get(path);
 			return value;
 		}
 
 		String[] parts = path.split("\\.");
-		Map<String, Object> node = data;
+		Map<String, Object> node = this.data;
 
 		for (int index = 0; index < parts.length; index++) {
 			Object obj = node.get(parts[index]);
@@ -679,6 +702,14 @@ public class Configuration {
 	 */
 	public Map<String, Object> getData() {
 		return new HashMap<String, Object>(this.data);
+	}
+	
+	/**
+	 * Returns true if this configuration contains the given key.
+	 * @return True if the configuration contains the given key.
+	 */
+	public boolean contains(String key) {
+		return this.getValue(key) != null;
 	}
 
 }
