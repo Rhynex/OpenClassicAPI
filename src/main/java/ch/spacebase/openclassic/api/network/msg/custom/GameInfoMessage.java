@@ -8,9 +8,11 @@ import ch.spacebase.openclassic.api.network.msg.Message;
 public class GameInfoMessage extends Message {
 
 	private String version;
+	private String language;
 	
-	public GameInfoMessage(String version) {
+	public GameInfoMessage(String version, String language) {
 		this.version = version;
+		this.language = language;
 	}
 	
 	/**
@@ -20,6 +22,14 @@ public class GameInfoMessage extends Message {
 	public String getVersion() {
 		return this.version;
 	}
+	
+	/**
+	 * Gets the language setting of the client.
+	 * @return The client's language setting.
+	 */
+	public String getLanguage() {
+		return this.language;
+	}
 
 	@Override
 	public Object[] getParams() {
@@ -28,7 +38,7 @@ public class GameInfoMessage extends Message {
 	
 	@Override
 	public String toString() {
-		return "ClientInfoMessage{version=" + version + "}";
+		return "ClientInfoMessage{version=" + version + ",language=" + language + "}";
 	}
 	
 	@Override

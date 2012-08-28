@@ -31,5 +31,10 @@ public class Console implements Sender {
 	public String getCommandPrefix() {
 		return "";
 	}
+
+	@Override
+	public String getLanguage() {
+		return OpenClassic.getGame().getLanguage();
+	}
 	
 }

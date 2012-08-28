@@ -161,4 +161,10 @@ public interface Game {
 	 */
 	public Translator getTranslator();
 	
+	/**
+	 * Gets the game's language setting.
+	 * @return The game's language setting.
+	 */
+	public String getLanguage();
+	
 }

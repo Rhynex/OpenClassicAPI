@@ -69,7 +69,7 @@ public class Translator {
 	 * @return The translated text.
 	 */
 	public String translate(String text) { 
-		return this.translate(text, OpenClassic.getClient().getConfig().getString("options.language", "English"));
+		return this.translate(text, OpenClassic.getGame().getLanguage());
 	}
 	
 	/**

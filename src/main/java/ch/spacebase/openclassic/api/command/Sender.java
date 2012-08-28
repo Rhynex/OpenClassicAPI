@@ -36,4 +36,10 @@ public interface Sender {
 	 */
 	public String getCommandPrefix();
 	
+	/**
+	 * Gets the sender's language.
+	 * @return The sender's language.
+	 */
+	public String getLanguage();
+	
 }
