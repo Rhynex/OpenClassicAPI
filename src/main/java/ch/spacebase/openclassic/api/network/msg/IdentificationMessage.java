@@ -26,7 +26,7 @@ public class IdentificationMessage extends Message {
 	}
 	
 	/**
-	 * Gets the player's name if the message is being recieved or the server name if it is being sent.
+	 * Gets the player's name if the message is client->server or the server name if it is server->client.
 	 * @return The username or server name.
 	 */
 	public String getUsernameOrServerName() {
@@ -34,7 +34,7 @@ public class IdentificationMessage extends Message {
 	}
 	
 	/**
-	 * Gets the verification key if the message is being recieved or the motd if it is being sent.
+	 * Gets the verification key if the message is client->server or the motd if it is server->client.
 	 * @return The verification key or motd.
 	 */
 	public String getVerificationKeyOrMotd() {
@@ -42,10 +42,10 @@ public class IdentificationMessage extends Message {
 	}
 	
 	/**
-	 * Gets whether this player is an OP. (unused when recieving)
-	 * @return Whether the player is an OP.
+	 * Gets whether this player is an OP if the message is server->client or whether the client is custom if it is client->server.
+	 * @return Whether the player is an OP or is custom.
 	 */
-	public byte getOp() {
+	public byte getOpOrCustomClient() {
 		return this.op;
 	}
 	
