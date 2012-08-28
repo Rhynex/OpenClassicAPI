@@ -1,7 +1,7 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -12,11 +12,11 @@ public class BlockPreview extends Widget {
 	private BlockType type;
 	private float scale;
 	
-	public BlockPreview(int id, int x, int y, GuiScreen parent, BlockType type) {
+	public BlockPreview(int id, int x, int y, Screen parent, BlockType type) {
 		this(id, x, y, parent, type, 0);
 	}
 	
-	public BlockPreview(int id, int x, int y, GuiScreen parent, BlockType type, float scale) {
+	public BlockPreview(int id, int x, int y, Screen parent, BlockType type, float scale) {
 		super(id, x, y, 0, 0, parent);
 		this.type = type;
 		this.scale = scale;

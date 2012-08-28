@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -10,7 +10,7 @@ public class Label extends Widget {
 
 	private String text = "";
 	
-	public Label(int id, int x, int y, GuiScreen parent, String text) {
+	public Label(int id, int x, int y, Screen parent, String text) {
 		super(id, x, y, RenderHelper.getHelper().getStringWidth(text), 8, parent);
 		this.text = text;
 	}

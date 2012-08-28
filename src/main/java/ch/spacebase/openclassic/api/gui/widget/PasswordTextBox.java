@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -8,35 +8,35 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
  */
 public class PasswordTextBox extends TextBox {
 	
-	public PasswordTextBox(int id, int x, int y, GuiScreen parent) {
+	public PasswordTextBox(int id, int x, int y, Screen parent) {
 		this(id, x, y, parent, 0);
 	}
 	
-	public PasswordTextBox(int id, int x, int y, GuiScreen parent, int max) {
+	public PasswordTextBox(int id, int x, int y, Screen parent, int max) {
 		this(id, x, y, 200, 20, parent, max);
 	}
 	
-	public PasswordTextBox(int id, int x, int y, int width, int height, GuiScreen parent) {
+	public PasswordTextBox(int id, int x, int y, int width, int height, Screen parent) {
 		this(id, x, y, width, height, parent, false);
 	}
 	
-	public PasswordTextBox(int id, int x, int y, int width, int height, GuiScreen parent, int max) {
+	public PasswordTextBox(int id, int x, int y, int width, int height, Screen parent, int max) {
 		this(id, x, y, width, height, parent, max, false);
 	}
 	
-	public PasswordTextBox(int id, int x, int y, GuiScreen parent, boolean chatbox) {
+	public PasswordTextBox(int id, int x, int y, Screen parent, boolean chatbox) {
 		this(id, x, y, 200, 20, parent, chatbox);
 	}
 	
-	public PasswordTextBox(int id, int x, int y, GuiScreen parent, int max, boolean chatbox) {
+	public PasswordTextBox(int id, int x, int y, Screen parent, int max, boolean chatbox) {
 		this(id, x, y, 200, 20, parent, chatbox);
 	}
 	
-	public PasswordTextBox(int id, int x, int y, int width, int height, GuiScreen parent, boolean chatbox) {
+	public PasswordTextBox(int id, int x, int y, int width, int height, Screen parent, boolean chatbox) {
 		this(id, x, y, width, height, parent, 0, chatbox);
 	}
 	
-	public PasswordTextBox(int id, int x, int y, int width, int height, GuiScreen parent, int max, boolean chatbox) {
+	public PasswordTextBox(int id, int x, int y, int width, int height, Screen parent, int max, boolean chatbox) {
 		super(id, x, y, width, height, parent, max, chatbox);
 	}
 	

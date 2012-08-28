@@ -7,7 +7,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.input.InputHelper;
 import ch.spacebase.openclassic.api.input.Keyboard;
 import ch.spacebase.openclassic.api.render.RenderHelper;
@@ -28,35 +28,35 @@ public class TextBox extends Widget {
 	
 	protected boolean chatbox;
 	
-	public TextBox(int id, int x, int y, GuiScreen parent) {
+	public TextBox(int id, int x, int y, Screen parent) {
 		this(id, x, y, parent, 0);
 	}
 	
-	public TextBox(int id, int x, int y, GuiScreen parent, int max) {
+	public TextBox(int id, int x, int y, Screen parent, int max) {
 		this(id, x, y, 200, 20, parent, max);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent) {
+	public TextBox(int id, int x, int y, int width, int height, Screen parent) {
 		this(id, x, y, width, height, parent, false);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, int max) {
+	public TextBox(int id, int x, int y, int width, int height, Screen parent, int max) {
 		this(id, x, y, width, height, parent, max, false);
 	}
 	
-	public TextBox(int id, int x, int y, GuiScreen parent, boolean chatbox) {
+	public TextBox(int id, int x, int y, Screen parent, boolean chatbox) {
 		this(id, x, y, 200, 20, parent, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, GuiScreen parent, int max, boolean chatbox) {
+	public TextBox(int id, int x, int y, Screen parent, int max, boolean chatbox) {
 		this(id, x, y, 200, 20, parent, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, boolean chatbox) {
+	public TextBox(int id, int x, int y, int width, int height, Screen parent, boolean chatbox) {
 		this(id, x, y, width, height, parent, 0, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, GuiScreen parent, int max, boolean chatbox) {
+	public TextBox(int id, int x, int y, int width, int height, Screen parent, int max, boolean chatbox) {
 		super(id, x, y, width, height, parent);
 		this.chatbox = chatbox;
 		this.max = max;

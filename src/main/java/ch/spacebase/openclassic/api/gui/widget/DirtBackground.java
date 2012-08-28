@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -8,7 +8,7 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
  */
 public class DirtBackground extends Widget {
 
-	public DirtBackground(int id, GuiScreen parent) {
+	public DirtBackground(int id, Screen parent) {
 		super(id, 0, 0, 0, 0, parent);
 	}
 

@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.gui.widget.Button;
 
 /**
@@ -10,11 +10,11 @@ public final class StateButton extends Button {
 
 	private String state;
 	
-	public StateButton(int id, int x, int y, GuiScreen parent, String text) {
+	public StateButton(int id, int x, int y, Screen parent, String text) {
 		this(id, x, y, 200, 20, parent, text);
 	}
 	
-	public StateButton(int id, int x, int y, int width, int height, GuiScreen parent, String text) {
+	public StateButton(int id, int x, int y, int width, int height, Screen parent, String text) {
 		super(id, x, y, width, height, parent, text);
 	}
 	

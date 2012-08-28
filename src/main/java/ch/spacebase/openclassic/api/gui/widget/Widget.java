@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 
 /**
  * Represents a GUI widget.
@@ -9,13 +9,13 @@ public abstract class Widget {
 
 	private int id;
 	protected boolean visible = true;
-	protected GuiScreen parent;
+	protected Screen parent;
 	protected int x;
 	protected int y;
 	protected int width;
 	protected int height;
 	
-	public Widget(int id, int x, int y, int width, int height, GuiScreen parent) {
+	public Widget(int id, int x, int y, int width, int height, Screen parent) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -84,7 +84,7 @@ public abstract class Widget {
 	 * Gets this widget's parent.
 	 * @return The widget's parent.
 	 */
-	public GuiScreen getParent() {
+	public Screen getParent() {
 		return this.parent;
 	}
 	
@@ -92,7 +92,7 @@ public abstract class Widget {
 	 * Sets this widget's parent.
 	 * @param screen This widget's new parent.
 	 */
-	public void setParent(GuiScreen screen) {
+	public void setParent(Screen screen) {
 		this.parent = screen;
 	}
 	
@@ -125,17 +125,17 @@ public abstract class Widget {
 	}
 
 	/**
-	 * Called when this widget is attached to a GuiScreen.
-	 * @param screen GuiScreen the widget is being attached to.
+	 * Called when this widget is attached to a Screen.
+	 * @param screen Screen the widget is being attached to.
 	 */
-	public void onAttached(GuiScreen screen) {
+	public void onAttached(Screen screen) {
 	}
 	
 	/**
-	 * Called when this widget is removed from a GuiScreen.
-	 * @param screen GuiScreen the widget is being removed from.
+	 * Called when this widget is removed from a Screen.
+	 * @param screen Screen the widget is being removed from.
 	 */
-	public void onRemoved(GuiScreen screen) {
+	public void onRemoved(Screen screen) {
 	}
 	
 }

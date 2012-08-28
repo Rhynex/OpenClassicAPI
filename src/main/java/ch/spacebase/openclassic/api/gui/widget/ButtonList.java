@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 
 /**
  * Represents a list consisting of buttons.
@@ -19,11 +20,11 @@ public class ButtonList extends Widget {
 	private int pages = 0;
 	private int index = 0;
 	
-	public ButtonList(int id, int parentWidth, int parentHeight, GuiScreen parent) {
+	public ButtonList(int id, int parentWidth, int parentHeight, Screen parent) {
 		this(id, parentWidth, parentHeight, parent, false);
 	}
 	
-	public ButtonList(int id, int parentWidth, int parentHeight, GuiScreen parent, boolean search) {
+	public ButtonList(int id, int parentWidth, int parentHeight, Screen parent, boolean search) {
 		super(id, 0, 0, parentWidth, parentHeight, parent);
 		
 		for (int button = 0; button < 5; button++) {
@@ -96,8 +97,8 @@ public class ButtonList extends Widget {
 			button.setActive(this.index < this.pages);
 			this.getBackButton().setActive(this.index > 0);
 			this.updateContents();
-		} else {
-			this.parent.onButtonListClick(this, button);
+		} else if(this.parent instanceof GuiScreen) {
+			((GuiScreen) this.parent).onButtonListClick(this, button);
 		}
 	}
 	

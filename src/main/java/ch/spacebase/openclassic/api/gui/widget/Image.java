@@ -1,7 +1,7 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
 import ch.spacebase.openclassic.api.block.model.SubTexture;
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -11,7 +11,7 @@ public class Image extends Widget {
 
 	private SubTexture tex;
 	
-	public Image(int id, int x, int y, GuiScreen parent, SubTexture tex) {
+	public Image(int id, int x, int y, Screen parent, SubTexture tex) {
 		super(id, x, y, Math.abs(tex.getX2() - tex.getX1()), Math.abs(tex.getY2() - tex.getY1()), parent);
 	}
 	

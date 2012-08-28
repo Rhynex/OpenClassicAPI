@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api.gui.widget;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -12,11 +13,11 @@ public class Button extends Widget {
 	private String text;
 	private boolean active = true;
 
-	public Button(int id, int x, int y, GuiScreen parent, String text) {
+	public Button(int id, int x, int y, Screen parent, String text) {
 		this(id, x, y, 200, 20, parent, text);
 	}
 	
-	public Button(int id, int x, int y, int width, int height, GuiScreen parent, String text) {
+	public Button(int id, int x, int y, int width, int height, Screen parent, String text) {
 		super(id, x, y, width, height, parent);
 		this.text = text;
 	}
@@ -66,7 +67,9 @@ public class Button extends Widget {
 			}
 		}
 		
-		this.parent.onButtonClick(this);
+		if(this.parent instanceof GuiScreen) {
+			((GuiScreen) this.parent).onButtonClick(this);
+		}
 	}
 
 	@Override

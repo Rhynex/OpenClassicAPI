@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
+import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -8,7 +8,7 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
  */
 public class TranslucentBackground extends Widget {
 
-	public TranslucentBackground(int id, GuiScreen parent) {
+	public TranslucentBackground(int id, Screen parent) {
 		super(id, 0, 0, 0, 0, parent);
 	}
 
