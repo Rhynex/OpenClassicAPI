@@ -9,7 +9,7 @@ public interface ProgressBar {
 	public String getText();
 	
 	/**
-	 * Sets the text of the progress bar for the next setProgress call.
+	 * Sets the text of the progress bar.
 	 * @param text Text to set.
 	 */
 	public void setText(String text);
@@ -21,7 +21,7 @@ public interface ProgressBar {
 	public String getTitle();
 	
 	/**
-	 * Sets the title of the progress bar for the next setProgress call.
+	 * Sets the title of the progress bar.
 	 * @param title Title to set.
 	 */
 	public void setTitle(String title);
@@ -33,9 +33,21 @@ public interface ProgressBar {
 	public int getProgress();
 	
 	/**
-	 * Sets the progress bar's progress and updates the display.
+	 * Sets the progress bar's progress.
 	 * @param progress Progress to set.
 	 */
 	public void setProgress(int progress);
+
+	/**
+	 * Returns true if the progress bar is currently visible.
+	 * @return True if the progress bar is visible.
+	 */
+	public boolean isVisible();
+	
+	/**
+	 * Sets whether the progress bar is visible.
+	 * @param visible Whether the progress bar is visible.
+	 */
+	public void setVisible(boolean visible);
 	
 }

@@ -99,8 +99,20 @@ public class Quad {
 	 * @param z Z to render at.
 	 * @param brightness Brightness to render at.
 	 */
-	public void render(int x, int y, int z, float brightness) {	
+	public void render(float x, float y, float z, float brightness) {	
 		RenderHelper.getHelper().drawQuad(this, x, y, z, brightness);
+	}
+	
+	/**
+	 * Renders the quad at the given scale.
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param z Z to render at.
+	 * @param scale Scale to render at.
+	 * @param brightness Brightness to render at.
+	 */
+	public void renderScaled(float x, float y, float z, float scale, float brightness) {
+		RenderHelper.getHelper().drawScaledQuad(this, x, y, z, scale, brightness);
 	}
 
 	/**

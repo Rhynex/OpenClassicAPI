@@ -62,6 +62,16 @@ public class TextBox extends Widget {
 		this.max = max;
 	}
 	
+	@Override
+	public void onAttached(Screen screen) {
+		InputHelper.getHelper().enableRepeatEvents(true);
+	}
+	
+	@Override
+	public void onRemoved(Screen screen) {
+		InputHelper.getHelper().enableRepeatEvents(false);
+	}
+	
 	/**
 	 * Returns true if the text box has the keyboard's focus.
 	 * @return True if the text box has focus.

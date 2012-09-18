@@ -3,8 +3,6 @@ package ch.spacebase.openclassic.api.block.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.spacebase.openclassic.api.render.RenderHelper;
-
 /**
  * Represents a block's model.
  */
@@ -57,7 +55,10 @@ public class Model {
 	 * @return This model's collision box.
 	 */
 	public BoundingBox getCollisionBox(int x, int y, int z) {
-		return this.collision;
+		if(this.collision == null) return null;
+		BoundingBox bb = this.collision.clone();
+		bb.move(x, y, z);
+		return bb;
 	}
 	
 	/**
@@ -97,7 +98,10 @@ public class Model {
 	 * @return This model's selection box.
 	 */
 	public BoundingBox getSelectionBox(int x, int y, int z) {
-		return this.selection;
+		if(this.selection == null) return null;
+		BoundingBox bb = this.selection.clone();
+		bb.move(x, y, z);
+		return bb;
 	}
 	
 	/**
@@ -137,29 +141,12 @@ public class Model {
 	 * @param brightness Brightness to render at.
 	 * @return Whether anything was rendered.
 	 */
-	public boolean render(int x, int y, int z, float brightness) {
+	public boolean render(float x, float y, float z, float brightness) {
 		for(Quad quad : this.quads) {
 			quad.render(x, y, z, brightness);
 		}
 		
 		return true;
-	}
-
-	/**
-	 * Renders the model with full brightness.
-	 * @param x X to render at.
-	 * @param y Y to render at.
-	 * @param z Z to render at.
-	 */
-	public void renderFullbright(int x, int y, int z) {
-		this.render(x, y, z, 1);
-	}
-	
-	/**
-	 * Renders a "preview" of the model.
-	 */
-	public void renderPreview(float brightness) {
-		RenderHelper.getHelper().renderPreview(this, brightness);
 	}
 	
 	/**
@@ -184,8 +171,22 @@ public class Model {
 	 * @param z Z to render at.
 	 * @param brightness Brightness to render at.
 	 */
-	public void renderAll(int x, int y, int z, float brightness) {
+	public void renderAll(float x, float y, float z, float brightness) {
 		this.render(x, y, z, brightness);
+	}
+
+	/**
+	 * Renders the model at the given scale.
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param z Z to render at.
+	 * @param scale Scale to render at.
+	 * @param brightness Brightness to render at.
+	 */
+	public void renderScaled(float x, float y, float z, float scale, float brightness) {
+		for(Quad quad : this.quads) {
+			quad.renderScaled(x, y, z, scale, brightness);
+		}
 	}
 	
 }

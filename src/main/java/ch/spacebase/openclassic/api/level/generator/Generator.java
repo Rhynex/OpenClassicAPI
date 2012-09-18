@@ -42,7 +42,7 @@ public abstract class Generator {
 			y++;
 		}
 		
-		return new Position(level, x, y + 0.5, z);	
+		return new Position(level, x, y + 0.5f, z);	
 	}
 	
 	public static int coordsToBlockIndex(Level level, int x, int y, int z) {

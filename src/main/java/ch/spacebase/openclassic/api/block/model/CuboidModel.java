@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.block.model;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
+import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -70,14 +71,14 @@ public class CuboidModel extends Model {
 	}
 	
 	@Override
-	public boolean render(int x, int y, int z, float brightness) {
-		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt(x, y, z);
+	public boolean render(float x, float y, float z, float brightness) {
+		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y, (int) z);
 		if(block == null) return false;
 		boolean result = false;
 		
 		for(Quad quad : this.getQuads()) {
 			BlockFace face = quadToFace(this, quad.getId());
-			if (RenderHelper.getHelper().canRenderSide(block, x, y, z, face)) {
+			if (RenderHelper.getHelper().canRenderSide(block, (int) x, (int) y, (int) z, face)) {
 				float mod = 0;
 				switch(face) {
 					case DOWN:
@@ -96,7 +97,7 @@ public class CuboidModel extends Model {
 						break;
 				}
 				
-				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, x + face.getModX(), y + face.getModY(), z + face.getModZ()) * mod);
+				quad.render(x, y, z, block == VanillaBlock.LAVA || block == VanillaBlock.STATIONARY_LAVA ? 100 : RenderHelper.getHelper().getBrightness(block, (int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod);
 				result = true;
 			}
 		}
@@ -105,23 +106,28 @@ public class CuboidModel extends Model {
 	}
 	
 	@Override
-	public void renderAll(int x, int y, int z, float brightness) {
-		super.render(x, y, z, brightness);
+	public void renderAll(float x, float y, float z, float brightness) {
+		this.getQuad(0).render(x, y, z, brightness * 0.5F);
+		this.getQuad(1).render(x, y, z, brightness * 1);
+		this.getQuad(2).render(x, y, z, brightness * 0.8F);
+		this.getQuad(3).render(x, y, z, brightness * 0.8F);
+		this.getQuad(4).render(x, y, z, brightness * 0.6F);
+		this.getQuad(5).render(x, y, z, brightness * 0.6F);
+	}
+	
+	@Override
+	public void renderScaled(float x, float y, float z, float scale, float brightness) {
+		this.getQuad(0).renderScaled(x, y, z, scale, brightness * 0.5F);
+		this.getQuad(1).renderScaled(x, y, z, scale, brightness * 1);
+		this.getQuad(2).renderScaled(x, y, z, scale, brightness * 0.8F);
+		this.getQuad(3).renderScaled(x, y, z, scale, brightness * 0.8F);
+		this.getQuad(4).renderScaled(x, y, z, scale, brightness * 0.6F);
+		this.getQuad(5).renderScaled(x, y, z, scale, brightness * 0.6F);
 	}
 	
 	@Override
 	public String getType() {
 		return "CuboidModel";
-	}
-	
-	@Override
-	public void renderFullbright(int x, int y, int z) {
-		this.getQuad(0).render(x, y, z, 0.5F);
-		this.getQuad(1).render(x, y, z, 1);
-		this.getQuad(2).render(x, y, z, 0.8F);
-		this.getQuad(3).render(x, y, z, 0.8F);
-		this.getQuad(4).render(x, y, z, 0.6F);
-		this.getQuad(5).render(x, y, z, 0.6F);
 	}
 	
 	/**
@@ -131,26 +137,14 @@ public class CuboidModel extends Model {
 	 * @return The BlockFace the quad ID converts to.
 	 */
 	public static BlockFace quadToFace(CuboidModel model, int quad) {
-		if(model instanceof LiquidModel) {
-			switch(quad) {
-			case 0: case 1: return BlockFace.DOWN;
-			case 2: case 3: return BlockFace.UP;
-			case 4: case 5: return BlockFace.WEST;
-			case 6: case 7: return BlockFace.EAST;
-			case 8: case 9: return BlockFace.SOUTH;
-			case 10: case 11: return BlockFace.NORTH;
+		switch(quad) {
+			case 0: return BlockFace.DOWN;
+			case 1: return BlockFace.UP;
+			case 2: return BlockFace.WEST;
+			case 3: return BlockFace.EAST;
+			case 4: return BlockFace.SOUTH;
+			case 5: return BlockFace.NORTH;
 			default: return null;
-			}
-		} else {
-			switch(quad) {
-				case 0: return BlockFace.DOWN;
-				case 1: return BlockFace.UP;
-				case 2: return BlockFace.WEST;
-				case 3: return BlockFace.EAST;
-				case 4: return BlockFace.SOUTH;
-				case 5: return BlockFace.NORTH;
-				default: return null;
-			}
 		}
 	}
 	

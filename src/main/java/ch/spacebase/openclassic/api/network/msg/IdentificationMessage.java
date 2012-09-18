@@ -5,12 +5,12 @@ package ch.spacebase.openclassic.api.network.msg;
  */
 public class IdentificationMessage extends Message {
 	
-	private int protocolVersion;
+	private byte protocolVersion;
 	private String usernameOrServerName;
 	private String verificationKeyOrMotd;
 	private byte op;
 	
-	public IdentificationMessage(int protocolVersion, String usernameOrServerName, String verificationKeyOrMotd, byte op) {
+	public IdentificationMessage(byte protocolVersion, String usernameOrServerName, String verificationKeyOrMotd, byte op) {
 		this.protocolVersion = protocolVersion;
 		this.usernameOrServerName = usernameOrServerName;
 		this.verificationKeyOrMotd = verificationKeyOrMotd;
@@ -21,7 +21,7 @@ public class IdentificationMessage extends Message {
 	 * Gets the sent/recieved protocol version.
 	 * @return The protocol version.
 	 */
-	public int getProtocolVersion() {
+	public byte getProtocolVersion() {
 		return this.protocolVersion;
 	}
 	

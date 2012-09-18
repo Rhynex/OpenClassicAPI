@@ -4,17 +4,17 @@ import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
- * A background made up of repeating dirt blocks, as seen in the main menu.
+ * The default background of the client implementation.
  */
-public class DirtBackground extends Widget {
+public class DefaultBackground extends Widget {
 
-	public DirtBackground(int id, Screen parent) {
+	public DefaultBackground(int id, Screen parent) {
 		super(id, 0, 0, 0, 0, parent);
 	}
 
 	@Override
 	public void render() {
-		RenderHelper.getHelper().drawDirtBG();
+		RenderHelper.getHelper().drawDefaultBG();
 	}
 
 }

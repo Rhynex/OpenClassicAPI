@@ -31,6 +31,11 @@ public class Constants {
 	public static final int TICKS_PER_SECOND = 20;
 	
 	/**
+	 * Number of milliseconds between each tick.
+	 */
+	public static final int TICK_MILLISECONDS = 1000 / TICKS_PER_SECOND;
+	
+	/**
 	 * Number of milliseconds between each physics tick
 	 */
 	public static final int PHYSICS_PER_SECOND = 10;
@@ -44,6 +49,11 @@ public class Constants {
 	 * Represents the packet code for a player who is an op.
 	 */
 	public static final byte OP = 0x64;
+
+	/**
+	 * The distance between the player's feet and the player's eyes.
+	 */
+	public static final float FOOT_EYE_DISTANCE = 1.59375f;
 	
 	/**
 	 * Default private constructor

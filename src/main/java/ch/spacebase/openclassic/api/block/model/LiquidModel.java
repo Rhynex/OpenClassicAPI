@@ -78,13 +78,13 @@ public class LiquidModel extends CubeModel {
 		super.addQuad(quad);
 		this.quadCount++;
 		
-		Quad q = new Quad(this.quadCount, quad.getTexture());
+		/* Quad q = new Quad(this.quadCount, quad.getTexture());
 		q.addVertex(0, quad.getVertex(3));
 		q.addVertex(1, quad.getVertex(2));
 		q.addVertex(2, quad.getVertex(1));
 		q.addVertex(3, quad.getVertex(0));
 		super.addQuad(q);
-		this.quadCount++;
+		this.quadCount++; */
 	}
 	
 	public void addTopQuad(Quad quad) {
@@ -93,14 +93,14 @@ public class LiquidModel extends CubeModel {
 		quad.setParent(this);
 		this.quadCount++;
 		
-		Quad q = new Quad(this.quadCount, quad.getTexture());
+		/* Quad q = new Quad(this.quadCount, quad.getTexture());
 		q.addVertex(0, quad.getVertex(2));
 		q.addVertex(1, quad.getVertex(3));
 		q.addVertex(2, quad.getVertex(0));
 		q.addVertex(3, quad.getVertex(1));
 		this.topQuads.add(quad.getId(), quad);
 		quad.setParent(this);
-		this.quadCount++;
+		this.quadCount++; */
 	}
 	
 	@Override
@@ -113,20 +113,21 @@ public class LiquidModel extends CubeModel {
 	}
 	
 	@Override
-	public boolean render(int x, int y, int z, float brightness) {
-		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt(x, y, z);
+	public boolean render(float x, float y, float z, float brightness) {
+		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y, (int) z);
 		if(block == null) return false;
 		boolean result = false;
 		
 		List<Quad> quads = this.getQuads();
-		if(OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z).isLiquid()) {
+		if(OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y + 1, (int) z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y + 1, (int) z).isLiquid()) {
 			quads = this.topQuads;
 		}
 		
+		RenderHelper.getHelper().setCulling(false);
 		int count = 0;
 		for(Quad quad : quads) {
 			BlockFace face = quadToFace(this, count);
-			if (RenderHelper.getHelper().canRenderSide(block, x, y, z, face)) {
+			if (RenderHelper.getHelper().canRenderSide(block, (int) x, (int) y, (int) z, face)) {
 				float mod = 0;
 				switch(face) {
 					case DOWN:
@@ -145,13 +146,14 @@ public class LiquidModel extends CubeModel {
 						break;
 				}
 				
-				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, x + face.getModX(), y + face.getModY(), z + face.getModZ()) * mod);
+				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, (int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod);
 				result = true;
 			}
 			
 			count++;
 		}
 		
+		RenderHelper.getHelper().setCulling(true);
 		return result;
 	}
 

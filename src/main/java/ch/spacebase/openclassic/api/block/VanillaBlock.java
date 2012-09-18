@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api.block;
 
 import ch.spacebase.openclassic.api.block.model.CubeModel;
 import ch.spacebase.openclassic.api.block.model.CuboidModel;
+import ch.spacebase.openclassic.api.block.model.EmptyModel;
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.PlantModel;
 import ch.spacebase.openclassic.api.block.model.LiquidModel;
@@ -12,7 +13,7 @@ import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
  */
 public enum VanillaBlock implements BlockType {
 
-	AIR((byte) 0, StepSound.NONE, false),
+	AIR((byte) 0, StepSound.NONE, new EmptyModel(), false),
 	STONE((byte) 1, StepSound.STONE, 1),
 	GRASS((byte) 2, StepSound.GRASS, new CubeModel(TERRAIN, new int[] { 2, 0, 3, 3, 3, 3 })),
 	DIRT((byte) 3, StepSound.GRAVEL, 2),
@@ -20,9 +21,9 @@ public enum VanillaBlock implements BlockType {
 	WOOD((byte) 5, StepSound.WOOD, 4),
 	SAPLING((byte) 6, StepSound.GRASS, new PlantModel(TERRAIN, 15)),
 	BEDROCK((byte) 7, StepSound.STONE, 17),
-	WATER((byte) 8, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
+	WATER((byte) 8, StepSound.NONE, new LiquidModel(TERRAIN, 14), 5, true, true),
 	STATIONARY_WATER((byte) 9, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
-	LAVA((byte) 10, StepSound.NONE, new LiquidModel(TERRAIN, 30), 5, true, true),
+	LAVA((byte) 10, StepSound.NONE, new LiquidModel(TERRAIN, 30), 20, true, true),
 	STATIONARY_LAVA((byte) 11, StepSound.NONE, new LiquidModel(TERRAIN, 30), true, true),
 	SAND((byte) 12, StepSound.SAND, 18),
 	GRAVEL((byte) 13, StepSound.GRAVEL, 19),
@@ -77,10 +78,6 @@ public enum VanillaBlock implements BlockType {
 	
 	private VanillaBlock(byte id, StepSound sound, Model model) {
 		this(id, sound, model, 0, true, false);
-	}
-	
-	private VanillaBlock(byte id, StepSound sound, boolean opaque) {
-		this(id, sound, 0, opaque);
 	}
 	
 	private VanillaBlock(byte id, StepSound sound, int texture, boolean opaque) {

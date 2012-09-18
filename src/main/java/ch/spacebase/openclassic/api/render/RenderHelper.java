@@ -1,8 +1,9 @@
 package ch.spacebase.openclassic.api.render;
 
+import java.awt.image.BufferedImage;
+
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.Quad;
 import ch.spacebase.openclassic.api.block.model.SubTexture;
 import ch.spacebase.openclassic.api.block.model.Texture;
@@ -49,7 +50,7 @@ public abstract class RenderHelper {
 	/**
 	 * Draws the dirt block background.
 	 */
-	public abstract void drawDirtBG();
+	public abstract void drawDefaultBG();
 	
 	/**
 	 * Renders the given text at the given position with the X as the center.
@@ -57,7 +58,7 @@ public abstract class RenderHelper {
 	 * @param x X to render at.
 	 * @param y Y to render at.
 	 */
-	public abstract void renderText(String text, int x, int y);
+	public abstract void renderText(String text, float x, float y);
 	
 	/**
 	 * Renders the given text at the given position.
@@ -66,7 +67,7 @@ public abstract class RenderHelper {
 	 * @param y Y to render at.
 	 * @param Whether the X is the center or not.
 	 */
-	public abstract void renderText(String text, int x, int y, boolean xCenter);
+	public abstract void renderText(String text, float x, float y, boolean xCenter);
 	
 	/**
 	 * Renders the given text at the given position with the X as the center.
@@ -75,7 +76,7 @@ public abstract class RenderHelper {
 	 * @param y Y to render at.
 	 * @param color Color to render the text.
 	 */
-	public abstract void renderText(String text, int x, int y, int color);
+	public abstract void renderText(String text, float x, float y, int color);
 	
 	/**
 	 * Renders the given text at the given position.
@@ -85,17 +86,53 @@ public abstract class RenderHelper {
 	 * @param color Color to render the text.
 	 * @param xCenter Whether the X is the center or not.
 	 */
-	public abstract void renderText(String text, int x, int y, int color, boolean xCenter);
+	public abstract void renderText(String text, float x, float y, int color, boolean xCenter);
+	
+	/**
+	 * Renders the given text at the given position with the X as the center and no shadow.
+	 * @param text Text to render
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 */
+	public abstract void renderTextNoShadow(String text, float x, float y);
+	
+	/**
+	 * Renders the given text at the given position with no shadow.
+	 * @param text Text to render
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param Whether the X is the center or not.
+	 */
+	public abstract void renderTextNoShadow(String text, float x, float y, boolean xCenter);
+	
+	/**
+	 * Renders the given text at the given position with the X as the center and no shadow.
+	 * @param text Text to render
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param color Color to render the text.
+	 */
+	public abstract void renderTextNoShadow(String text, float x, float y, int color);
+	
+	/**
+	 * Renders the given text at the given position with no shadow.
+	 * @param text Text to render
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param color Color to render the text.
+	 * @param xCenter Whether the X is the center or not.
+	 */
+	public abstract void renderTextNoShadow(String text, float x, float y, int color, boolean xCenter);
 
 	/**
 	 * Draws a box with the given corners and color.
 	 * @param x1 X of the first corner.
 	 * @param y1 Y of the first corner.
-	 * @param x2 X of the second corner.
-	 * @param y2 Y of the second corner.
+	 * @param f X of the second corner.
+	 * @param g Y of the second corner.
 	 * @param color Color of the box.
 	 */
-	public abstract void drawBox(int x1, int y1, int x2, int y2, int color);
+	public abstract void drawBox(float x1, float y1, float x2, float y2, int color);
 	
 	/**
 	 * Colors the specified area, fading into the given color.
@@ -117,18 +154,6 @@ public abstract class RenderHelper {
 	 * @param fadeTo Color to fade into.
 	 */
 	public abstract void color(int x1, int y1, int x2, int y2, int color, int fadeTo);
-	
-	/**
-	 * Draws the given part of the currently binded image at the given coordinates. (note: use bindTexture before calling)
-	 * @param x X to draw at.
-	 * @param y Y to draw at.
-	 * @param z Z to draw at.
-	 * @param imgX X to start at in the image.
-	 * @param imgY Y to start at in the image.
-	 * @param width Width of the drawn image.
-	 * @param height Height of the drawn image.
-	 */
-	public abstract void drawImage(int x, int y, int z, int imgX, int imgY, int width, int height);
 
 	/**
 	 * Tells OpenGL to draw the specified color.
@@ -175,7 +200,7 @@ public abstract class RenderHelper {
 	 * @param y Y to draw at.
 	 * @param z Z to draw at.
 	 */
-	public abstract void drawQuad(Quad quad, int x, int y, int z);
+	public abstract void drawQuad(Quad quad, float x, float y, float z);
 	
 	/**
 	 * Draws a quad.
@@ -185,15 +210,16 @@ public abstract class RenderHelper {
 	 * @param z Z to draw at.
 	 * @param brightness Brightness to draw at.
 	 */
-	public abstract void drawQuad(Quad quad, int x, int y, int z, float brightness);
+	public abstract void drawQuad(Quad quad, float x, float y, float z, float brightness);
 
 	/**
 	 * Draws a texture.
 	 * @param texture Texture to draw
 	 * @param x X to draw at.
 	 * @param y Y to draw at.
+	 * @param brightness Brightness to draw at.
 	 */
-	public abstract void drawTexture(Texture texture, int x, int y);
+	public abstract void drawTexture(Texture texture, float x, float y, float brightness);
 	
 	/**
 	 * Draws a texture.
@@ -201,16 +227,18 @@ public abstract class RenderHelper {
 	 * @param x X to draw at.
 	 * @param y Y to draw at.
 	 * @param z Z to draw at.
+	 * @param brightness Brightness to draw at.
 	 */
-	public abstract void drawTexture(Texture texture, int x, int y, int z);
+	public abstract void drawTexture(Texture texture, float x, float y, float z, float brightness);
 	
 	/**
 	 * Draws a subtexture.
 	 * @param texture SubTexture to draw
 	 * @param x X to draw at.
 	 * @param y Y to draw at.
+	 * @param brightness Brightness to draw at.
 	 */
-	public abstract void drawSubTex(SubTexture texture, int x, int y);
+	public abstract void drawSubTex(SubTexture texture, float x, float y, float brightness);
 	
 	/**
 	 * Draws a subtexture.
@@ -218,8 +246,22 @@ public abstract class RenderHelper {
 	 * @param x X to draw at.
 	 * @param y Y to draw at.
 	 * @param z Z to draw at.
+	 * @param brightness Brightness to draw at.
 	 */
-	public abstract void drawSubTex(SubTexture texture, int x, int y, int z);
+	public abstract void drawSubTex(SubTexture texture, float x, float y, float z, float brightness);
+	
+	/**
+	 * Draws a subtexture.
+	 * @param texture SubTexture to draw
+	 * @param x X to draw at.
+	 * @param y Y to draw at.
+	 * @param z Z to draw at.
+	 * @param scale Scale to draw with.
+	 * @param r Red to color with.
+	 * @param g Green to color with.
+	 * @param b Blue to color with.
+	 */
+	public abstract void drawSubTex(SubTexture texture, float x, float y, float z, float scale, float r, float g, float b);
 	
 	/**
 	 * Returns true if the side of the block can be rendered.
@@ -243,16 +285,10 @@ public abstract class RenderHelper {
 	public abstract float getBrightness(BlockType main, int x, int y, int z);
 	
 	/**
-	 * Renders a preview of the model as seen in the player's hand.
-	 * @param model Model to render.
-	 */
-	public abstract void renderPreview(Model model, float brightness);
-	
-	/**
 	 * Gets the width of a string.
 	 * @return The width of a string.
 	 */
-	public abstract int getStringWidth(String string);
+	public abstract float getStringWidth(String string);
 
 	/**
 	 * Draws a rotated block like in the quickbar.
@@ -270,5 +306,39 @@ public abstract class RenderHelper {
 	 * @param Scale to draw at.
 	 */
 	public abstract void drawRotatedBlock(int x, int y, BlockType block, float scale);
+	
+	/**
+	 * Draws the given BufferedImage.
+	 * @param image BufferedImage to draw.
+	 * @param x X to draw at.
+	 * @param y Y to draw at.
+	 */
+	public abstract void drawImage(BufferedImage image, int x, int y);
+	
+	/**
+	 * Draws the given BufferedImage.
+	 * @param image BufferedImage to draw.
+	 * @param x X to draw at.
+	 * @param y Y to draw at.
+	 * @param z Z to draw at.
+	 */
+	public abstract void drawImage(BufferedImage image, int x, int y, int z);
+	
+	/**
+	 * Draws a quad at the given scale.
+	 * @param quad Quad to draw.
+	 * @param x X to draw at.
+	 * @param y Y to draw at.
+	 * @param z Z to draw at.
+	 * @param scale Scale to draw at.
+	 * @param brightness Brightness to draw at.
+	 */
+	public abstract void drawScaledQuad(Quad quad, float x, float y, float z, float scale, float brightness);
+
+	/**
+	 * Sets whether backface culling is turned on.
+	 * @param enabled Whether culling is enabled.
+	 */
+	public abstract void setCulling(boolean enabled);
 	
 }

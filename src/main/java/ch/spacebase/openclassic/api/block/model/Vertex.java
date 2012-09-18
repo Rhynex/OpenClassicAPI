@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.block.model;
 
+import ch.spacebase.openclassic.api.math.Vector;
+
 /**
  * Represents a vertex.
  */
@@ -37,6 +39,14 @@ public class Vertex {
 	 */
 	public float getZ() {
 		return this.z;
+	}
+	
+	/**
+	 * Returns this vertex as a vector.
+	 * @return This vertex as a vector.
+	 */
+	public Vector toVector() {
+		return new Vector(this.x, this.y, this.z);
 	}
 	
 }

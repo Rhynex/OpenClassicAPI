@@ -11,7 +11,7 @@ public class Label extends Widget {
 	private String text = "";
 	
 	public Label(int id, int x, int y, Screen parent, String text) {
-		super(id, x, y, RenderHelper.getHelper().getStringWidth(text), 8, parent);
+		super(id, x, y, (int) RenderHelper.getHelper().getStringWidth(text), 8, parent);
 		this.text = text;
 	}
 	
@@ -29,7 +29,7 @@ public class Label extends Widget {
 	 */
 	public void setText(String text) {
 		this.text = text;
-		this.width = RenderHelper.getHelper().getStringWidth(text);
+		this.width = (int) RenderHelper.getHelper().getStringWidth(text);
 	}
 
 	@Override

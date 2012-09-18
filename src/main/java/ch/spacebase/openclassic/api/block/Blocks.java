@@ -12,8 +12,13 @@ import ch.spacebase.openclassic.api.event.block.BlockUnregisterEvent;
  */
 public class Blocks {
 	
-	//private static final SortedMap<Byte, BlockType> registry = new TreeMap<Byte, BlockType>();
 	private static final BlockType registry[] = new BlockType[256];
+	
+	static {
+		// make sure enum is loaded.
+		@SuppressWarnings("unused")
+		VanillaBlock v = VanillaBlock.STONE;
+	}
 	
 	/**
 	 * Gets the block with the given ID.

@@ -61,6 +61,14 @@ public class Texture {
 	}
 	
 	/**
+	 * Sets the texture file of this texture.
+	 * @param path Path of the texture file.
+	 */
+	public void setTexture(String path) {
+		this.texture = path;
+	}
+	
+	/**
 	 * Returns true if this texture is in the minecraft client jar file.
 	 * @return True if the texture is in the minecraft jar.
 	 */

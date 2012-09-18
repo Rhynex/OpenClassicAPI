@@ -11,7 +11,7 @@ public abstract class MainScreen extends Screen {
 	 * Gets the last player clicked on the playerlist screen.
 	 * @return The last clicked player.
 	 */
-	public abstract String getClickedPlayer();
+	public abstract String getHoveredPlayer();
 	
 	/**
 	 * Adds a chat message to the chat history.

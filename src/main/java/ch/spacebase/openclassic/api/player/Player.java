@@ -75,7 +75,7 @@ public interface Player extends Sender {
 	 * @param y Y to move to.
 	 * @param z Z to move to.
 	 */
-	public void moveTo(double x, double y, double z);
+	public void moveTo(float x, float y, float z);
 	
 	/**
 	 * Moves the player to the given coordinates and rotation.
@@ -85,7 +85,7 @@ public interface Player extends Sender {
 	 * @param yaw Yaw to move to.
 	 * @param pitch Pitch to move to.
 	 */
-	public void moveTo(double x, double y, double z, byte yaw, byte pitch);
+	public void moveTo(float x, float y, float z, float yaw, float pitch);
 	
 	/**
 	 * Moves the player to the given level and coordinates.
@@ -94,7 +94,7 @@ public interface Player extends Sender {
 	 * @param y Y to move to.
 	 * @param z Z to move to.
 	 */
-	public void moveTo(Level level, double x, double y, double z);
+	public void moveTo(Level level, float x, float y, float z);
 	
 	/**
 	 * Moves the player to the given level, coordinates, and rotation.
@@ -105,7 +105,7 @@ public interface Player extends Sender {
 	 * @param yaw Yaw to move to.
 	 * @param pitch Pitch to move to.
 	 */
-	public void moveTo(Level level, double x, double y, double z, byte yaw, byte pitch);
+	public void moveTo(Level level, float x, float y, float z, float yaw, float pitch);
 	
 	/**
 	 * Gets the player's group.

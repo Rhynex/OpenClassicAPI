@@ -19,7 +19,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.util.math.MathHelper;
+import ch.spacebase.openclassic.api.math.MathHelper;
 
 /**
  * Represents a YAML configuration.

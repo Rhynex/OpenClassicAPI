@@ -3,58 +3,58 @@ package ch.spacebase.openclassic.api.block.model;
 /**
  * Represents a part of a bigger texture.
  */
-public class SubTexture {
+public class SubTexture implements Cloneable {
 	
 	private Texture parent;
 	private int id;
-	private int x1;
-	private int y1;
-	private int x2;
-	private int y2;
+	private float x;
+	private float y;
+	private float xLength;
+	private float yLength;
 
-	public SubTexture(Texture parent, int id, int x, int y, int length) {
+	public SubTexture(Texture parent, int id, float x, float y, float length) {
 		this(parent, id, x, y, length, length);
 	}
 
-	public SubTexture(Texture parent, int id, int x, int y, int xLength, int yLength) {
+	public SubTexture(Texture parent, int id, float x, float y, float xLength, float yLength) {
 		this.parent = parent;
 		this.id = id;
-		this.x1 = x;
-		this.x2 = x + xLength;
-		this.y1 = y;
-		this.y2 = y + yLength;
+		this.x = x;
+		this.y = y;
+		this.xLength = xLength;
+		this.yLength = yLength;
 	}
 
 	/**
 	 * Gets the X of the SubTexture's first point.
 	 * @return The X of the first point.
 	 */
-	public int getX1() {
-		return this.x1;
+	public float getX1() {
+		return this.x;
 	}
 
 	/**
 	 * Gets the Y of the SubTexture's first point.
 	 * @return The Y of the first point.
 	 */
-	public int getY1() {
-		return this.y1;
+	public float getY1() {
+		return this.y;
 	}
 
 	/**
 	 * Gets the X of the SubTexture's second point.
 	 * @return The X of the second point.
 	 */
-	public int getX2() {
-		return this.x2;
+	public float getX2() {
+		return this.x + this.xLength;
 	}
 
 	/**
 	 * Gets the Y of the SubTexture's second point.
 	 * @return The Y of the second point.
 	 */
-	public int getY2() {
-		return this.y2;
+	public float getY2() {
+		return this.y + this.yLength;
 	}
 
 	/**
@@ -71,6 +71,15 @@ public class SubTexture {
 	 */
 	public int getId() {
 		return this.id;
+	}
+	
+	public SubTexture clone() {
+		return new SubTexture(this.parent, this.id, this.x, this.y, this.xLength, this.yLength);
+	}
+	
+	@Override
+	public String toString() {
+		return "SubTexture{parent=" + this.parent.getTexture() + ",id=" + this.id + ",x=" + this.x + ",y=" + this.y + ",xLength=" + this.xLength + ",yLength=" + this.yLength + "}";
 	}
 	
 }

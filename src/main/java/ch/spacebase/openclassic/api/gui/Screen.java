@@ -30,6 +30,8 @@ public abstract class Screen {
 	 */
 	public void attachWidget(Widget widget) {
 		this.widgets.add(widget);
+		widget.setParent(this);
+		widget.onAttached(this);
 	}
 	
 	/**
@@ -38,7 +40,9 @@ public abstract class Screen {
 	 */
 	public void removeWidget(int id) {
 		for(Widget widget : this.widgets) {
-			if(widget.getId() == id) this.removeWidget(widget);
+			if(widget.getId() == id) {
+				this.removeWidget(widget);
+			}
 		}
 	}
 	
@@ -56,6 +60,11 @@ public abstract class Screen {
 	 * Clears the widget list.
 	 */
 	public void clearWidgets() {
+		for(Widget widget : this.widgets) {
+			widget.setParent(null);
+			widget.onRemoved(this);
+		}
+		
 		this.widgets.clear();
 	}
 	

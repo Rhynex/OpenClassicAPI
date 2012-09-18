@@ -28,6 +28,12 @@ public interface Level {
 	public void removePlayer(String player);
 	
 	/**
+	 * Removes a player from this level.
+	 * @param id ID of the player to remove.
+	 */
+	public void removePlayer(byte id);
+	
+	/**
 	 * Gets whether physics are enabled on this world.
 	 * @return True if physics are enabled.
 	 */
@@ -157,9 +163,18 @@ public interface Level {
 	 * Gets the highest block Y at the given X and Z.
 	 * @param x X to check.
 	 * @param z Z to check.
-	 * @return The Y of the heighest non-air block.
+	 * @return The Y of the highest non-air block.
 	 */
 	public int getHighestBlockY(int x, int z);
+	
+	/**
+	 * Gets the highest block Y below the given Y at the given X and Z.
+	 * @param x X to check.
+	 * @param z Z to check.
+	 * @param max Maximum Y of the block.
+	 * @return The Y of the highest non-air block below the given Y.
+	 */
+	public int getHighestBlockY(int x, int z, int max);
 	
 	/**
 	 * Returns true if there are no higher blocks at the given X and Z than the one at the given Y.
@@ -258,12 +273,6 @@ public interface Level {
 	 * @param generating Whether the level is generating.
 	 */
 	public void setGenerating(boolean generating);
-	
-	/**
-	 * Returns true if tree physics are enabled.
-	 * @return True if tree physics are enabled.
-	 */
-	public boolean treePhysics();
 	
 	/**
 	 * Sends a network message to all players in the level.

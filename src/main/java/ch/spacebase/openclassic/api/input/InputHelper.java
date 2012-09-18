@@ -54,5 +54,11 @@ public abstract class InputHelper {
 	 * Returns mouse focus to the MainScreen.
 	 */
 	public abstract void grabMouse();
+
+	/**
+	 * Sets whether keyboard repeat events are enabled.
+	 * @param enabled Whether keyboard repeat events are enabled.
+	 */
+	public abstract void enableRepeatEvents(boolean enabled);
 	
 }
