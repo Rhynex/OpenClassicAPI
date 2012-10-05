@@ -97,7 +97,7 @@ public final class HeartbeatManager {
 		URL url = null;
 		
 		try {
-			url = new URL("http://minecraft.net/heartbeat.jsp?port=" + OpenClassic.getServer().getPort() + "&max=" + OpenClassic.getServer().getMaxPlayers() + "&name=" + URLEncoder.encode(Color.stripColor(OpenClassic.getServer().getServerName()), "UTF-8") + "&public=" + OpenClassic.getServer().isPublic() + "&version=" + Constants.PROTOCOL_VERSION + "&salt=" + salt + "&users=" + OpenClassic.getServer().getPlayers().size());
+			url = new URL("https://minecraft.net/heartbeat.jsp?port=" + OpenClassic.getServer().getPort() + "&max=" + OpenClassic.getServer().getMaxPlayers() + "&name=" + URLEncoder.encode(Color.stripColor(OpenClassic.getServer().getServerName()), "UTF-8") + "&public=" + OpenClassic.getServer().isPublic() + "&version=" + Constants.PROTOCOL_VERSION + "&salt=" + salt + "&users=" + OpenClassic.getServer().getPlayers().size());
 		} catch(MalformedURLException e) {
 			OpenClassic.getLogger().severe("Malformed URL while attempting minecraft.net heartbeat?");
 			return;
