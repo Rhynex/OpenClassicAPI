@@ -3,7 +3,7 @@ package ch.spacebase.openclassic.api.block;
 import java.util.Arrays;
 import java.util.List;
 
-import ch.spacebase.openclassic.api.event.EventFactory;
+import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.event.block.BlockRegisterEvent;
 import ch.spacebase.openclassic.api.event.block.BlockUnregisterEvent;
 
@@ -34,7 +34,7 @@ public class Blocks {
 	 * @param block Block to register.
 	 */
 	public static void register(BlockType block) {
-		EventFactory.callEvent(new BlockRegisterEvent(block));
+		OpenClassic.getGame().getEventManager().dispatch(new BlockRegisterEvent(block));
 		registry[block.getId()] = block;
 	}
 	
@@ -43,7 +43,7 @@ public class Blocks {
 	 * @param id ID of the Block to unregister.
 	 */
 	public static void unregister(int id) {
-		EventFactory.callEvent(new BlockUnregisterEvent(fromId(id)));
+		OpenClassic.getGame().getEventManager().dispatch(new BlockUnregisterEvent(fromId(id)));
 		registry[id] = null;
 	}
 	

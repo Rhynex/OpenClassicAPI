@@ -59,6 +59,11 @@ public class Constants {
 	 * The URL of the Minecraft website.
 	 */
 	public static final String MINECRAFT_URL = "https://minecraft.net/";
+
+	/**
+	 * The player's eye height relative to their Y coordinate.
+	 */
+	public static final float EYE_HEIGHT = 1.62f;
 	
 	/**
 	 * Default private constructor

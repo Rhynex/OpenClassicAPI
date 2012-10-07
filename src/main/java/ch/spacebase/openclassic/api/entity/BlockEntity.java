@@ -1,8 +1,8 @@
 package ch.spacebase.openclassic.api.entity;
 
+import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
-import ch.spacebase.openclassic.api.event.EventFactory;
 import ch.spacebase.openclassic.api.event.entity.EntityBlockRemoveEvent;
 import ch.spacebase.openclassic.api.event.entity.EntityBlockSetEvent;
 import ch.spacebase.openclassic.api.event.entity.EntityMoveEvent;
@@ -86,14 +86,14 @@ public class BlockEntity {
 		if(this.controller == null) return;
 		if(pos == null) return;
 		
-		EntityMoveEvent event = EventFactory.callEvent(new EntityMoveEvent(this, this.pos, pos));
+		EntityMoveEvent event = OpenClassic.getGame().getEventManager().dispatch(new EntityMoveEvent(this, this.pos, pos));
 		if(event.isCancelled()) 
 			return;
 		
-		if(EventFactory.callEvent(new EntityBlockRemoveEvent(this, BlockRemoveCause.PLAYER, this.pos.getLevel().getBlockAt(this.pos))).isCancelled() || !this.controller.onBlockRemoval(BlockRemoveCause.POSITION_CHANGE, this.pos.getLevel().getBlockAt(this.pos)))
+		if(OpenClassic.getGame().getEventManager().dispatch(new EntityBlockRemoveEvent(this, BlockRemoveCause.PLAYER, this.pos.getLevel().getBlockAt(this.pos))).isCancelled() || !this.controller.onBlockRemoval(BlockRemoveCause.POSITION_CHANGE, this.pos.getLevel().getBlockAt(this.pos)))
 			return;
 		
-		if(EventFactory.callEvent(new EntityBlockSetEvent(this, pos.getLevel().getBlockAt(pos))).isCancelled() || !this.controller.onBlockSet(pos.getLevel().getBlockAt(pos)))
+		if(OpenClassic.getGame().getEventManager().dispatch(new EntityBlockSetEvent(this, pos.getLevel().getBlockAt(pos))).isCancelled() || !this.controller.onBlockSet(pos.getLevel().getBlockAt(pos)))
 			return;
 		
 		this.pos.getLevel().setBlockAt(event.getFrom(), VanillaBlock.AIR);

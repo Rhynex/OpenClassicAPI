@@ -8,6 +8,7 @@ import ch.spacebase.openclassic.api.command.Command;
 import ch.spacebase.openclassic.api.command.CommandExecutor;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.event.EventManager;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.LevelInfo;
 import ch.spacebase.openclassic.api.level.generator.Generator;
@@ -28,6 +29,12 @@ public interface Game {
 	 * @return The game's package manager.
 	 */
 	public PackageManager getPackageManager();
+	
+	/**
+	 * Gets the game's event manager.
+	 * @return The game's event manager.
+	 */
+	public EventManager getEventManager();
 	
 	/**
 	 * Gets the game's scheduler.

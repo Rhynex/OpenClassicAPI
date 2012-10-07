@@ -5,6 +5,7 @@ import java.util.List;
 
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.command.Sender;
+import ch.spacebase.openclassic.api.component.ComponentHolder;
 import ch.spacebase.openclassic.api.data.NBTData;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.permissions.Group;
@@ -13,7 +14,7 @@ import ch.spacebase.openclassic.api.plugin.RemotePluginInfo;
 /**
  * Represents a player.
  */
-public interface Player extends Sender {
+public interface Player extends Sender, ComponentHolder {
 
 	/**
 	 * Gets the player's network session.

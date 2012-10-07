@@ -8,8 +8,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
@@ -21,8 +19,6 @@ import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.Server;
-import ch.spacebase.openclassic.api.event.EventFactory;
-import ch.spacebase.openclassic.api.event.Listener;
 import ch.spacebase.openclassic.api.event.plugin.PluginDisableEvent;
 import ch.spacebase.openclassic.api.event.plugin.PluginEnableEvent;
 import ch.spacebase.openclassic.api.util.io.JarFilter;
@@ -33,7 +29,6 @@ import ch.spacebase.openclassic.api.util.io.JarFilter;
 public class PluginManager {
 	
 	private List<Plugin> plugins = new ArrayList<Plugin>();
-	private Map<Listener, Plugin> listeners = new HashMap<Listener, Plugin>();
 
 	/**
 	 * Loads plugins with the specified load order step.
@@ -137,7 +132,7 @@ public class PluginManager {
 		plugin.onEnable();
 		
 		OpenClassic.getLogger().info(plugin.getDescription().getFullName() + " has been enabled!");
-		EventFactory.callEvent(new PluginEnableEvent(plugin));
+		OpenClassic.getGame().getEventManager().dispatch(new PluginEnableEvent(plugin));
 		
 		for(Plugin p : this.plugins) {
 			if(!p.isEnabled()) {
@@ -174,17 +169,13 @@ public class PluginManager {
 		OpenClassic.getLogger().info(Color.GREEN + "Disabling " + plugin.getDescription().getFullName() + "...");
 		plugin.setEnabled(false);
 		plugin.onDisable();
-		for(Listener listener : this.listeners.keySet()) {
-			if(this.listeners.get(listener).getDescription().getName().equals(plugin.getDescription().getName())) {
-				this.listeners.remove(listener);
-			}
-		}
+		OpenClassic.getGame().getEventManager().unregisterListeners(plugin);
 		
 		OpenClassic.getGame().unregisterCommands(plugin);
 		OpenClassic.getGame().unregisterExecutors(plugin);
 		
 		OpenClassic.getLogger().info(plugin.getDescription().getFullName() + " has been disabled!");
-		EventFactory.callEvent(new PluginDisableEvent(plugin));
+		OpenClassic.getGame().getEventManager().dispatch(new PluginDisableEvent(plugin));
 		
 		for(Plugin p : this.plugins) {
 			if(p.isEnabled()) {
@@ -222,15 +213,6 @@ public class PluginManager {
 		}
 		
 		return null;
-	}
-	
-	/**
-	 * Gets the plugin which the listener belongs to, if it is registered.
-	 * @param listen Listener that belongs to the plugin.
-	 * @return The plugin it belongs to.
-	 */
-	public Plugin getPlugin(Listener listen) {
-		return this.listeners.get(listen);
 	}
 	
 	/**
@@ -287,40 +269,6 @@ public class PluginManager {
                 }
             }
         }
-	}
-	
-	/**
-	 * Gets a list of all registered listeners.
-	 * @return A list of all listeners.
-	 */
-	public Collection<Listener> getListeners() {
-		return this.listeners.keySet();
-	}
-	
-	/**
-	 * Gets a list of all listeners registered to the given plugin.
-	 * @param plugin Plugin to get listeners for.
-	 * @return Listeners registered to the plugin.
-	 */
-	public List<Listener> getListeners(String plugin) {
-		List<Listener> result = new ArrayList<Listener>();
-		
-		for(Listener listener : this.listeners.keySet()) {
-			if(this.listeners.get(listener).getDescription().getName().equals(plugin)) {
-				result.add(listener);
-			}
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Registers a listener to the plugin.
-	 * @param listener Listener to register.
-	 * @param plugin Plugin the listener belongs to.
-	 */
-	public void registerListener(Listener listener, Plugin plugin) {
-		this.listeners.put(listener, plugin);
 	}
 	
 	/**

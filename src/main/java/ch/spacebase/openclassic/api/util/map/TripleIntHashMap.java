@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.util.set;
+package ch.spacebase.openclassic.api.util.map;
 
 import java.util.HashMap;
 
