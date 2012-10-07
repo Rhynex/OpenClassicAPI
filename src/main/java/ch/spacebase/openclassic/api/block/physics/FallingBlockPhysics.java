@@ -36,10 +36,11 @@ public class FallingBlockPhysics implements BlockPhysics {
 	}
 	
 	private void fall(Block block) {
-		if(block.getRelative(BlockFace.DOWN) != null && (block.getRelative(BlockFace.DOWN).getType() == VanillaBlock.AIR || block.getRelative(BlockFace.DOWN).getType() == VanillaBlock.WATER || block.getRelative(BlockFace.DOWN).getType() == VanillaBlock.STATIONARY_WATER || block.getRelative(BlockFace.DOWN).getType() == VanillaBlock.LAVA || block.getRelative(BlockFace.DOWN).getType() == VanillaBlock.STATIONARY_LAVA)) {
+		Block relative = block.getRelative(BlockFace.DOWN);
+		if(relative != null && (relative.getType() == VanillaBlock.AIR || relative.getType() == VanillaBlock.WATER || relative.getType() == VanillaBlock.STATIONARY_WATER || relative.getType() == VanillaBlock.LAVA || relative.getType() == VanillaBlock.STATIONARY_LAVA)) {
 			block.setType(VanillaBlock.AIR);
-			block.getRelative(BlockFace.DOWN).setTypeId(this.id);
-			block.getLevel().delayTick(block.getRelative(BlockFace.DOWN).getPosition(), this.id);
+			relative.setTypeId(this.id);
+			block.getLevel().delayTick(relative.getPosition(), this.id);
 		}
 	}
 

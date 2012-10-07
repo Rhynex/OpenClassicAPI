@@ -22,7 +22,7 @@ public class Position implements Cloneable {
 	private float prevPitch;
 	
 	public Position(Level level, float x, float y, float z) {
-		this(level, x, y, z, (byte) 0, (byte) 0);
+		this(level, x, y, z, 0, 0);
 	}
 	
 	public Position(Level level, float x, float y, float z, float yaw, float pitch) {

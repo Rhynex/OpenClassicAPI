@@ -19,7 +19,7 @@ public enum VanillaBlock implements BlockType {
 	DIRT((byte) 3, StepSound.GRAVEL, 2),
 	COBBLESTONE((byte) 4, StepSound.STONE, 16),
 	WOOD((byte) 5, StepSound.WOOD, 4),
-	SAPLING((byte) 6, StepSound.GRASS, new PlantModel(TERRAIN, 15)),
+	SAPLING((byte) 6, StepSound.GRASS, new PlantModel(TERRAIN, 15), false),
 	BEDROCK((byte) 7, StepSound.STONE, 17),
 	WATER((byte) 8, StepSound.NONE, new LiquidModel(TERRAIN, 14), 5, true, true),
 	STATIONARY_WATER((byte) 9, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
