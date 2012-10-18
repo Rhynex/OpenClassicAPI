@@ -66,6 +66,26 @@ public class Constants {
 	public static final float EYE_HEIGHT = 1.62f;
 	
 	/**
+	 * The width of a chunk.
+	 */
+	public static final int CHUNK_WIDTH = 16;
+	
+	/**
+	 * The height of a chunk.
+	 */
+	public static final int CHUNK_HEIGHT = 16;
+	
+	/**
+	 * The height of a column.
+	 */
+	public static final int COLUMN_HEIGHT = 16;
+	
+	/**
+	 * The depth of a chunk.
+	 */
+	public static final int CHUNK_DEPTH = 16;
+	
+	/**
 	 * Default private constructor
 	 */
 	private Constants() {

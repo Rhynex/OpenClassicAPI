@@ -31,6 +31,7 @@ public interface Client extends Game {
 	/**
 	 * Saves the current level.
 	 */
+	@Deprecated
 	public void saveLevel();
 
 	/**

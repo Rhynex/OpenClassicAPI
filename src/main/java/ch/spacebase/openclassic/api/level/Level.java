@@ -7,6 +7,8 @@ import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.data.NBTData;
 import ch.spacebase.openclassic.api.entity.BlockEntity;
+import ch.spacebase.openclassic.api.level.column.Column;
+import ch.spacebase.openclassic.api.level.generator.Generator;
 import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.player.Player;
 
@@ -80,36 +82,6 @@ public interface Level {
 	 * @param pos New spawn.
 	 */
 	public void setSpawn(Position pos);
-
-	/**
-	 * Gets the width of the level. Width is the length along the X axis.
-	 * @return The level's width.
-	 */
-	public short getWidth();
-	
-	/**
-	 * Gets the height of the level. Height is the length along the Y axis.
-	 * @return The level's height.
-	 */
-	public short getHeight();
-	
-	/**
-	 * Gets the depth of this level. Depth is the length along the Z axis.
-	 * @return The level's depth.
-	 */
-	public short getDepth();
-	
-	/**
-	 * Gets the water level of the level.
-	 * @return The level's water level.
-	 */
-	public short getWaterLevel();
-	
-	/**
-	 * Gets an array of all the block IDs in the level.
-	 * @return All the block IDs.
-	 */
-	public byte[] getBlocks();
 	
 	/**
 	 * Gets the ID of the block at the given position.
@@ -263,18 +235,6 @@ public interface Level {
 	public boolean setBlockAt(int x, int y, int z, BlockType type, boolean physics);
 	
 	/**
-	 * Returns true if the level is generating.
-	 * @return True if the level is generating.
-	 */
-	public boolean isGenerating();
-	
-	/**
-	 * Sets whether the level is generating.
-	 * @param generating Whether the level is generating.
-	 */
-	public void setGenerating(boolean generating);
-	
-	/**
 	 * Sends a network message to all players in the level.
 	 * @param message Message to send.
 	 */
@@ -384,5 +344,68 @@ public interface Level {
 	 * @param color Cloud color to set.
 	 */
 	public void setCloudColor(int color);
+	
+	/**
+	 * Gets the level's generation seed.
+	 * @return The level's seed.
+	 */
+	public long getSeed();
+	
+	/**
+	 * Sets the level's generation seed.
+	 * @param The new seed.
+	 * @param seed
+	 */
+	public void setSeed(long seed);
+
+	/**
+	 * Saves the level.
+	 */
+	public void save();
+	
+	/**
+	 * Gets the column at the given coordinates.
+	 * @param x The x of the column.
+	 * @param z The z of the column.
+	 * @return The column at the given coordinates.
+	 */
+	public Column getColumn(int x, int z);
+	
+	/**
+	 * Gets the column at the given coordinates.
+	 * @param x The x of the column.
+	 * @param z The z of the column.
+	 * @param load Whether or not to load the column if it isn't already loaded.
+	 * @return The column at the given coordinates.
+	 */
+	public Column getColumn(int x, int z, boolean load);
+	
+	/**
+	 * Gets the column at the given block coordinates.
+	 * @param x The x of the column.
+	 * @param z The z of the column.
+	 * @return The column at the given block coordinates.
+	 */
+	public Column getColumnFromBlock(int x, int z);
+	
+	/**
+	 * Returns true if the given column is loaded.
+	 * @param x The x of the column.
+	 * @param z The z of the column.
+	 * @return Whether the column is loaded.
+	 */
+	public boolean isColumnLoaded(int x, int z);
+	
+	/**
+	 * Gets all the loaded columns.
+	 * @return All loaded columns.
+	 */
+	public List<? extends Column> getColumns();
+	
+	/**
+	 * Gets the level's chunk generator.
+	 * @return The level's generator.
+	 */
+	public Generator getGenerator();
 	
 }

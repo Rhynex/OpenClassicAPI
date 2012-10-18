@@ -1,6 +1,5 @@
 package ch.spacebase.openclassic.api.block.model;
 
-import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
@@ -71,8 +70,7 @@ public class CuboidModel extends Model {
 	}
 	
 	@Override
-	public boolean render(float x, float y, float z, float brightness) {
-		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y, (int) z);
+	public boolean render(BlockType block, float x, float y, float z, float brightness) {
 		if(block == null) return false;
 		boolean result = false;
 		
@@ -106,7 +104,7 @@ public class CuboidModel extends Model {
 	}
 	
 	@Override
-	public void renderAll(float x, float y, float z, float brightness) {
+	public void renderAll(BlockType type, float x, float y, float z, float brightness) {
 		this.getQuad(0).render(x, y, z, brightness * 0.5F);
 		this.getQuad(1).render(x, y, z, brightness * 1);
 		this.getQuad(2).render(x, y, z, brightness * 0.8F);

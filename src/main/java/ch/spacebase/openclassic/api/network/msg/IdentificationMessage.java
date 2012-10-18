@@ -5,13 +5,13 @@ package ch.spacebase.openclassic.api.network.msg;
  */
 public class IdentificationMessage extends Message {
 	
-	private byte protocolVersion;
+	private byte protocol;
 	private String usernameOrServerName;
 	private String verificationKeyOrMotd;
 	private byte op;
 	
-	public IdentificationMessage(byte protocolVersion, String usernameOrServerName, String verificationKeyOrMotd, byte op) {
-		this.protocolVersion = protocolVersion;
+	public IdentificationMessage(byte protocol, String usernameOrServerName, String verificationKeyOrMotd, byte op) {
+		this.protocol = protocol;
 		this.usernameOrServerName = usernameOrServerName;
 		this.verificationKeyOrMotd = verificationKeyOrMotd;
 		this.op = op;
@@ -22,7 +22,7 @@ public class IdentificationMessage extends Message {
 	 * @return The protocol version.
 	 */
 	public byte getProtocolVersion() {
-		return this.protocolVersion;
+		return this.protocol;
 	}
 	
 	/**
@@ -51,12 +51,12 @@ public class IdentificationMessage extends Message {
 	
 	@Override
 	public String toString() {
-		return "IdentificationMessage{protocol=" + protocolVersion + ",usernameorservername=" + usernameOrServerName + ",verificationkeyormotd=" + verificationKeyOrMotd + ",op=" + op + "}";
+		return "IdentificationMessage{protocol=" + protocol + ",usernameorservername=" + usernameOrServerName + ",verificationkeyormotd=" + verificationKeyOrMotd + ",op=" + op + "}";
 	}
 
 	@Override
 	public Object[] getParams() {
-		return new Object[] { this.usernameOrServerName, this.verificationKeyOrMotd, this.protocolVersion, this.op };
+		return new Object[] { this.usernameOrServerName, this.verificationKeyOrMotd, this.protocol, this.op };
 	}
 	
 	@Override

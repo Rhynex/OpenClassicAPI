@@ -3,6 +3,8 @@ package ch.spacebase.openclassic.api.block.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.spacebase.openclassic.api.block.BlockType;
+
 /**
  * Represents a block's model.
  */
@@ -141,7 +143,7 @@ public class Model {
 	 * @param brightness Brightness to render at.
 	 * @return Whether anything was rendered.
 	 */
-	public boolean render(float x, float y, float z, float brightness) {
+	public boolean render(BlockType type, float x, float y, float z, float brightness) {
 		for(Quad quad : this.quads) {
 			quad.render(x, y, z, brightness);
 		}
@@ -171,8 +173,8 @@ public class Model {
 	 * @param z Z to render at.
 	 * @param brightness Brightness to render at.
 	 */
-	public void renderAll(float x, float y, float z, float brightness) {
-		this.render(x, y, z, brightness);
+	public void renderAll(BlockType type, float x, float y, float z, float brightness) {
+		this.render(type, x, y, z, brightness);
 	}
 
 	/**

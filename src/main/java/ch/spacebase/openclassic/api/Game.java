@@ -104,7 +104,7 @@ public interface Game {
 	 * @param generator Generator to generate with.
 	 * @return The created level.
 	 */
-	public Level createLevel(LevelInfo info, Generator generator);
+	public Level createLevel(LevelInfo info);
 	
 	/**
 	 * Returns true if the game is running.
@@ -119,11 +119,10 @@ public interface Game {
 	public Configuration getConfig();
 	
 	/**
-	 * Registers a generator to the given name.
-	 * @param name Name to register to.
+	 * Registers a generator.
 	 * @param generator Generator to register.
 	 */
-	public void registerGenerator(String name, Generator generator);
+	public void registerGenerator(Generator generator);
 	
 	/**
 	 * Gets the generator registered to the given name,

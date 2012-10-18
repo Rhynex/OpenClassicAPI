@@ -300,12 +300,14 @@ public interface Server extends Game {
 	 * Saves the level with the given name.
 	 * @param name Level to save.
 	 */
+	@Deprecated
 	public void saveLevel(String name);
 	
 	/**
 	 * Saves the given level.
 	 * @param level Level to save.
 	 */
+	@Deprecated
 	public void saveLevel(Level level);
 	
 	/**

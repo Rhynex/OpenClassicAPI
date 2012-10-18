@@ -98,12 +98,7 @@ public class Block {
 	 * @return The block relative.
 	 */
 	public Block getRelative(int x, int y, int z) {
-		Position pos = this.pos.clone().add(x, y, z);
-		if(pos.getBlockX() >= this.pos.getLevel().getWidth() || pos.getBlockX() < 0) return null;
-		if(pos.getBlockY() >= this.pos.getLevel().getHeight() || pos.getBlockY() < 0) return null;
-		if(pos.getBlockZ() >= this.pos.getLevel().getDepth() || pos.getBlockZ() < 0) return null;
-		
-		return new Block(pos);
+		return new Block(this.pos.clone().add(x, y, z));
 	}
 	
 	/**

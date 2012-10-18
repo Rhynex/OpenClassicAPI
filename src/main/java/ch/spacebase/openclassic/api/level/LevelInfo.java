@@ -1,6 +1,7 @@
 package ch.spacebase.openclassic.api.level;
 
 import ch.spacebase.openclassic.api.Position;
+import ch.spacebase.openclassic.api.level.generator.Generator;
 
 /**
  * The basic info for creating a level.
@@ -9,16 +10,12 @@ public class LevelInfo {
 
 	private String name;
 	private Position spawn;
-	private short width;
-	private short height;
-	private short depth;
+	private Generator generator;
 	
-	public LevelInfo(String name, Position spawn, short width, short height, short depth) {
+	public LevelInfo(String name, Position spawn, Generator generator) {
 		this.name = name;
 		this.spawn = spawn;
-		this.width = width;
-		this.height = height;
-		this.depth = depth;
+		this.generator = generator;
 	}
 	
 	/**
@@ -38,27 +35,11 @@ public class LevelInfo {
 	}
 	
 	/**
-	 * Gets the width of the level.
-	 * @return The level's width.
+	 * Gets the generator of the level.
+	 * @return The level's generator.
 	 */
-	public short getWidth() {
-		return this.width;
-	}
-	
-	/**
-	 * Gets the height of the level.
-	 * @return The level's height.
-	 */
-	public short getHeight() {
-		return this.height;
-	}
-	
-	/**
-	 * Gets the depth of the level.
-	 * @return The level's depth.
-	 */
-	public short getDepth() {
-		return this.depth;
+	public Generator getGenerator() {
+		return this.generator;
 	}
 	
 }

@@ -113,8 +113,7 @@ public class LiquidModel extends CubeModel {
 	}
 	
 	@Override
-	public boolean render(float x, float y, float z, float brightness) {
-		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y, (int) z);
+	public boolean render(BlockType block, float x, float y, float z, float brightness) {
 		if(block == null) return false;
 		boolean result = false;
 		

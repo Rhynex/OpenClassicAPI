@@ -3,22 +3,30 @@ package ch.spacebase.openclassic.api.level.generator;
 import java.util.Random;
 
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.level.Level;
+import ch.spacebase.openclassic.api.util.Constants;
 
 /**
- * Represents a map generator.
+ * Represents a chunk generator.
  */
 public abstract class Generator {
 
-	protected static Random rand = new Random();
+	protected Random rand = new Random();
 	
 	/**
-	 * Generates the level.
-	 * @param level Level to generate.
-	 * @param blocks Generated block IDs.
+	 * Generates a chunk.
+	 * @param x X of the chunk.
+	 * @param y Y of the chunk.
+	 * @param z Z of the chunk.
+	 * @param blocks Array to output blocks to.
 	 */
-	public abstract void generate(Level level, byte blocks[]);
+	public abstract void generate(long seed, int x, int y, int z, byte blocks[]);
+	
+	/**
+	 * Gets the name of this generator.
+	 * @return The name of this generator.
+	 */
+	public abstract String getName();
 	
 	/**
 	 * Finds a spawn for the level.
@@ -26,30 +34,26 @@ public abstract class Generator {
 	 * @return The spawn found for the level.
 	 */
 	public Position findSpawn(Level level) {
-		int x = level.getWidth() / 2;
-		int y = level.getWaterLevel() + 2;
-		int z = level.getDepth() / 2;
-		
-		while(level.getBlockTypeAt(x, y, z) != VanillaBlock.AIR || level.getBlockTypeAt(x, y - 1, z) != VanillaBlock.AIR || level.getBlockTypeAt(x, y - 2, z) == VanillaBlock.AIR) {
-			if(y >= level.getHeight() - 1) {
-				x = rand.nextInt(level.getWidth());
-				y = level.getWaterLevel() + 2;
-				z = rand.nextInt(level.getDepth());
-				
-				continue;
-			}
-			
-			y++;
-		}
+		this.rand.setSeed(level.getSeed());
+		int x = this.rand.nextInt(2000);
+		int y = 256 / 2 + 12; // TODO
+		int z = this.rand.nextInt(2000);
 		
 		return new Position(level, x, y + 0.5f, z);	
 	}
 	
-	public static int coordsToBlockIndex(Level level, int x, int y, int z) {
-		if (x < 0 || y < 0 || z < 0 || x > level.getWidth() || y > level.getHeight() || z > level.getDepth())
-			return -1;
-
-		return x + (z * level.getWidth()) + (y * level.getWidth() * level.getDepth());
+	/**
+	 * Converts a set of coordinates to a block array index.
+	 * @param x X coordinate.
+	 * @param y Y coordinate.
+	 * @param z Z coordinate.
+	 * @return The block array index of the coordinates.
+	 */
+	public static int coordsToBlockIndex(int x, int y, int z) {
+		x &= 0xf;
+		y &= 0xf;
+		z &= 0xf;
+		return x + (z * Constants.CHUNK_WIDTH) + (y * Constants.CHUNK_WIDTH * Constants.CHUNK_DEPTH);
 	}
 	
 }
