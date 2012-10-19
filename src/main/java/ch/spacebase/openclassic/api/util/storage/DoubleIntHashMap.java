@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.util.map;
+package ch.spacebase.openclassic.api.util.storage;
 
 import java.util.concurrent.ConcurrentHashMap;
 

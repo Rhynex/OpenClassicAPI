@@ -78,7 +78,7 @@ public class Constants {
 	/**
 	 * The height of a column.
 	 */
-	public static final int COLUMN_HEIGHT = 16;
+	public static final int COLUMN_HEIGHT = 256;
 	
 	/**
 	 * The depth of a chunk.

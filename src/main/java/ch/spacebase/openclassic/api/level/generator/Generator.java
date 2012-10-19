@@ -4,7 +4,7 @@ import java.util.Random;
 
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.level.Level;
-import ch.spacebase.openclassic.api.util.Constants;
+import ch.spacebase.openclassic.api.util.storage.TripleIntByteArray;
 
 /**
  * Represents a chunk generator.
@@ -20,7 +20,7 @@ public abstract class Generator {
 	 * @param z Z of the chunk.
 	 * @param blocks Array to output blocks to.
 	 */
-	public abstract void generate(long seed, int x, int y, int z, byte blocks[]);
+	public abstract void generate(long seed, int x, int y, int z, TripleIntByteArray blocks);
 	
 	/**
 	 * Gets the name of this generator.
@@ -40,20 +40,6 @@ public abstract class Generator {
 		int z = this.rand.nextInt(2000);
 		
 		return new Position(level, x, y + 0.5f, z);	
-	}
-	
-	/**
-	 * Converts a set of coordinates to a block array index.
-	 * @param x X coordinate.
-	 * @param y Y coordinate.
-	 * @param z Z coordinate.
-	 * @return The block array index of the coordinates.
-	 */
-	public static int coordsToBlockIndex(int x, int y, int z) {
-		x &= 0xf;
-		y &= 0xf;
-		z &= 0xf;
-		return x + (z * Constants.CHUNK_WIDTH) + (y * Constants.CHUNK_WIDTH * Constants.CHUNK_DEPTH);
 	}
 	
 }

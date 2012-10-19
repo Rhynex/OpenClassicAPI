@@ -2,7 +2,6 @@ package ch.spacebase.openclassic.api.block.model;
 
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -95,7 +94,7 @@ public class CuboidModel extends Model {
 						break;
 				}
 				
-				quad.render(x, y, z, block == VanillaBlock.LAVA || block == VanillaBlock.STATIONARY_LAVA ? 100 : RenderHelper.getHelper().getBrightness(block, (int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod);
+				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, (int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod);
 				result = true;
 			}
 		}

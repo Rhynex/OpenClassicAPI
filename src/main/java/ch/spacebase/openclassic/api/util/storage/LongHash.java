@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.util.map;
+package ch.spacebase.openclassic.api.util.storage;
 
 public class LongHash {
 	

@@ -21,10 +21,10 @@ public enum VanillaBlock implements BlockType {
 	WOOD((byte) 5, StepSound.WOOD, 4),
 	SAPLING((byte) 6, StepSound.GRASS, new PlantModel(TERRAIN, 15), false),
 	BEDROCK((byte) 7, StepSound.STONE, 17),
-	WATER((byte) 8, StepSound.NONE, new LiquidModel(TERRAIN, 14), 5, true, true),
-	STATIONARY_WATER((byte) 9, StepSound.NONE, new LiquidModel(TERRAIN, 14), true, true),
-	LAVA((byte) 10, StepSound.NONE, new LiquidModel(TERRAIN, 30), 20, true, true),
-	STATIONARY_LAVA((byte) 11, StepSound.NONE, new LiquidModel(TERRAIN, 30), true, true),
+	WATER((byte) 8, StepSound.NONE, new LiquidModel(TERRAIN, 14), 5, false, true),
+	STATIONARY_WATER((byte) 9, StepSound.NONE, new LiquidModel(TERRAIN, 14), false, true),
+	LAVA((byte) 10, StepSound.NONE, new LiquidModel(TERRAIN, 30), 20, false, true),
+	STATIONARY_LAVA((byte) 11, StepSound.NONE, new LiquidModel(TERRAIN, 30), false, true),
 	SAND((byte) 12, StepSound.SAND, 18),
 	GRAVEL((byte) 13, StepSound.GRAVEL, 19),
 	GOLD_ORE((byte) 14, StepSound.STONE, 32),
@@ -157,6 +157,11 @@ public enum VanillaBlock implements BlockType {
 	
 	public boolean isSolid() {
 		return this != AIR && this != SAPLING && this != WATER && this != STATIONARY_WATER && this != LAVA && this != STATIONARY_LAVA && this != LEAVES && this != GLASS && this != DANDELION && this != ROSE && this != BROWN_MUSHROOM && this != RED_MUSHROOM && this != SLAB;
+	}
+
+	@Override
+	public int getLightLevel() {
+		return this == LAVA || this == STATIONARY_LAVA ? 15 : 0;
 	}
 	
 }

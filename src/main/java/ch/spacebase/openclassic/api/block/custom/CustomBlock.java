@@ -18,6 +18,7 @@ public class CustomBlock implements BlockType {
 	private StepSound sound;
 	private boolean liquid;
 	private Model model;
+	private int lightlevel; // TODO: setter
 	
 	private BlockPhysics physics;
 	private int delay;
@@ -132,6 +133,11 @@ public class CustomBlock implements BlockType {
 
 	public void setModel(Model model) {
 		this.model = model;
+	}
+
+	@Override
+	public int getLightLevel() {
+		return this.lightlevel;
 	}
 	
 }

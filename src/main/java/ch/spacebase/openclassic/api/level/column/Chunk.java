@@ -20,4 +20,6 @@ public interface Chunk {
 	
 	public void setBlockAt(int x, int y, int z, byte id);
 	
+	public int blockIndex(int x, int y, int z);
+	
 }

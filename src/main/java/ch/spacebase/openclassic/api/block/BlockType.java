@@ -76,5 +76,11 @@ public interface BlockType {
 	 * @return True if the block is solid.
 	 */
 	public boolean isSolid();
+
+	/**
+	 * Gets the light that the block gives off.
+	 * @return The light that the block gives off.
+	 */
+	public int getLightLevel();
 	
 }
