@@ -167,6 +167,15 @@ public interface Level {
 	public boolean isLit(int x, int y, int z);
 	
 	/**
+	 * Gets the brightness level of the block.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @return The brightness level of the block.
+	 */
+	public float getBrightness(int x, int y, int z);
+	
+	/**
 	 * Sets the block ID at the given position to the given byte.
 	 * @param pos Position of the block.
 	 * @param type Type ID to set.

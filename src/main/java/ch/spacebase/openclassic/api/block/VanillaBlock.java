@@ -160,8 +160,8 @@ public enum VanillaBlock implements BlockType {
 	}
 
 	@Override
-	public int getLightLevel() {
-		return this == LAVA || this == STATIONARY_LAVA ? 15 : 0;
+	public float getBrightness() {
+		return this == LAVA || this == STATIONARY_LAVA ? 100 : 0;
 	}
 	
 }

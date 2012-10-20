@@ -22,6 +22,10 @@ public interface Column {
 	
 	public int getHighestOpaque(int x, int z);
 	
+	public boolean isLit(int x, int y, int z);
+	
+	public float getBrightness(int x, int y, int z);
+	
 	public Chunk getChunk(int y);
 	
 	public Chunk getChunkFromBlock(int y);
