@@ -86,6 +86,11 @@ public class Constants {
 	public static final int CHUNK_DEPTH = 16;
 	
 	/**
+	 * The area of a chunk.
+	 */
+	public static final int CHUNK_AREA = CHUNK_WIDTH * CHUNK_HEIGHT * CHUNK_DEPTH;
+	
+	/**
 	 * Default private constructor
 	 */
 	private Constants() {

@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.level.column;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.level.Level;
+import ch.spacebase.openclassic.api.level.generator.biome.BiomeManager;
 
 public interface Column {
 
@@ -33,5 +34,9 @@ public interface Column {
 	public List<? extends Chunk> getChunks();
 	
 	public void save();
+	
+	public BiomeManager getBiomeManager();
+	
+	public void setBiomeManager(BiomeManager manager);
 	
 }

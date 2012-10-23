@@ -9,6 +9,8 @@ import ch.spacebase.openclassic.api.data.NBTData;
 import ch.spacebase.openclassic.api.entity.BlockEntity;
 import ch.spacebase.openclassic.api.level.column.Column;
 import ch.spacebase.openclassic.api.level.generator.Generator;
+import ch.spacebase.openclassic.api.level.generator.biome.Biome;
+import ch.spacebase.openclassic.api.level.generator.biome.BiomeManager;
 import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.player.Player;
 
@@ -416,5 +418,31 @@ public interface Level {
 	 * @return The level's generator.
 	 */
 	public Generator getGenerator();
+	
+	/**
+	 * Gets the biome at the given coordinates.
+	 * @param x X to get the biome at.
+	 * @param y Y to get the biome at.
+	 * @param z Z to get the biome at.
+	 * @return The biome at the given coordinates.
+	 */
+	public Biome getBiome(int x, int y, int z);
+
+	/**
+	 * Gets the BiomeManager for the given column.
+	 * @param x X of the column.
+	 * @param z Z of the column.
+	 * @return The column's biome manager.
+	 */
+	public BiomeManager getBiomeManager(int x, int z);
+
+	/**
+	 * Gets the BiomeManager for the given column.
+	 * @param x X of the column.
+	 * @param z Z of the column.
+	 * @param load Whether to load the column if it is unloaded.
+	 * @return The column's biome manager.
+	 */
+	public BiomeManager getBiomeManager(int x, int z, boolean load);
 	
 }
