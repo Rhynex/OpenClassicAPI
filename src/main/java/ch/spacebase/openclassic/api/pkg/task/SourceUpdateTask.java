@@ -10,9 +10,9 @@ import java.nio.channels.ReadableByteChannel;
 
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.text.ConfigurationNode;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
-import ch.spacebase.openclassic.api.config.ConfigurationNode;
 
 /**
  * A task that updates a source.
@@ -27,7 +27,7 @@ public class SourceUpdateTask implements Runnable {
 	
 	@Override
 	public void run() {	
-		Configuration sources = OpenClassic.getGame().getPackageManager().getSourcesList();
+		YamlFile sources = OpenClassic.getGame().getPackageManager().getSourcesList();
 		if(this.executor != null) this.executor.sendMessage(Color.AQUA + "Updating sources...");
 		
 		File file = null;

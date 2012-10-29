@@ -9,6 +9,8 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
  */
 public class CuboidModel extends Model {
 	
+	private boolean cube = false;
+	
 	public CuboidModel(Texture texture, int[] textureIds, float x1, float y1, float z1, float x2, float y2, float z2) {
 		if(textureIds.length < 6) {
 			throw new IllegalArgumentException("Texture ID array must have length of 6!");
@@ -58,6 +60,8 @@ public class CuboidModel extends Model {
 		face4.addVertex(2, x2, y2, z2);
 		face4.addVertex(3, x2, y1, z2);
 		this.addQuad(face4);
+		
+		this.cube = x1 == 0 && y1 == 0 && z1 == 0 && x2 == 1 && y2 == 1 && z2 == 1;
 	}
 	
 	public CuboidModel(Texture texture, int textureId, float x1, float y1, float z1, float x2, float y2, float z2) {
@@ -120,6 +124,11 @@ public class CuboidModel extends Model {
 		this.getQuad(3).renderScaled(x, y, z, scale, brightness * 0.8F);
 		this.getQuad(4).renderScaled(x, y, z, scale, brightness * 0.6F);
 		this.getQuad(5).renderScaled(x, y, z, scale, brightness * 0.6F);
+	}
+	
+	@Override
+	public boolean isCube() {
+		return this.cube;
 	}
 	
 	@Override

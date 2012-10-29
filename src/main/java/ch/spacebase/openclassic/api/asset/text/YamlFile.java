@@ -1,10 +1,8 @@
-package ch.spacebase.openclassic.api.config;
+package ch.spacebase.openclassic.api.asset.text;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,69 +17,36 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.Asset;
+import ch.spacebase.openclassic.api.asset.AssetSource;
 import ch.spacebase.openclassic.api.math.MathHelper;
 
 /**
- * Represents a YAML configuration.
+ * Represents a YAML file.
  */
 @SuppressWarnings("unchecked")
-public class Configuration {
+public class YamlFile extends Asset {
 
 	protected Map<String, Object> data;
 	protected Set<ConfigurationNode> nodes;
 	
-	private File configFile;
-	private InputStream in;
 	private Yaml yaml;
 
-	public Configuration(InputStream in) {
+	public YamlFile(String file, AssetSource source) {
+		super(file, source);
 		this.data = new HashMap<String, Object>();
 		this.nodes = new HashSet<ConfigurationNode>();
-		this.in = in;
 		
 		DumperOptions options = new DumperOptions();
-
 		options.setIndent(4);
 		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-
-		this.yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
-	}
-	
-	public Configuration(File file) {
-		this.data = new HashMap<String, Object>();
-		this.nodes = new HashSet<ConfigurationNode>();
-		this.configFile = file;
-		
-		DumperOptions options = new DumperOptions();
-
-		options.setIndent(4);
-		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-
 		this.yaml = new Yaml(new SafeConstructor(), new EmptyNullRepresenter(), options);
 	}
 
 	/**
 	 * Loads the configuration.
 	 */
-	public void load() {
-		InputStream in = null;
-		if(this.in != null) {
-			in = this.in;
-		} else {		
-			try {
-				if (!this.configFile.exists()) {
-					if(this.configFile.getParentFile() != null) this.configFile.getParentFile().mkdirs();
-					this.configFile.createNewFile();
-				}
-	
-				in = new FileInputStream(this.configFile);
-			} catch (IOException e) {
-				OpenClassic.getLogger().severe("Failed to load config file " + this.configFile.getName() + "!");
-				e.printStackTrace();
-				return;
-			}
-		}
-		
+	public void load(DataInputStream in) throws IOException {
 		this.data = (Map<String, Object>) this.yaml.load(in);
 		if(this.data == null) this.data = new HashMap<String, Object>();
 	}
@@ -89,27 +54,13 @@ public class Configuration {
 	/**
 	 * Saves the configuration.
 	 */
-	public void save() {
-		if(this.configFile != null) {
-			try {
-				if (!this.configFile.exists()) {
-					if(this.configFile.getParentFile() != null) this.configFile.getParentFile().mkdirs();
-					this.configFile.createNewFile();
-				}
-	
-				FileOutputStream out = new FileOutputStream(configFile);
-				OutputStreamWriter writer = new OutputStreamWriter(out, "UTF-8");
-	
-				for (ConfigurationNode node : nodes) {
-					node.setConfiguration(this);
-				}
-				
-				this.yaml.dump(data, writer);
-			} catch (IOException e) {
-				OpenClassic.getLogger().severe("Failed to save config file " + this.configFile.getName() + "!");
-				e.printStackTrace();
-			}
+	public void save(DataOutputStream out) throws IOException {
+		OutputStreamWriter writer = new OutputStreamWriter(out, "UTF-8");
+		for(ConfigurationNode node : this.nodes) {
+			node.setConfiguration(this);
 		}
+			
+		this.yaml.dump(this.data, writer);
 	}
 
 	/**
@@ -335,7 +286,11 @@ public class Configuration {
 
 		if (value == null) {
 			this.setValue(path, def);
-			save();
+			try {
+				this.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return def;
@@ -366,7 +321,11 @@ public class Configuration {
 
 		if (value == null) {
 			this.setValue(path, def);
-			save();
+			try {
+				this.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return def;
@@ -397,7 +356,11 @@ public class Configuration {
 
 		if (value == null) {
 			this.setValue(path, def);
-			save();
+			try {
+				this.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return def;
@@ -428,7 +391,11 @@ public class Configuration {
 
 		if (value == null) {
 			this.setValue(path, def);
-			save();
+			try {
+				this.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return def;
@@ -459,7 +426,11 @@ public class Configuration {
 
 		if (value == null) {
 			this.setValue(path, def);
-			save();
+			try {
+				this.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return def;
@@ -489,7 +460,11 @@ public class Configuration {
 
 		if (value == null) {
 			this.setValue(path, def);
-			save();
+			try {
+				this.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return def;
@@ -519,7 +494,11 @@ public class Configuration {
 		}
 		
 		this.setValue(path, def);
-		save();
+		try {
+			this.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return def;
 	}
@@ -555,7 +534,11 @@ public class Configuration {
 		}
 		
 		this.setValue(path, def);
-		save();
+		try {
+			this.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return def;
 	}
@@ -591,7 +574,11 @@ public class Configuration {
 		}
 		
 		this.setValue(path, def);
-		save();
+		try {
+			this.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return def;
 	}
@@ -627,7 +614,11 @@ public class Configuration {
 		}
 		
 		this.setValue(path, def);
-		save();
+		try {
+			this.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return def;
 	}
@@ -663,7 +654,11 @@ public class Configuration {
 		}
 		
 		this.setValue(path, def);
-		save();
+		try {
+			this.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return def;
 	}

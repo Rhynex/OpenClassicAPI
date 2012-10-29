@@ -5,7 +5,7 @@ public class EmptyBiomeManager extends BiomeManager {
 	public EmptyBiomeManager(int x, int z) {
 		super(x, z);
 	}
-	
+
 	@Override
 	public Biome getBiome(int x, int y, int z) {
 		return null;

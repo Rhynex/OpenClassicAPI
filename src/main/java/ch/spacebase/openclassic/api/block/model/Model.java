@@ -152,6 +152,14 @@ public class Model {
 	}
 	
 	/**
+	 * Returns true if this model is a full cube.
+	 * @return True if the model is a full cube.
+	 */
+	public boolean isCube() {
+		return false;
+	}
+	
+	/**
 	 * Gets the type of model this is for use in client to server communications.
 	 * @return The type of model.
 	 */

@@ -17,10 +17,10 @@ import ch.spacebase.openclassic.api.asset.Asset;
 import ch.spacebase.openclassic.api.asset.AssetSource;
 
 public class Texture extends Asset {
-
+	
 	private BufferedImage img;
 	private TextureFormat format;
-	private int textureId = -1;;
+	private int textureId = -1;
 	
 	public Texture(String file, AssetSource source) {
 		super(file, source);
@@ -39,7 +39,7 @@ public class Texture extends Asset {
 	}
 	
 	public SubTexture getSubTexture(int id, int width, int height) {
-		return new SubTexture(this, (id % 16) / 16f, (id / 16f) / 16f, width, height);
+		return new SubTexture(this, (id % width) / (float) width, (id / (float) width) / height, width, height);
 	}
 	
 	public SubTexture getSubTexture(int x, int y, int width, int height) {

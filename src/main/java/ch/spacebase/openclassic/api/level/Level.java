@@ -102,6 +102,22 @@ public interface Level {
 	public byte getBlockIdAt(int x, int y, int z);
 	
 	/**
+	 * Gets the data of the block at the given position.
+	 * @param pos Position of the block.
+	 * @return The block's data.
+	 */
+	public byte getData(Position pos);
+	
+	/**
+	 * Gets the data of the block at the given coordinates.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @return The block's data.
+	 */
+	public byte getData(int x, int y, int z);
+	
+	/**
 	 * Gets the BlockType of the block at the given position.
 	 * @param pos Position of the block.
 	 * @return The BlockType.
@@ -176,40 +192,6 @@ public interface Level {
 	 * @return The brightness level of the block.
 	 */
 	public float getBrightness(int x, int y, int z);
-	
-	/**
-	 * Sets the block ID at the given position to the given byte.
-	 * @param pos Position of the block.
-	 * @param type Type ID to set.
-	 */
-	public boolean setBlockIdAt(Position pos, byte type);
-	
-	/**
-	 * Sets the block ID at the given position to the given byte.
-	 * @param pos Position of the block.
-	 * @param type Type ID to set.
-	 * @param physics Whether to apply physics.
-	 */
-	public boolean setBlockIdAt(Position pos, byte type, boolean physics);
-	
-	/**
-	 * Sets the block ID at the given coordinates to the given byte.
-	 * @param x X of the block.
-	 * @param y Y of the block.
-	 * @param z Z of the block.
-	 * @param type Type ID to set.
-	 */
-	public boolean setBlockIdAt(int x, int y, int z, byte type);
-	
-	/**
-	 * Sets the block ID at the given coordinates to the given byte.
-	 * @param x X of the block.
-	 * @param y Y of the block.
-	 * @param z Z of the block.
-	 * @param type Type ID to set.
-	 * @param physics Whether to apply physics.
-	 */
-	public boolean setBlockIdAt(int x, int y, int z, byte type, boolean physics);
 	
 	/**
 	 * Sets the BlockType at the given position to the given BlockType.
@@ -303,7 +285,7 @@ public interface Level {
 	 * @param pos Position to schedule.
 	 * @param id ID of the block to tick.
 	 */
-	public void delayTick(Position pos, byte id);
+	public void delayTick(Position pos, BlockType type);
 
 	/**
 	 * Attempts to grow a tree at the given coordinates.

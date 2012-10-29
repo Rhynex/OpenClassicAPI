@@ -1,10 +1,12 @@
 package ch.spacebase.openclassic.api.pkg.task;
 
 import java.io.File;
+import java.io.IOException;
+
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
 
 /**
  * A task that removes a source.
@@ -21,7 +23,7 @@ public class SourceRemoveTask implements Runnable {
 	
 	@Override
 	public void run() {
-		Configuration sources = OpenClassic.getGame().getPackageManager().getSourcesList();
+		YamlFile sources = OpenClassic.getGame().getPackageManager().getSourcesList();
 		
 		if(sources.getNode(this.id) == null) {
 			if(this.executor != null) this.executor.sendMessage(Color.RED + "The source is not in the server's source list.");
@@ -33,7 +35,11 @@ public class SourceRemoveTask implements Runnable {
 		(new File(OpenClassic.getGame().getDirectory(), "source-cache/" + id + "-packages.yml")).delete();
 		
 		sources.remove(this.id);
-		sources.save();
+		try {
+			sources.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		if(this.executor != null) this.executor.sendMessage(Color.GREEN + "The source \"" + this.id + "\" has been removed successfully!");
 	}

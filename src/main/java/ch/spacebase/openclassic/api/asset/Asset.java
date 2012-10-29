@@ -14,7 +14,7 @@ public abstract class Asset {
 		this.source = source;
 	}
 	
-	public DataInputStream getInputStream() {
+	public DataInputStream getInputStream() throws IOException {
 		return this.source.getInputStream(this.file);
 	}
 	

@@ -20,24 +20,15 @@ public class Block {
 	 * @return The block's ID.
 	 */
 	public byte getTypeId() {
-		return this.pos.getLevel().getBlockIdAt(pos);
+		return this.pos.getLevel().getBlockIdAt(this.pos);
 	}
 	
 	/**
-	 * Sets the block's ID.
-	 * @param id Block ID to set.
+	 * Gets the block's data.
+	 * @return The block's data.
 	 */
-	public boolean setTypeId(byte id) {
-		return this.pos.getLevel().setBlockIdAt(pos, id);
-	}
-	
-	/**
-	 * Sets the block's ID.
-	 * @param id Block ID to set.
-	 * @param physics Whether or not to apply physics.
-	 */
-	public boolean setTypeId(byte id, boolean physics) {
-		return this.pos.getLevel().setBlockIdAt(pos, id, physics);
+	public byte getData() {
+		return this.pos.getLevel().getData(this.pos);
 	}
 	
 	/**
@@ -45,7 +36,7 @@ public class Block {
 	 * @return The block's type.
 	 */
 	public BlockType getType() {
-		return Blocks.fromId(this.getTypeId());
+		return Blocks.get(this.getTypeId(), this.getData());
 	}
 	
 	/**
@@ -53,7 +44,7 @@ public class Block {
 	 * @param type VanillaBlock to set.
 	 */
 	public boolean setType(BlockType type) {
-		return this.setTypeId(type.getId());
+		return this.pos.getLevel().setBlockAt(this.pos, type);
 	}
 	
 	/**
@@ -62,7 +53,7 @@ public class Block {
 	 * @param physics Whether or not to apply physics.
 	 */
 	public boolean setType(BlockType type, boolean physics) {
-		return this.setTypeId(type.getId(), physics);
+		return this.pos.getLevel().setBlockAt(this.pos, type, physics);
 	}
 	
 	/**

@@ -6,7 +6,7 @@ import java.util.Random;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.level.Level;
-import ch.spacebase.openclassic.api.util.storage.TripleIntByteArray;
+import ch.spacebase.openclassic.api.util.storage.BlockStore;
 
 /**
  * Represents a chunk generator.
@@ -22,7 +22,7 @@ public abstract class Generator {
 	 * @param blocks Array to output blocks to.
 	 * @param random Random to use when generating.
 	 */
-	public abstract void generate(Level level, int x, int y, int z, TripleIntByteArray blocks, Random random);
+	public abstract void generate(Level level, int x, int y, int z, BlockStore blocks, Random random);
 	
 	/**
 	 * Gets a list of populators for the given level.

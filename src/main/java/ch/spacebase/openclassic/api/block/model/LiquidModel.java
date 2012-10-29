@@ -21,6 +21,7 @@ public class LiquidModel extends CubeModel {
 	public LiquidModel(Texture texture, int textureIds[]) {
 		super(texture, textureIds);
 		
+		this.setCollisionBox(null);
 		Quad bottom = new Quad(0, texture.getSubTexture(textureIds[0]));
 		bottom.addVertex(0, 0, 0, 0);
 		bottom.addVertex(1, 1, 0, 0);

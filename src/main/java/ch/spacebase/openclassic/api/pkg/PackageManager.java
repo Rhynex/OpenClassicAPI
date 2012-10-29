@@ -1,10 +1,9 @@
 package ch.spacebase.openclassic.api.pkg;
 
-import java.io.File;
-
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.pkg.task.PackageInstallTask;
 import ch.spacebase.openclassic.api.pkg.task.PackageRemoveTask;
 import ch.spacebase.openclassic.api.pkg.task.PackageUpdateTask;
@@ -17,22 +16,19 @@ import ch.spacebase.openclassic.api.pkg.task.SourceUpdateTask;
  */
 public class PackageManager {
 
-	private final Configuration sources;
-	private final Configuration installed;
+	private final YamlFile sources;
+	private final YamlFile installed;
 	
 	public PackageManager() {
-		this.sources = new Configuration(new File(OpenClassic.getGame().getDirectory(), "sources.yml"));
-		this.installed = new Configuration(new File(OpenClassic.getGame().getDirectory(), "installed.yml"));
-		
-		this.sources.load();
-		this.installed.load();
+		this.sources = OpenClassic.getGame().getAssetManager().load("sources.yml", AssetSource.FILE, YamlFile.class);
+		this.installed = OpenClassic.getGame().getAssetManager().load("installed.yml", AssetSource.FILE, YamlFile.class);
 	}
 	
 	/**
 	 * Gets the YAML configuration containing all the installed sources.
 	 * @return A YAML configuration containing all of the installed sources.
 	 */
-	public Configuration getSourcesList() {
+	public YamlFile getSourcesList() {
 		return this.sources;
 	}
 	
@@ -40,7 +36,7 @@ public class PackageManager {
 	 * Gets the YAML configuration containing all the installed packages.
 	 * @return A YAML configuration containing all of the installed packages.
 	 */
-	public Configuration getInstalled() {
+	public YamlFile getInstalled() {
 		return this.installed;
 	}
 

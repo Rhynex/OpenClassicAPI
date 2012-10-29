@@ -14,6 +14,11 @@ public interface BlockPhysics {
 	public void update(Block block);
 	
 	/**
+	 * Called to check whether the block can be placed.
+	 */
+	public boolean canPlace(Block block);
+	
+	/**
 	 * Called when the block is placed.
 	 * @param block Block being placed.
 	 */

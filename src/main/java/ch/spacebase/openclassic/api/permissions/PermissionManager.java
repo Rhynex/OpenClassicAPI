@@ -1,11 +1,12 @@
 package ch.spacebase.openclassic.api.permissions;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.network.msg.PlayerOpMessage;
 import ch.spacebase.openclassic.api.util.Constants;
 
@@ -14,15 +15,24 @@ import ch.spacebase.openclassic.api.util.Constants;
  */
 public class PermissionManager {
 	
-	private Configuration perms;
+	private YamlFile perms;
 	private List<Group> groups = new ArrayList<Group>();
 	
 	/**
 	 * Loads the server's permissions and groups.
 	 */
 	public void load() {
-		if(this.perms == null) this.perms = new Configuration(new File(OpenClassic.getGame().getDirectory(), "permissions.yml"));
-		this.perms.load();
+		if(this.perms == null) {
+			this.perms = OpenClassic.getGame().getAssetManager().load("permissions.yml", AssetSource.FILE, YamlFile.class);
+		} else {
+			try {
+				this.perms.load();
+			} catch (IOException e) {
+				OpenClassic.getLogger().severe("Failed to load permissions file!");
+				e.printStackTrace();
+			}
+		}
+		
 		this.loadGroups();
 	}
 	
@@ -50,7 +60,12 @@ public class PermissionManager {
 			}
 		}
 		
-		this.perms.save();
+		try {
+			this.perms.save();
+		} catch (IOException e) {
+			OpenClassic.getLogger().severe("Failed to save permissions file!");
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -58,8 +73,7 @@ public class PermissionManager {
 	 */
 	public void reload() {
 		this.save();
-		this.perms.load();
-		this.loadGroups();
+		this.load();
 	}
 	
 	/**

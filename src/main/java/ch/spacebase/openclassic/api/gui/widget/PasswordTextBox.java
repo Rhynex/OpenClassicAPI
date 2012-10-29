@@ -13,7 +13,7 @@ public class PasswordTextBox extends TextBox {
 	}
 	
 	public PasswordTextBox(int id, int x, int y, Screen parent, int max) {
-		this(id, x, y, 200, 20, parent, max);
+		this(id, x, y, 400, 40, parent, max);
 	}
 	
 	public PasswordTextBox(int id, int x, int y, int width, int height, Screen parent) {
@@ -25,11 +25,11 @@ public class PasswordTextBox extends TextBox {
 	}
 	
 	public PasswordTextBox(int id, int x, int y, Screen parent, boolean chatbox) {
-		this(id, x, y, 200, 20, parent, chatbox);
+		this(id, x, y, 400, 40, parent, chatbox);
 	}
 	
 	public PasswordTextBox(int id, int x, int y, Screen parent, int max, boolean chatbox) {
-		this(id, x, y, 200, 20, parent, chatbox);
+		this(id, x, y, 400, 40, parent, chatbox);
 	}
 	
 	public PasswordTextBox(int id, int x, int y, int width, int height, Screen parent, boolean chatbox) {
@@ -45,7 +45,7 @@ public class PasswordTextBox extends TextBox {
 		if(!this.chatbox) RenderHelper.getHelper().drawBox(this.x - 1, this.y - 1, this.x + this.width + 1, this.y + this.height + 1, -6250336);
 		RenderHelper.getHelper().drawBox(this.x, this.y, this.x + this.width, this.y + this.height, (!this.chatbox ? -16777216 : Integer.MIN_VALUE));
 		String render = this.text.replaceAll("(?s).", "*");
-		RenderHelper.getHelper().renderText(render.substring(0, this.cursor) + (this.blink && this.focus ? "|" : "") + render.substring(this.cursor, render.length()), this.x + 4, (this.chatbox ? this.y + 2 : this.y + 6), 14737632, false);
+		RenderHelper.getHelper().renderText(render.substring(0, this.cursor) + (this.blink && this.focus ? "|" : "") + render.substring(this.cursor, render.length()), this.x + 4, (this.chatbox ? this.y + 2 : this.y + 6), false);
 	}
 
 }

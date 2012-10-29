@@ -28,14 +28,14 @@ public class ButtonList extends Widget {
 		super(id, 0, 0, parentWidth, parentHeight, parent);
 		
 		for (int button = 0; button < 5; button++) {
-			this.buttons.add(new Button(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, "---"));
+			this.buttons.add(new Button(button, this.width / 2 - 200, this.height / 6 + button * 48, this.parent, "---"));
 			this.buttons.get(id).setVisible(false);
 			this.buttons.get(id).setActive(false);
 		}
 		
-		this.buttons.add(new Button(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, "Back"));
-		this.buttons.add(new Button(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, "Next"));
-		this.search = new TextBox(7, this.width / 2 - 100, this.height / 6 + 120, this.parent);
+		this.buttons.add(new Button(5, this.width / 2 - 400, this.height / 6 + 96, 100, 40, this.parent, "Back"));
+		this.buttons.add(new Button(6, this.width / 2 + 300, this.height / 6 + 96, 100, 40, this.parent, "Next"));
+		this.search = new TextBox(7, this.width / 2 - 200, this.height / 6 + 240, this.parent);
 		this.getBackButton().setActive(false);
 		this.getNextButton().setActive(false);
 		this.useSearch = search;

@@ -18,6 +18,8 @@ public enum BlockFace {
 	/** The western face. */
 	WEST(0, 0, -1);
 	
+	private static final BlockFace nsew[] = new BlockFace[] { NORTH, SOUTH, EAST, WEST };
+	
 	private int modx;
 	private int mody;
 	private int modz;
@@ -50,6 +52,10 @@ public enum BlockFace {
 	 */
 	public int getModZ() {
 		return this.modz;
+	}
+	
+	public static BlockFace[] nsew() {
+		return nsew;
 	}
 	
 }

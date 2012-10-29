@@ -22,8 +22,8 @@ public abstract class GuiScreen extends Screen {
 	 * @param height Height of the screen.
 	 */
 	public void open(int width, int height) {
-		this.width = width * 240 / height;
-		this.height = height * 240 / height;
+		this.width = width;// * 240 / height;
+		this.height = height;// * 240 / height;
 		this.onOpen();
 	}
 	

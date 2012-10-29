@@ -70,25 +70,6 @@ public abstract class RenderHelper {
 	public abstract void renderText(String text, float x, float y, boolean xCenter);
 	
 	/**
-	 * Renders the given text at the given position with the X as the center.
-	 * @param text Text to render
-	 * @param x X to render at.
-	 * @param y Y to render at.
-	 * @param color Color to render the text.
-	 */
-	public abstract void renderText(String text, float x, float y, int color);
-	
-	/**
-	 * Renders the given text at the given position.
-	 * @param text Text to render
-	 * @param x X to render at.
-	 * @param y Y to render at.
-	 * @param color Color to render the text.
-	 * @param xCenter Whether the X is the center or not.
-	 */
-	public abstract void renderText(String text, float x, float y, int color, boolean xCenter);
-	
-	/**
 	 * Renders the given text at the given position with the X as the center and no shadow.
 	 * @param text Text to render
 	 * @param x X to render at.
@@ -104,25 +85,6 @@ public abstract class RenderHelper {
 	 * @param Whether the X is the center or not.
 	 */
 	public abstract void renderTextNoShadow(String text, float x, float y, boolean xCenter);
-	
-	/**
-	 * Renders the given text at the given position with the X as the center and no shadow.
-	 * @param text Text to render
-	 * @param x X to render at.
-	 * @param y Y to render at.
-	 * @param color Color to render the text.
-	 */
-	public abstract void renderTextNoShadow(String text, float x, float y, int color);
-	
-	/**
-	 * Renders the given text at the given position with no shadow.
-	 * @param text Text to render
-	 * @param x X to render at.
-	 * @param y Y to render at.
-	 * @param color Color to render the text.
-	 * @param xCenter Whether the X is the center or not.
-	 */
-	public abstract void renderTextNoShadow(String text, float x, float y, int color, boolean xCenter);
 
 	/**
 	 * Draws a box with the given corners and color.
@@ -181,7 +143,7 @@ public abstract class RenderHelper {
 	 * @return The mouse's X.
 	 */
 	public int getRenderMouseX() {
-		return InputHelper.getHelper().getMouseX() * (this.getDisplayWidth() * 240 / this.getDisplayHeight()) / this.getDisplayWidth();
+		return InputHelper.getHelper().getMouseX();// * (this.getDisplayWidth() * 240 / this.getDisplayHeight()) / this.getDisplayWidth();
 	}
 	
 	/**
@@ -189,7 +151,7 @@ public abstract class RenderHelper {
 	 * @return The mouse's Y.
 	 */
 	public int getRenderMouseY() {
-		int height = this.getDisplayHeight() * 240 / this.getDisplayHeight();
+		int height = this.getDisplayHeight();// * 240 / this.getDisplayHeight();
 		return height - InputHelper.getHelper().getMouseY() * height / this.getDisplayHeight() - 1;
 	}
 

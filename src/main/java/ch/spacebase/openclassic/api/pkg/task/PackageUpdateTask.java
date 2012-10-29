@@ -17,8 +17,9 @@ import java.util.zip.ZipFile;
 
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
 
 /**
  * A task that updates a package.
@@ -35,7 +36,7 @@ public class PackageUpdateTask implements Runnable {
 	
 	@Override
 	public void run() {
-		Configuration pkgs = OpenClassic.getGame().getPackageManager().getInstalled();
+		YamlFile pkgs = OpenClassic.getGame().getPackageManager().getInstalled();
 		
 		if(pkgs.getNode(this.name) == null) {
 			if(this.executor != null) this.executor.sendMessage(Color.RED + "This package isn't installed!");
@@ -49,7 +50,7 @@ public class PackageUpdateTask implements Runnable {
 		File cache = new File(OpenClassic.getGame().getDirectory(), "source-cache");
 		if(!cache.exists()) cache.mkdirs();
 		
-		Configuration source = null;
+		YamlFile source = null;
 		String url = "";
 		String version = "";
 		String depends = "";
@@ -57,11 +58,9 @@ public class PackageUpdateTask implements Runnable {
 		String enable = "";
 		
 		for(File file : cache.listFiles()) {
-			source = new Configuration(file);
-			source.load();
+			source = OpenClassic.getGame().getAssetManager().load("source-cache/" + file.getName(), AssetSource.FILE, YamlFile.class);
 			
 			if(source.getNode(this.name) == null) continue;
-			
 			url = source.getString(this.name + ".url");
 			version = source.getString(this.name + ".latest");
 			depends = source.getString(this.name + ".depends");
@@ -199,7 +198,11 @@ public class PackageUpdateTask implements Runnable {
 			pkgs.setValue(this.name + ".files", files);
 			pkgs.setValue(this.name + ".dirs", dirs);
 			pkgs.setValue(this.name + ".plugins", enable);
-			pkgs.save();
+			try {
+				pkgs.save();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			if(enable != null && !enable.equals("")) {
 				for(String plugin : enable.split(",")) {

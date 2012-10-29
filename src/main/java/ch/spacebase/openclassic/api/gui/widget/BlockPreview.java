@@ -40,7 +40,7 @@ public class BlockPreview extends Widget {
 
 	@Override
 	public void render() {
-		RenderHelper.getHelper().drawRotatedBlock(x, y, this.type, this.scale);
+		RenderHelper.getHelper().drawRotatedBlock(this.x, this.y, this.type, this.scale);
 	}
 
 }

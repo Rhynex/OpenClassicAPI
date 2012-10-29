@@ -7,14 +7,15 @@ import java.util.Random;
 
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.column.Chunk;
+import ch.spacebase.openclassic.api.util.storage.BlockStore;
 
 public abstract class Biome {
 
 	private int id;
-	private boolean registered = false;
 	private List<Decorator> decorators = new ArrayList<Decorator>();
 
-	public Biome(Decorator... decorators) {
+	public Biome(int id, Decorator... decorators) {
+		this.id = id;
 		this.decorators.addAll(Arrays.asList(decorators));
 		Biomes.register(this);
 	}
@@ -25,11 +26,7 @@ public abstract class Biome {
 		}
 	}
 
-	protected final void setId(int id) {
-		if(!this.registered) {
-			this.id = id;
-			this.registered = true;
-		}
+	public void generateColumn(Level level, int x, int y, int z, BlockStore blockData, Random random) {
 	}
 
 	public int getId() {

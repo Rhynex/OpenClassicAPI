@@ -11,5 +11,5 @@ public class Biomes {
 	public static Biome getBiome(int id) {
 		return biomes[id];
 	}
-	
+
 }

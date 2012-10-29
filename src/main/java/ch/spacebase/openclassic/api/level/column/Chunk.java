@@ -1,5 +1,6 @@
 package ch.spacebase.openclassic.api.level.column;
 
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.level.generator.biome.Biome;
 
 public interface Chunk {
@@ -20,7 +21,9 @@ public interface Chunk {
 	
 	public byte getBlockAt(int x, int y, int z);
 	
-	public void setBlockAt(int x, int y, int z, byte id);
+	public byte getData(int x, int y, int z);
+	
+	public void setBlockAt(int x, int y, int z, BlockType type);
 	
 	public int blockIndex(int x, int y, int z);
 	

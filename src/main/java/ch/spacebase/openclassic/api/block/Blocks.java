@@ -12,12 +12,12 @@ import ch.spacebase.openclassic.api.event.block.BlockUnregisterEvent;
  */
 public class Blocks {
 	
-	private static final BlockType registry[] = new BlockType[256];
+	private static final BlockType registry[] = new BlockType[256 * 16];
 	
 	static {
-		// make sure enum is loaded.
+		// make sure default blocks are loaded.
 		@SuppressWarnings("unused")
-		VanillaBlock v = VanillaBlock.STONE;
+		BlockType v = VanillaBlock.STONE;
 	}
 	
 	/**
@@ -25,8 +25,19 @@ public class Blocks {
 	 * @param id ID of the block.
 	 * @return The block with the given ID.
 	 */
-	public static BlockType fromId(int id) {
-		return registry[id];
+	public static BlockType get(int id) {
+		return get(id, 0);
+	}
+	
+	/**
+	 * Gets the block with the given ID and data.
+	 * @param id ID of the block.
+	 * @param data Data of the block.
+	 * @return The block with the given ID and data.
+	 */
+	public static BlockType get(int id, int data) {
+		data &= 0xf;
+		return registry[id * 16 + data];
 	}
 	
 	/**
@@ -35,7 +46,7 @@ public class Blocks {
 	 */
 	public static void register(BlockType block) {
 		OpenClassic.getGame().getEventManager().dispatch(new BlockRegisterEvent(block));
-		registry[block.getId()] = block;
+		registry[block.getId() * 16 + block.getData()] = block;
 	}
 	
 	/**
@@ -43,8 +54,22 @@ public class Blocks {
 	 * @param id ID of the Block to unregister.
 	 */
 	public static void unregister(int id) {
-		OpenClassic.getGame().getEventManager().dispatch(new BlockUnregisterEvent(fromId(id)));
-		registry[id] = null;
+		for(int data = 0; data < 16; data++) {
+			unregister(id, data);
+		}
+	}
+	
+	/**
+	 * Unregisters a block.
+	 * @param id ID of the Block to unregister.
+	 * @param data Data of the Block to unregister.
+	 */
+	public static void unregister(int id, int data) {
+		data &= 0xf;
+		if(get(id, data) != null) {
+			OpenClassic.getGame().getEventManager().dispatch(new BlockUnregisterEvent(get(id, data)));
+			registry[id * 16 + data] = null;
+		}
 	}
 	
 	/**

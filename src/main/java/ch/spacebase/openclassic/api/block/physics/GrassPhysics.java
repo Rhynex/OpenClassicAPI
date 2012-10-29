@@ -35,6 +35,11 @@ public class GrassPhysics implements BlockPhysics {
 	@Override
 	public void onPlace(Block block) {
 	}
+	
+	@Override
+	public boolean canPlace(Block block) {
+		return true;
+	}
 
 	@Override
 	public void onBreak(Block block) {

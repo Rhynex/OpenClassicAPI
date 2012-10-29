@@ -19,6 +19,11 @@ public class SpongePhysics implements BlockPhysics {
 	public void onPlace(Block block) {
 		this.soak(block);
 	}
+	
+	@Override
+	public boolean canPlace(Block block) {
+		return true;
+	}
 
 	@Override
 	public void onBreak(Block block) {

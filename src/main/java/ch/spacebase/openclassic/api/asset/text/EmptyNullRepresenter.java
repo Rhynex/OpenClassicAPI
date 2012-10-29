@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.config;
+package ch.spacebase.openclassic.api.asset.text;
 
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.CollectionNode;

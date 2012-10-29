@@ -1,5 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
+import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.model.SubTexture;
 import ch.spacebase.openclassic.api.gui.GuiScreen;
@@ -16,7 +17,7 @@ public class Button extends Widget {
 	private boolean active = true;
 
 	public Button(int id, int x, int y, Screen parent, String text) {
-		this(id, x, y, 200, 20, parent, text);
+		this(id, x, y, 400, 40, parent, text);
 	}
 	
 	public Button(int id, int x, int y, int width, int height, Screen parent, String text) {
@@ -91,9 +92,9 @@ public class Button extends Widget {
 		}
 
 		SubTexture part1 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1(), texture.getY1(), this.width / 2, this.height / 2);
-		SubTexture part2 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1() + 200 - this.width / 2, texture.getY1(), this.width / 2, this.height / 2);
-		SubTexture part3 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1(), texture.getY1() + 20 - this.height / 2, this.width / 2, this.height / 2);
-		SubTexture part4 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1() + 200 - this.width / 2, texture.getY1() + 20 - this.height / 2, this.width / 2, this.height / 2);
+		SubTexture part2 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1() + 400 - this.width / 2, texture.getY1(), this.width / 2, this.height / 2);
+		SubTexture part3 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1(), texture.getY1() + 40 - this.height / 2, this.width / 2, this.height / 2);
+		SubTexture part4 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1() + 400 - this.width / 2, texture.getY1() + 40 - this.height / 2, this.width / 2, this.height / 2);
 		RenderHelper.getHelper().drawSubTex(part1, this.x, this.y, 1);
 		RenderHelper.getHelper().drawSubTex(part2, this.x + this.width / 2, this.y, 1);
 		RenderHelper.getHelper().drawSubTex(part3, this.x, this.y + this.height / 2, 1);
@@ -105,11 +106,11 @@ public class Button extends Widget {
 		}
 		
 		if (!this.active) {
-			RenderHelper.getHelper().renderText(message, this.x + this.width / 2, this.y + (this.height - 8) / 2, -6250336);
+			RenderHelper.getHelper().renderText(Color.GRAY + message, this.x + (this.width - 8) / 2, this.y + (this.height - 24) / 2);
 		} else if (hover) {
-			RenderHelper.getHelper().renderText(message, this.x + this.width / 2, this.y + (this.height - 8) / 2, 16777120);
+			RenderHelper.getHelper().renderText(Color.YELLOW + message, this.x + (this.width - 8) / 2, this.y + (this.height - 24) / 2);
 		} else {
-			RenderHelper.getHelper().renderText(message, this.x + this.width / 2, this.y + (this.height - 8) / 2, 14737632);
+			RenderHelper.getHelper().renderText(message, this.x + (this.width - 8) / 2, this.y + (this.height - 24) / 2);
 		}
 	}
 }

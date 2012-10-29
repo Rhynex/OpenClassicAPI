@@ -4,7 +4,8 @@ import java.io.File;
 import java.util.logging.Logger;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.data.NBTData;
 
 /**
@@ -14,7 +15,7 @@ public abstract class Plugin {
 
 	private Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 	private PluginDescription description;
-	private Configuration config;
+	private YamlFile config;
 	private File dataFolder;
 	private boolean enabled;
 	private NBTData data;
@@ -22,7 +23,6 @@ public abstract class Plugin {
 	protected void init(PluginDescription description) {
 		this.description = description;
 		this.dataFolder = new File(OpenClassic.getGame().getDirectory(), "plugins/" + description.getName());
-		this.config = new Configuration(new File(this.dataFolder, "config.yml"));
 		this.data = new NBTData(description.getName());
 	}
 	
@@ -68,7 +68,11 @@ public abstract class Plugin {
 	 * Gets the plugin's configuration.
 	 * @return The plugin's configuration.
 	 */
-	public Configuration getConfig() {
+	public YamlFile getConfig() {
+		if(this.config == null) {
+			this.config = OpenClassic.getGame().getAssetManager().load(this.dataFolder.getPath() + File.separator + "config.yml", AssetSource.FILE, YamlFile.class);
+		}
+		
 		return this.config;
 	}
 	

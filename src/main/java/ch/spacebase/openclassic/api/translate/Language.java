@@ -1,9 +1,8 @@
 package ch.spacebase.openclassic.api.translate;
 
-import java.io.File;
-import java.io.InputStream;
-
-import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 
 /**
  * A language pack for use in a translator.
@@ -11,18 +10,11 @@ import ch.spacebase.openclassic.api.config.Configuration;
 public class Language {
 
 	private String name;
-	private Configuration lang;
+	private YamlFile lang;
 	
-	public Language(String name, String file) {
+	public Language(String name, String file, AssetSource source) {
 		this.name = name;
-		this.lang = new Configuration(new File(file));
-		this.lang.load();
-	}
-	
-	public Language(String name, InputStream in) {
-		this.name = name;
-		this.lang = new Configuration(in);
-		this.lang.load();
+		this.lang = OpenClassic.getGame().getAssetManager().load(file, source, YamlFile.class);
 	}
 	
 	/**

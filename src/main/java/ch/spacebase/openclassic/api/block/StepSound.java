@@ -8,12 +8,13 @@ import java.util.Random;
 public enum StepSound {
 
 	NONE("", 0, 0),
-	GRASS("step.grass", 0.6F, 1),
 	CLOTH("step.cloth", 0.7F, 1.2F),
-	SAND("step.sand", 0.6F, 1),
+	DIRT("step.dirt", 1, 1),
+	GRASS("step.grass", 1, 1),
 	GRAVEL("step.gravel", 1, 1),
+	METAL("step.metal", 1, 2),
+	SAND("step.sand", 0.6F, 1),
 	STONE("step.stone", 1, 1),
-	METAL("step.stone", 1, 2),
 	WOOD("step.wood", 1, 1);
 	
 	private static final Random rand = new Random();

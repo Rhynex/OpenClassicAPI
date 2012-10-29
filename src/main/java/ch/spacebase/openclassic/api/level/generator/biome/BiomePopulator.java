@@ -10,7 +10,7 @@ public class BiomePopulator implements Populator {
 
 	@Override
 	public void populate(Level level, Chunk chunk, Random random) {
-		Biome biome = chunk.getBiome(7, 7, 7);
+		Biome biome = chunk.getBiome(chunk.getWorldX() + 7, chunk.getWorldY() + 7, chunk.getWorldZ() + 7);
 		if(biome != null) {
 			biome.decorate(level, chunk, random);
 		}

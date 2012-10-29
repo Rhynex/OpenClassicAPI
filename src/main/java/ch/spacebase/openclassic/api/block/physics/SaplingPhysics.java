@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.block.physics;
 import java.util.Random;
 
 import ch.spacebase.openclassic.api.block.Block;
+import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
@@ -32,6 +33,12 @@ public class SaplingPhysics implements BlockPhysics {
 	@Override
 	public void onPlace(Block block) {
 	}
+	
+	@Override
+	public boolean canPlace(Block block) {
+		Block b = block.getRelative(BlockFace.DOWN);
+		return b.getType() == VanillaBlock.DIRT || b.getType() == VanillaBlock.GRASS;
+	}
 
 	@Override
 	public void onBreak(Block block) {
@@ -39,6 +46,10 @@ public class SaplingPhysics implements BlockPhysics {
 
 	@Override
 	public void onNeighborChange(Block block, Block neighbor) {
+		Block b = block.getRelative(BlockFace.DOWN);
+		if(b.getType() != VanillaBlock.DIRT && b.getType() != VanillaBlock.GRASS) {
+			block.setType(VanillaBlock.AIR);
+		}
 	}
 
 }

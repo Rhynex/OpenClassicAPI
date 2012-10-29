@@ -10,8 +10,8 @@ import java.nio.channels.ReadableByteChannel;
 
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
 
 /**
  * A task that adds a source.
@@ -30,7 +30,7 @@ public class SourceAddTask implements Runnable {
 	
 	@Override
 	public void run() {	
-		Configuration sources = OpenClassic.getGame().getPackageManager().getSourcesList();
+		YamlFile sources = OpenClassic.getGame().getPackageManager().getSourcesList();
 		
 		if(sources.getString(this.id) != null && !sources.getString(this.id).equals("")) {
 			if(this.executor != null) this.executor.sendMessage(Color.RED + "A source with the specified ID already exists.");
@@ -38,7 +38,11 @@ public class SourceAddTask implements Runnable {
 		}
 		
 		sources.setValue(this.id, this.url);
-		sources.save();
+		try {
+			sources.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		if(this.executor != null) this.executor.sendMessage(Color.AQUA + "Downloading package list...");
 		File file = new File(OpenClassic.getGame().getDirectory(), "source-cache/" + id + "-packages.yml");

@@ -4,10 +4,11 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Map;
 
+import ch.spacebase.openclassic.api.asset.AssetManager;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.command.Command;
 import ch.spacebase.openclassic.api.command.CommandExecutor;
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.event.EventManager;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.LevelInfo;
@@ -20,10 +21,16 @@ import ch.spacebase.openclassic.api.sound.AudioManager;
 import ch.spacebase.openclassic.api.translate.Translator;
 
 /**
- * Represents a Minecraft game.
+ * Represents an OpenClassic game.
  */
 public interface Game {
 
+	/**
+	 * Gets the game's asset manager.
+	 * @return The game's asset manager.
+	 */
+	public AssetManager getAssetManager();
+	
 	/**
 	 * Gets the game's package manager.
 	 * @return The game's package manager.
@@ -116,7 +123,7 @@ public interface Game {
 	 * Gets the game's configuration.
 	 * @return The game's configuration.
 	 */
-	public Configuration getConfig();
+	public YamlFile getConfig();
 	
 	/**
 	 * Registers a generator.

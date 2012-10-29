@@ -1,11 +1,12 @@
 package ch.spacebase.openclassic.api.pkg.task;
 
 import java.io.File;
+import java.io.IOException;
 
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.text.YamlFile;
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.plugin.Plugin;
 
 /**
@@ -23,7 +24,7 @@ public class PackageRemoveTask implements Runnable {
 	
 	@Override
 	public void run() {
-		Configuration pkgs = OpenClassic.getGame().getPackageManager().getInstalled();
+		YamlFile pkgs = OpenClassic.getGame().getPackageManager().getInstalled();
 		
 		if(pkgs.getNode(this.name) == null) {
 			if(this.executor != null) this.executor.sendMessage(Color.RED + "This package is not installed!");
@@ -54,7 +55,11 @@ public class PackageRemoveTask implements Runnable {
 		}
 		
 		pkgs.remove(this.name);
-		pkgs.save();
+		try {
+			pkgs.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		if(this.executor != null) this.executor.sendMessage(Color.GREEN + "The package \"" + this.name + "\" has been removed successfully!");
 	}

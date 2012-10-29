@@ -22,6 +22,11 @@ public class HalfStepPhysics implements BlockPhysics {
 			relative.setType(VanillaBlock.DOUBLE_SLAB);
 		}
 	}
+	
+	@Override
+	public boolean canPlace(Block block) {
+		return true;
+	}
 
 	@Override
 	public void onBreak(Block block) {

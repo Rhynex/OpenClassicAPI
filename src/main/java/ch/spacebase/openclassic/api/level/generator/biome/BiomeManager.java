@@ -1,7 +1,7 @@
 package ch.spacebase.openclassic.api.level.generator.biome;
 
 public abstract class BiomeManager implements Cloneable {
-	
+
 	private final int x;
 	private final int z;
 
@@ -26,5 +26,5 @@ public abstract class BiomeManager implements Cloneable {
 
 	@Override
 	public abstract BiomeManager clone();
-	
+
 }

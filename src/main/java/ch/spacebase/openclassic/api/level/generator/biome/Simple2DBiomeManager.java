@@ -12,6 +12,8 @@ public class Simple2DBiomeManager extends BiomeManager {
 
 	@Override
 	public Biome getBiome(int x, int y, int z) {
+		x &= 0xf;
+		z &= 0xf;
 		return Biomes.getBiome(this.biomes[z << 4 | x]);
 	}
 
@@ -33,5 +35,5 @@ public class Simple2DBiomeManager extends BiomeManager {
 		manager.deserialize(this.serialize());
 		return manager;
 	}
-	
+
 }

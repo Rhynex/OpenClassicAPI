@@ -11,7 +11,7 @@ public final class StateButton extends Button {
 	private String state;
 	
 	public StateButton(int id, int x, int y, Screen parent, String text) {
-		this(id, x, y, 200, 20, parent, text);
+		this(id, x, y, 400, 40, parent, text);
 	}
 	
 	public StateButton(int id, int x, int y, int width, int height, Screen parent, String text) {

@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.config;
+package ch.spacebase.openclassic.api.asset.text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import ch.spacebase.openclassic.api.math.MathHelper;
 public class ConfigurationNode {
 
 	private final String path;
-	protected Configuration config;
+	protected YamlFile config;
 	private Object value;
 	private Object def;
 
@@ -80,7 +80,7 @@ public class ConfigurationNode {
 	 * Sets the configuration this node belongs to.
 	 * @param config Configuration this node belongs to.
 	 */
-	public void setConfiguration(Configuration config) {
+	public void setConfiguration(YamlFile config) {
 		config.addNode(this);
 	}
 

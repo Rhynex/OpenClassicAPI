@@ -4,6 +4,7 @@ import java.net.SocketAddress;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.Position;
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.component.ComponentHolder;
 import ch.spacebase.openclassic.api.data.NBTData;
@@ -53,16 +54,16 @@ public interface Player extends Sender, ComponentHolder {
 	public void setDisplayName(String name);
 	
 	/**
-	 * Gets the current ID of the block placement mode the player has.
-	 * @return The block ID of the current block mode.
+	 * Gets the current block placement mode of the player.
+	 * @return The current block mode.
 	 */
-	public byte getPlaceMode();
+	public BlockType getPlaceMode();
 	
 	/**
-	 * Sets the block ID of the current block placement mode the player has.
-	 * @param type Block ID to set it to.
+	 * Sets the current block placement mode of the player.
+	 * @param type Block to set it to.
 	 */
-	public void setPlaceMode(int type);
+	public void setPlaceMode(BlockType type);
 	
 	/**
 	 * Moves the player to the given position.

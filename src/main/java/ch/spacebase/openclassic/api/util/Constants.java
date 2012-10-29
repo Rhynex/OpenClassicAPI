@@ -88,7 +88,17 @@ public class Constants {
 	/**
 	 * The area of a chunk.
 	 */
-	public static final int CHUNK_AREA = CHUNK_WIDTH * CHUNK_HEIGHT * CHUNK_DEPTH;
+	public static final int CHUNK_AREA = CHUNK_WIDTH * CHUNK_DEPTH;
+	
+	/**
+	 * The volume of a chunk.
+	 */
+	public static final int CHUNK_VOLUME = CHUNK_WIDTH * CHUNK_HEIGHT * CHUNK_DEPTH;
+
+	/**
+	 * The standard sea level of a level.
+	 */
+	public static final int SEA_LEVEL = 63;
 	
 	/**
 	 * Default private constructor

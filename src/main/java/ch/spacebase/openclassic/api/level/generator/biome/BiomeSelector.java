@@ -9,5 +9,5 @@ public abstract class BiomeSelector {
 	}
 
 	public abstract Biome pickBiome(int x, int y, int z, long seed);
-	
+
 }
