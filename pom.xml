@@ -48,8 +48,12 @@
         		<url>http://central.maven.org/maven2</url>
     		</repository>
               	<repository>
-              	      <id>spacebase</id>
-              	      <url>http://repo.spacebase.ch</url>
+              	      	<id>spout-repo</id>
+              	      	<url>http://repo.spout.org</url>
+              	</repository>
+              	<repository>
+              	     	<id>spacebase</id>
+              	      	<url>http://repo.spacebase.ch</url>
               	</repository>
 	</repositories>
 
@@ -59,6 +63,12 @@
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
 			<version>1.10</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.royawesome</groupId>
+			<artifactId>jlibnoise</artifactId>
+			<version>dev-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
