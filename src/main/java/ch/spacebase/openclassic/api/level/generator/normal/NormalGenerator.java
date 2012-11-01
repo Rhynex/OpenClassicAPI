@@ -31,7 +31,7 @@ public class NormalGenerator extends BiomeGenerator {
 
 	@Override
 	public String getName() {
-		return "VanillaNormal";
+		return "normal";
 	}
 
 	@Override
