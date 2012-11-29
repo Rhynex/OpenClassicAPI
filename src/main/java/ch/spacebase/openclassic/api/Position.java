@@ -1,5 +1,6 @@
 package ch.spacebase.openclassic.api;
 
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.math.MathHelper;
 import ch.spacebase.openclassic.api.math.Vector;
@@ -157,6 +158,14 @@ public class Position implements Cloneable {
 		if(inter > 90) inter = 90;
 		if(inter < -90) inter = -90;
 		return inter;
+	}
+	
+	/**
+	 * Gets the BlockType at this position.
+	 * @return The BlockType at this position.
+	 */
+	public BlockType getBlockType() {
+		return this.level.getBlockTypeAt(this);
 	}
 	
 	/**

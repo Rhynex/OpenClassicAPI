@@ -152,6 +152,26 @@ public class Model {
 	}
 	
 	/**
+	 * Renders the model with the given texture.
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param z Z to render at.
+	 * @param brightness Brightness to render at.
+	 * @param texture Texture to render with.
+	 * @return Whether anything was rendered.
+	 */
+	public boolean render(BlockType type, float x, float y, float z, float brightness, SubTexture texture) {
+		for(Quad quad : this.quads) {
+			SubTexture old = quad.getTexture();
+			quad.setTexture(texture);
+			quad.render(x, y, z, brightness);
+			quad.setTexture(old);
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * Returns true if this model is a full cube.
 	 * @return True if the model is a full cube.
 	 */

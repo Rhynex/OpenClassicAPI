@@ -13,8 +13,12 @@ public class AssetManager {
 	}
 	
 	public <T extends Asset> T load(String file, AssetSource source, Class<T> clazz) {
+		return this.load(file, source, clazz, true);
+	}
+	
+	public <T extends Asset> T load(String file, AssetSource source, Class<T> clazz, boolean usedir) {
 		try {
-			T asset = clazz.getDeclaredConstructor(String.class, AssetSource.class).newInstance(source.getPath(this.dir, file), source);
+			T asset = clazz.getDeclaredConstructor(String.class, AssetSource.class).newInstance(usedir ? source.getPath(this.dir, file) : file, source);
 			asset.load();
 			return asset;
 		} catch (Exception e) {

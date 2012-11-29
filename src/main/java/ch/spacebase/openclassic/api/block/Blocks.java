@@ -37,7 +37,9 @@ public class Blocks {
 	 */
 	public static BlockType get(int id, int data) {
 		data &= 0xf;
-		return registry[id * 16 + data];
+		BlockType ret = registry[id * 16 + data];
+		if(ret == null) return get(id, 0);
+		return ret;
 	}
 	
 	/**

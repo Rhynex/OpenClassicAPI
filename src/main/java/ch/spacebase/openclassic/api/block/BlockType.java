@@ -22,6 +22,7 @@ public class BlockType {
 	private boolean liquid = false;
 	private float brightness = 0;
 	private int delay = 0;
+	private int breakTicks = 0;
 	private BlockPhysics physics;
 	
 	public BlockType(int id, StepSound sound, int texture) {
@@ -150,6 +151,23 @@ public class BlockType {
 	 */
 	public BlockType setTickDelay(int delay) {
 		this.delay = delay;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's break ticks.
+	 * @return The block's break ticks.
+	 */
+	public int getBreakTicks() {
+		return this.breakTicks;
+	}
+	
+	/**
+	 * Sets the blocks break ticks.
+	 * @param time The block's new break ticks.
+	 */
+	public BlockType setBreakTicks(int time) {
+		this.breakTicks = time;
 		return this;
 	}
 

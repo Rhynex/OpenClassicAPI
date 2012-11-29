@@ -93,6 +93,14 @@ public class Quad {
 	}
 	
 	/**
+	 * Sets the quad's texture.
+	 * @param tex The quad's new texture.
+	 */
+	public void setTexture(SubTexture tex) {
+		this.texture = tex;
+	}
+	
+	/**
 	 * Renders the quad.
 	 * @param x X to render at.
 	 * @param y Y to render at.

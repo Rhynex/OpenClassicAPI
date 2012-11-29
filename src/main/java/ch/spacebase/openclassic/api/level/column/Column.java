@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api.level.column;
 
 import java.util.List;
 
+import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.generator.biome.BiomeManager;
@@ -17,6 +18,10 @@ public interface Column {
 	public int getWorldX();
 	
 	public int getWorldZ();
+	
+	public Block getBlock(int x, int y, int z);
+	
+	public Block getBlockRelative(int x, int y, int z);
 	
 	public byte getBlockAt(int x, int y, int z);
 	
@@ -34,7 +39,7 @@ public interface Column {
 	
 	public Chunk getChunkFromBlock(int y);
 	
-	public List<? extends Chunk> getChunks();
+	public List<Chunk> getChunks();
 	
 	public void save();
 	

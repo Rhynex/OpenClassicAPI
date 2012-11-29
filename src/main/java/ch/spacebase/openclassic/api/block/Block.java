@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.block;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.entity.BlockEntity;
 import ch.spacebase.openclassic.api.level.Level;
+import ch.spacebase.openclassic.api.level.generator.biome.Biome;
 
 /**
  * Represents a block.
@@ -78,7 +79,17 @@ public class Block {
 	 * @return The block relative.
 	 */
 	public Block getRelative(BlockFace face) {
-		return this.getRelative(face.getModX(), face.getModY(), face.getModZ());
+		return this.getRelative(face, 1);
+	}
+	
+	/**
+	 * Gets the block relative to the given face at the given distance.
+	 * @param face Face to get the block relative to.
+	 * @param dist Distance from the block to get the relative at.
+	 * @return The block relative.
+	 */
+	public Block getRelative(BlockFace face, int dist) {
+		return this.getRelative(face.getModX() * dist, face.getModY() * dist, face.getModZ() * dist);
 	}
 	
 	/**
@@ -106,6 +117,14 @@ public class Block {
 	 */
 	public boolean isEntity() {
 		return this.getBlockEntity() != null;
+	}
+
+	/**
+	 * Gets the biome at this block.
+	 * @return The biome at this block.
+	 */
+	public Biome getBiome() {
+		return this.getPosition().getLevel().getBiome(this.getPosition().getBlockX(), this.getPosition().getBlockY(), this.getPosition().getBlockZ());
 	}
 	
 }

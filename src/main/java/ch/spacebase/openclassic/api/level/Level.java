@@ -393,7 +393,7 @@ public interface Level {
 	 * Gets all the loaded columns.
 	 * @return All loaded columns.
 	 */
-	public List<? extends Column> getColumns();
+	public List<Column> getColumns();
 	
 	/**
 	 * Gets the level's chunk generator.
@@ -426,5 +426,14 @@ public interface Level {
 	 * @return The column's biome manager.
 	 */
 	public BiomeManager getBiomeManager(int x, int z, boolean load);
+	
+	/**
+	 * Creates an explosion at the given location.
+	 * @param x X of the explosion.
+	 * @param y Y of the explosion.
+	 * @param z Z of the explosion.
+	 * @param power Power of the explosion.
+	 */
+	public void explode(int x, int y, int z, int power);
 	
 }

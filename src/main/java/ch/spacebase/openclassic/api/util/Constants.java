@@ -94,6 +94,11 @@ public class Constants {
 	 * The volume of a chunk.
 	 */
 	public static final int CHUNK_VOLUME = CHUNK_WIDTH * CHUNK_HEIGHT * CHUNK_DEPTH;
+	
+	/**
+	 * The volume of a column.
+	 */
+	public static final int COLUMN_VOLUME = CHUNK_WIDTH * COLUMN_HEIGHT * CHUNK_DEPTH;
 
 	/**
 	 * The standard sea level of a level.
