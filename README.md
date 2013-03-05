@@ -2,7 +2,7 @@
 <b><center><h1>OpenClassicAPI</h></center></b>
 ==========
 
-
+<h1>No longer being developed as of March 5th, 2013.</h>
 
 <b>About OpenClassicAPI</b>
 --------
