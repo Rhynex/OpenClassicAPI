@@ -1,7 +1,6 @@
 package ch.spacebase.openclassic.api.block;
 
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.entity.BlockEntity;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.generator.biome.Biome;
 
@@ -101,22 +100,6 @@ public class Block {
 	 */
 	public Block getRelative(int x, int y, int z) {
 		return new Block(this.pos.clone().add(x, y, z));
-	}
-	
-	/**
-	 * Gets the entity of this block, if there is one.
-	 * @return The block's entity.
-	 */
-	public BlockEntity getBlockEntity() {
-		return this.pos.getLevel().getBlockEntity(this.pos);
-	}
-	
-	/**
-	 * Returns true if this block is an entity.
-	 * @return Whether the block is an entity.
-	 */
-	public boolean isEntity() {
-		return this.getBlockEntity() != null;
 	}
 
 	/**

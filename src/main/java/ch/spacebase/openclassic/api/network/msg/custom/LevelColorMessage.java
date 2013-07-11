@@ -37,11 +37,6 @@ public class LevelColorMessage extends Message {
 	}
 
 	@Override
-	public Object[] getParams() {
-		return new Object[] { type, value };
-	}
-
-	@Override
 	public byte getOpcode() {
 		return 21;
 	}

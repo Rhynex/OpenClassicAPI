@@ -36,11 +36,6 @@ public class BlockModelMessage extends Message {
 	public String toString() {
 		return "BlockModelMessage{block=" + block + ",quads=" + model.getQuads().size() + "}";
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.block, this.model.getClass().getSimpleName(), this.model.getDefaultCollisionBox().getX1(), this.model.getDefaultCollisionBox().getX2(), this.model.getDefaultCollisionBox().getY1(), this.model.getDefaultCollisionBox().getY2(), this.model.getDefaultCollisionBox().getZ1(), this.model.getDefaultCollisionBox().getZ2(), this.model.getDefaultSelectionBox().getX1(), this.model.getDefaultSelectionBox().getX2(), this.model.getDefaultSelectionBox().getY1(), this.model.getDefaultSelectionBox().getY2(), this.model.getDefaultSelectionBox().getZ1(), this.model.getDefaultSelectionBox().getZ2() };
-	}
 	
 	@Override
 	public byte getOpcode() {

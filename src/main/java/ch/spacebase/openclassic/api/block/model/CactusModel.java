@@ -1,8 +1,12 @@
 package ch.spacebase.openclassic.api.block.model;
 
+import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.texture.Texture;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.render.RenderHelper;
+import ch.spacebase.openclassic.api.util.Constants;
 
 /**
  * The model used for cacti.
@@ -17,42 +21,42 @@ public class CactusModel extends Model {
 		this.setCollisionBox(0.065f, 0, 0.065f, 0.935f, 1, 0.935f);
 		this.setSelectionBox(0.065f, 0, 0.065f, 0.935f, 1, 0.935f);
 		
-		Quad bottom = new Quad(0, texture.getSubTexture(textureIds[0]));
+		Quad bottom = new Quad(0, texture.getSubTexture(textureIds[0], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		bottom.addVertex(0, 0, 0, 0);
 		bottom.addVertex(1, 1, 0, 0);
 		bottom.addVertex(2, 1, 0, 1);
 		bottom.addVertex(3, 0, 0, 1);
 		this.addQuad(bottom);
 		
-		Quad top = new Quad(1, texture.getSubTexture(textureIds[1]));
+		Quad top = new Quad(1, texture.getSubTexture(textureIds[1], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		top.addVertex(0, 0, 1, 0);
 		top.addVertex(1, 0, 1, 1);
 		top.addVertex(2, 1, 1, 1);
 		top.addVertex(3, 1, 1, 0);
 		this.addQuad(top);
 
-		Quad face1 = new Quad(2, texture.getSubTexture(textureIds[2]));
+		Quad face1 = new Quad(2, texture.getSubTexture(textureIds[2], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face1.addVertex(0, 0, 0, 0.065f);
 		face1.addVertex(1, 0, 1, 0.065f);
 		face1.addVertex(2, 1, 1, 0.065f);
 		face1.addVertex(3, 1, 0, 0.065f);
 		this.addQuad(face1);
 
-		Quad face2 = new Quad(3, texture.getSubTexture(textureIds[3]));
+		Quad face2 = new Quad(3, texture.getSubTexture(textureIds[3], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face2.addVertex(0, 1, 0, 0.935f);
 		face2.addVertex(1, 1, 1, 0.935f);
 		face2.addVertex(2, 0, 1, 0.935f);
 		face2.addVertex(3, 0, 0, 0.935f);
 		this.addQuad(face2);
 
-		Quad face3 = new Quad(4, texture.getSubTexture(textureIds[4]));
+		Quad face3 = new Quad(4, texture.getSubTexture(textureIds[4], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face3.addVertex(0, 0.065f, 0, 1);
 		face3.addVertex(1, 0.065f, 1, 1);
 		face3.addVertex(2, 0.065f, 1, 0);
 		face3.addVertex(3, 0.065f, 0, 0);
 		this.addQuad(face3);
 		
-		Quad face4 = new Quad(5, texture.getSubTexture(textureIds[5]));
+		Quad face4 = new Quad(5, texture.getSubTexture(textureIds[5], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face4.addVertex(0, 0.935f, 0, 0);
 		face4.addVertex(1, 0.935f, 1, 0);
 		face4.addVertex(2, 0.935f, 1, 1);
@@ -64,8 +68,8 @@ public class CactusModel extends Model {
 		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId });
 	}
 	
-	public CactusModel(String texture, int textureSize) {
-		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
+	public CactusModel(String texture, AssetSource source) {
+		this(OpenClassic.getGame().getAssetManager().load(texture, source, Texture.class), 0);
 	}
 	
 	@Override
@@ -131,10 +135,10 @@ public class CactusModel extends Model {
 		switch(quad) {
 			case 0: return BlockFace.DOWN;
 			case 1: return BlockFace.UP;
-			case 2: return BlockFace.WEST;
-			case 3: return BlockFace.EAST;
-			case 4: return BlockFace.SOUTH;
-			case 5: return BlockFace.NORTH;
+			case 2: return BlockFace.EAST;
+			case 3: return BlockFace.WEST;
+			case 4: return BlockFace.NORTH;
+			case 5: return BlockFace.SOUTH;
 			default: return null;
 		}
 	}

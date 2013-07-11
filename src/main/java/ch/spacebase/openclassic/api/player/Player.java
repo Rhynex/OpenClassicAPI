@@ -4,10 +4,12 @@ import java.net.SocketAddress;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.block.BlockType;
+import ch.spacebase.openclassic.api.block.BlockFace;
+import ch.spacebase.openclassic.api.block.model.BoundingBox;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.component.ComponentHolder;
 import ch.spacebase.openclassic.api.data.NBTData;
+import ch.spacebase.openclassic.api.inventory.PlayerInventory;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.permissions.Group;
 import ch.spacebase.openclassic.api.plugin.RemotePluginInfo;
@@ -54,16 +56,22 @@ public interface Player extends Sender, ComponentHolder {
 	public void setDisplayName(String name);
 	
 	/**
-	 * Gets the current block placement mode of the player.
-	 * @return The current block mode.
+	 * Gets the player's selected block.
+	 * @return The player's selected block.
 	 */
-	public BlockType getPlaceMode();
+	public Position getSelectedBlock();
 	
 	/**
-	 * Sets the current block placement mode of the player.
-	 * @param type Block to set it to.
+	 * Gets the player's selected liquid.
+	 * @return The player's selected liquid.
 	 */
-	public void setPlaceMode(BlockType type);
+	public Position getSelectedLiquid();
+	
+	/**
+	 * Gets the player's selected block face.
+	 * @return The player's selected block face.
+	 */
+	public BlockFace getSelectedFace();
 	
 	/**
 	 * Moves the player to the given position.
@@ -187,5 +195,64 @@ public interface Player extends Sender, ComponentHolder {
 	 * @return If this player can see the other player.
 	 */
 	public boolean canSee(Player player);
+	
+	/**
+	 * Gets the player's bounding box.
+	 * @return The player's bounding box.
+	 */
+	public BoundingBox getBoundingBox();
+	
+	/**
+	 * Gets the player's inventory.
+	 * @return The player's inventory.
+	 */
+	public PlayerInventory getInventory();
+	
+	/**
+	 * Gets the player's health.
+	 * @return The player's health
+	 */
+	public int getHealth();
+	
+	/**
+	 * Sets the player's health.
+	 * @param health The player's new health
+	 */
+	public void setHealth(int health);
+	
+	/**
+	 * Damages the player.
+	 * @param damage Damage to deal.
+	 */
+	public void damage(int damage);
+	
+	/**
+	 * Heals the player.
+	 * @param health Amount of health to heal.
+	 */
+	public void heal(int health);
+	
+	/**
+	 * Returns true if the player is dead.
+	 * @return True if the player is dead.
+	 */
+	public boolean isDead();
+	
+	/**
+	 * Kills the player.
+	 */
+	public void die();
+	
+	/**
+	 * Gets the player's remaining air.
+	 * @return The player's remaining air.
+	 */
+	public int getAir();
+	
+	/**
+	 * Sets the player's remaining air.
+	 * @param air The player's new remaining air.
+	 */
+	public void setAir(int air);
 	
 }

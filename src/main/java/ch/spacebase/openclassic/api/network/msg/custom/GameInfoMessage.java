@@ -30,11 +30,6 @@ public class GameInfoMessage extends Message {
 	public String getLanguage() {
 		return this.language;
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.version };
-	}
 	
 	@Override
 	public String toString() {

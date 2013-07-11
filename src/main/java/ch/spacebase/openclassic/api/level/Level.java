@@ -5,8 +5,8 @@ import java.util.List;
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
+import ch.spacebase.openclassic.api.block.complex.ComplexBlock;
 import ch.spacebase.openclassic.api.data.NBTData;
-import ch.spacebase.openclassic.api.entity.BlockEntity;
 import ch.spacebase.openclassic.api.level.column.Column;
 import ch.spacebase.openclassic.api.level.generator.Generator;
 import ch.spacebase.openclassic.api.level.generator.biome.Biome;
@@ -239,46 +239,6 @@ public interface Level {
 	 * @param message Message to send.
 	 */
 	public void sendToAllExcept(Player skip, Message message);
-	
-	/**
-	 * Gets all the entities in the level.
-	 * @return All the entities.
-	 */
-	public List<BlockEntity> getBlockEntities();
-	
-	/**
-	 * Gets the entity with the given ID.
-	 * @param id ID to look for.
-	 * @return The entity.
-	 */
-	public BlockEntity getBlockEntityFromId(int id);
-	
-	/**
-	 * Gets the entity at the given position.
-	 * @param pos Position of the entity.
-	 * @return The entity.
-	 */
-	public BlockEntity getBlockEntity(Position pos);
-	
-	/**
-	 * Spawns an entity.
-	 * @param entity BlockEntity to spawn.
-	 * @param pos Position to spawn the entity in.
-	 * @return The spawned entity.
-	 */
-	public BlockEntity spawnBlockEntity(BlockEntity entity, Position pos);
-	
-	/**
-	 * Removes the entity from the level.
-	 * @param entity BlockEntity to remove.
-	 */
-	public void removeBlockEntity(BlockEntity entity);
-	
-	/**
-	 * Removes the entity with the given ID from the level.
-	 * @param id ID of the BlockEntity to remove.
-	 */
-	public void removeBlockEntity(int id);
 
 	/**
 	 * Schedules a block to be ticked next time the server ticks.
@@ -435,5 +395,53 @@ public interface Level {
 	 * @param power Power of the explosion.
 	 */
 	public void explode(int x, int y, int z, int power);
+	
+	/**
+	 * Checks whether there is a complex block at the given position.
+	 * @param pos Position of the block.
+	 * @return Whether the block is complex.
+	 */
+	public boolean isComplex(Position pos);
+	
+	/**
+	 * Checks whether there is a complex block at the given coordinates.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @return Whether the block is complex.
+	 */
+	public boolean isComplex(int x, int y, int z);
+	
+	/**
+	 * Gets the complex block at the given position.
+	 * @param pos Position of the block.
+	 * @return The complex block at the given position.
+	 */
+	public ComplexBlock getComplexBlock(Position pos);
+	
+	/**
+	 * Gets the complex block at the given coordinates.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @return The complex block at the given coordinates.
+	 */
+	public ComplexBlock getComplexBlock(int x, int y, int z);
+	
+	/**
+	 * Sets the complex block at the given position.
+	 * @param pos Position of the block.
+	 * @param complex The new complex block to set.
+	 */
+	public void setComplexBlock(Position pos, ComplexBlock complex);
+	
+	/**
+	 * Sets the complex block at the given coordinates.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @param complex The new complex block to set.
+	 */
+	public void setComplexBlock(int x, int y, int z, ComplexBlock complex);
 	
 }

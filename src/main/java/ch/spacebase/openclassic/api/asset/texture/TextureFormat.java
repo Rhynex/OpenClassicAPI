@@ -6,6 +6,7 @@ public enum TextureFormat {
 	GIF,
 	JPEG,
 	JPG,
-	PNG;
+	PNG,
+	UNKNOWN;
 	
 }

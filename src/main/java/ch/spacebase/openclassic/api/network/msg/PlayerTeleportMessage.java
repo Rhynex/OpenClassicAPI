@@ -75,11 +75,6 @@ public class PlayerTeleportMessage extends Message {
 	}
 	
 	@Override
-	public Object[] getParams() {
-		return new Object[] { this.playerId, this.x, this.y, this.z, this.yaw, this.pitch };
-	}
-	
-	@Override
 	public byte getOpcode() {
 		return 8;
 	}

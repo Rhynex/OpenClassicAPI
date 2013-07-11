@@ -2,12 +2,13 @@ package ch.spacebase.openclassic.api.render;
 
 import java.awt.image.BufferedImage;
 
+import ch.spacebase.openclassic.api.asset.texture.SubTexture;
+import ch.spacebase.openclassic.api.asset.texture.Texture;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.block.model.Quad;
-import ch.spacebase.openclassic.api.block.model.SubTexture;
-import ch.spacebase.openclassic.api.block.model.Texture;
 import ch.spacebase.openclassic.api.input.InputHelper;
+import ch.spacebase.openclassic.api.item.Item;
 
 /**
  * A collection of Gui helper methods.
@@ -38,7 +39,9 @@ public abstract class RenderHelper {
 	 * @param file File to bind.
 	 * @param jar Whether the file is in the client jar or not.
 	 * @return The binded texture's id.
+	 * @deprecated Use Texture.bind instead.
 	 */
+	@Deprecated
 	public abstract int bindTexture(String file, boolean jar);
 	
 	/**
@@ -61,13 +64,23 @@ public abstract class RenderHelper {
 	public abstract void renderText(String text, float x, float y);
 	
 	/**
-	 * Renders the given text at the given position.
+	 * Renders the given text at the given position with the X as the center at a scale of 2.
+	 * @param text Text to render
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 */
+	public abstract void renderScaledText(String text, float x, float y);
+	
+	/**
+	 * Renders the given text at the given position at a scale of 2.
 	 * @param text Text to render
 	 * @param x X to render at.
 	 * @param y Y to render at.
 	 * @param Whether the X is the center or not.
 	 */
 	public abstract void renderText(String text, float x, float y, boolean xCenter);
+	
+	public abstract void renderScaledText(String text, float x, float y, boolean xCenter);
 	
 	/**
 	 * Renders the given text at the given position with the X as the center and no shadow.
@@ -97,7 +110,7 @@ public abstract class RenderHelper {
 	public abstract void drawBox(float x1, float y1, float x2, float y2, int color);
 	
 	/**
-	 * Colors the specified area, fading into the given color.
+	 * Colors the specified area.
 	 * @param x1 X of the first corner.
 	 * @param y1 Y of the first corner.
 	 * @param x2 X of the second corner.
@@ -116,6 +129,27 @@ public abstract class RenderHelper {
 	 * @param fadeTo Color to fade into.
 	 */
 	public abstract void color(int x1, int y1, int x2, int y2, int color, int fadeTo);
+	
+	/**
+	 * Colors the specified area without alpha.
+	 * @param x1 X of the first corner.
+	 * @param y1 Y of the first corner.
+	 * @param x2 X of the second corner.
+	 * @param y2 Y of the second corner.
+	 * @param color Color to draw.
+	 */
+	public abstract void colorSolid(int x1, int y1, int x2, int y2, int color);
+	
+	/**
+	 * Colors the specified area without alpha, fading into the given color.
+	 * @param x1 X of the first corner.
+	 * @param y1 Y of the first corner.
+	 * @param x2 X of the second corner.
+	 * @param y2 Y of the second corner.
+	 * @param color Color to draw.
+	 * @param fadeTo Color to fade into.
+	 */
+	public abstract void colorSolid(int x1, int y1, int x2, int y2, int color, int fadeTo);
 
 	/**
 	 * Tells OpenGL to draw the specified color.
@@ -219,11 +253,9 @@ public abstract class RenderHelper {
 	 * @param y Y to draw at.
 	 * @param z Z to draw at.
 	 * @param scale Scale to draw with.
-	 * @param r Red to color with.
-	 * @param g Green to color with.
-	 * @param b Blue to color with.
+	 * @param brightness Brightness to draw at.
 	 */
-	public abstract void drawSubTex(SubTexture texture, float x, float y, float z, float scale, float r, float g, float b);
+	public abstract void drawSubTex(SubTexture texture, float x, float y, float z, float scale, float brightness);
 	
 	/**
 	 * Returns true if the side of the block can be rendered.
@@ -302,5 +334,12 @@ public abstract class RenderHelper {
 	 * @param enabled Whether culling is enabled.
 	 */
 	public abstract void setCulling(boolean enabled);
+	
+	/**
+	 * Renders the item for holding.
+	 * @param item Item to render.
+	 * @param brightness Brightness to render at.
+	 */
+	public abstract void drawHeldItem(Item item, float brightness);
 	
 }

@@ -30,11 +30,6 @@ public class KeyChangeMessage extends Message {
 	public boolean isPressed() {
 		return this.pressed;
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.key, this.pressed ? (byte) 1 : (byte) 0 };
-	}
 	
 	@Override
 	public String toString() {

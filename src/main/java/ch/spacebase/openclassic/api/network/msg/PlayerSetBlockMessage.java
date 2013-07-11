@@ -63,11 +63,6 @@ public class PlayerSetBlockMessage extends Message {
 	public String toString() {
 		return "PlayerSetBlockMessage{x=" + x + ",y=" + y + ",z=" + z + ",place=" + place + ",block=" + type + "}";
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.x, this.y, this.z, this.place ? (byte) 1 : (byte) 0, this.type };
-	}
 	
 	@Override
 	public byte getOpcode() {

@@ -23,11 +23,6 @@ public class PlayerDisconnectMessage extends Message {
 	public String toString() {
 		return "PlayerDisconnectMessage{message=" + message + "}";
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.message };
-	}
 	
 	@Override
 	public byte getOpcode() {

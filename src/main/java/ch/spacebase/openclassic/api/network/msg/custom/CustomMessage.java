@@ -33,11 +33,6 @@ public class CustomMessage extends Message {
 	public byte[] getData() {
 		return this.data;
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.id, this.data, this.data.length };
-	}
 	
 	@Override
 	public String toString() {

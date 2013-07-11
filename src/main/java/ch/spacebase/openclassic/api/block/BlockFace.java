@@ -6,28 +6,30 @@ package ch.spacebase.openclassic.api.block;
 public enum BlockFace {
 
 	/** The upper face. */
-	UP(0, 1, 0),
+	UP(0, 1, 0, 1),
 	/** The lower face. */
-	DOWN(0, -1, 0),
+	DOWN(0, -1, 0, 0),
 	/** The northern face. */
-	NORTH(1, 0, 0),
+	NORTH(-1, 0, 0, 3),
 	/** The southern face. */
-	SOUTH(-1, 0, 0),
+	SOUTH(1, 0, 0, 2),
 	/** The eastern face. */
-	EAST(0, 0, 1),
+	EAST(0, 0, -1, 5),
 	/** The western face. */
-	WEST(0, 0, -1);
+	WEST(0, 0, 1, 4);
 	
 	private static final BlockFace nsew[] = new BlockFace[] { NORTH, SOUTH, EAST, WEST };
 	
 	private int modx;
 	private int mody;
 	private int modz;
+	private int inverted;
 	
-	private BlockFace(int modx, int mody, int modz) {
+	private BlockFace(int modx, int mody, int modz, int inverted) {
 		this.modx = modx;
 		this.mody = mody;
 		this.modz = modz;
+		this.inverted = inverted;
 	}
 	
 	/**
@@ -54,6 +56,18 @@ public enum BlockFace {
 		return this.modz;
 	}
 	
+	/**
+	 * Gets the inverse of this face.
+	 * @return The inverse of this face.
+	 */
+	public BlockFace invert() {
+		return values()[this.inverted];
+	}
+	
+	/**
+	 * Gets an array containing the north, south, east, and west faces.
+	 * @return The array containing the faces.
+	 */
 	public static BlockFace[] nsew() {
 		return nsew;
 	}

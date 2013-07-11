@@ -62,7 +62,6 @@ public class PondDecorator implements Decorator {
 			}
 		}
 
-		System.out.println("Placed water pond: " + x + ", " + y + ", " + z);
 		this.finalizeSurface(level, x, y, z);
 	}
 

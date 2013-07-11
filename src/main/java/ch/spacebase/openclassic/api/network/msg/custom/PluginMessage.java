@@ -31,11 +31,6 @@ public class PluginMessage extends Message {
 	public String getVersion() {
 		return this.version;
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.name, this.version };
-	}
 	
 	@Override
 	public String toString() {

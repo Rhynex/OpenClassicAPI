@@ -5,9 +5,12 @@ import java.util.List;
 
 import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.texture.Texture;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.render.RenderHelper;
+import ch.spacebase.openclassic.api.util.Constants;
 
 /**
  * A model used in liquids.
@@ -15,62 +18,62 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
 public class LiquidModel extends CubeModel {
 
 	private int quadCount = 0;
-	private BoundingBox top = new BoundingBox(0, 0, 0, 1, 0.95f, 1);
+	private BoundingBox top;
 	private List<Quad> topQuads = new ArrayList<Quad>();
 	
-	public LiquidModel(Texture texture, int textureIds[]) {
+	public LiquidModel(Texture texture, int textureIds[], float topHeight) {
 		super(texture, textureIds);
-		
+		this.top = new BoundingBox(0, 0, 0, 1, topHeight, 1);
 		this.setCollisionBox(null);
-		Quad bottom = new Quad(0, texture.getSubTexture(textureIds[0]));
+		Quad bottom = new Quad(0, texture.getSubTexture(textureIds[0], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		bottom.addVertex(0, 0, 0, 0);
 		bottom.addVertex(1, 1, 0, 0);
 		bottom.addVertex(2, 1, 0, 1);
 		bottom.addVertex(3, 0, 0, 1);
 		this.addTopQuad(bottom);
 		
-		Quad top = new Quad(1, texture.getSubTexture(textureIds[1]));
-		top.addVertex(0, 0, 0.95f, 0);
-		top.addVertex(1, 0, 0.95f, 1);
-		top.addVertex(2, 1, 0.95f, 1);
-		top.addVertex(3, 1, 0.95f, 0);
+		Quad top = new Quad(1, texture.getSubTexture(textureIds[1], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
+		top.addVertex(0, 0, topHeight, 0);
+		top.addVertex(1, 0, topHeight, 1);
+		top.addVertex(2, 1, topHeight, 1);
+		top.addVertex(3, 1, topHeight, 0);
 		this.addTopQuad(top);
 
-		Quad face1 = new Quad(2, texture.getSubTexture(textureIds[2]));
+		Quad face1 = new Quad(2, texture.getSubTexture(textureIds[2], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face1.addVertex(0, 0, 0, 0);
-		face1.addVertex(1, 0, 0.95f, 0);
-		face1.addVertex(2, 1, 0.95f, 0);
+		face1.addVertex(1, 0, topHeight, 0);
+		face1.addVertex(2, 1, topHeight, 0);
 		face1.addVertex(3, 1, 0, 0);
 		this.addTopQuad(face1);
 
-		Quad face2 = new Quad(3, texture.getSubTexture(textureIds[3]));
+		Quad face2 = new Quad(3, texture.getSubTexture(textureIds[3], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face2.addVertex(0, 1, 0, 1);
-		face2.addVertex(1, 1, 0.95f, 1);
-		face2.addVertex(2, 0, 0.95f, 1);
+		face2.addVertex(1, 1, topHeight, 1);
+		face2.addVertex(2, 0, topHeight, 1);
 		face2.addVertex(3, 0, 0, 1);
 		this.addTopQuad(face2);
 
-		Quad face3 = new Quad(4, texture.getSubTexture(textureIds[4]));
+		Quad face3 = new Quad(4, texture.getSubTexture(textureIds[4], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face3.addVertex(0, 0, 0, 1);
-		face3.addVertex(1, 0, 0.95f, 1);
-		face3.addVertex(2, 0, 0.95f, 0);
+		face3.addVertex(1, 0, topHeight, 1);
+		face3.addVertex(2, 0, topHeight, 0);
 		face3.addVertex(3, 0, 0, 0);
 		this.addTopQuad(face3);
 		
-		Quad face4 = new Quad(5, texture.getSubTexture(textureIds[5]));
+		Quad face4 = new Quad(5, texture.getSubTexture(textureIds[5], Constants.TERRAIN_SIZE, Constants.TERRAIN_SIZE));
 		face4.addVertex(0, 1, 0, 0);
-		face4.addVertex(1, 1, 0.95f, 0);
-		face4.addVertex(2, 1, 0.95f, 1);
+		face4.addVertex(1, 1, topHeight, 0);
+		face4.addVertex(2, 1, topHeight, 1);
 		face4.addVertex(3, 1, 0, 1);
 		this.addTopQuad(face4);
 	}
 	
-	public LiquidModel(Texture texture, int textureId) {
-		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId });
+	public LiquidModel(Texture texture, int textureId, float topHeight) {
+		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, topHeight);
 	}
 	
-	public LiquidModel(String texture, int textureSize) {
-		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
+	public LiquidModel(String texture, AssetSource source, float topHeight) {
+		this(OpenClassic.getGame().getAssetManager().load(texture, source, Texture.class), 0, topHeight);
 	}
 
 	@Override
@@ -107,7 +110,9 @@ public class LiquidModel extends CubeModel {
 	@Override
 	public BoundingBox getSelectionBox(int x, int y, int z) {
 		if(OpenClassic.getGame() instanceof Client && OpenClassic.getClient().getLevel() != null && OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z).isLiquid()) {
-			return this.top;
+			BoundingBox bb = this.top.clone();
+			bb.move(x, y, z);
+			return bb;
 		}
 		
 		return super.getSelectionBox(x, y, z);

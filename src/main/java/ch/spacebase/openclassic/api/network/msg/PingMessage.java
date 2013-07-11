@@ -9,11 +9,6 @@ public class PingMessage extends Message {
 	public String toString() {
 		return "PingMessage{}";
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { };
-	}
 	
 	@Override
 	public byte getOpcode() {

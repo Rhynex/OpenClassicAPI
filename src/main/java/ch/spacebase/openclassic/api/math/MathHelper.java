@@ -10,7 +10,7 @@ public class MathHelper {
 	private static float SIN[] = new float[65536];
 
 	static {
-		for (int i = 0; i < 65536; i++) {
+		for(int i = 0; i < 65536; i++) {
 			SIN[i] = (float) Math.sin((i * Math.PI * 2D) / 65536D);
 		}
 	}
@@ -22,7 +22,7 @@ public class MathHelper {
 	public static float cos(float f) {
 		return SIN[(int) (f * 10430.38F + 16384F) & 0xffff];
 	}
-	
+
 	public static Vector toForwardVec(float yaw, float pitch) {
 		float xzLen = MathHelper.cos(-pitch * DEG_TO_RAD);
 		float x = (MathHelper.sin(-yaw * DEG_TO_RAD - (float) Math.PI) * xzLen);
@@ -30,14 +30,34 @@ public class MathHelper {
 		float z = (MathHelper.cos(-yaw * DEG_TO_RAD - (float) Math.PI) * xzLen);
 		return new Vector(x, y, z);
 	}
-	
+
+	public static float wrapYaw(float angle) {
+		angle %= 360f;
+		if(angle <= -180) {
+			return angle + 360;
+		} else if(angle > 180) {
+			return angle - 360;
+		} else {
+			return angle;
+		}
+	}
+
+	public static float wrapPitch(float angle) {
+		angle = wrapYaw(angle);
+		if(angle < -90) return -90;
+		if(angle > 90) return 90;
+		return angle;
+	}
+
 	/**
 	 * Casts the given object to an integer if applicable.
-	 * @param o Object to cast.
+	 * 
+	 * @param o
+	 *            Object to cast.
 	 * @return The resulting integer.
 	 */
 	public static Integer castInt(Object o) {
-		if (o instanceof Number) {
+		if(o instanceof Number) {
 			return ((Number) o).intValue();
 		}
 
@@ -46,11 +66,13 @@ public class MathHelper {
 
 	/**
 	 * Casts the given object to a double if applicable.
-	 * @param o Object to cast.
+	 * 
+	 * @param o
+	 *            Object to cast.
 	 * @return The resulting double.
 	 */
 	public static Double castDouble(Object o) {
-		if (o instanceof Number) {
+		if(o instanceof Number) {
 			return ((Number) o).doubleValue();
 		}
 
@@ -59,11 +81,13 @@ public class MathHelper {
 
 	/**
 	 * Casts the given object to a float if applicable.
-	 * @param o Object to cast.
+	 * 
+	 * @param o
+	 *            Object to cast.
 	 * @return The resulting float.
 	 */
 	public static Float castFloat(Object obj) {
-		if (obj instanceof Number) {
+		if(obj instanceof Number) {
 			return ((Number) obj).floatValue();
 		}
 
@@ -72,13 +96,15 @@ public class MathHelper {
 
 	/**
 	 * Casts the given object to a boolean if applicable.
-	 * @param o Object to cast.
+	 * 
+	 * @param o
+	 *            Object to cast.
 	 * @return The resulting boolean.
 	 */
 	public static Boolean castBoolean(Object o) {
-		if (o instanceof Boolean) {
+		if(o instanceof Boolean) {
 			return (Boolean) o;
-		} else if (o instanceof String) {
+		} else if(o instanceof String) {
 			try {
 				return Boolean.parseBoolean((String) o);
 			} catch (IllegalArgumentException e) {

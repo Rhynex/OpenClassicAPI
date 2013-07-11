@@ -1,16 +1,24 @@
 package ch.spacebase.openclassic.api.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.Position;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.block.complex.ComplexBlock;
 import ch.spacebase.openclassic.api.block.model.CubeModel;
 import ch.spacebase.openclassic.api.block.model.Model;
-import ch.spacebase.openclassic.api.block.model.Texture;
+import ch.spacebase.openclassic.api.asset.texture.Texture;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
+import ch.spacebase.openclassic.api.inventory.ItemStack;
 
 /**
  * Represents a custom block.
  */
 public class BlockType {
 	
-	public static final Texture TERRAIN = new Texture("/level/terrain.png", true, 256, 256, 16);
+	public static final Texture TERRAIN = OpenClassic.getGame().getAssetManager().load("/level/terrain.png", AssetSource.JAR, Texture.class);
 	
 	private byte id;
 	private byte data;
@@ -18,12 +26,14 @@ public class BlockType {
 	private StepSound sound;
 	
 	private boolean opaque = true;
-	private boolean selectable = true;
 	private boolean liquid = false;
 	private float brightness = 0;
 	private int delay = 0;
-	private int breakTicks = 0;
+	private float hardness = 0;
 	private BlockPhysics physics;
+	private List<ItemStack> drops = new ArrayList<ItemStack>();
+	private int dropChance = 0;
+	private Class<? extends ComplexBlock> complex;
 	
 	public BlockType(int id, StepSound sound, int texture) {
 		this(id, sound, new CubeModel(TERRAIN, texture));
@@ -42,6 +52,12 @@ public class BlockType {
 		this.data = (byte) (data & 0xf);
 		this.sound = sound;
 		this.model = model;
+		this.drops.add(new ItemStack(this));
+	}
+	
+	protected void fixDrops() {
+		this.drops.clear();
+		this.drops.add(new ItemStack(this));
 	}
 	
 	/**
@@ -95,19 +111,6 @@ public class BlockType {
 	}
 	
 	/**
-	 * Returns true if the block is selectable in the block menu.
-	 * @return True if the block is selectable.
-	 */
-	public boolean isSelectable() {
-		return this.selectable;
-	}
-	
-	public BlockType setSelectable(boolean selectable) {
-		this.selectable = selectable;
-		return this;
-	}
-	
-	/**
 	 * Gets whether the block is a liquid.
 	 * @return True if the block is a liquid.
 	 */
@@ -155,19 +158,97 @@ public class BlockType {
 	}
 	
 	/**
-	 * Gets the block's break ticks.
-	 * @return The block's break ticks.
+	 * Gets the block's hardness.
+	 * @return The block's hardness.
 	 */
-	public int getBreakTicks() {
-		return this.breakTicks;
+	public float getHardness() {
+		return this.hardness;
 	}
 	
 	/**
-	 * Sets the blocks break ticks.
-	 * @param time The block's new break ticks.
+	 * Sets the block's hardness.
+	 * @param hardness The block's new hardness.
 	 */
-	public BlockType setBreakTicks(int time) {
-		this.breakTicks = time;
+	public BlockType setHardness(float hardness) {
+		this.hardness = hardness;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's drop chance.
+	 * @return The block's drop chance (0 for always).
+	 */
+	public int getDropChance() {
+		return this.dropChance;
+	}
+	
+	/**
+	 * Sets the block's drop chance.
+	 * @param chance The block's new drop chance (0 for always).
+	 */
+	public BlockType setDropChance(int chance) {
+		this.dropChance = chance;
+		return this;
+	}
+	
+	/**
+	 * Gets this block's drops.
+	 * @return This block's drops.
+	 */
+	public List<ItemStack> getDrops() {
+		return new ArrayList<ItemStack>(this.drops);
+	}
+	
+	/**
+	 * Returns true if the block is a complex block.
+	 * @return True if the block is complex.
+	 */
+	public boolean isComplex() {
+		return this.complex != null;
+	}
+	
+	/**
+	 * Gets the complex block class for this block.
+	 * @return The block's complex block class.
+	 */
+	public Class<? extends ComplexBlock> getComplexBlock() {
+		return this.complex;
+	}
+	
+	/**
+	 * Creates a new complex block instance for this block.
+	 * @param pos Position of the complex block.
+	 * @return The newly created complex block.
+	 */
+	public ComplexBlock createComplexBlock(Position pos) {
+		try {
+			return this.complex.getConstructor(Position.class).newInstance(pos);
+		} catch (Exception e) {
+			OpenClassic.getLogger().severe("Failed to create complex block instance: " + e);
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * Sets the complex block class for this block.
+	 * @param This block's new complex block class.
+	 */
+	public BlockType setComplexBlock(Class<? extends ComplexBlock> clazz) {
+		this.complex = clazz;
+		return this;
+	}
+	
+	/**
+	 * Sets this block's drops.
+	 * @param drops The new drops for this block.
+	 */
+	public BlockType setDrops(ItemStack... drops) {
+		this.drops.clear();
+		for(ItemStack drop : drops) {
+			this.drops.add(drop);
+		}
+		
 		return this;
 	}
 

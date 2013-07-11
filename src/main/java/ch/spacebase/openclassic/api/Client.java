@@ -87,4 +87,10 @@ public interface Client extends Game {
 	 */
 	public ProgressBar getProgressBar();
 	
+	/**
+	 * Returns true if the client is in a multiplayer game.
+	 * @return True if the client is in multiplayer.
+	 */
+	public boolean isInMultiplayer();
+	
 }

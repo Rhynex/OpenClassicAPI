@@ -106,6 +106,21 @@ public class Constants {
 	public static final int SEA_LEVEL = 63;
 	
 	/**
+	 * The player's max health.
+	 */
+	public static final int MAX_PLAYER_HEALTH = 20;
+	
+	/**
+	 * The player's maximum amount of air.
+	 */
+	public static final int MAX_PLAYER_AIR = 300;
+	
+	/**
+	 * The size of each terrain image.
+	 */
+	public static final int TERRAIN_SIZE = 16;
+	
+	/**
 	 * Default private constructor
 	 */
 	private Constants() {

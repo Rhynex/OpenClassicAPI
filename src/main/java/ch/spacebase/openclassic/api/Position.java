@@ -31,8 +31,8 @@ public class Position implements Cloneable {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.yaw = yaw;
-		this.pitch = pitch;
+		this.yaw = MathHelper.wrapYaw(yaw);
+		this.pitch = MathHelper.wrapPitch(pitch);
 		this.prevX = x;
 		this.prevY = y;
 		this.prevZ = z;
@@ -209,7 +209,10 @@ public class Position implements Cloneable {
 	 */
 	public void setYaw(float yaw) {
 		this.prevYaw = this.yaw;
-		this.yaw = yaw;
+		this.yaw = MathHelper.wrapYaw(yaw);
+		if(this.yaw != yaw) {
+			this.prevYaw = this.yaw;
+		}
 	}
 	
 	/**
@@ -218,7 +221,10 @@ public class Position implements Cloneable {
 	 */
 	public void setPitch(float pitch) {
 		this.prevPitch = this.pitch;
-		this.pitch = pitch;
+		this.pitch = MathHelper.wrapPitch(pitch);
+		if(this.pitch != pitch) {
+			this.prevPitch = this.pitch;
+		}
 	}
 	
 	/**
@@ -254,6 +260,17 @@ public class Position implements Cloneable {
 		this.setY(vec.getY());
 		this.setZ(vec.getZ());
 		return this;
+	}
+	
+	/**
+	 * Resets the position's previous location cache.
+	 */
+	public void resetCache() {
+		this.prevX = this.x;
+		this.prevY = this.y;
+		this.prevZ = this.z;
+		this.prevYaw = this.yaw;
+		this.prevPitch = this.pitch;
 	}
 	
 	/**

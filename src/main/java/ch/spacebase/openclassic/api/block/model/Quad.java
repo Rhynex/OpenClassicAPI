@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.block.model;
 import java.util.Arrays;
 import java.util.List;
 
+import ch.spacebase.openclassic.api.asset.texture.SubTexture;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -107,8 +108,13 @@ public class Quad {
 	 * @param z Z to render at.
 	 * @param brightness Brightness to render at.
 	 */
-	public void render(float x, float y, float z, float brightness) {	
-		RenderHelper.getHelper().drawQuad(this, x, y, z, brightness);
+	public void render(float x, float y, float z, float brightness) {
+		try {
+			RenderHelper.getHelper().drawQuad(this, x, y, z, brightness);
+		} catch(Throwable t) {
+			t.printStackTrace();
+			System.exit(0);
+		}
 	}
 	
 	/**

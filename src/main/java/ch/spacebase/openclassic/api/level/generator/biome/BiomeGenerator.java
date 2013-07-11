@@ -54,7 +54,6 @@ public abstract class BiomeGenerator extends Generator {
 		for(int xx = x; xx < x + Constants.CHUNK_WIDTH; xx++) {
 			for(int zz = z; zz < z + Constants.CHUNK_DEPTH; zz++) {
 				Biome biome = this.getBiome(xx, zz, level.getSeed());
-				System.out.println("Placed biome: " + biome.getClass().getSimpleName());
 				biomeData[(zz & 0xf) << 4 | (xx & 0xf)] = (byte) biome.getId();
 			}
 		}

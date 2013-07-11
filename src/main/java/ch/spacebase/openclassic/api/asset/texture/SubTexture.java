@@ -54,6 +54,22 @@ public class SubTexture implements Cloneable {
 	public float getY2() {
 		return this.y + this.height;
 	}
+	
+	/**
+	 * Gets the width of the SubTexture.
+	 * @return The SubTexture's width.
+	 */
+	public float getWidth() {
+		return this.width;
+	}
+	
+	/**
+	 * Gets the height of the SubTexture.
+	 * @return The SubTexture's height.
+	 */
+	public float getHeight() {
+		return this.height;
+	}
 
 	/**
 	 * Gets the parent this SubTexture belongs to.

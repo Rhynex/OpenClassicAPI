@@ -9,11 +9,6 @@ public class LevelInitializeMessage extends Message {
 	public String toString() {
 		return "LevelInitializeMessage{}";
 	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { };
-	}
 	
 	@Override
 	public byte getOpcode() {

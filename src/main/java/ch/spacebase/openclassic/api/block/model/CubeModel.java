@@ -1,5 +1,9 @@
 package ch.spacebase.openclassic.api.block.model;
 
+import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.asset.AssetSource;
+import ch.spacebase.openclassic.api.asset.texture.Texture;
+
 /**
  * A model shaped like a cube.
  */
@@ -13,8 +17,8 @@ public class CubeModel extends CuboidModel {
 		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId });
 	}
 	
-	public CubeModel(String texture, int textureSize) {
-		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
+	public CubeModel(String texture, AssetSource source) {
+		this(OpenClassic.getGame().getAssetManager().load(texture, source, Texture.class), 0);
 	}
 	
 	@Override

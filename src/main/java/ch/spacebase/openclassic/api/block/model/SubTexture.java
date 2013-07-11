@@ -9,20 +9,20 @@ public class SubTexture implements Cloneable {
 	private int id;
 	private float x;
 	private float y;
-	private float xLength;
-	private float yLength;
+	private float width;
+	private float height;
 
-	public SubTexture(Texture parent, int id, float x, float y, float length) {
-		this(parent, id, x, y, length, length);
+	public SubTexture(Texture parent, int id, float x, float y, float size) {
+		this(parent, id, x, y, size, size);
 	}
 
-	public SubTexture(Texture parent, int id, float x, float y, float xLength, float yLength) {
+	public SubTexture(Texture parent, int id, float x, float y, float width, float height) {
 		this.parent = parent;
 		this.id = id;
 		this.x = x;
 		this.y = y;
-		this.xLength = xLength;
-		this.yLength = yLength;
+		this.width = width;
+		this.height = height;
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class SubTexture implements Cloneable {
 	 * @return The X of the second point.
 	 */
 	public float getX2() {
-		return this.x + this.xLength;
+		return this.x + this.width;
 	}
 
 	/**
@@ -54,7 +54,23 @@ public class SubTexture implements Cloneable {
 	 * @return The Y of the second point.
 	 */
 	public float getY2() {
-		return this.y + this.yLength;
+		return this.y + this.height;
+	}
+	
+	/**
+	 * Gets the width of the SubTexture.
+	 * @return The SubTexture's width.
+	 */
+	public float getWidth() {
+		return this.width;
+	}
+	
+	/**
+	 * Gets the height of the SubTexture.
+	 * @return The SubTexture's height.
+	 */
+	public float getHeight() {
+		return this.height;
 	}
 
 	/**
@@ -74,12 +90,12 @@ public class SubTexture implements Cloneable {
 	}
 	
 	public SubTexture clone() {
-		return new SubTexture(this.parent, this.id, this.x, this.y, this.xLength, this.yLength);
+		return new SubTexture(this.parent, this.id, this.x, this.y, this.width, this.height);
 	}
 	
 	@Override
 	public String toString() {
-		return "SubTexture{parent=" + this.parent.getTexture() + ",id=" + this.id + ",x=" + this.x + ",y=" + this.y + ",xLength=" + this.xLength + ",yLength=" + this.yLength + "}";
+		return "SubTexture{parent=" + this.parent.getTexture() + ",id=" + this.id + ",x=" + this.x + ",y=" + this.y + ",width=" + this.width + ",height=" + this.height + "}";
 	}
 	
 }

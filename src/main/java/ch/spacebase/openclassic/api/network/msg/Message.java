@@ -9,12 +9,6 @@ public abstract class Message {
 	public abstract String toString();
 	
 	/**
-	 * Gets the param values for client sending.
-	 * @return The message's param values.
-	 */
-	public abstract Object[] getParams();
-	
-	/**
 	 * Gets the message's opcode.
 	 * @return The message's opcode.
 	 */

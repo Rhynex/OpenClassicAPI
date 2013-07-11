@@ -2,7 +2,7 @@ package ch.spacebase.openclassic.api.gui.widget;
 
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.block.model.SubTexture;
+import ch.spacebase.openclassic.api.asset.texture.SubTexture;
 import ch.spacebase.openclassic.api.gui.GuiScreen;
 import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.render.RenderHelper;
@@ -62,7 +62,7 @@ public class Button extends Widget {
 	public void onMouseClick(int x, int y, int button) {
 		if(button != 0 || !this.isActive()) return;
 		
-		OpenClassic.getClient().getAudioManager().playSound("random.click", 1, 1);
+		OpenClassic.getClient().getAudioManager().playSound("generic.click", 1, 1);
 		for(Widget widget : this.parent.getWidgets()) {
 			if(widget instanceof ButtonList && ((ButtonList) widget).getButtons().contains(this)) {
 				((ButtonList) widget).onButtonClick(this);
@@ -77,9 +77,6 @@ public class Button extends Widget {
 
 	@Override
 	public void render() {
-		//RenderHelper.getHelper().bindTexture("/gui/gui.png", true);
-		RenderHelper.getHelper().glColor(1, 1, 1, 1);
-		
 		int mouseX = RenderHelper.getHelper().getRenderMouseX();
 		int mouseY = RenderHelper.getHelper().getRenderMouseY();
 		
@@ -91,10 +88,10 @@ public class Button extends Widget {
 			texture = GuiTextures.BUTTON_HOVER;
 		}
 
-		SubTexture part1 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1(), texture.getY1(), this.width / 2, this.height / 2);
-		SubTexture part2 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1() + 400 - this.width / 2, texture.getY1(), this.width / 2, this.height / 2);
-		SubTexture part3 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1(), texture.getY1() + 40 - this.height / 2, this.width / 2, this.height / 2);
-		SubTexture part4 = new SubTexture(texture.getParent(), texture.getId(), texture.getX1() + 400 - this.width / 2, texture.getY1() + 40 - this.height / 2, this.width / 2, this.height / 2);
+		SubTexture part1 = texture.getParent().getSubTexture(texture.getX1(), texture.getY1(), this.width / 2, this.height / 2);
+		SubTexture part2 = texture.getParent().getSubTexture(texture.getX1() + 400 - this.width / 2, texture.getY1(), this.width / 2, this.height / 2);
+		SubTexture part3 = texture.getParent().getSubTexture(texture.getX1(), texture.getY1() + 40 - this.height / 2, this.width / 2, this.height / 2);
+		SubTexture part4 = texture.getParent().getSubTexture(texture.getX1() + 400 - this.width / 2, texture.getY1() + 40 - this.height / 2, this.width / 2, this.height / 2);
 		RenderHelper.getHelper().drawSubTex(part1, this.x, this.y, 1);
 		RenderHelper.getHelper().drawSubTex(part2, this.x + this.width / 2, this.y, 1);
 		RenderHelper.getHelper().drawSubTex(part3, this.x, this.y + this.height / 2, 1);

@@ -6,6 +6,8 @@ import java.util.List;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.event.block.BlockRegisterEvent;
 import ch.spacebase.openclassic.api.event.block.BlockUnregisterEvent;
+import ch.spacebase.openclassic.api.item.BlockItem;
+import ch.spacebase.openclassic.api.item.Items;
 
 /**
  * The block registry.
@@ -49,6 +51,7 @@ public class Blocks {
 	public static void register(BlockType block) {
 		OpenClassic.getGame().getEventManager().dispatch(new BlockRegisterEvent(block));
 		registry[block.getId() * 16 + block.getData()] = block;
+		Items.register(new BlockItem(block));
 	}
 	
 	/**
@@ -58,6 +61,7 @@ public class Blocks {
 	public static void unregister(int id) {
 		for(int data = 0; data < 16; data++) {
 			unregister(id, data);
+			Items.unregister(id);
 		}
 	}
 	
@@ -71,6 +75,7 @@ public class Blocks {
 		if(get(id, data) != null) {
 			OpenClassic.getGame().getEventManager().dispatch(new BlockUnregisterEvent(get(id, data)));
 			registry[id * 16 + data] = null;
+			Items.unregister(id, data);
 		}
 	}
 	

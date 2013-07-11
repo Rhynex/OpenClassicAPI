@@ -10,6 +10,7 @@ import ch.spacebase.openclassic.api.command.Command;
 import ch.spacebase.openclassic.api.command.CommandExecutor;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.event.EventManager;
+import ch.spacebase.openclassic.api.inventory.recipe.RecipeManager;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.LevelInfo;
 import ch.spacebase.openclassic.api.level.generator.Generator;
@@ -30,6 +31,12 @@ public interface Game {
 	 * @return The game's asset manager.
 	 */
 	public AssetManager getAssetManager();
+	
+	/**
+	 * Gets the game's crafting manager.
+	 * @return The game's crafting manager.
+	 */
+	public RecipeManager getRecipeManager();
 	
 	/**
 	 * Gets the game's package manager.

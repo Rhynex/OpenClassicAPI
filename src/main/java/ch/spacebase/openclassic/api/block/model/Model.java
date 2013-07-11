@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.block.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.spacebase.openclassic.api.asset.texture.SubTexture;
 import ch.spacebase.openclassic.api.block.BlockType;
 
 /**

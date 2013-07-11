@@ -27,6 +27,18 @@ public interface ProgressBar {
 	public void setTitle(String title);
 	
 	/**
+	 * Gets the subtitle the progress bar is showing.
+	 * @return The progress bar's subtitle.
+	 */
+	public String getSubTitle();
+	
+	/**
+	 * Sets the subtitle of the progress bar.
+	 * @param subtitle subtitle to set.
+	 */
+	public void setSubTitle(String subtitle);
+	
+	/**
 	 * Gets the progress bar's progress.
 	 * @return The progress bar's progress.
 	 */

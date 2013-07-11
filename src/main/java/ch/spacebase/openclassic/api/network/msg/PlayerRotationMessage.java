@@ -45,11 +45,6 @@ public class PlayerRotationMessage extends Message {
 	}
 	
 	@Override
-	public Object[] getParams() {
-		return new Object[] { this.playerId, this.yaw, this.pitch };
-	}
-	
-	@Override
 	public byte getOpcode() {
 		return 11;
 	}
