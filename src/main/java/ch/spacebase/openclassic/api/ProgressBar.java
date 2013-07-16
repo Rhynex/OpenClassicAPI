@@ -37,7 +37,7 @@ public interface ProgressBar {
 	 * @param progress Progress to set.
 	 */
 	public void setProgress(int progress);
-
+	
 	/**
 	 * Returns true if the progress bar is currently visible.
 	 * @return True if the progress bar is visible.
@@ -49,5 +49,10 @@ public interface ProgressBar {
 	 * @param visible Whether the progress bar is visible.
 	 */
 	public void setVisible(boolean visible);
+	
+	/**
+	 * Renders the progress bar on to the screen.
+	 */
+	public void render();
 	
 }

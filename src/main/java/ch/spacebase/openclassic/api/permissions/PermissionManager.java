@@ -21,7 +21,10 @@ public class PermissionManager {
 	 * Loads the server's permissions and groups.
 	 */
 	public void load() {
-		if(this.perms == null) this.perms = new Configuration(new File(OpenClassic.getGame().getDirectory(), "permissions.yml"));
+		if(this.perms == null) {
+			this.perms = new Configuration(new File(OpenClassic.getGame().getDirectory(), "permissions.yml"));
+		}
+		
 		this.perms.load();
 		this.loadGroups();
 	}

@@ -8,22 +8,22 @@ public class Constants {
 	/**
 	 * The server's current version.
 	 */
-	public static final String SERVER_VERSION = "1.1";
+	public static final String SERVER_VERSION = "1.2";
 	
 	/**
 	 * The client's current version.
 	 */
-	public static final String CLIENT_VERSION = "1.1";
+	public static final String CLIENT_VERSION = "1.2";
 	
 	/**
 	 * The protocol version.
 	 */
-	public static final byte PROTOCOL_VERSION = 0x07;
+	public static final byte PROTOCOL_VERSION = 7;
 	
 	/**
 	 * The OpenClassic protocol version.
 	 */
-	public static final byte OPENCLASSIC_PROTOCOL_VERSION = 1;
+	public static final byte OPENCLASSIC_PROTOCOL_VERSION = 2;
 	
 	/**
 	 * Number of ticks per second

@@ -10,9 +10,15 @@ import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 /**
  * Physics used in saplings to grow trees.
  */
-public class SaplingPhysics implements BlockPhysics {
+public class TreeGrowthPhysics implements BlockPhysics {
 
 	private static final Random rand = new Random();
+	
+	private BlockType block;
+	
+	public TreeGrowthPhysics(BlockType block) {
+		this.block = block;
+	}
 	
 	@Override
 	public void update(Block block) {
@@ -21,7 +27,7 @@ public class SaplingPhysics implements BlockPhysics {
 			if (rand.nextInt(5) == 0) {
 				block.setType(VanillaBlock.AIR, false);
 				if (!block.getLevel().growTree(block.getPosition().getBlockX(), block.getPosition().getBlockY(), block.getPosition().getBlockZ())) {
-					block.setType(VanillaBlock.SAPLING, false);
+					block.setType(this.block, false);
 				}
 			}
 		} else {

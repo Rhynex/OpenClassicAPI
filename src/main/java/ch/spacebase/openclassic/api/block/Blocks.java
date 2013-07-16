@@ -14,12 +14,6 @@ public class Blocks {
 	
 	private static final BlockType registry[] = new BlockType[256];
 	
-	static {
-		// make sure enum is loaded.
-		@SuppressWarnings("unused")
-		VanillaBlock v = VanillaBlock.STONE;
-	}
-	
 	/**
 	 * Gets the block with the given ID.
 	 * @param id ID of the block.

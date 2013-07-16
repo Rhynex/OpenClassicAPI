@@ -2,14 +2,23 @@ package ch.spacebase.openclassic.api.block.physics;
 
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockFace;
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 
 /**
- * Physics used to make half steps join.
+ * Physics used to make half blocks join.
  */
-public class HalfStepPhysics implements BlockPhysics {
+public class HalfBlockPhysics implements BlockPhysics {
 
+	private BlockType block;
+	private BlockType full;
+	
+	public HalfBlockPhysics(BlockType block, BlockType full) {
+		this.block = block;
+		this.full = full;
+	}
+	
 	@Override
 	public void update(Block block) {
 	}
@@ -17,9 +26,9 @@ public class HalfStepPhysics implements BlockPhysics {
 	@Override
 	public void onPlace(Block block) {
 		Block relative = block.getRelative(BlockFace.DOWN);
-		if(relative != null && relative.getType() == VanillaBlock.SLAB) {
+		if(relative != null && relative.getType() == this.block) {
 			block.setType(VanillaBlock.AIR);
-			relative.setType(VanillaBlock.DOUBLE_SLAB);
+			relative.setType(this.full);
 		}
 	}
 

@@ -49,7 +49,7 @@ public class SpongePhysics implements BlockPhysics {
 			for (int y = sponge.getPosition().getBlockY() - 2; y <= sponge.getPosition().getBlockY() + 2; y++) {
 				for (int z = sponge.getPosition().getBlockZ() - 2; z <= sponge.getPosition().getBlockZ() + 2; z++) {
 					Block block = sponge.getLevel().getBlockAt(x, y, z);
-					if (block.getType() == VanillaBlock.WATER || block.getType() == VanillaBlock.STATIONARY_WATER) {
+					if (block.getType().getPhysics() instanceof LiquidPhysics && ((LiquidPhysics) block.getType().getPhysics()).canSoak()) {
 						block.setType(VanillaBlock.AIR, false);
 					}
 				}

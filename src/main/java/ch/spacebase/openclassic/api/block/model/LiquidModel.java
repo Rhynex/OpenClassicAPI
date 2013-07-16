@@ -20,7 +20,8 @@ public class LiquidModel extends CubeModel {
 	
 	public LiquidModel(Texture texture, int textureIds[]) {
 		super(texture, textureIds);
-		
+		this.setCollisionBox(null);
+		this.setSelectionBox(null);
 		Quad bottom = new Quad(0, texture.getSubTexture(textureIds[0]));
 		bottom.addVertex(0, 0, 0, 0);
 		bottom.addVertex(1, 1, 0, 0);
@@ -77,14 +78,6 @@ public class LiquidModel extends CubeModel {
 		quad.id = this.quadCount;
 		super.addQuad(quad);
 		this.quadCount++;
-		
-		/* Quad q = new Quad(this.quadCount, quad.getTexture());
-		q.addVertex(0, quad.getVertex(3));
-		q.addVertex(1, quad.getVertex(2));
-		q.addVertex(2, quad.getVertex(1));
-		q.addVertex(3, quad.getVertex(0));
-		super.addQuad(q);
-		this.quadCount++; */
 	}
 	
 	public void addTopQuad(Quad quad) {
@@ -92,15 +85,6 @@ public class LiquidModel extends CubeModel {
 		this.topQuads.add(quad.getId(), quad);
 		quad.setParent(this);
 		this.quadCount++;
-		
-		/* Quad q = new Quad(this.quadCount, quad.getTexture());
-		q.addVertex(0, quad.getVertex(2));
-		q.addVertex(1, quad.getVertex(3));
-		q.addVertex(2, quad.getVertex(0));
-		q.addVertex(3, quad.getVertex(1));
-		this.topQuads.add(quad.getId(), quad);
-		quad.setParent(this);
-		this.quadCount++; */
 	}
 	
 	@Override

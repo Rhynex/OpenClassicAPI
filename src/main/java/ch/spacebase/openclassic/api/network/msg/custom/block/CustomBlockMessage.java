@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.network.msg.custom.block;
 
-import ch.spacebase.openclassic.api.block.custom.CustomBlock;
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.network.msg.Message;
 
 /**
@@ -8,9 +8,9 @@ import ch.spacebase.openclassic.api.network.msg.Message;
  */
 public class CustomBlockMessage extends Message {
 
-	private CustomBlock block;
+	private BlockType block;
 	
-	public CustomBlockMessage(CustomBlock block) {
+	public CustomBlockMessage(BlockType block) {
 		this.block = block;
 	}
 	
@@ -18,7 +18,7 @@ public class CustomBlockMessage extends Message {
 	 * Gets the block contained in the message.
 	 * @return The contained block.
 	 */
-	public CustomBlock getBlock() {
+	public BlockType getBlock() {
 		return this.block;
 	}
 	
@@ -29,7 +29,7 @@ public class CustomBlockMessage extends Message {
 
 	@Override
 	public Object[] getParams() {
-		return new Object[] { this.block.getId(), this.block.isOpaque() ? (byte) 1 : (byte) 0, this.block.isSelectable() ? (byte) 1 : (byte) 0, this.block.getStepSound().name(), this.block.isLiquid() ? (byte) 1 : (byte) 0, this.block.getTickDelay(), this.block.getFallback().getId(), this.block.isSolid() ? (byte) 1 : (byte) 0 };
+		return new Object[] { this.block.getId(), this.block.isOpaque() ? (byte) 1 : (byte) 0, this.block.isSelectable() ? (byte) 1 : (byte) 0, this.block.getStepSound().name(), this.block.isLiquid() ? (byte) 1 : (byte) 0, this.block.getTickDelay(), this.block.getPreventsRendering() ? (byte) 1 : (byte) 0, this.block.canPlaceIn() ? (byte) 1 : (byte) 0, this.block.isGas() ? (byte) 1 : (byte) 0 };
 	}
 	
 	@Override

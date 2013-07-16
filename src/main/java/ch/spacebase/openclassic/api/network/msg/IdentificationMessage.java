@@ -8,13 +8,13 @@ public class IdentificationMessage extends Message {
 	private byte protocolVersion;
 	private String usernameOrServerName;
 	private String verificationKeyOrMotd;
-	private byte op;
+	private byte opOrOpenClassic;
 	
-	public IdentificationMessage(byte protocolVersion, String usernameOrServerName, String verificationKeyOrMotd, byte op) {
+	public IdentificationMessage(byte protocolVersion, String usernameOrServerName, String verificationKeyOrMotd, byte opOrOpenClassic) {
 		this.protocolVersion = protocolVersion;
 		this.usernameOrServerName = usernameOrServerName;
 		this.verificationKeyOrMotd = verificationKeyOrMotd;
-		this.op = op;
+		this.opOrOpenClassic = opOrOpenClassic;
 	}
 	
 	/**
@@ -46,17 +46,17 @@ public class IdentificationMessage extends Message {
 	 * @return Whether the player is an OP or is custom.
 	 */
 	public byte getOpOrCustomClient() {
-		return this.op;
+		return this.opOrOpenClassic;
 	}
 	
 	@Override
 	public String toString() {
-		return "IdentificationMessage{protocol=" + protocolVersion + ",usernameorservername=" + usernameOrServerName + ",verificationkeyormotd=" + verificationKeyOrMotd + ",op=" + op + "}";
+		return "IdentificationMessage{protocol=" + protocolVersion + ",usernameorservername=" + usernameOrServerName + ",verificationkeyormotd=" + verificationKeyOrMotd + ",op=" + opOrOpenClassic + "}";
 	}
 
 	@Override
 	public Object[] getParams() {
-		return new Object[] { this.usernameOrServerName, this.verificationKeyOrMotd, this.protocolVersion, this.op };
+		return new Object[] { this.usernameOrServerName, this.verificationKeyOrMotd, this.protocolVersion, this.opOrOpenClassic };
 	}
 	
 	@Override

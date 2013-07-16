@@ -12,10 +12,14 @@ import ch.spacebase.openclassic.api.level.Level;
  */
 public class LiquidPhysics implements BlockPhysics {
 
-	private byte id;
+	private BlockType block;
+	private boolean soak;
+	private boolean fluidMovement;
 	
-	public LiquidPhysics(byte id) {
-		this.id = id;
+	public LiquidPhysics(BlockType block, boolean soak, boolean fluidMovement) {
+		this.block = block;
+		this.soak = soak;
+		this.fluidMovement = fluidMovement;
 	}
 	
 	@Override
@@ -29,19 +33,19 @@ public class LiquidPhysics implements BlockPhysics {
 				break;
 			}
 
-			if (block.getLevel().setBlockIdAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ(), this.id)) {
+			if (block.getLevel().setBlockAt(block.getPosition().getBlockX(), y, block.getPosition().getBlockZ(), this.block)) {
 				moving = true;
 			} else {
 				break;
 			}
 			
-			if(this.id == VanillaBlock.LAVA.getId()) {
+			if(!this.fluidMovement) {
 				break;
 			}
 		}
 
 		y++;
-		if (this.id == VanillaBlock.WATER.getId() || !moving) {
+		if (this.fluidMovement || !moving) {
 			int x = block.getPosition().getBlockX();
 			int yy = block.getPosition().getBlockY();
 			int z = block.getPosition().getBlockZ();
@@ -49,12 +53,12 @@ public class LiquidPhysics implements BlockPhysics {
 		}
 
 		if (moving) {
-			block.getLevel().delayTick(new Position(block.getLevel(), block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()), this.id);
+			block.getLevel().delayTick(new Position(block.getLevel(), block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()), this.block.getId());
 		}
 	}
 	
 	private boolean canMove(Level level, int x, int y, int z) {
-		if (this.id == VanillaBlock.WATER.getId()) {
+		if (this.soak) {
 			for (int bx = x - 2; bx <= x + 2; bx++) {
 				for (int by = y - 2; by <= y + 2; by++) {
 					for (int bz = z - 2; bz <= z + 2; bz++) {
@@ -76,8 +80,8 @@ public class LiquidPhysics implements BlockPhysics {
 				return false;
 			}
 
-			if (level.setBlockIdAt(x, y, z, this.id)) {
-				level.delayTick(new Position(level, x, y, z), this.id);
+			if (level.setBlockAt(x, y, z, this.block)) {
+				level.delayTick(new Position(level, x, y, z), this.block.getId());
 			}
 		}
 
@@ -86,7 +90,7 @@ public class LiquidPhysics implements BlockPhysics {
 
 	@Override
 	public void onPlace(Block block) {
-		block.getLevel().delayTick(block.getPosition(), this.id);
+		block.getLevel().delayTick(block.getPosition(), this.block.getId());
 	}
 
 	@Override
@@ -95,14 +99,11 @@ public class LiquidPhysics implements BlockPhysics {
 
 	@Override
 	public void onNeighborChange(Block block, Block neighbor) {
-		if (neighbor.getType() != VanillaBlock.AIR) {
-			if (this.id == VanillaBlock.WATER.getId() && neighbor.getType() == VanillaBlock.LAVA || neighbor.getType() == VanillaBlock.WATER && this.id == VanillaBlock.LAVA.getId()) {
-				block.setType(VanillaBlock.STONE);
-				return;
-			}
-		}
-
 		block.getLevel().delayTick(block.getPosition(), block.getTypeId());
+	}
+	
+	public boolean canSoak() {
+		return this.soak;
 	}
 
 }
