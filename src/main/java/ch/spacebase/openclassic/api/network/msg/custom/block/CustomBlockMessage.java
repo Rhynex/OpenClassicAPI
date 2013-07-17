@@ -29,7 +29,7 @@ public class CustomBlockMessage extends Message {
 
 	@Override
 	public Object[] getParams() {
-		return new Object[] { this.block.getId(), this.block.isOpaque() ? (byte) 1 : (byte) 0, this.block.isSelectable() ? (byte) 1 : (byte) 0, this.block.getStepSound().name(), this.block.isLiquid() ? (byte) 1 : (byte) 0, this.block.getTickDelay(), this.block.getPreventsRendering() ? (byte) 1 : (byte) 0, this.block.canPlaceIn() ? (byte) 1 : (byte) 0, this.block.isGas() ? (byte) 1 : (byte) 0 };
+		return new Object[] { this.block.getId(), this.block.isOpaque() ? (byte) 1 : (byte) 0, this.block.isSelectable() ? (byte) 1 : (byte) 0, this.block.getStepSound().name(), this.block.isLiquid() ? (byte) 1 : (byte) 0, this.block.getTickDelay(), this.block.getPreventsRendering() ? (byte) 1 : (byte) 0, this.block.canPlaceIn() ? (byte) 1 : (byte) 0, this.block.isGas() ? (byte) 1 : (byte) 0, this.block.getPreventsOwnRenderingRaw() ? (byte) 1 : (byte) 0 };
 	}
 	
 	@Override

@@ -41,7 +41,7 @@ public class VanillaBlock {
 	public static final BlockType LOG = new BlockType(17, StepSound.WOOD, new int[] { 21, 21, 20, 20, 20, 20 });
 	public static final BlockType LEAVES = new BlockType(18, StepSound.GRASS, 22).setOpaque(false).setPreventsRendering(false);
 	public static final BlockType SPONGE = new BlockType(19, StepSound.GRASS, 48);
-	public static final BlockType GLASS = new BlockType(20, StepSound.METAL, 49).setOpaque(false).setPreventsRendering(false);
+	public static final BlockType GLASS = new BlockType(20, StepSound.METAL, 49).setOpaque(false).setPreventsRendering(false).setPreventsOwnRendering(true);
 	public static final BlockType RED_CLOTH = new BlockType(21, StepSound.CLOTH, 64);
 	public static final BlockType ORANGE_CLOTH = new BlockType(22, StepSound.CLOTH, 65);
 	public static final BlockType YELLOW_CLOTH = new BlockType(23, StepSound.CLOTH, 66);

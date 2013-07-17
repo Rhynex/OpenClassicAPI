@@ -16,13 +16,14 @@ public class BlockType {
 	private Model model;
 	private StepSound sound;
 	private boolean preventsRendering = true;
+	private boolean preventsOwnRendering = false;
 	private boolean opaque = true;
 	private boolean selectable = true;
 	private BlockPhysics phys = null;
 	private boolean liquid = false;
 	private int tickDelay = 0;
-	private boolean placeIn;
-	private boolean gas;
+	private boolean placeIn = false;
+	private boolean gas = false;
 	
 	public BlockType(int id, StepSound sound, int texture) {
 		this(id, sound, TERRAIN_TEXTURE, texture);
@@ -105,6 +106,32 @@ public class BlockType {
 	 */
 	public BlockType setPreventsRendering(boolean prevents) {
 		this.preventsRendering = prevents;
+		return this;
+	}
+	
+	/**
+	 * Returns true if the block prevents adjacent blocks of its type from rendering.
+	 * @return True if the block prevents adjacent blocks of its type from rendering.
+	 */
+	public boolean getPreventsOwnRendering() {
+		return this.getPreventsRendering() || this.getPreventsOwnRenderingRaw();
+	}
+	
+	/**
+	 * Returns true if the block prevents adjacent blocks of its type from rendering.
+	 * @return True if the block prevents adjacent blocks of its type from rendering.
+	 */
+	public boolean getPreventsOwnRenderingRaw() {
+		return this.preventsOwnRendering;
+	}
+	
+	/**
+	 * Sets whether the block is prevents adjacent blocks of its type from rendering.
+	 * @param prevents Whether the block prevents adjacent blocks of its type from rendering.
+	 * @return This block type.
+	 */
+	public BlockType setPreventsOwnRendering(boolean prevents) {
+		this.preventsOwnRendering = prevents;
 		return this;
 	}
 	
