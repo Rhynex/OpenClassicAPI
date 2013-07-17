@@ -70,6 +70,23 @@ public abstract class RenderHelper {
 	public abstract void renderText(String text, float x, float y, boolean xCenter);
 	
 	/**
+	 * Renders scaled text at the given position with the X as the center.
+	 * @param text Text to render
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 */
+	public abstract void renderScaledText(String text, float x, float y);
+	
+	/**
+	 * Renders scaled text at the given position.
+	 * @param text Text to render
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param Whether the X is the center or not.
+	 */
+	public abstract void renderScaledText(String text, float x, float y, boolean xCenter);
+	
+	/**
 	 * Renders the given text at the given position with the X as the center.
 	 * @param text Text to render
 	 * @param x X to render at.
@@ -177,6 +194,22 @@ public abstract class RenderHelper {
 	public abstract int getDisplayHeight();
 	
 	/**
+	 * Gets the width of the current display, scaled to the gui resolution.
+	 * @return The display's width.
+	 */
+	public int getGuiWidth() {
+		return this.getDisplayWidth() * 240 / this.getDisplayHeight();
+	}
+	
+	/**
+	 * Gets the height of the current display, scaled to the gui resolution.
+	 * @return The display's height.
+	 */
+	public int getGuiHeight() {
+		return this.getDisplayHeight() * 240 / this.getDisplayHeight();
+	}
+	
+	/**
 	 * Gets the mouse's X relative to rendering coordinates.
 	 * @return The mouse's X.
 	 */
@@ -249,6 +282,17 @@ public abstract class RenderHelper {
 	 * @param brightness Brightness to draw at.
 	 */
 	public abstract void drawSubTex(SubTexture texture, float x, float y, float z, float brightness);
+	
+	/**
+	 * Draws a subtexture.
+	 * @param texture SubTexture to draw
+	 * @param x X to draw at.
+	 * @param y Y to draw at.
+	 * @param z Z to draw at.
+	 * @param scale Scale to draw at.
+	 * @param brightness Brightness to draw at.
+	 */
+	public abstract void drawSubTex(SubTexture texture, float x, float y, float z, float scale, float brightness);
 	
 	/**
 	 * Draws a subtexture.

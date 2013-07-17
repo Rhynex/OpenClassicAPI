@@ -5,6 +5,7 @@ import ch.spacebase.openclassic.api.block.model.Texture;
 
 public class GuiTextures {
 
+	public static final Texture LOGO = new Texture("/gui/logo.png", true, 251, 48);
 	public static final Texture GUI = new Texture("/gui/gui.png", true, 256, 256, 16);
 	public static final Texture ICONS = new Texture("/gui/icons.png", true, 256, 256, 16);
 	public static final SubTexture CROSSHAIR = new SubTexture(ICONS, 0, 0, 0, 16, 16);

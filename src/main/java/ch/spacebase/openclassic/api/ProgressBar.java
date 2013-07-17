@@ -3,18 +3,6 @@ package ch.spacebase.openclassic.api;
 public interface ProgressBar {
 
 	/**
-	 * Gets the text the progress bar is showing.
-	 * @return The progress bar's text.
-	 */
-	public String getText();
-	
-	/**
-	 * Sets the text of the progress bar.
-	 * @param text Text to set.
-	 */
-	public void setText(String text);
-	
-	/**
 	 * Gets the title the progress bar is showing.
 	 * @return The progress bar's title.
 	 */
@@ -25,6 +13,30 @@ public interface ProgressBar {
 	 * @param title Title to set.
 	 */
 	public void setTitle(String title);
+	
+	/**
+	 * Gets the subtitle the progress bar is showing.
+	 * @return The progress bar's subtitle.
+	 */
+	public String getSubtitle();
+	
+	/**
+	 * Sets the subtitle of the progress bar.
+	 * @param subtitle Subtitle to set.
+	 */
+	public void setSubtitle(String subtitle);
+	
+	/**
+	 * Gets the text the progress bar is showing.
+	 * @return The progress bar's text.
+	 */
+	public String getText();
+	
+	/**
+	 * Sets the text of the progress bar.
+	 * @param text Text to set.
+	 */
+	public void setText(String text);
 	
 	/**
 	 * Gets the progress bar's progress.
