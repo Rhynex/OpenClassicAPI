@@ -1,8 +1,10 @@
 package ch.spacebase.openclassic.api.util.io;
 
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * A set of utilities for I/O interactions.
@@ -37,6 +39,35 @@ public class IOUtils {
 		for(char letter : str.toCharArray()) {
 			out.writeChar(letter);
 		}
+	}
+	
+	/**
+	 * Compares two input streams.
+	 * @param in1 First input stream.
+	 * @param in2 Second input stream.
+	 * @return Whether the input streams are equal in content.
+	 * @throws IOException if an I/O error occurs.
+	 */
+	public static boolean contentEquals(InputStream in1, InputStream in2) throws IOException {
+		if(!(in1 instanceof BufferedInputStream)) {
+			in1 = new BufferedInputStream(in1);
+		}
+
+		if(!(in2 instanceof BufferedInputStream)) {
+			in2 = new BufferedInputStream(in2);
+		}
+
+		int ch = in1.read();
+		while(ch != -1) {
+			int ch2 = in2.read();
+			if(ch != ch2) {
+				return false;
+			}
+			
+			ch = in1.read();
+		}
+
+		return in2.read() == -1;
 	}
 	
 	/**
