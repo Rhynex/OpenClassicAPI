@@ -6,14 +6,9 @@ package ch.spacebase.openclassic.api.util;
 public class Constants {
 	
 	/**
-	 * The server's current version.
+	 * OpenClassic's current version.
 	 */
-	public static final String SERVER_VERSION = "1.2";
-	
-	/**
-	 * The client's current version.
-	 */
-	public static final String CLIENT_VERSION = "1.2";
+	public static final String VERSION = "1.2.1";
 	
 	/**
 	 * The protocol version.
