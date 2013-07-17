@@ -83,12 +83,15 @@ public class Translator {
 			if(this.get(this.def) != null) {
 				return this.get(this.def).translate(text);
 			} else {
-				return "<missing language>";
+				return text;
 			}
 		} else {
 			String result = this.get(lang).translate(text);
 			if(result.equals("<missing translation>")) {
-				return this.get(this.def).translate(text);
+				result = this.get(this.def).translate(text);
+				if(result.equals("<missing translation>")) {
+					return text;
+				}
 			}
 			
 			return result;
