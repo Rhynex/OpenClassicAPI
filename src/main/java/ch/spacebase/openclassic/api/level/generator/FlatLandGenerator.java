@@ -16,6 +16,7 @@ public class FlatLandGenerator extends Generator {
 		level.setGenerating(true);
 		if(OpenClassic.getGame() instanceof Client) {
 			OpenClassic.getClient().getProgressBar().setVisible(true);
+			OpenClassic.getClient().getProgressBar().render();
 		}
 		
 		int count = 0;
@@ -35,14 +36,13 @@ public class FlatLandGenerator extends Generator {
 					count++;
 					if(OpenClassic.getGame() instanceof Client) {
 						OpenClassic.getClient().getProgressBar().setProgress((int) (((double) count / (double) blocks.length) * 100) * 2);
-						OpenClassic.getClient().getProgressBar().render();
 					}
 				}
 			}
 		}
 		
 		if(OpenClassic.getGame() instanceof Client) {
-			OpenClassic.getClient().getProgressBar().setVisible(true);
+			OpenClassic.getClient().getProgressBar().setVisible(false);
 		}
 		
 		level.setGenerating(false);
