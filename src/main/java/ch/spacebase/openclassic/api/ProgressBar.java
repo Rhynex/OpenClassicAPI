@@ -63,8 +63,13 @@ public interface ProgressBar {
 	public void setVisible(boolean visible);
 	
 	/**
-	 * Renders the progress bar on to the screen.
+	 * Renders the progress bar display on to the screen.
 	 */
 	public void render();
+	
+	/**
+	 * Renders only the progress bar on to the screen.
+	 */
+	public void renderBar();
 	
 }

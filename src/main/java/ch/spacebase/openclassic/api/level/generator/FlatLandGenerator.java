@@ -13,12 +13,6 @@ public class FlatLandGenerator extends Generator {
 
 	@Override
 	public void generate(Level level, byte blocks[]) {
-		level.setGenerating(true);
-		if(OpenClassic.getGame() instanceof Client) {
-			OpenClassic.getClient().getProgressBar().setVisible(true);
-			OpenClassic.getClient().getProgressBar().render();
-		}
-		
 		int count = 0;
 		for(int x = 0; x < level.getWidth(); x++) {
 			for(int y = 0; y <= level.getWaterLevel(); y++) {
@@ -36,16 +30,13 @@ public class FlatLandGenerator extends Generator {
 					count++;
 					if(OpenClassic.getGame() instanceof Client) {
 						OpenClassic.getClient().getProgressBar().setProgress((int) (((double) count / (double) blocks.length) * 100) * 2);
+						if(count % 5000 == 0) {
+							OpenClassic.getClient().getProgressBar().renderBar();
+						}
 					}
 				}
 			}
 		}
-		
-		if(OpenClassic.getGame() instanceof Client) {
-			OpenClassic.getClient().getProgressBar().setVisible(false);
-		}
-		
-		level.setGenerating(false);
 	}
 
 }

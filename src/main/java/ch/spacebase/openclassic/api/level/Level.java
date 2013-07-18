@@ -262,18 +262,6 @@ public interface Level {
 	public boolean setBlockAt(int x, int y, int z, BlockType type, boolean physics);
 	
 	/**
-	 * Returns true if the level is generating.
-	 * @return True if the level is generating.
-	 */
-	public boolean isGenerating();
-	
-	/**
-	 * Sets whether the level is generating.
-	 * @param generating Whether the level is generating.
-	 */
-	public void setGenerating(boolean generating);
-	
-	/**
 	 * Sends a network message to all players in the level.
 	 * @param message Message to send.
 	 */
