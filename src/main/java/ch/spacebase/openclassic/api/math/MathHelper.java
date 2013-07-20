@@ -5,24 +5,56 @@ package ch.spacebase.openclassic.api.math;
  */
 public class MathHelper {
 
-	public static final float f_2PI = (float) (2.0d * Math.PI);
-	public static final float DEG_TO_RAD = 0.01745329f;
-	private static float SIN[] = new float[65536];
+	public static final float PI = 3.1415927f;
+	public static final float TWO_PI = PI * 2;
+
+	private static final int SIN_BITS = 14;
+	private static final int SIN_MASK = ~(-1 << SIN_BITS);
+	private static final int SIN_COUNT = SIN_MASK + 1;
+	private static final float[] SIN_TABLE = new float[SIN_COUNT];
+
+	private static final float radFull = TWO_PI;
+	private static final float degFull = 360;
+	private static final float radToIndex = SIN_COUNT / radFull;
+	private static final float degToIndex = SIN_COUNT / degFull;
+
+	public static final float RAD_TO_DEG = 180f / PI;
+	public static final float DEG_TO_RAD = PI / 180;
 
 	static {
-		for (int i = 0; i < 65536; i++) {
-			SIN[i] = (float) Math.sin((i * Math.PI * 2D) / 65536D);
+		for(int i = 0; i < SIN_COUNT; i++) {
+			SIN_TABLE[i] = (float) Math.sin((i + 0.5f) / SIN_COUNT * radFull);
+		}
+
+		for(int i = 0; i < 360; i += 90) {
+			SIN_TABLE[(int) (i * degToIndex) & SIN_MASK] = (float) Math.sin(i * DEG_TO_RAD);
 		}
 	}
 
-	public static float sin(float f) {
-		return SIN[(int) (f * 10430.38F) & 0xffff];
+	/**
+	 * Gets the sine of an angle.
+	 * @param radians Measure of the angle.
+	 * @return The sine of the angle.
+	 */
+	public static float sin(float radians) {
+		return SIN_TABLE[(int) (radians * radToIndex) & SIN_MASK];
 	}
 
-	public static float cos(float f) {
-		return SIN[(int) (f * 10430.38F + 16384F) & 0xffff];
+	/**
+	 * Gets the cosine of an angle.
+	 * @param radians Measure of the angle.
+	 * @return The cosine of the angle.
+	 */
+	public static float cos(float radians) {
+		return SIN_TABLE[(int) ((radians + PI / 2) * radToIndex) & SIN_MASK];
 	}
-	
+
+	/**
+	 * Converts yaw and pitch values to a forward vector.
+	 * @param yaw Yaw to convert.
+	 * @param pitch Pitch to convert.
+	 * @return The resulting forward vector.
+	 */
 	public static Vector toForwardVec(float yaw, float pitch) {
 		float xzLen = MathHelper.cos(-pitch * DEG_TO_RAD);
 		float x = (MathHelper.sin(-yaw * DEG_TO_RAD - (float) Math.PI) * xzLen);
@@ -30,14 +62,14 @@ public class MathHelper {
 		float z = (MathHelper.cos(-yaw * DEG_TO_RAD - (float) Math.PI) * xzLen);
 		return new Vector(x, y, z);
 	}
-	
+
 	/**
 	 * Casts the given object to an integer if applicable.
 	 * @param o Object to cast.
 	 * @return The resulting integer.
 	 */
 	public static Integer castInt(Object o) {
-		if (o instanceof Number) {
+		if(o instanceof Number) {
 			return ((Number) o).intValue();
 		}
 
@@ -50,7 +82,7 @@ public class MathHelper {
 	 * @return The resulting double.
 	 */
 	public static Double castDouble(Object o) {
-		if (o instanceof Number) {
+		if(o instanceof Number) {
 			return ((Number) o).doubleValue();
 		}
 
@@ -63,7 +95,7 @@ public class MathHelper {
 	 * @return The resulting float.
 	 */
 	public static Float castFloat(Object obj) {
-		if (obj instanceof Number) {
+		if(obj instanceof Number) {
 			return ((Number) obj).floatValue();
 		}
 
@@ -76,9 +108,9 @@ public class MathHelper {
 	 * @return The resulting boolean.
 	 */
 	public static Boolean castBoolean(Object o) {
-		if (o instanceof Boolean) {
+		if(o instanceof Boolean) {
 			return (Boolean) o;
-		} else if (o instanceof String) {
+		} else if(o instanceof String) {
 			try {
 				return Boolean.parseBoolean((String) o);
 			} catch (IllegalArgumentException e) {
