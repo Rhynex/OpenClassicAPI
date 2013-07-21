@@ -7,6 +7,9 @@ public class MathHelper {
 
 	public static final float PI = 3.1415927f;
 	public static final float TWO_PI = PI * 2;
+	public static final float HALF_PI = PI / 2;
+	public static final float ONE_AND_HALF_PI = PI + HALF_PI;
+	public static final double DTWO_PI = Math.PI * 2;
 
 	private static final int SIN_BITS = 14;
 	private static final int SIN_MASK = ~(-1 << SIN_BITS);
@@ -20,6 +23,7 @@ public class MathHelper {
 
 	public static final float RAD_TO_DEG = 180f / PI;
 	public static final float DEG_TO_RAD = PI / 180;
+	public static final double DDEG_TO_RAD = Math.PI / 180;
 
 	static {
 		for(int i = 0; i < SIN_COUNT; i++) {
