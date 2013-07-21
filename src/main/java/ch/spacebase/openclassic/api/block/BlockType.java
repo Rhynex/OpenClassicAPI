@@ -24,6 +24,7 @@ public class BlockType {
 	private int tickDelay = 0;
 	private boolean placeIn = false;
 	private boolean gas = false;
+	private float brightness = 0;
 	
 	public BlockType(int id, StepSound sound, int texture) {
 		this(id, sound, TERRAIN_TEXTURE, texture);
@@ -258,6 +259,24 @@ public class BlockType {
 	 */
 	public BlockType setGas(boolean gas) {
 		this.gas = gas;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's permanent brightness level.
+	 * @return The block's brightness, or 0 for default level brightness.
+	 */
+	public float getBrightness() {
+		return this.brightness;
+	}
+	
+	/**
+	 * Sets the block's permanent brightness level.
+	 * @param brightness The block's new brightness (0 = default level brightness).
+	 * @return This block type.
+	 */
+	public BlockType setBrightness(float brightness) {
+		this.brightness = brightness;
 		return this;
 	}
 	

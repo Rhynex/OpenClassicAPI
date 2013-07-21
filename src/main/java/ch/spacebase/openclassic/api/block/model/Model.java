@@ -142,8 +142,21 @@ public class Model {
 	 * @return Whether anything was rendered.
 	 */
 	public boolean render(float x, float y, float z, float brightness) {
+		return this.render(x, y, z, brightness, false);
+	}
+	
+	/**
+	 * Renders the model.
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param z Z to render at.
+	 * @param brightness Brightness to render at.
+	 * @param batch Whether this model is part of an internal batch.
+	 * @return Whether anything was rendered.
+	 */
+	public boolean render(float x, float y, float z, float brightness, boolean batch) {
 		for(Quad quad : this.quads) {
-			quad.render(x, y, z, brightness);
+			quad.render(x, y, z, brightness, batch);
 		}
 		
 		return true;

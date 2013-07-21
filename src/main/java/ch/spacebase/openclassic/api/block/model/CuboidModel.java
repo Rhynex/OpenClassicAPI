@@ -3,7 +3,6 @@ package ch.spacebase.openclassic.api.block.model;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.block.VanillaBlock;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -77,7 +76,7 @@ public class CuboidModel extends Model {
 	}
 	
 	@Override
-	public boolean render(float x, float y, float z, float brightness) {
+	public boolean render(float x, float y, float z, float brightness, boolean batch) {
 		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y, (int) z);
 		if(block == null) return false;
 		boolean result = false;
@@ -103,7 +102,7 @@ public class CuboidModel extends Model {
 						break;
 				}
 				
-				quad.render(x, y, z, block == VanillaBlock.LAVA || block == VanillaBlock.STATIONARY_LAVA ? 100 : RenderHelper.getHelper().getBrightness(block, (int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod);
+				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, (int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod, batch);
 				result = true;
 			}
 		}

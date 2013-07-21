@@ -243,7 +243,7 @@ public abstract class RenderHelper {
 	 * @param z Z to draw at.
 	 * @param brightness Brightness to draw at.
 	 */
-	public abstract void drawQuad(Quad quad, float x, float y, float z, float brightness);
+	public abstract void drawQuad(Quad quad, float x, float y, float z, float brightness, boolean batch);
 
 	/**
 	 * Draws a texture.

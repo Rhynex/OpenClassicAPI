@@ -31,8 +31,8 @@ public class VanillaBlock {
 	public static final BlockType BEDROCK = new BlockType(7, StepSound.STONE, 17).setSelectable(false);
 	public static final BlockType WATER = new BlockType(8, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 14)).setTickDelay(5).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true);
 	public static final BlockType STATIONARY_WATER = new BlockType(9, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 14)).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true);
-	public static final BlockType LAVA = new BlockType(10, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30)).setTickDelay(20).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true);
-	public static final BlockType STATIONARY_LAVA = new BlockType(11, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30)).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true);
+	public static final BlockType LAVA = new BlockType(10, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30)).setTickDelay(20).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setBrightness(1);
+	public static final BlockType STATIONARY_LAVA = new BlockType(11, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30)).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setBrightness(1);
 	public static final BlockType SAND = new BlockType(12, StepSound.SAND, 18).setTickDelay(1);
 	public static final BlockType GRAVEL = new BlockType(13, StepSound.GRAVEL, 19).setTickDelay(1);
 	public static final BlockType GOLD_ORE = new BlockType(14, StepSound.STONE, 32);

@@ -99,8 +99,20 @@ public class Quad {
 	 * @param z Z to render at.
 	 * @param brightness Brightness to render at.
 	 */
-	public void render(float x, float y, float z, float brightness) {	
-		RenderHelper.getHelper().drawQuad(this, x, y, z, brightness);
+	public void render(float x, float y, float z, float brightness) {
+		this.render(x, y, z, brightness, false);
+	}
+	
+	/**
+	 * Renders the quad.
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param z Z to render at.
+	 * @param brightness Brightness to render at.
+	 * @param batch Whether this render is part of an internal batch.
+	 */
+	public void render(float x, float y, float z, float brightness, boolean batch) {	
+		RenderHelper.getHelper().drawQuad(this, x, y, z, brightness, batch);
 	}
 	
 	/**
