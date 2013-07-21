@@ -21,7 +21,8 @@ public class MathHelper {
 	private static final float radToIndex = SIN_COUNT / radFull;
 	private static final float degToIndex = SIN_COUNT / degFull;
 
-	public static final float RAD_TO_DEG = 180f / PI;
+	public static final float RAD_TO_DEG = 180 / PI;
+	public static final double DRAD_TO_DEG = 180 / Math.PI;
 	public static final float DEG_TO_RAD = PI / 180;
 	public static final double DDEG_TO_RAD = Math.PI / 180;
 
