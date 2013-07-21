@@ -6,10 +6,10 @@ package ch.spacebase.openclassic.api.network.msg;
 public class PlayerRotationMessage extends Message {
 	
 	private byte playerId;
-	private byte yaw;
-	private byte pitch;
+	private float yaw;
+	private float pitch;
 	
-	public PlayerRotationMessage(byte playerId, byte yaw, byte pitch) {
+	public PlayerRotationMessage(byte playerId, float yaw, float pitch) {
 		this.playerId = playerId;
 		this.yaw = yaw;
 		this.pitch = pitch;
@@ -27,7 +27,7 @@ public class PlayerRotationMessage extends Message {
 	 * Gets the new yaw of the player.
 	 * @return The player's new yaw.
 	 */
-	public byte getYaw() {
+	public float getYaw() {
 		return this.yaw;
 	}
 	
@@ -35,18 +35,13 @@ public class PlayerRotationMessage extends Message {
 	 * Gets the new pitch of the player.
 	 * @return The player's new pitch.
 	 */
-	public byte getPitch() {
+	public float getPitch() {
 		return this.pitch;
 	}
 	
 	@Override
 	public String toString() {
 		return "PlayerRotationMessage{playerid=" + playerId + ",yaw=" + yaw + ",pitch=" + pitch + "}";
-	}
-	
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.playerId, this.yaw, this.pitch };
 	}
 	
 	@Override

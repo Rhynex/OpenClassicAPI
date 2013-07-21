@@ -6,13 +6,13 @@ package ch.spacebase.openclassic.api.network.msg;
 public class PlayerPositionRotationMessage extends Message {
 	
 	private byte playerId;
-	private double xChange;
-	private double yChange;
-	private double zChange;
-	private byte yaw;
-	private byte pitch;
+	private float xChange;
+	private float yChange;
+	private float zChange;
+	private float yaw;
+	private float pitch;
 	
-	public PlayerPositionRotationMessage(byte playerId, double xChange, double yChange, double zChange, byte yaw, byte pitch) {
+	public PlayerPositionRotationMessage(byte playerId, float xChange, float yChange, float zChange, float yaw, float pitch) {
 		this.playerId = playerId;
 		this.xChange = xChange;
 		this.yChange = yChange;
@@ -33,7 +33,7 @@ public class PlayerPositionRotationMessage extends Message {
 	 * Gets the X change of the player.
 	 * @return The X change.
 	 */
-	public double getXChange() {
+	public float getXChange() {
 		return this.xChange;
 	}
 	
@@ -41,7 +41,7 @@ public class PlayerPositionRotationMessage extends Message {
 	 * Gets the Y change of the player.
 	 * @return The Y change.
 	 */
-	public double getYChange() {
+	public float getYChange() {
 		return this.yChange;
 	}
 	
@@ -49,7 +49,7 @@ public class PlayerPositionRotationMessage extends Message {
 	 * Gets the Z change of the player.
 	 * @return The Z change.
 	 */
-	public double getZChange() {
+	public float getZChange() {
 		return this.zChange;
 	}
 	
@@ -57,7 +57,7 @@ public class PlayerPositionRotationMessage extends Message {
 	 * Gets the new yaw of the player.
 	 * @return The player's new yaw.
 	 */
-	public byte getYaw() {
+	public float getYaw() {
 		return this.yaw;
 	}
 	
@@ -65,18 +65,13 @@ public class PlayerPositionRotationMessage extends Message {
 	 * Gets the new pitch of the player.
 	 * @return The player's new pitch.
 	 */
-	public byte getPitch() {
+	public float getPitch() {
 		return this.pitch;
 	}
 	
 	@Override
 	public String toString() {
 		return "PlayerPositionRotationMessage{playerid=" + playerId + ",xchange=" + xChange + ",ychange=" + yChange + ",zchange=" + zChange + ",yaw=" + yaw + ",pitch=" + pitch + "}";
-	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.playerId, this.xChange, this.yChange, this.zChange, this.yaw, this.pitch };
 	}
 	
 	@Override

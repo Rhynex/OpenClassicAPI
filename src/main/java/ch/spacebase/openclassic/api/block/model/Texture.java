@@ -64,8 +64,8 @@ public class Texture {
 	 * Sets the texture file of this texture.
 	 * @param path Path of the texture file.
 	 */
-	public void setTexture(String path) {
-		this.texture = path;
+	public void setTexture(String texture) {
+		this.texture = texture;
 	}
 	
 	/**

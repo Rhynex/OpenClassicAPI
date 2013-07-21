@@ -97,11 +97,6 @@ public class AudioPlayMessage extends Message {
 	}
 
 	@Override
-	public Object[] getParams() {
-		return new Object[] { this.identifier, this.x, this.y, this.z, this.volume, this.pitch, this.music ? (byte) 1 : (byte) 0, this.loop ? (byte) 1 : (byte) 0 };
-	}
-
-	@Override
 	public byte getOpcode() {
 		return 23;
 	}

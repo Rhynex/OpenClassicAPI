@@ -57,11 +57,6 @@ public class AudioRegisterMessage extends Message {
 	}
 
 	@Override
-	public Object[] getParams() {
-		return new Object[] { this.identifier, this.url, this.included ? (byte) 1 : (byte) 0, this.music ? (byte) 1 : (byte) 0 };
-	}
-
-	@Override
 	public byte getOpcode() {
 		return 22;
 	}

@@ -27,11 +27,6 @@ public class MusicStopMessage extends Message {
 	}
 
 	@Override
-	public Object[] getParams() {
-		return new Object[] { this.identifier };
-	}
-
-	@Override
 	public byte getOpcode() {
 		return 24;
 	}

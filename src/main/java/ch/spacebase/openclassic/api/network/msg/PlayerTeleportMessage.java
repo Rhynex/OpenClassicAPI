@@ -6,13 +6,13 @@ package ch.spacebase.openclassic.api.network.msg;
 public class PlayerTeleportMessage extends Message {
 	
 	private byte playerId;
-	private double x;
-	private double y;
-	private double z;
-	private byte yaw;
-	private byte pitch;
+	private float x;
+	private float y;
+	private float z;
+	private float yaw;
+	private float pitch;
 	
-	public PlayerTeleportMessage(byte playerId, double x, double y, double z, byte yaw, byte pitch) {
+	public PlayerTeleportMessage(byte playerId, float x, float y, float z, float yaw, float pitch) {
 		this.playerId = playerId;
 		this.x = x;
 		this.y = y;
@@ -33,7 +33,7 @@ public class PlayerTeleportMessage extends Message {
 	 * Gets the player's new X.
 	 * @return The new X.
 	 */
-	public double getX() {
+	public float getX() {
 		return this.x;
 	}
 	
@@ -41,7 +41,7 @@ public class PlayerTeleportMessage extends Message {
 	 * Gets the player's new Y.
 	 * @return The new Y.
 	 */
-	public double getY() {
+	public float getY() {
 		return this.y;
 	}
 	
@@ -49,7 +49,7 @@ public class PlayerTeleportMessage extends Message {
 	 * Gets the player's new Z.
 	 * @return The new Z.
 	 */
-	public double getZ() {
+	public float getZ() {
 		return this.z;
 	}
 	
@@ -57,7 +57,7 @@ public class PlayerTeleportMessage extends Message {
 	 * Gets the player's new yaw.
 	 * @return The new yaw.
 	 */
-	public byte getYaw() {
+	public float getYaw() {
 		return this.yaw;
 	}
 	
@@ -65,18 +65,13 @@ public class PlayerTeleportMessage extends Message {
 	 * Gets the player's new pitch.
 	 * @return The new pitch.
 	 */
-	public byte getPitch() {
+	public float getPitch() {
 		return this.pitch;
 	}
 	
 	@Override
 	public String toString() {
 		return "PlayerTeleportMessage{playerid=" + playerId + ",x=" + x + ",y=" + y + ",z=" + z + ",yaw=" + yaw + ",pitch=" + pitch + "}";
-	}
-	
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.playerId, this.x, this.y, this.z, this.yaw, this.pitch };
 	}
 	
 	@Override

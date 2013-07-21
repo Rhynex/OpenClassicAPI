@@ -6,11 +6,11 @@ package ch.spacebase.openclassic.api.network.msg;
 public class PlayerPositionMessage extends Message {
 	
 	private byte playerId;
-	private double xChange;
-	private double yChange;
-	private double zChange;
+	private float xChange;
+	private float yChange;
+	private float zChange;
 	
-	public PlayerPositionMessage(byte playerId, double xChange, double yChange, double zChange) {
+	public PlayerPositionMessage(byte playerId, float xChange, float yChange, float zChange) {
 		this.playerId = playerId;
 		this.xChange = xChange;
 		this.yChange = yChange;
@@ -29,7 +29,7 @@ public class PlayerPositionMessage extends Message {
 	 * Gets the X change of the player.
 	 * @return The X change.
 	 */
-	public double getXChange() {
+	public float getXChange() {
 		return this.xChange;
 	}
 	
@@ -37,7 +37,7 @@ public class PlayerPositionMessage extends Message {
 	 * Gets the Y change of the player.
 	 * @return The Y change.
 	 */
-	public double getYChange() {
+	public float getYChange() {
 		return this.yChange;
 	}
 	
@@ -45,18 +45,13 @@ public class PlayerPositionMessage extends Message {
 	 * Gets the Z change of the player.
 	 * @return The Z change.
 	 */
-	public double getZChange() {
+	public float getZChange() {
 		return this.zChange;
 	}
 	
 	@Override
 	public String toString() {
 		return "PlayerPositionMessage{playerid=" + playerId + ",xchange=" + xChange + ",ychange=" + yChange + ",zchange=" + zChange + "}";
-	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.playerId, this.xChange, this.yChange, this.zChange };
 	}
 	
 	@Override

@@ -7,13 +7,13 @@ public class PlayerSpawnMessage extends Message {
 	
 	private byte playerId;
 	private String name;
-	private double x;
-	private double y;
-	private double z;
-	private byte yaw;
-	private byte pitch;
+	private float x;
+	private float y;
+	private float z;
+	private float yaw;
+	private float pitch;
 	
-	public PlayerSpawnMessage(byte playerId, String name, double x, double y, double z, byte yaw, byte pitch) {
+	public PlayerSpawnMessage(byte playerId, String name, float x, float y, float z, float yaw, float pitch) {
 		this.playerId = playerId;
 		this.name = name;
 		this.x = x;
@@ -43,7 +43,7 @@ public class PlayerSpawnMessage extends Message {
 	 * Gets the X of the spawned player.
 	 * @return The player's X.
 	 */
-	public double getX() {
+	public float getX() {
 		return this.x;
 	}
 	
@@ -51,7 +51,7 @@ public class PlayerSpawnMessage extends Message {
 	 * Gets the Y of the spawned player.
 	 * @return The player's Y.
 	 */
-	public double getY() {
+	public float getY() {
 		return this.y;
 	}
 	
@@ -59,7 +59,7 @@ public class PlayerSpawnMessage extends Message {
 	 * Gets the Z of the spawned player.
 	 * @return The player's Z.
 	 */
-	public double getZ() {
+	public float getZ() {
 		return this.z;
 	}
 	
@@ -67,7 +67,7 @@ public class PlayerSpawnMessage extends Message {
 	 * Gets the yaw of the spawned player.
 	 * @return The player's yaw.
 	 */
-	public byte getYaw() {
+	public float getYaw() {
 		return this.yaw;
 	}
 	
@@ -75,18 +75,13 @@ public class PlayerSpawnMessage extends Message {
 	 * Gets the pitch of the spawned player.
 	 * @return The player's pitch.
 	 */
-	public byte getPitch() {
+	public float getPitch() {
 		return this.pitch;
 	}
 	
 	@Override
 	public String toString() {
 		return "PlayerSpawnMessage{playerid=" + playerId + ",name=" + name + ",x=" + x + ",y=" + y + ",z=" + z + ",yaw=" + yaw + ",pitch=" + pitch + "}";
-	}
-
-	@Override
-	public Object[] getParams() {
-		return new Object[] { this.playerId, this.name, this.x, this.y, this.z, this.yaw, this.pitch };
 	}
 	
 	@Override
