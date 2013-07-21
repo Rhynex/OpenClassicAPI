@@ -51,9 +51,14 @@ public class Constants {
 	public static final float FOOT_EYE_DISTANCE = 1.59375f;
 	
 	/**
-	 * The URL of the Minecraft website.
+	 * The URL of the Minecraft website using https.
 	 */
-	public static final String MINECRAFT_URL = "https://minecraft.net/";
+	public static final String MINECRAFT_URL_HTTPS = "https://minecraft.net/";
+	
+	/**
+	 * The URL of the Minecraft website using http.
+	 */
+	public static final String MINECRAFT_URL_HTTP = "http://minecraft.net/";
 	
 	/**
 	 * Default private constructor
