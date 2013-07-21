@@ -5,47 +5,56 @@ package ch.spacebase.openclassic.api;
  */
 public enum Color {
 
-	/** Represents the color code prefix. */
-	COLOR_CHARACTER("&", 0, 0, 0),
 	/** Represents the color black. */
-	BLACK(COLOR_CHARACTER + "0", 0, 0, 0),
+	BLACK('0', 0, 0, 0),
 	/** Represents the color dark blue. */
-	DARK_BLUE(COLOR_CHARACTER + "1", 0, 0, 170),
+	DARK_BLUE('1', 0, 0, 170),
 	/** Represents the color dark green. */
-	DARK_GREEN(COLOR_CHARACTER + "2", 0, 170, 0),
+	DARK_GREEN('2', 0, 170, 0),
 	/** Represents the color cyan. */
-	CYAN(COLOR_CHARACTER + "3", 0, 170, 170),
+	CYAN('3', 0, 170, 170),
 	/** Represents the color dark red. */
-	DARK_RED(COLOR_CHARACTER + "4", 170, 0, 0),
+	DARK_RED('4', 170, 0, 0),
 	/** Represents the color purple. */
-	PURPLE(COLOR_CHARACTER + "5", 170, 0, 170),
+	PURPLE('5', 170, 0, 170),
 	/** Represents the color gold. */
-	GOLD(COLOR_CHARACTER + "6", 255, 170, 0),
+	GOLD('6', 255, 170, 0),
 	/** Represents the color gray. */
-	GRAY(COLOR_CHARACTER + "7", 170, 170, 170),
+	GRAY('7', 170, 170, 170),
 	/** Represents the color dark gray. */
-	DARK_GRAY(COLOR_CHARACTER + "8", 85, 85, 85),
+	DARK_GRAY('8', 85, 85, 85),
 	/** Represents the color blue. */
-	BLUE(COLOR_CHARACTER + "9", 85, 85, 255),
+	BLUE('9', 85, 85, 255),
 	/** Represents the color green. */
-	GREEN(COLOR_CHARACTER + "a", 85, 255, 85),
+	GREEN('a', 85, 255, 85),
 	/** Represents the color aqua. */
-	AQUA(COLOR_CHARACTER + "b", 85, 255, 255),
+	AQUA('b', 85, 255, 255),
 	/** Represents the color red. */
-	RED(COLOR_CHARACTER + "c", 255, 85, 85),
+	RED('c', 255, 85, 85),
 	/** Represents the color pink. */
-	PINK(COLOR_CHARACTER + "d", 255, 85, 255),
+	PINK('d', 255, 85, 255),
 	/** Represents the color yellow. */
-	YELLOW(COLOR_CHARACTER + "e", 255, 255, 85),
+	YELLOW('e', 255, 255, 85),
 	/** Represents the color white. */
-	WHITE(COLOR_CHARACTER + "f", 255, 255, 255);
+	WHITE('f', 255, 255, 255),
+	/** Represents the color orange. Only available on OpenClassic clients. */
+	ORANGE('g', 220, 120, 60),
+	/** Represents the color orange. Only available on OpenClassic clients. */
+	BROWN('h', 90, 60, 30);
 	
-	private String code;
+	/** Represents the color code prefix. */
+	public static final char COLOR_CHARACTER = '&';
+	/** Represents the color code prefix as a String. */
+	public static final String COLOR_CHARACTER_STRING = String.valueOf(COLOR_CHARACTER);
+	/** A string containing all color chars. */
+	public static final String CHARS = buildChars();
+	
+	private char code;
 	private int r;
 	private int g;
 	private int b;
 	
-	private Color(String code, int r, int g, int b) {
+	private Color(char code, int r, int g, int b) {
 		this.code = code;
 		this.r = r;
 		this.g = g;
@@ -53,19 +62,11 @@ public enum Color {
 	}
 	
 	/**
-	 * Gets the color code string.
-	 * @return The color code.
+	 * Gets the color code char.
+	 * @return The color code char.
 	 */
-	public String getCode() {
+	public char getCode() {
 		return this.code;
-	}
-	
-	/**
-	 * Gets the symbol following the color code prefix.
-	 * @return The color code's symbol.
-	 */
-	public String getSymbol() {
-		return this.code.replace(COLOR_CHARACTER.getCode(), "");
 	}
 	
 	/**
@@ -94,7 +95,7 @@ public enum Color {
 	
 	@Override
 	public String toString() {
-		return this.code;
+		return COLOR_CHARACTER_STRING + this.code;
 	}
 	
 	/**
@@ -104,11 +105,10 @@ public enum Color {
 	 */
 	public static String stripColor(String message) {
 		StringBuilder builder = new StringBuilder();
-		
 		for(int index = 0; index < message.length(); index++) {
 			char curr = message.charAt(index);
 			
-			if(curr == COLOR_CHARACTER.getCode().charAt(0)) {
+			if(curr == COLOR_CHARACTER) {
 				index++;
 				continue;
 			}
@@ -121,10 +121,21 @@ public enum Color {
 
 	public static Color getByChar(char c) {
 		for(Color color : values()) {
-			if(color.getSymbol().length() > 0 && color.getSymbol().charAt(0) == c) return color;
+			if(color.getCode() == c) {
+				return color;
+			}
 		}
 		
 		return null;
+	}
+	
+	private static String buildChars() {
+		StringBuilder build = new StringBuilder();
+		for(Color color : values()) {
+			build.append(color.getCode());
+		}
+		
+		return build.toString();
 	}
 
 }
