@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.plugin;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.plugin.Plugin;
 
 /**
@@ -7,8 +9,15 @@ import ch.spacebase.openclassic.api.plugin.Plugin;
  */
 public class PluginEnableEvent extends PluginEvent {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	public PluginEnableEvent(Plugin plugin) {
-		super(EventType.PLUGIN_ENABLE, plugin);
+		super(plugin);
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 	
 }

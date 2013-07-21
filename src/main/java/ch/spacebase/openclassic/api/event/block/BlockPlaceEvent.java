@@ -1,8 +1,10 @@
 package ch.spacebase.openclassic.api.event.block;
 
+import com.zachsthings.onevent.Cancellable;
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.event.Cancellable;
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -10,12 +12,14 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class BlockPlaceEvent extends BlockEvent implements Cancellable {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private BlockType held;
 	private Player player;
 	private boolean cancelled = false;
 	
 	public BlockPlaceEvent(Block block, Player player, BlockType held) {
-		super(EventType.BLOCK_PLACE, block);
+		super(block);
 		this.player = player;
 		this.held = held;
 	}
@@ -44,6 +48,11 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

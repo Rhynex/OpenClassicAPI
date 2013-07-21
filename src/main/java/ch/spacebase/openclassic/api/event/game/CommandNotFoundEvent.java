@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.game;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.command.Sender;
 
 /**
@@ -7,12 +9,13 @@ import ch.spacebase.openclassic.api.command.Sender;
  */
 public class CommandNotFoundEvent extends GameEvent {
 
-	private boolean showmessage = true;
+	private static final HandlerList handlers = new HandlerList();
+	
+	private boolean showMessage = true;
 	private Sender sender;
 	private String command;
 	
 	public CommandNotFoundEvent(Sender sender, String command) {
-		super(EventType.COMMAND_NOT_FOUND);
 		this.sender = sender;
 		this.command = command;
 	}
@@ -46,7 +49,7 @@ public class CommandNotFoundEvent extends GameEvent {
 	 * @return True if the message will show.
 	 */
 	public boolean showMessage() {
-		return this.showmessage;
+		return this.showMessage;
 	}
 	
 	/**
@@ -54,7 +57,12 @@ public class CommandNotFoundEvent extends GameEvent {
 	 * @param show Whether the message will show.
 	 */
 	public void setShowMessage(boolean show) {
-		this.showmessage = show;
+		this.showMessage = show;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

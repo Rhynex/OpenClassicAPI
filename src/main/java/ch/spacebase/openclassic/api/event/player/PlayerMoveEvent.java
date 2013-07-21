@@ -1,7 +1,9 @@
 package ch.spacebase.openclassic.api.event.player;
 
+import com.zachsthings.onevent.Cancellable;
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.event.Cancellable;
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -9,16 +11,14 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
     
+	private static final HandlerList handlers = new HandlerList();
+	
 	private boolean cancelled = false;
 	private Position from;
 	private Position to;
-	
-    public PlayerMoveEvent(Player player, Position from, Position to) {
-    	this(EventType.PLAYER_MOVE, player, from, to);
-    }
     
-    public PlayerMoveEvent(EventType type, Player player, Position from, Position to) {
-    	super(type, player);
+    public PlayerMoveEvent(Player player, Position from, Position to) {
+    	super(player);
     	this.from = from;
     	this.to = to;
     }
@@ -63,6 +63,11 @@ public class PlayerMoveEvent extends PlayerEvent implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 	
 }

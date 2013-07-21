@@ -1,6 +1,7 @@
 package ch.spacebase.openclassic.api.event.level;
 
-import ch.spacebase.openclassic.api.event.Event;
+import com.zachsthings.onevent.Event;
+
 import ch.spacebase.openclassic.api.level.Level;
 
 /**
@@ -10,8 +11,7 @@ public abstract class LevelEvent extends Event {
 
 	private Level level;
 	
-	public LevelEvent(EventType type, Level level) {
-		super(type);
+	public LevelEvent(Level level) {
 		this.level = level;
 	}
 	

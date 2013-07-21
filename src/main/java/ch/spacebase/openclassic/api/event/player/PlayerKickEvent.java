@@ -1,7 +1,9 @@
 package ch.spacebase.openclassic.api.event.player;
 
+import com.zachsthings.onevent.Cancellable;
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.Color;
-import ch.spacebase.openclassic.api.event.Cancellable;
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -9,12 +11,14 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class PlayerKickEvent extends PlayerEvent implements Cancellable {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private boolean cancelled = false;
     private String message;
     private String reason;
     
     public PlayerKickEvent(Player player, String reason, String message) {
-    	super(EventType.PLAYER_KICK, player);
+    	super(player);
     	this.reason = reason;
     	this.message = message;
     }
@@ -63,6 +67,11 @@ public class PlayerKickEvent extends PlayerEvent implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 	
 }

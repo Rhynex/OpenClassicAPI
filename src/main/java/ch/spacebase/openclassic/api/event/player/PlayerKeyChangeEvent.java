@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.player;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -7,11 +9,13 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class PlayerKeyChangeEvent extends PlayerEvent {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private int key;
 	private boolean pressed;
 	
 	public PlayerKeyChangeEvent(Player player, int key, boolean pressed) {
-		super(EventType.PLAYER_KEY_CHANGE, player);
+		super(player);
 		this.key = key;
 		this.pressed = pressed;
 	}
@@ -30,6 +34,11 @@ public class PlayerKeyChangeEvent extends PlayerEvent {
 	 */
 	public boolean isPressed() {
 		return this.pressed;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

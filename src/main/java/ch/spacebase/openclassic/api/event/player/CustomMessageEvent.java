@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.player;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.network.msg.custom.CustomMessage;
 import ch.spacebase.openclassic.api.player.Player;
 
@@ -8,10 +10,12 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class CustomMessageEvent extends PlayerEvent {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private CustomMessage message;
 	
 	public CustomMessageEvent(Player player, CustomMessage message) {
-		super(EventType.CUSTOM_MESSAGE, player);
+		super(player);
 		this.message = message;
 	}
 	
@@ -21,6 +25,11 @@ public class CustomMessageEvent extends PlayerEvent {
 	 */
 	public CustomMessage getMessage() {
 		return this.message;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

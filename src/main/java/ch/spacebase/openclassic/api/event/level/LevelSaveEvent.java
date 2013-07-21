@@ -1,6 +1,8 @@
 package ch.spacebase.openclassic.api.event.level;
 
-import ch.spacebase.openclassic.api.event.Cancellable;
+import com.zachsthings.onevent.Cancellable;
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.level.Level;
 
 /**
@@ -8,10 +10,12 @@ import ch.spacebase.openclassic.api.level.Level;
  */
 public class LevelSaveEvent extends LevelEvent implements Cancellable {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private boolean cancelled = false;
 	
 	public LevelSaveEvent(Level level) {
-		super(EventType.LEVEL_SAVE, level);
+		super(level);
 	}
 	
 	@Override
@@ -22,6 +26,11 @@ public class LevelSaveEvent extends LevelEvent implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

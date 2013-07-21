@@ -136,7 +136,7 @@ public class CuboidModel extends Model {
 		return CuboidModel.class;
 	}
 	
-	public boolean isCube() {
+	public boolean isFullCube() {
 		return this.cube;
 	}
 	

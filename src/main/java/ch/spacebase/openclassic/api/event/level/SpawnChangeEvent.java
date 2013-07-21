@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.level;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.level.Level;
 
@@ -8,10 +10,12 @@ import ch.spacebase.openclassic.api.level.Level;
  */
 public class SpawnChangeEvent extends LevelEvent {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private Position old;
 	
 	public SpawnChangeEvent(Level level, Position old) {
-		super(EventType.SPAWN_CHANGE, level);
+		super(level);
 		this.old = old;
 	}
 	
@@ -21,6 +25,11 @@ public class SpawnChangeEvent extends LevelEvent {
 	 */
 	public Position getOldSpawn() {
 		return this.old;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

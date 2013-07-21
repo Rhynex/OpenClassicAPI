@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.player;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.player.Player;
 
@@ -8,8 +10,15 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class PlayerTeleportEvent extends PlayerMoveEvent {
     
+	private static final HandlerList handlers = new HandlerList();
+	
     public PlayerTeleportEvent(Player player, Position from, Position to) {
-    	super(EventType.PLAYER_TELEPORT, player, from, to);
+    	super(player, from, to);
+    }
+    
+    @Override
+    public HandlerList getHandlers() {
+    	return handlers;
     }
 	
 }

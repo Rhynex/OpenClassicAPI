@@ -1,19 +1,24 @@
 package ch.spacebase.openclassic.api.event.player;
 
+import com.zachsthings.onevent.Cancellable;
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.Position;
-import ch.spacebase.openclassic.api.event.Cancellable;
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
  * Called when a player respawns with the Load Location key.
+ * NOTICE: Only called on client currently due to detection issues.
  */
 public class PlayerRespawnEvent extends PlayerEvent implements Cancellable {
     
+	private static final HandlerList handlers = new HandlerList();
+	
 	private boolean cancelled = false;
 	private Position pos;
 	
     public PlayerRespawnEvent(Player player, Position pos) {
-    	super(EventType.PLAYER_RESPAWN, player);
+    	super(player);
     	this.pos = pos;
     }
     
@@ -41,6 +46,11 @@ public class PlayerRespawnEvent extends PlayerEvent implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 	
 }

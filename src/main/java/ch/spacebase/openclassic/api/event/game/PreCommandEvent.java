@@ -1,19 +1,22 @@
 package ch.spacebase.openclassic.api.event.game;
 
+import com.zachsthings.onevent.Cancellable;
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.command.Sender;
-import ch.spacebase.openclassic.api.event.Cancellable;
 
 /**
  * Called when a command is executed.
  */
 public class PreCommandEvent extends GameEvent implements Cancellable {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private boolean cancelled = false;
 	private Sender sender;
 	private String command;
 	
 	public PreCommandEvent(Sender sender, String command) {
-		super(EventType.PRE_COMMAND);
 		this.sender = sender;
 		this.command = command;
 	}
@@ -50,6 +53,11 @@ public class PreCommandEvent extends GameEvent implements Cancellable {
 	@Override
 	public void setCancelled(boolean cancel) {
 		this.cancelled = cancel;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

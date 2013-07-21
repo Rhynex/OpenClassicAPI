@@ -1,11 +1,6 @@
 package ch.spacebase.openclassic.api.event.game;
 
-import ch.spacebase.openclassic.api.event.Event;
+import com.zachsthings.onevent.Event;
 
 public abstract class GameEvent extends Event {
-
-	public GameEvent(EventType type) {
-		super(type);
-	}
-
 }

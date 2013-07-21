@@ -18,6 +18,7 @@ public final class NormalGenerator extends Generator {
 
 	private Random random = new Random();
 	private int[] floodData = new int[1048576];
+	private int progressCounter = 0;
 
 	@Override
 	public void generate(Level level, byte data[]) {
@@ -495,14 +496,15 @@ public final class NormalGenerator extends Generator {
 	}
 
 	private void setStep(String step) {
-		if(OpenClassic.getClient().getProgressBar() != null) {
+		if(OpenClassic.getClient() != null) {
 			OpenClassic.getClient().getProgressBar().setText(step);
 			OpenClassic.getClient().getProgressBar().render();
 		}
 	}
 
 	private void setProgress(int progress) {
-		if(OpenClassic.getClient().getProgressBar() != null) {
+		this.progressCounter++;
+		if(OpenClassic.getClient() != null && this.progressCounter % 10 == 0) {
 			OpenClassic.getClient().getProgressBar().setProgress(progress);
 			OpenClassic.getClient().getProgressBar().renderBar();
 		}

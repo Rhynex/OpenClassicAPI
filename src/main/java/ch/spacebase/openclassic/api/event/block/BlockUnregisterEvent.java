@@ -1,17 +1,20 @@
 package ch.spacebase.openclassic.api.event.block;
 
+import com.zachsthings.onevent.Event;
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.event.Event;
 
 /**
  * Called when a block is unregistered.
  */
 public class BlockUnregisterEvent extends Event {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	private BlockType type;
 	
 	public BlockUnregisterEvent(BlockType type) {
-		super(EventType.BLOCK_UNREGISTER);
 		this.type = type;
 	}
 	
@@ -21,6 +24,11 @@ public class BlockUnregisterEvent extends Event {
 	 */
 	public BlockType getBlock() {
 		return this.type;
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

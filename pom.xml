@@ -67,6 +67,11 @@
     			<version>1.1-SNAPSHOT</version>
     			<scope>compile</scope>
   		</dependency>
+  		<dependency>
+    			<groupId>com.zachsthings</groupId>
+    			<artifactId>onevent</artifactId>
+    			<version>latest</version>
+  		</dependency>
 	</dependencies>
 
 	<build>
@@ -103,13 +108,6 @@
 						<goals>
 							<goal>shade</goal>
 						</goals>
-						<configuration>
-							<artifactSet>
-								<excludes>
-									<exclude>junit:junit</exclude>
-								</excludes>
-							</artifactSet>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

@@ -2,6 +2,8 @@ package ch.spacebase.openclassic.api.event.player;
 
 import java.net.SocketAddress;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -9,12 +11,14 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class PlayerLoginEvent extends PlayerEvent {
 
+	private static final HandlerList handlers = new HandlerList();
+	
     private final SocketAddress address;
     private Result result = Result.ALLOWED;
     private String message = "";
     
     public PlayerLoginEvent(Player player, SocketAddress address) {
-        super(EventType.PLAYER_LOGIN, player);
+        super(player);
         this.address = address;
     }
 
@@ -81,6 +85,11 @@ public class PlayerLoginEvent extends PlayerEvent {
         this.result = result;
         this.message = message;
     }
+    
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
+	}
     
     /**
      * The result of a login attempt.

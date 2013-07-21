@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.player;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -7,10 +9,12 @@ import ch.spacebase.openclassic.api.player.Player;
  */
 public class PlayerQuitEvent extends PlayerEvent {
 
+	private static final HandlerList handlers = new HandlerList();
+	
     private String message;
     
     public PlayerQuitEvent(Player player, String message) {
-    	super(EventType.PLAYER_QUIT, player);
+    	super(player);
     	this.message = message;
     }
     
@@ -29,5 +33,10 @@ public class PlayerQuitEvent extends PlayerEvent {
     public void setMessage(String message) {
     	this.message = message;
     }
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
+	}
 	
 }

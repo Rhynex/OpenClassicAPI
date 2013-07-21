@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.event.level;
 
+import com.zachsthings.onevent.HandlerList;
+
 import ch.spacebase.openclassic.api.level.Level;
 
 /**
@@ -7,8 +9,15 @@ import ch.spacebase.openclassic.api.level.Level;
  */
 public class LevelCreateEvent extends LevelEvent {
 
+	private static final HandlerList handlers = new HandlerList();
+	
 	public LevelCreateEvent(Level level) {
-		super(EventType.LEVEL_CREATE, level);
+		super(level);
+	}
+
+	@Override
+	public HandlerList getHandlers() {
+		return handlers;
 	}
 
 }

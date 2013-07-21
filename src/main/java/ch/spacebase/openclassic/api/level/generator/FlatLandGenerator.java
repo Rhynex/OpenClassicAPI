@@ -28,11 +28,9 @@ public class FlatLandGenerator extends Generator {
 					}
 					
 					count++;
-					if(OpenClassic.getGame() instanceof Client) {
+					if(OpenClassic.getGame() instanceof Client && count % 5000 == 0) {
 						OpenClassic.getClient().getProgressBar().setProgress((int) (((double) count / (double) blocks.length) * 100) * 2);
-						if(count % 5000 == 0) {
-							OpenClassic.getClient().getProgressBar().renderBar();
-						}
+						OpenClassic.getClient().getProgressBar().renderBar();
 					}
 				}
 			}

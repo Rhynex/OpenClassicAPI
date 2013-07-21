@@ -17,12 +17,13 @@ import java.util.jar.JarFile;
 
 import org.yaml.snakeyaml.Yaml;
 
+import com.zachsthings.onevent.EventManager;
+import com.zachsthings.onevent.Listener;
+
 import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.Server;
-import ch.spacebase.openclassic.api.event.EventFactory;
-import ch.spacebase.openclassic.api.event.Listener;
 import ch.spacebase.openclassic.api.event.plugin.PluginDisableEvent;
 import ch.spacebase.openclassic.api.event.plugin.PluginEnableEvent;
 import ch.spacebase.openclassic.api.util.io.JarFilter;
@@ -137,7 +138,7 @@ public class PluginManager {
 		plugin.onEnable();
 		
 		OpenClassic.getLogger().info(plugin.getDescription().getFullName() + " has been enabled!");
-		EventFactory.callEvent(new PluginEnableEvent(plugin));
+		EventManager.callEvent(new PluginEnableEvent(plugin));
 		
 		for(Plugin p : this.plugins) {
 			if(!p.isEnabled()) {
@@ -184,7 +185,7 @@ public class PluginManager {
 		OpenClassic.getGame().unregisterExecutors(plugin);
 		
 		OpenClassic.getLogger().info(plugin.getDescription().getFullName() + " has been disabled!");
-		EventFactory.callEvent(new PluginDisableEvent(plugin));
+		EventManager.callEvent(new PluginDisableEvent(plugin));
 		
 		for(Plugin p : this.plugins) {
 			if(p.isEnabled()) {
