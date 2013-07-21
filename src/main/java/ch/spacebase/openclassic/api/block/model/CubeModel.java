@@ -18,8 +18,8 @@ public class CubeModel extends CuboidModel {
 	}
 	
 	@Override
-	public String getType() {
-		return "CubeModel";
+	public Class<? extends Model> getNetworkClass() {
+		return CubeModel.class;
 	}
 	
 }

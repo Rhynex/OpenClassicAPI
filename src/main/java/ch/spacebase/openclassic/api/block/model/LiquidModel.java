@@ -140,5 +140,10 @@ public class LiquidModel extends CubeModel {
 		RenderHelper.getHelper().setCulling(true);
 		return result;
 	}
+	
+	@Override
+	public Class<? extends Model> getNetworkClass() {
+		return LiquidModel.class;
+	}
 
 }

@@ -12,8 +12,8 @@ public class EmptyModel extends Model {
 	public void renderPreview(float brightness) {
 	}
 	
-	public String getType() {
-		return "EmptyModel";
+	public Class<? extends Model> getNetworkClass() {
+		return EmptyModel.class;
 	}
 
 	public void renderAll(int x, int y, int z, float brightness) {

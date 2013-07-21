@@ -44,4 +44,9 @@ public class PlantModel extends Model {
 		this.quadCount++;
 	}
 	
+	@Override
+	public Class<? extends Model> getNetworkClass() {
+		return PlantModel.class;
+	}
+	
 }

@@ -11,9 +11,15 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
  */
 public class CuboidModel extends Model {
 	
+	private boolean cube = false;
+	
 	public CuboidModel(Texture texture, int[] textureIds, float x1, float y1, float z1, float x2, float y2, float z2) {
 		if(textureIds.length < 6) {
 			throw new IllegalArgumentException("Texture ID array must have length of 6!");
+		}
+		
+		if(x1 == 0 && y1 == 0 && z1 == 0 && x2 == 1 && y2 == 1 && z2 == 1) {
+			this.cube = true;
 		}
 		
 		this.setCollisionBox(x1, y1, z1, x2, y2, z2);
@@ -126,8 +132,12 @@ public class CuboidModel extends Model {
 	}
 	
 	@Override
-	public String getType() {
-		return "CuboidModel";
+	public Class<? extends Model> getNetworkClass() {
+		return CuboidModel.class;
+	}
+	
+	public boolean isCube() {
+		return this.cube;
 	}
 	
 	/**

@@ -153,8 +153,8 @@ public class Model {
 	 * Gets the type of model this is for use in client to server communications.
 	 * @return The type of model.
 	 */
-	public String getType() {
-		return "Model";
+	public Class<? extends Model> getNetworkClass() {
+		return Model.class;
 	}
 
 	/**
