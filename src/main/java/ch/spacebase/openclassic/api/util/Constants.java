@@ -8,7 +8,7 @@ public class Constants {
 	/**
 	 * OpenClassic's current version.
 	 */
-	public static final String VERSION = "1.2.4";
+	public static final String VERSION = "1.2.5";
 	
 	/**
 	 * The protocol version.
