@@ -11,12 +11,24 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
 public class CuboidModel extends Model {
 	
 	private boolean cube = false;
+	private float x1;
+	private float y1;
+	private float z1;
+	private float x2;
+	private float y2;
+	private float z2;
 	
 	public CuboidModel(Texture texture, int[] textureIds, float x1, float y1, float z1, float x2, float y2, float z2) {
 		if(textureIds.length < 6) {
 			throw new IllegalArgumentException("Texture ID array must have length of 6!");
 		}
 		
+		this.x1 = x1;
+		this.y1 = y1;
+		this.z1 = z1;
+		this.x2 = x2;
+		this.y2 = y2;
+		this.z2 = z2;
 		if(x1 == 0 && y1 == 0 && z1 == 0 && x2 == 1 && y2 == 1 && z2 == 1) {
 			this.cube = true;
 		}
@@ -135,8 +147,60 @@ public class CuboidModel extends Model {
 		return CuboidModel.class;
 	}
 	
+	/**
+	 * Gets whether the model is a full cube.
+	 * @return Whether the model is a full cube.
+	 */
 	public boolean isFullCube() {
 		return this.cube;
+	}
+	
+	/**
+	 * Gets the model's first x coordinate.
+	 * @return The model's first x.
+	 */
+	public float getX1() {
+		return this.x1;
+	}
+	
+	/**
+	 * Gets the model's first y coordinate.
+	 * @return The model's first y.
+	 */
+	public float getY1() {
+		return this.y1;
+	}
+	
+	/**
+	 * Gets the model's first z coordinate.
+	 * @return The model's first z.
+	 */
+	public float getZ1() {
+		return this.z1;
+	}
+	
+	/**
+	 * Gets the model's second x coordinate.
+	 * @return The model's second x.
+	 */
+	public float getX2() {
+		return this.x2;
+	}
+	
+	/**
+	 * Gets the model's second y coordinate.
+	 * @return The model's second y.
+	 */
+	public float getY2() {
+		return this.y2;
+	}
+	
+	/**
+	 * Gets the model's second z coordinate.
+	 * @return The model's second z.
+	 */
+	public float getZ2() {
+		return this.z2;
 	}
 	
 	/**
