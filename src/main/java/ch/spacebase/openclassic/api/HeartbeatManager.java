@@ -137,16 +137,18 @@ public final class HeartbeatManager {
 				HeartbeatManager.url = result;
 				OpenClassic.getLogger().info(Color.GREEN + "The server's URL is now \"" + getURL() + "\".");
 				
-				try {
-					File file = new File(OpenClassic.getGame().getDirectory(), "server-address.txt");
-					if(!file.exists()) file.createNewFile();
-					
-					BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-					writer.write(result);
-					IOUtils.closeQuietly(writer);
-				} catch(IOException e) {
-					OpenClassic.getLogger().severe("Failed to save server address!");
-					e.printStackTrace();
+				if(OpenClassic.getGame() != null) {
+					try {
+						File file = new File(OpenClassic.getGame().getDirectory(), "server-address.txt");
+						if(!file.exists()) file.createNewFile();
+						
+						BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+						writer.write(result);
+						IOUtils.closeQuietly(writer);
+					} catch(IOException e) {
+						OpenClassic.getLogger().severe("Failed to save server address!");
+						e.printStackTrace();
+					}
 				}
 			}
 		} catch (IOException e) {
