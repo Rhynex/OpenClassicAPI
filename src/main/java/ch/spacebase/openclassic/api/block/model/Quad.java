@@ -3,6 +3,8 @@ package ch.spacebase.openclassic.api.block.model;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
@@ -42,7 +44,7 @@ public class Quad {
 	 * @param vertex Vertex to add.
 	 */
 	public void addVertex(int id, Vertex vertex) {
-		if(id > 3 || id < 0) throw new IllegalArgumentException("Quad can only have 4 vertices with IDs 0 - 3!");
+		Validate.isTrue(id >= 0 && id <= 3, "Quad can only have 4 vertices with IDs 0 - 3!");
 		this.vertices[id] = vertex;
 	}
 	
@@ -62,7 +64,7 @@ public class Quad {
 	 * @param id ID of the vertex to remove.
 	 */
 	public void removeVertex(int id) {
-		if(id > 3 || id < 0) throw new IllegalArgumentException("Quad can only have 4 vertices with IDs 0 - 3!");
+		Validate.isTrue(id >= 0 && id <= 3, "Quad can only have 4 vertices with IDs 0 - 3!");
 		this.vertices[id] = null;
 	}
 	
@@ -72,7 +74,7 @@ public class Quad {
 	 * @return The vertex with the given ID.
 	 */
 	public Vertex getVertex(int id) {
-		if(id > 3 || id < 0) throw new IllegalArgumentException("Quad can only have 4 vertices with IDs 0 - 3!");
+		Validate.isTrue(id >= 0 && id <= 3, "Quad can only have 4 vertices with IDs 0 - 3!");
 		return this.vertices[id];
 	}
 	

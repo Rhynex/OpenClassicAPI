@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
+
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.opennbt.stream.NBTInputStream;
 import ch.spacebase.opennbt.stream.NBTOutputStream;
@@ -66,13 +68,7 @@ public class NBTData {
 			e.printStackTrace();
 			return;
 		} finally {
-			if(in != null) {
-				try {
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			IOUtils.closeQuietly(in);
 		}
 	}
 	
@@ -106,13 +102,7 @@ public class NBTData {
 			e.printStackTrace();
 			return;
 		} finally {
-			if(out != null) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			IOUtils.closeQuietly(out);
 		}
 	}
 	

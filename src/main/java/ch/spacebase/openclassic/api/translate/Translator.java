@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.Validate;
+
 import ch.spacebase.openclassic.api.OpenClassic;
 
 /**
@@ -35,6 +37,7 @@ public class Translator {
 	 * @param lang The language to register.
 	 */
 	public void register(Language lang) {
+		Validate.notNull(lang, "Language cannot be null.");
 		this.languages.put(lang.getName(), lang);
 	}
 	

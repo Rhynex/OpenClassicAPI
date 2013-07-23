@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
 
 /**
  * A language pack for use in a translator.
@@ -15,14 +16,14 @@ public class Language {
 	
 	public Language(String name, String file) {
 		this.name = name;
-		this.lang = new Configuration(new File(file));
+		this.lang = new YamlConfig(new File(file));
 		this.lang.load();
 	}
 	
 	public Language(String name, InputStream in) {
 		this.name = name;
-		this.lang = new Configuration(in);
-		this.lang.load();
+		this.lang = new YamlConfig();
+		this.lang.load(in);
 	}
 	
 	/**

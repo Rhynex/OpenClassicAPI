@@ -15,10 +15,13 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.commons.io.IOUtils;
+
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
 
 /**
  * A task that installs a package.
@@ -55,7 +58,7 @@ public class PackageInstallTask implements Runnable {
 		String enable = "";
 		
 		for(File file : cache.listFiles()) {
-			source = new Configuration(file);
+			source = new YamlConfig(file);
 			source.load();
 			
 			if(source.getNode(this.name) == null) continue;
@@ -132,13 +135,8 @@ public class PackageInstallTask implements Runnable {
 			e.printStackTrace();
 			return;
 		} finally {
-			try {
-				if(rbc != null) rbc.close();
-				if(fos != null) fos.close();
-			} catch(IOException e) {
-				OpenClassic.getLogger().warning("Failed to close stream after downloading file!");
-				e.printStackTrace();
-			}
+			IOUtils.closeQuietly(rbc);
+			IOUtils.closeQuietly(fos);
 		}
 		
 		if(this.executor != null) this.executor.sendMessage(Color.AQUA + "Installing package...");
@@ -179,14 +177,9 @@ public class PackageInstallTask implements Runnable {
 			e.printStackTrace();
 			return;
 		} finally {
-			try {
-				if(zfile != null) zfile.close();
-				if(is != null) is.close();
-				if(out != null) out.close();
-			} catch(IOException e) {
-				OpenClassic.getLogger().warning("Failed to close stream after unzipping file!");
-				e.printStackTrace();
-			}
+			IOUtils.closeQuietly(zfile);
+			IOUtils.closeQuietly(is);
+			IOUtils.closeQuietly(out);
 		}
 		
 		pkgs.setValue(this.name + ".url", url);

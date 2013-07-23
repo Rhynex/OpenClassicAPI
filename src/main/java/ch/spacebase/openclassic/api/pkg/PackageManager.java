@@ -5,6 +5,7 @@ import java.io.File;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
 import ch.spacebase.openclassic.api.pkg.task.PackageInstallTask;
 import ch.spacebase.openclassic.api.pkg.task.PackageRemoveTask;
 import ch.spacebase.openclassic.api.pkg.task.PackageUpdateTask;
@@ -21,8 +22,8 @@ public class PackageManager {
 	private final Configuration installed;
 	
 	public PackageManager() {
-		this.sources = new Configuration(new File(OpenClassic.getGame().getDirectory(), "sources.yml"));
-		this.installed = new Configuration(new File(OpenClassic.getGame().getDirectory(), "installed.yml"));
+		this.sources = new YamlConfig(new File(OpenClassic.getGame().getDirectory(), "sources.yml"));
+		this.installed = new YamlConfig(new File(OpenClassic.getGame().getDirectory(), "installed.yml"));
 		
 		this.sources.load();
 		this.installed.load();

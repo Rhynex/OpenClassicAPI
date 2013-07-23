@@ -1,7 +1,7 @@
 package ch.spacebase.openclassic.api;
 
 import java.io.File;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import ch.spacebase.openclassic.api.command.Command;
@@ -12,7 +12,6 @@ import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.LevelInfo;
 import ch.spacebase.openclassic.api.level.generator.Generator;
 import ch.spacebase.openclassic.api.pkg.PackageManager;
-import ch.spacebase.openclassic.api.plugin.Plugin;
 import ch.spacebase.openclassic.api.plugin.PluginManager;
 import ch.spacebase.openclassic.api.scheduler.Scheduler;
 import ch.spacebase.openclassic.api.sound.AudioManager;
@@ -46,26 +45,26 @@ public interface Game {
 	 * @param plugin Plugin the command belongs to.
 	 * @param command Command to register.
 	 */
-	public void registerCommand(Plugin plugin, Command command);
+	public void registerCommand(Object owner, Command command);
 	
 	/**
 	 * Registers a command executor.
 	 * @param plugin Plugin the executor belongs to.
 	 * @param executor Executor to register.
 	 */
-	public void registerExecutor(Plugin plugin, CommandExecutor executor);
+	public void registerExecutor(Object owner, CommandExecutor executor);
 	
 	/**
 	 * Unregisters a plugins commands.
 	 * @param plugin Plugin the commands belongs to.
 	 */
-	public void unregisterCommands(Plugin plugin);
+	public void unregisterCommands(Object owner);
 	
 	/**
 	 * Unregisters a plugins executors.
 	 * @param plugin Plugin the executors belongs to.
 	 */
-	public void unregisterExecutors(Plugin plugin);
+	public void unregisterExecutors(Object owner);
 	
 	/**
 	 * Processes a sent command.
@@ -78,13 +77,13 @@ public interface Game {
 	 * Gets a list of all non-executor commands registered.
 	 * @return All non-executor commands.
 	 */
-	public Collection<Command> getCommands();
+	public List<Command> getCommands();
 	
 	/**
 	 * Gets a list of all executors registered.
 	 * @return All executors.
 	 */
-	public Collection<CommandExecutor> getCommandExecutors();
+	public List<CommandExecutor> getCommandExecutors();
 	
 	/**
 	 * Shuts down the game.

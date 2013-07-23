@@ -8,6 +8,8 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
+import org.apache.commons.io.IOUtils;
+
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
@@ -87,13 +89,8 @@ public class SourceAddTask implements Runnable {
 			e.printStackTrace();
 			return;
 		} finally {
-			try {
-				if(rbc != null) rbc.close();
-				if(fos != null) fos.close();
-			} catch(IOException e) {
-				OpenClassic.getLogger().warning("Failed to close stream after downloading file!");
-				e.printStackTrace();
-			}
+			IOUtils.closeQuietly(rbc);
+			IOUtils.closeQuietly(fos);
 		}
 		
 		if(this.executor != null) this.executor.sendMessage(Color.GREEN + "The source \"" + this.id + "\" has been added successfully!");

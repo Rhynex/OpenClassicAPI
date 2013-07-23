@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
 import ch.spacebase.openclassic.api.data.NBTData;
 
 /**
@@ -22,7 +23,7 @@ public abstract class Plugin {
 	protected void init(PluginDescription description) {
 		this.description = description;
 		this.dataFolder = new File(OpenClassic.getGame().getDirectory(), "plugins/" + description.getName());
-		this.config = new Configuration(new File(this.dataFolder, "config.yml"));
+		this.config = new YamlConfig(new File(this.dataFolder, "config.yml"));
 		this.data = new NBTData(description.getName());
 	}
 	

@@ -8,11 +8,13 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
+import org.apache.commons.io.IOUtils;
+
 import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.config.Configuration;
-import ch.spacebase.openclassic.api.config.ConfigurationNode;
+import ch.spacebase.openclassic.api.config.Node;
 
 /**
  * A task that updates a source.
@@ -34,7 +36,7 @@ public class SourceUpdateTask implements Runnable {
 		String id = "";
 		String url = "";
 		
-		for(ConfigurationNode node : sources.getNodes()) {
+		for(Node node : sources.getNodes(false)) {
 			id = node.getPath();
 			url = node.getString();
 			
@@ -84,13 +86,8 @@ public class SourceUpdateTask implements Runnable {
 				e.printStackTrace();
 				return;
 			} finally {
-				try {
-					if(rbc != null) rbc.close();
-					if(fos != null) fos.close();
-				} catch(IOException e) {
-					OpenClassic.getLogger().warning("Failed to close stream after downloading file!");
-					e.printStackTrace();
-				}
+				IOUtils.closeQuietly(rbc);
+				IOUtils.closeQuietly(fos);
 			}
 		}
 		

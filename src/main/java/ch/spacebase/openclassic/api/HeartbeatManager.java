@@ -17,6 +17,8 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
+
 import ch.spacebase.openclassic.api.util.Constants;
 
 /**
@@ -125,12 +127,11 @@ public final class HeartbeatManager {
 			conn.setRequestProperty("Content-type", "text/xml; charset=" + "UTF-8");
 			
 			InputStream input = conn.getInputStream();
-			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(input));
 			String result = reader.readLine();
 			
-			reader.close();
-			input.close();
+			IOUtils.closeQuietly(reader);
+			IOUtils.closeQuietly(input);
 			
 			if(!HeartbeatManager.url.equals(result)) {
 				HeartbeatManager.url = result;
@@ -142,7 +143,7 @@ public final class HeartbeatManager {
 					
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 					writer.write(result);
-					writer.close();
+					IOUtils.closeQuietly(writer);
 				} catch(IOException e) {
 					OpenClassic.getLogger().severe("Failed to save server address!");
 					e.printStackTrace();

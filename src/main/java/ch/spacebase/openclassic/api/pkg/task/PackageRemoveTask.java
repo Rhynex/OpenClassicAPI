@@ -45,11 +45,11 @@ public class PackageRemoveTask implements Runnable {
 		
 		if(this.executor != null) this.executor.sendMessage(Color.AQUA + "Removing files...");
 		
-		for(String file : pkgs.getStringList(this.name + ".files")) {
+		for(String file : pkgs.getList(this.name + ".files", String.class)) {
 			(new File(OpenClassic.getGame().getDirectory(), file)).delete();
 		}
 		
-		for(String dir : pkgs.getStringList(this.name + ".dirs")) {
+		for(String dir : pkgs.getList(this.name + ".dirs", String.class)) {
 			(new File(OpenClassic.getGame().getDirectory(), dir)).delete();
 		}
 		

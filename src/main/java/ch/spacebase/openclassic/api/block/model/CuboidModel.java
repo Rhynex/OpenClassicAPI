@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.block.model;
 
+import org.apache.commons.lang3.Validate;
+
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
@@ -19,10 +21,7 @@ public class CuboidModel extends Model {
 	private float z2;
 	
 	public CuboidModel(Texture texture, int[] textureIds, float x1, float y1, float z1, float x2, float y2, float z2) {
-		if(textureIds.length < 6) {
-			throw new IllegalArgumentException("Texture ID array must have length of 6!");
-		}
-		
+		Validate.isTrue(textureIds.length == 6, "Texture ID array must have length of 6!");
 		this.x1 = x1;
 		this.y1 = y1;
 		this.z1 = z1;

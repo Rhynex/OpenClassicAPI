@@ -1,24 +1,22 @@
 package ch.spacebase.openclassic.api.plugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.commons.io.IOUtils;
 import org.yaml.snakeyaml.Yaml;
 
 import com.zachsthings.onevent.EventManager;
-import com.zachsthings.onevent.Listener;
+import com.zachsthings.onevent.HandlerList;
 
 import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.Color;
@@ -34,7 +32,6 @@ import ch.spacebase.openclassic.api.util.io.JarFilter;
 public class PluginManager {
 	
 	private List<Plugin> plugins = new ArrayList<Plugin>();
-	private Map<Listener, Plugin> listeners = new HashMap<Listener, Plugin>();
 
 	/**
 	 * Loads plugins with the specified load order step.
@@ -163,6 +160,8 @@ public class PluginManager {
 		for(Plugin plugin : this.plugins) {
 			this.disablePlugin(plugin);
 		}
+		
+		HandlerList.unregisterAll();
 	}
 	
 	/**
@@ -175,12 +174,7 @@ public class PluginManager {
 		OpenClassic.getLogger().info(Color.GREEN + "Disabling " + plugin.getDescription().getFullName() + "...");
 		plugin.setEnabled(false);
 		plugin.onDisable();
-		for(Listener listener : this.listeners.keySet()) {
-			if(this.listeners.get(listener).getDescription().getName().equals(plugin.getDescription().getName())) {
-				this.listeners.remove(listener);
-			}
-		}
-		
+		HandlerList.unregisterAll(plugin);
 		OpenClassic.getGame().unregisterCommands(plugin);
 		OpenClassic.getGame().unregisterExecutors(plugin);
 		
@@ -209,6 +203,13 @@ public class PluginManager {
 	 * Clears the plugin list.
 	 */
 	public void clearPlugins() {
+		for(Plugin plugin : this.plugins) {
+			if(plugin.isEnabled()) {
+				this.disablePlugin(plugin);
+			}
+		}
+		
+		HandlerList.unregisterAll();
 		this.plugins.clear();
 	}
 	
@@ -223,15 +224,6 @@ public class PluginManager {
 		}
 		
 		return null;
-	}
-	
-	/**
-	 * Gets the plugin which the listener belongs to, if it is registered.
-	 * @param listen Listener that belongs to the plugin.
-	 * @return The plugin it belongs to.
-	 */
-	public Plugin getPlugin(Listener listen) {
-		return this.listeners.get(listen);
 	}
 	
 	/**
@@ -279,49 +271,8 @@ public class PluginManager {
             e.printStackTrace();
             return null;
         } finally {
-            if (jar != null) {
-                try {
-                    jar.close();
-                } catch (IOException e) {
-                    OpenClassic.getLogger().severe("Failed to close jar after getting plugin description!");
-                    e.printStackTrace();
-                }
-            }
+        	IOUtils.closeQuietly(jar);
         }
-	}
-	
-	/**
-	 * Gets a list of all registered listeners.
-	 * @return A list of all listeners.
-	 */
-	public Collection<Listener> getListeners() {
-		return this.listeners.keySet();
-	}
-	
-	/**
-	 * Gets a list of all listeners registered to the given plugin.
-	 * @param plugin Plugin to get listeners for.
-	 * @return Listeners registered to the plugin.
-	 */
-	public List<Listener> getListeners(String plugin) {
-		List<Listener> result = new ArrayList<Listener>();
-		
-		for(Listener listener : this.listeners.keySet()) {
-			if(this.listeners.get(listener).getDescription().getName().equals(plugin)) {
-				result.add(listener);
-			}
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Registers a listener to the plugin.
-	 * @param listener Listener to register.
-	 * @param plugin Plugin the listener belongs to.
-	 */
-	public void registerListener(Listener listener, Plugin plugin) {
-		this.listeners.put(listener, plugin);
 	}
 	
 	/**

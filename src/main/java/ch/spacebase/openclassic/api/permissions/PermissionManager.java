@@ -6,6 +6,7 @@ import java.util.List;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.config.Configuration;
+import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
 import ch.spacebase.openclassic.api.network.msg.PlayerOpMessage;
 import ch.spacebase.openclassic.api.util.Constants;
 
@@ -22,7 +23,7 @@ public class PermissionManager {
 	 */
 	public void load() {
 		if(this.perms == null) {
-			this.perms = new Configuration(new File(OpenClassic.getGame().getDirectory(), "permissions.yml"));
+			this.perms = new YamlConfig(new File(OpenClassic.getGame().getDirectory(), "permissions.yml"));
 		}
 		
 		this.perms.load();
@@ -40,8 +41,9 @@ public class PermissionManager {
 			this.perms.setValue(group.getName() + ".players", group.getPlayers());
 		}
 		
-		if(this.perms.getData().size() > this.groups.size()) {
-			for(String name : this.perms.getData().keySet()) {
+		List<String> keys = this.perms.getAbsoluteKeys(false);
+		if(keys.size() > this.groups.size()) {
+			for(String name : keys) {
 				boolean match = false;
 				for(Group group : this.groups) {
 					if(group.getName().equalsIgnoreCase(name)) match = true;
@@ -69,14 +71,14 @@ public class PermissionManager {
 	 * Loads the server's groups.
 	 */
 	public void loadGroups() {
-		for(String key : this.perms.getData().keySet()) {
+		for(String key : this.perms.getAbsoluteKeys(false)) {
 			String name = key;
 			
 			try {
 				String inherits = this.perms.getString(key + ".inherits");
 				boolean def = this.perms.getBoolean(key + ".default");
-				List<String> permissions = this.perms.getStringList(key + ".permissions");
-				List<String> players = this.perms.getStringList(key + ".players");
+				List<String> permissions = this.perms.getList(key + ".permissions", String.class);
+				List<String> players = this.perms.getList(key + ".players", String.class);
 				
 				this.groups.add(new Group(name, inherits, def, permissions, players));
 			} catch(Exception e) {

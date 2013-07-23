@@ -3,6 +3,8 @@ package ch.spacebase.openclassic.api.block;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
 import com.zachsthings.onevent.EventManager;
 
 import ch.spacebase.openclassic.api.event.block.BlockRegisterEvent;
@@ -29,6 +31,7 @@ public class Blocks {
 	 * @param block Block to register.
 	 */
 	public static void register(BlockType block) {
+		Validate.notNull(block, "Block cannot be null.");
 		EventManager.callEvent(new BlockRegisterEvent(block));
 		registry[block.getId()] = block;
 	}
