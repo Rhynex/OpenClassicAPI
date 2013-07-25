@@ -18,6 +18,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.representer.Representer;
 
+import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.config.Node;
 
@@ -65,7 +66,7 @@ public class YamlConfig implements Configuration {
 			in = new FileInputStream(this.file);
 			this.load(in);
 		} catch (IOException e) {
-			System.err.println("Failed to load from file " + this.file.getPath() + "!");
+			OpenClassic.getLogger().severe("Failed to load from file " + this.file.getPath() + "!");
 			e.printStackTrace();
 		} finally {
 			IOUtils.closeQuietly(in);
@@ -97,7 +98,7 @@ public class YamlConfig implements Configuration {
 			out = new FileOutputStream(this.file);
 			this.save(out);
 		} catch (IOException e) {
-			System.err.println("Failed to save config file to " + this.file.getPath() + "!");
+			OpenClassic.getLogger().severe("Failed to save config file to " + this.file.getPath() + "!");
 			e.printStackTrace();
 		} finally {
 			IOUtils.closeQuietly(out);
@@ -111,7 +112,7 @@ public class YamlConfig implements Configuration {
 			writer = new OutputStreamWriter(out, "UTF-8");
 			this.yaml.dump(this.root, writer);
 		} catch (IOException e) {
-			System.err.println("Failed to save config file to stream!");
+			OpenClassic.getLogger().severe("Failed to save config file to stream!");
 			e.printStackTrace();
 		} finally {
 			IOUtils.closeQuietly(writer);
