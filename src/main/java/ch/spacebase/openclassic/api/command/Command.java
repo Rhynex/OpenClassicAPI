@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api.command;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * Represents a command class.
  */
@@ -32,6 +34,8 @@ public abstract class Command {
 	}
 	
 	public Command(String aliases[], String permission, int minArgs, int maxArgs, Class<? extends Sender> senders[]) {
+		Validate.notNull(aliases, "Aliases cannot be null.");
+		Validate.isTrue(aliases.length > 0, "Aliases cannot be empty.");
 		this.aliases = aliases;
 		this.permission = permission;
 		this.minArgs = minArgs;
@@ -72,20 +76,24 @@ public abstract class Command {
 	}
 	
 	/**
-	 * Gets the command's usage.
-	 * @return The command's usage.
-	 */
-	public String getUsage() {
-		return "";
-	}
-	
-	/**
 	 * Gets this command's aliases.
 	 * @return This command's aliases.
 	 */
 	public String[] getAliases() {
 		return this.aliases;
 	}
+	
+	/**
+	 * Gets the command's description.
+	 * @return The command's description.
+	 */
+	public abstract String getDescription();
+	
+	/**
+	 * Gets the command's usage.
+	 * @return The command's usage.
+	 */
+	public abstract String getUsage();
 	
 	/**
 	 * Executes the command.
