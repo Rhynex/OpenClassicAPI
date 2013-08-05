@@ -12,16 +12,43 @@ import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
 public class Language {
 
 	private String name;
+	private String langCode;
 	private Configuration lang;
 	
+	@Deprecated
+	/**
+	 * Due to changes in API this method is now deprecated.
+	 * Replaced by method Language(String name, String langCode, String file).
+	 */
 	public Language(String name, String file) {
 		this.name = name;
+		this.langCode = "undefined";
 		this.lang = new YamlConfig(new File(file));
 		this.lang.load();
 	}
 	
+	@Deprecated
+	/**
+	 * Due to changes in API this method is now deprecated.
+	 * Replaced by method Language(String name, String langCode, InputStream in).
+	 */
 	public Language(String name, InputStream in) {
 		this.name = name;
+		this.langCode = "undefined";
+		this.lang = new YamlConfig();
+		this.lang.load(in);
+	}
+	
+	public Language(String name, String langCode, String file) {
+		this.name = name;
+		this.langCode = langCode;
+		this.lang = new YamlConfig(new File(file));
+		this.lang.load();
+	}
+	
+	public Language(String name, String langCode, InputStream in) {
+		this.name = name;
+		this.langCode = langCode;
 		this.lang = new YamlConfig();
 		this.lang.load(in);
 	}
@@ -32,6 +59,14 @@ public class Language {
 	 */
 	public String getName() {
 		return this.name;
+	}
+	
+	/**
+	 * Gets the native name of this language.
+	 * @return This language's native name.
+	 */
+	public String getLangCode() {
+		return this.langCode;
 	}
 	
 	/**
