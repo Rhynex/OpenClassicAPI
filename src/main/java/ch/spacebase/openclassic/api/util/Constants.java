@@ -18,7 +18,7 @@ public class Constants {
 	/**
 	 * The OpenClassic protocol version.
 	 */
-	public static final byte OPENCLASSIC_PROTOCOL_VERSION = 4;
+	public static final byte OPENCLASSIC_PROTOCOL_VERSION = 5;
 	
 	/**
 	 * Number of ticks per second

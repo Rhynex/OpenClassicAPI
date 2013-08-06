@@ -14,7 +14,7 @@ public class Language {
 	private String name;
 	private String langCode;
 	private Configuration lang;
-	
+
 	@Deprecated
 	/**
 	 * Due to changes in API this method is now deprecated.
@@ -26,7 +26,7 @@ public class Language {
 		this.lang = new YamlConfig(new File(file));
 		this.lang.load();
 	}
-	
+
 	@Deprecated
 	/**
 	 * Due to changes in API this method is now deprecated.
@@ -38,21 +38,21 @@ public class Language {
 		this.lang = new YamlConfig();
 		this.lang.load(in);
 	}
-	
+
 	public Language(String name, String langCode, String file) {
 		this.name = name;
 		this.langCode = langCode;
 		this.lang = new YamlConfig(new File(file));
 		this.lang.load();
 	}
-	
+
 	public Language(String name, String langCode, InputStream in) {
 		this.name = name;
 		this.langCode = langCode;
 		this.lang = new YamlConfig();
 		this.lang.load(in);
 	}
-	
+
 	/**
 	 * Gets the name of this language.
 	 * @return This language's name.
@@ -60,7 +60,7 @@ public class Language {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Gets the native name of this language.
 	 * @return This language's native name.
@@ -68,7 +68,7 @@ public class Language {
 	public String getLangCode() {
 		return this.langCode;
 	}
-	
+
 	/**
 	 * Adds a translation to this language instance.
 	 * @param key Key to use for the translation.
@@ -77,7 +77,7 @@ public class Language {
 	public void addTranslation(String key, String translation) {
 		this.lang.setValue(key, translation);
 	}
-	
+
 	/**
 	 * Translates the given key to text from this language.
 	 * @param key Key to translate.
@@ -90,5 +90,5 @@ public class Language {
 			return "<missing translation>";
 		}
 	}
-	
+
 }

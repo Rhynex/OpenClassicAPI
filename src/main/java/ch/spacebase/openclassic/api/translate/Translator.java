@@ -11,6 +11,7 @@ import ch.spacebase.openclassic.api.OpenClassic;
 /**
  * Translates string keys into text from the current selected language.
  */
+// TODO: modify language API to automatically translate in sendMessage/broadcastMessage
 public class Translator {
 
 	private final Map<String, Language> languages = new HashMap<String, Language>();
@@ -38,7 +39,7 @@ public class Translator {
 	 */
 	public void register(Language lang) {
 		Validate.notNull(lang, "Language cannot be null.");
-		this.languages.put(lang.getName(), lang);
+		this.languages.put(lang.getLangCode(), lang);
 	}
 	
 	/**
