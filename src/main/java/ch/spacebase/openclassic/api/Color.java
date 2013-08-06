@@ -46,7 +46,7 @@ public enum Color {
 	public static final char COLOR_CHARACTER = '&';
 	/** Represents the color code prefix as a String. */
 	public static final String COLOR_CHARACTER_STRING = String.valueOf(COLOR_CHARACTER);
-	/** A string containing all color chars. */
+	/** A string containing all color chars, with each as an uppercase and lowercase version. */
 	public static final String CHARS = buildChars();
 	
 	private char code;
@@ -119,6 +119,11 @@ public enum Color {
 		return builder.toString();
 	}
 
+	/**
+	 * Gets the color from the given character code.
+	 * @param c Code to search with.
+	 * @return Color with the given code.
+	 */
 	public static Color getByChar(char c) {
 		for(Color color : values()) {
 			if(color.getCode() == c) {
@@ -129,9 +134,29 @@ public enum Color {
 		return null;
 	}
 	
+	/**
+	 * Translates any colors prefixed with the given character to working
+	 * color codes.
+	 * @param prefix Prefix to look for.
+	 * @param text Text to translate.
+	 * @return The resulting translated text.
+	 */
+	public static String translate(char prefix, String text) {
+		char[] chars = text.toCharArray();
+		for(int index = 0; index < chars.length - 1; index++) {
+			if(chars[index] == prefix && CHARS.indexOf(chars[index + 1]) > -1) {
+				chars[index] = COLOR_CHARACTER;
+				chars[index + 1] = Character.toLowerCase(chars[index + 1]);
+			}
+		}
+
+		return new String(chars);
+	}
+	
 	private static String buildChars() {
 		StringBuilder build = new StringBuilder();
 		for(Color color : values()) {
+			build.append(String.valueOf(color.getCode()).toUpperCase());
 			build.append(color.getCode());
 		}
 		

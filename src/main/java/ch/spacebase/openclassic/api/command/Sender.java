@@ -6,10 +6,21 @@ package ch.spacebase.openclassic.api.command;
 public interface Sender {
 
 	/**
-	 * Sends a message to the command sender.
+	 * Sends a message to the command sender, translating it as a key
+	 * if a translation is available in their language and splitting
+	 * it by new line characters to send individually.
 	 * @param message Message to send.
 	 */
 	public void sendMessage(String message);
+	
+	/**
+	 * Sends a message to the command sender, translating it as a key
+	 * if a translation is available in their language, formatting
+	 * it using String.format, and splitting it by new line characters
+	 * to send individually.
+	 * @param message Message to send.
+	 */
+	public void sendMessage(String message, Object... args);
 	
 	/**
 	 * Gets the name of the sender.

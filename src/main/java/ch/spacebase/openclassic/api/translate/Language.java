@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.translate;
 import java.io.File;
 import java.io.InputStream;
 
+import ch.spacebase.openclassic.api.Color;
 import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
 
@@ -77,7 +78,14 @@ public class Language {
 	public void addTranslation(String key, String translation) {
 		this.lang.setValue(key, translation);
 	}
-
+	
+	/**
+	 * Gets the language's translations.
+	 * @return The language's translations.
+	 */
+	protected Configuration getTranslations() {
+		return this.lang;
+	}
 	/**
 	 * Translates the given key to text from this language.
 	 * @param key Key to translate.
@@ -85,9 +93,9 @@ public class Language {
 	 */
 	public String translate(String key) {
 		if(this.lang.contains(key)) {
-			return this.lang.getString(key);
+			return Color.translate('&', this.lang.getString(key));
 		} else {
-			return "<missing translation>";
+			return key;
 		}
 	}
 

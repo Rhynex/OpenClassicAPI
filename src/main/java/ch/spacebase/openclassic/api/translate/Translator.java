@@ -11,7 +11,6 @@ import ch.spacebase.openclassic.api.OpenClassic;
 /**
  * Translates string keys into text from the current selected language.
  */
-// TODO: modify language API to automatically translate in sendMessage/broadcastMessage
 public class Translator {
 
 	private final Map<String, Language> languages = new HashMap<String, Language>();
@@ -34,12 +33,19 @@ public class Translator {
 	}
 	
 	/**
-	 * Registers a language.
+	 * Registers a language, adding translations to an existing
+	 * language instance if one already is registered.
 	 * @param lang The language to register.
 	 */
 	public void register(Language lang) {
 		Validate.notNull(lang, "Language cannot be null.");
-		this.languages.put(lang.getLangCode(), lang);
+		if(this.languages.containsKey(lang.getLangCode())) {
+			for(String key : lang.getTranslations().getAbsoluteKeys(false)) {
+				this.get(lang.getLangCode()).getTranslations().setValue(key, lang.getTranslations().getValue(key));
+			}
+		} else {
+			this.languages.put(lang.getLangCode(), lang);
+		}
 	}
 	
 	/**
@@ -91,11 +97,8 @@ public class Translator {
 			}
 		} else {
 			String result = this.get(lang).translate(text);
-			if(result.equals("<missing translation>")) {
+			if(result.equals(text)) {
 				result = this.get(this.def).translate(text);
-				if(result.equals("<missing translation>")) {
-					return text;
-				}
 			}
 			
 			return result;

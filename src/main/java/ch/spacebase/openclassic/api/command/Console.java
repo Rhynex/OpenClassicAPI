@@ -9,7 +9,12 @@ public class Console implements Sender {
 
 	@Override
 	public void sendMessage(String message) {
-		OpenClassic.getLogger().info(message);
+		OpenClassic.getLogger().info(OpenClassic.getGame().getTranslator().translate(message));
+	}
+	
+	@Override
+	public void sendMessage(String message, Object... args) {
+		OpenClassic.getLogger().info(String.format(OpenClassic.getGame().getTranslator().translate(message), args));
 	}
 
 	@Override

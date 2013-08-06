@@ -14,10 +14,19 @@ import ch.spacebase.openclassic.api.player.Player;
 public interface Server extends Game {
 	
 	/**
-	 * Broadcasts a message via chat.
+	 * Broadcasts a message via chat, translating it as a key
+	 * if a translation is available.
 	 * @param message The message to broadcast.
 	 */
 	public void broadcastMessage(String message);
+	
+	/**
+	 * Broadcasts a message via chat, translating it as a key
+	 * if a translation is available and formatting it using
+	 * String.format.
+	 * @param message The message to broadcast.
+	 */
+	public void broadcastMessage(String message, Object... args);
 	
 	/**
 	 * Gets a list of online players.
