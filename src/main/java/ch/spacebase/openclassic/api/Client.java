@@ -4,12 +4,19 @@ import ch.spacebase.openclassic.api.gui.GuiScreen;
 import ch.spacebase.openclassic.api.gui.MainScreen;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.player.Player;
+import ch.spacebase.openclassic.api.settings.Settings;
 
 /**
  * Represents the OpenClassic Client.
  */
 public interface Client extends Game {
 
+	/**
+	 * Gets the client's settings.
+	 * @return The client's settings.
+	 */
+	public Settings getSettings();
+	
 	/**
 	 * Gets the client's player.
 	 * @return The client's player.

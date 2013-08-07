@@ -75,6 +75,17 @@ public class ButtonList extends Widget {
 	}
 	
 	/**
+	 * Sets the current page the list is on.
+	 * @param The new page.
+	 */
+	public void setCurrentPage(int page) {
+		this.index = page;
+		this.getBackButton().setActive(this.index > 0);
+		this.getNextButton().setActive(this.index < this.pages);
+		this.updateContents();
+	}
+	
+	/**
 	 * Gets the number of pages in this list.
 	 * @return The list's page count.
 	 */

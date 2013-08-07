@@ -8,7 +8,7 @@ public class Constants {
 	/**
 	 * OpenClassic's current version.
 	 */
-	public static final String VERSION = "1.3";
+	public static final String VERSION = "1.3.1";
 	
 	/**
 	 * The protocol version.
@@ -59,6 +59,11 @@ public class Constants {
 	 * The URL of the Minecraft website using http.
 	 */
 	public static final String MINECRAFT_URL_HTTP = "http://minecraft.net/";
+	
+	/**
+	 * Sensitivity values for different client sensitivity settings.
+	 */
+	public static final double[] SENSITIVITY_VALUE = new double[] { 0.05D, 0.15D, 0.3D, 0.5D, 0.75D };
 	
 	/**
 	 * Default private constructor
