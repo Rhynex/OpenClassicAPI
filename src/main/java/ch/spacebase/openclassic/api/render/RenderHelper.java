@@ -213,7 +213,7 @@ public abstract class RenderHelper {
 	 * Gets the mouse's X relative to rendering coordinates.
 	 * @return The mouse's X.
 	 */
-	public int getRenderMouseX() {
+	public int getScaledMouseX() {
 		return InputHelper.getHelper().getMouseX() * (this.getDisplayWidth() * 240 / this.getDisplayHeight()) / this.getDisplayWidth();
 	}
 	
@@ -221,7 +221,7 @@ public abstract class RenderHelper {
 	 * Gets the mouse's Y relative to rendering coordinates.
 	 * @return The mouse's Y.
 	 */
-	public int getRenderMouseY() {
+	public int getScaledMouseY() {
 		int height = this.getDisplayHeight() * 240 / this.getDisplayHeight();
 		return height - InputHelper.getHelper().getMouseY() * height / this.getDisplayHeight() - 1;
 	}

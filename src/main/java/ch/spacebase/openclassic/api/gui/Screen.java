@@ -39,7 +39,7 @@ public abstract class Screen {
 	 * @param id ID of the widget.
 	 */
 	public void removeWidget(int id) {
-		for(Widget widget : this.widgets) {
+		for(Widget widget : this.getWidgets()) {
 			if(widget.getId() == id) {
 				this.removeWidget(widget);
 			}
@@ -75,7 +75,9 @@ public abstract class Screen {
 	 */
 	public Widget getWidget(int id) {
 		for(Widget widget : this.widgets) {
-			if(widget.getId() == id) return widget;
+			if(widget.getId() == id) {
+				return widget;
+			}
 		}
 		
 		return null;
@@ -90,7 +92,9 @@ public abstract class Screen {
 	@SuppressWarnings("unchecked")
 	public <T extends Widget> T getWidget(int id, Class<T> type) {
 		for(Widget widget : this.widgets) {
-			if(widget.getId() == id && type.isInstance(widget)) return (T) widget;
+			if(widget.getId() == id && type.isInstance(widget)) {
+				return (T) widget;
+			}
 		}
 		
 		return null;

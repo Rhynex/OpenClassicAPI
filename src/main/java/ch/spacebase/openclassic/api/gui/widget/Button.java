@@ -79,8 +79,8 @@ public class Button extends Widget {
 		//RenderHelper.getHelper().bindTexture("/gui/gui.png", true);
 		RenderHelper.getHelper().glColor(1, 1, 1, 1);
 		
-		int mouseX = RenderHelper.getHelper().getRenderMouseX();
-		int mouseY = RenderHelper.getHelper().getRenderMouseY();
+		int mouseX = RenderHelper.getHelper().getScaledMouseX();
+		int mouseY = RenderHelper.getHelper().getScaledMouseY();
 		
 		SubTexture texture = GuiTextures.BUTTON;
 		boolean hover = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;

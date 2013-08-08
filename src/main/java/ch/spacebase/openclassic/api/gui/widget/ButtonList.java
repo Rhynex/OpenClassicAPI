@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.gui.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.gui.GuiScreen;
 import ch.spacebase.openclassic.api.gui.Screen;
 
@@ -33,8 +34,8 @@ public class ButtonList extends Widget {
 			this.buttons.get(id).setActive(false);
 		}
 		
-		this.buttons.add(new Button(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, "Back"));
-		this.buttons.add(new Button(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, "Next"));
+		this.buttons.add(new Button(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.back")));
+		this.buttons.add(new Button(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.next")));
 		this.search = new TextBox(7, this.width / 2 - 100, this.height / 6 + 120, this.parent);
 		this.getBackButton().setActive(false);
 		this.getNextButton().setActive(false);
