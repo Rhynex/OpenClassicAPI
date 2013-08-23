@@ -17,6 +17,10 @@ public class Model {
 	 * @param quad Quad to add.
 	 */
 	public void addQuad(Quad quad) {
+		while(quad.getId() > this.quads.size()) {
+			this.quads.add(this.quads.size(), null);
+		}
+		
 		this.quads.add(quad.getId(), quad);
 		quad.setParent(this);
 	}

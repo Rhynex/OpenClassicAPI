@@ -1,6 +1,5 @@
 package ch.spacebase.openclassic.api.block.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.Client;
@@ -14,55 +13,12 @@ import ch.spacebase.openclassic.api.render.RenderHelper;
  */
 public class LiquidModel extends CubeModel {
 
-	private int quadCount = 0;
 	private BoundingBox top = new BoundingBox(0, 0, 0, 1, 0.95f, 1);
-	private List<Quad> topQuads = new ArrayList<Quad>();
 	
 	public LiquidModel(Texture texture, int textureIds[]) {
 		super(texture, textureIds);
 		this.setCollisionBox(null);
 		this.setSelectionBox(null);
-		Quad bottom = new Quad(0, texture.getSubTexture(textureIds[0]));
-		bottom.addVertex(0, 0, 0, 0);
-		bottom.addVertex(1, 1, 0, 0);
-		bottom.addVertex(2, 1, 0, 1);
-		bottom.addVertex(3, 0, 0, 1);
-		this.addTopQuad(bottom);
-		
-		Quad top = new Quad(1, texture.getSubTexture(textureIds[1]));
-		top.addVertex(0, 0, 0.95f, 0);
-		top.addVertex(1, 0, 0.95f, 1);
-		top.addVertex(2, 1, 0.95f, 1);
-		top.addVertex(3, 1, 0.95f, 0);
-		this.addTopQuad(top);
-
-		Quad face1 = new Quad(2, texture.getSubTexture(textureIds[2]));
-		face1.addVertex(0, 0, 0, 0);
-		face1.addVertex(1, 0, 0.95f, 0);
-		face1.addVertex(2, 1, 0.95f, 0);
-		face1.addVertex(3, 1, 0, 0);
-		this.addTopQuad(face1);
-
-		Quad face2 = new Quad(3, texture.getSubTexture(textureIds[3]));
-		face2.addVertex(0, 1, 0, 1);
-		face2.addVertex(1, 1, 0.95f, 1);
-		face2.addVertex(2, 0, 0.95f, 1);
-		face2.addVertex(3, 0, 0, 1);
-		this.addTopQuad(face2);
-
-		Quad face3 = new Quad(4, texture.getSubTexture(textureIds[4]));
-		face3.addVertex(0, 0, 0, 1);
-		face3.addVertex(1, 0, 0.95f, 1);
-		face3.addVertex(2, 0, 0.95f, 0);
-		face3.addVertex(3, 0, 0, 0);
-		this.addTopQuad(face3);
-		
-		Quad face4 = new Quad(5, texture.getSubTexture(textureIds[5]));
-		face4.addVertex(0, 1, 0, 0);
-		face4.addVertex(1, 1, 0.95f, 0);
-		face4.addVertex(2, 1, 0.95f, 1);
-		face4.addVertex(3, 1, 0, 1);
-		this.addTopQuad(face4);
 	}
 	
 	public LiquidModel(Texture texture, int textureId) {
@@ -71,20 +27,6 @@ public class LiquidModel extends CubeModel {
 	
 	public LiquidModel(String texture, int textureSize) {
 		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
-	}
-
-	@Override
-	public void addQuad(Quad quad) {
-		quad.id = this.quadCount;
-		super.addQuad(quad);
-		this.quadCount++;
-	}
-	
-	public void addTopQuad(Quad quad) {
-		quad.id = this.quadCount;
-		this.topQuads.add(quad.getId(), quad);
-		quad.setParent(this);
-		this.quadCount++;
 	}
 	
 	@Override
@@ -102,9 +44,10 @@ public class LiquidModel extends CubeModel {
 		if(block == null) return false;
 		boolean result = false;
 		
+		boolean top = false;
 		List<Quad> quads = this.getQuads();
 		if(OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y + 1, (int) z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y + 1, (int) z).isLiquid()) {
-			quads = this.topQuads;
+			top = true;
 		}
 		
 		RenderHelper.getHelper().setCulling(false);
@@ -130,7 +73,25 @@ public class LiquidModel extends CubeModel {
 						break;
 				}
 				
+				if(top) {
+					for(int vert = 0; vert < quad.getVertices().size(); vert++) {
+						Vertex v = quad.getVertices().get(vert);
+						if(v.getY() == 1) {
+							quad.addVertex(vert, new Vertex(v.getX(), 0.95f, v.getZ()));
+						}
+					}
+				}
+				
 				quad.render(x, y, z, RenderHelper.getHelper().getBrightness(block, (int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod, batch);
+				if(top) {
+					for(int vert = 0; vert < quad.getVertices().size(); vert++) {
+						Vertex v = quad.getVertices().get(vert);
+						if(v.getY() == 0.95f) {
+							quad.addVertex(vert, new Vertex(v.getX(), 1, v.getZ()));
+						}
+					}
+				}
+				
 				result = true;
 			}
 			

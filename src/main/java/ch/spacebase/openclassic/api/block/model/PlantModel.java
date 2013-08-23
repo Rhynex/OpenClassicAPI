@@ -45,6 +45,12 @@ public class PlantModel extends Model {
 	}
 	
 	@Override
+	public void clearQuads() {
+		super.clearQuads();
+		this.quadCount = 0;
+	}
+	
+	@Override
 	public Class<? extends Model> getNetworkClass() {
 		return PlantModel.class;
 	}

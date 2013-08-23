@@ -25,6 +25,11 @@ public class BlockType {
 	private boolean placeIn = false;
 	private boolean gas = false;
 	private float brightness = 0;
+	private float speedModifier = 1;
+	private int fogRed = -1;
+	private int fogGreen = -1;
+	private int fogBlue = -1;
+	private float fogDensity = -1;
 	
 	public BlockType(int id, StepSound sound, int texture) {
 		this(id, sound, TERRAIN_TEXTURE, texture);
@@ -277,6 +282,110 @@ public class BlockType {
 	 */
 	public BlockType setBrightness(float brightness) {
 		this.brightness = brightness;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's speed modifier for when an entity is in the block, where 0 is no movement and 1 is normal speed.
+	 * @return The block's speed modifier.
+	 */
+	public float getSpeedModifier() {
+		return this.speedModifier;
+	}
+	
+	/**
+	 * Sets the block's speed modifier for when an entity is in the block, where 0 is no movement and 1 is normal speed.
+	 * @param mod The block's speed modifier.
+	 * @return This block type.
+	 */
+	public BlockType setSpeedModifier(float mod) {
+		this.speedModifier = mod;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's fog color red value for when an entity is in the block.
+	 * @return The block's fog color red value, or -1 for default.
+	 */
+	public int getFogRed() {
+		return this.fogRed;
+	}
+	
+	/**
+	 * Sets the block's fog color red value for when an entity is in the block.
+	 * @param red The block's fog color red value.
+	 * @return This block type.
+	 */
+	public BlockType setFogRed(int red) {
+		this.fogRed = red;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's fog color green value for when an entity is in the block.
+	 * @return The block's fog color green value, or -1 for default.
+	 */
+	public int getFogGreen() {
+		return this.fogGreen;
+	}
+	
+	/**
+	 * Sets the block's fog color green value for when an entity is in the block.
+	 * @param green The block's fog color green value.
+	 * @return This block type.
+	 */
+	public BlockType setFogGreen(int green) {
+		this.fogGreen = green;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's fog color blue value for when an entity is in the block.
+	 * @return The block's fog color blue value, or -1 for default.
+	 */
+	public int getFogBlue() {
+		return this.fogBlue;
+	}
+	
+	/**
+	 * Sets the block's fog color blue value for when an entity is in the block.
+	 * @param blue The block's fog color blue value.
+	 * @return This block type.
+	 */
+	public BlockType setFogBlue(int blue) {
+		this.fogBlue = blue;
+		return this;
+	}
+	
+	/**
+	 * Sets the block's fog color for when an entity is in the block.
+	 * @param green The block's fog color red value.
+	 * @param green The block's fog color green value.
+	 * @param blue The block's fog color blue value.
+	 * @return This block type.
+	 */
+	public BlockType setFogColor(int red, int green, int blue) {
+		this.fogRed = red;
+		this.fogGreen = green;
+		this.fogBlue = blue;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's fog density for when an entity is in the block.
+	 * @return The block's fog density, or -1 for default.
+	 */
+	public float getFogDensity() {
+		return this.fogDensity;
+	}
+	
+	/**
+	 * Sets the block's fog density for when an entity is in the block.
+	 * @param density The block's fog density.
+	 * @return This block type.
+	 */
+	public BlockType setFogDensity(float density) {
+		this.fogDensity = density;
 		return this;
 	}
 	
