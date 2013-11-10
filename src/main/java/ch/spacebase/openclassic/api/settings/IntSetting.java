@@ -11,8 +11,8 @@ public class IntSetting extends Setting {
 
 	private String stringVals[];
 	
-	public IntSetting(String name, String configKey, String stringVals[]) {
-		super(name, configKey);
+	public IntSetting(String name, String stringVals[]) {
+		super(name);
 		Validate.notNull(stringVals, "stringVals cannot be null.");
 		this.stringVals = stringVals;
 	}
@@ -22,7 +22,7 @@ public class IntSetting extends Setting {
 	 * @return The setting's value.
 	 */
 	public int getValue() {
-		return OpenClassic.getGame().getConfig().getInteger(this.getConfigKey(), 0);
+		return OpenClassic.getGame().getConfig().getInteger(this.getName(), 0);
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class IntSetting extends Setting {
 	 */
 	public void setValue(int value) {
 		Validate.isTrue(value >= 0 && value < this.stringVals.length, "Value must be >= 0 and < stringVals.length");
-		OpenClassic.getGame().getConfig().setValue(this.getConfigKey(), value);
+		OpenClassic.getGame().getConfig().setValue(this.getName(), value);
 		OpenClassic.getGame().getConfig().save();
 	}
 	
@@ -40,8 +40,8 @@ public class IntSetting extends Setting {
 	 * @param The setting's default value.
 	 */
 	public void setDefault(int value) {
-		if(!OpenClassic.getGame().getConfig().contains(this.getConfigKey())) {
-			OpenClassic.getGame().getConfig().setValue(this.getConfigKey(), value);
+		if(!OpenClassic.getGame().getConfig().contains(this.getName())) {
+			OpenClassic.getGame().getConfig().setValue(this.getName(), value);
 			OpenClassic.getGame().getConfig().save();
 		}
 	}

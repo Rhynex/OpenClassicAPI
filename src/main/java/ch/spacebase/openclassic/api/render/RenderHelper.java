@@ -385,4 +385,77 @@ public abstract class RenderHelper {
 	 */
 	public abstract void setCulling(boolean enabled);
 	
+	/**
+	 * Pushes the current matrix onto the stack.
+	 */
+	public abstract void pushMatrix();
+	
+	/**
+	 * Pops the top matrix from the stack.
+	 */
+	public abstract void popMatrix();
+	
+	/**
+	 * Scales rendering by the given amount.
+	 * @param x X scale.
+	 * @param y Y scale.
+	 * @param z Z scale.
+	 */
+	public abstract void scale(float x, float y, float z);
+	
+	/**
+	 * Translates rendering by the given amount.
+	 * @param x X movement.
+	 * @param y Y movement.
+	 * @param z Z movement.
+	 */
+	public abstract void translate(float x, float y, float z);
+	
+	/**
+	 * Rotates by the given amount and normals.
+	 * @param angle Amount of rotation
+	 * @param x X normal.
+	 * @param y Y normal.
+	 * @param z Z normal.
+	 */
+	public abstract void rotate(float angle, float x, float y, float z);
+	
+	/**
+	 * Enables blending of colors with alpha.
+	 */
+	public abstract void enableBlend();
+	
+	/**
+	 * Disables blending of colors with alpha.
+	 */
+	public abstract void disableBlend();
+	
+	/**
+	 * Draws an subimage from the binded texture with the given data.
+	 * @param x X coordinate.
+	 * @param y Y coordinate.
+	 * @param z Z coordinate.
+	 * @param imgX X of the texture to start at.
+	 * @param imgY Y of the texture to start at.
+	 * @param imgWidth Width of the texture to use.
+	 * @param imgHeight Height of the texture to use.
+	 */
+	public abstract void drawSubImage(int x, int y, int z, int imgX, int imgY, int imgWidth, int imgHeight);
+	
+	/**
+	 * Draws a black translucent box at the given coordinates with the given dimensions.
+	 * @param x X coordinate.
+	 * @param y Y coordinate.
+	 * @param width Width of the box.
+	 * @param height Height of the box.
+	 */
+	public abstract void drawTranslucentBox(int x, int y, int width, int height);
+	
+	/**
+	 * Gets the renderer's mipmap mode.
+	 * (0 = none, 1 = GL 3.0, 2 = Framebuffer Extension, 3 = GL 1.4)
+	 * @return The renderer's mipmap mode.
+	 */
+	public abstract int getMipmapMode();
+	
 }

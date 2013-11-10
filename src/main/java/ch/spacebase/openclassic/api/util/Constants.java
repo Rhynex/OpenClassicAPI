@@ -64,6 +64,21 @@ public class Constants {
 	 * Sensitivity values for different client sensitivity settings.
 	 */
 	public static final double[] SENSITIVITY_VALUE = new double[] { 0.05D, 0.15D, 0.3D, 0.5D, 0.75D };
+
+	/**
+	 * Max health of a player.
+	 */
+	public static final int MAX_HEALTH = 20;
+	
+	/**
+	 * Max air of a player.
+	 */
+	public static final int MAX_AIR = 20;
+	
+	/**
+	 * Max arrows of a player.
+	 */
+	public static final int MAX_ARROWS = 99;
 	
 	/**
 	 * Default private constructor

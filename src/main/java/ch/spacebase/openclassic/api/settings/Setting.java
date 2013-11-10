@@ -6,11 +6,9 @@ package ch.spacebase.openclassic.api.settings;
 public abstract class Setting {
 
 	private String name;
-	private String configKey;
 	
-	public Setting(String name, String configKey) {
+	public Setting(String name) {
 		this.name = name;
-		this.configKey = configKey;
 	}
 	
 	/**
@@ -22,11 +20,11 @@ public abstract class Setting {
 	}
 	
 	/**
-	 * Gets this setting's config key.
-	 * @return The setting's config key.
+	 * Gets whether this setting is visible.
+	 * @return Whether this setting is visible.
 	 */
-	public String getConfigKey() {
-		return this.configKey;
+	public boolean isVisible() {
+		return true;
 	}
 	
 	/**

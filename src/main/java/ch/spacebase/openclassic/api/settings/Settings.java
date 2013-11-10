@@ -78,7 +78,7 @@ public class Settings {
 	 * @param setting Setting to register.
 	 */
 	public void registerSetting(Setting setting) {
-		this.settings.put(setting.getConfigKey(), setting);
+		this.settings.put(setting.getName(), setting);
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class Settings {
 	 * @param setting Setting to unregister.
 	 */
 	public void unregisterSetting(Setting setting) {
-		this.settings.remove(setting.getConfigKey());
+		this.settings.remove(setting.getName());
 	}
 	
 }

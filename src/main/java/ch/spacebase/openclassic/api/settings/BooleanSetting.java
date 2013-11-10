@@ -7,8 +7,8 @@ import ch.spacebase.openclassic.api.OpenClassic;
  */
 public class BooleanSetting extends Setting {
 
-	public BooleanSetting(String name, String configKey) {
-		super(name, configKey);
+	public BooleanSetting(String name) {
+		super(name);
 	}
 	
 	/**
@@ -16,7 +16,7 @@ public class BooleanSetting extends Setting {
 	 * @return The setting's value.
 	 */
 	public boolean getValue() {
-		return OpenClassic.getGame().getConfig().getBoolean(this.getConfigKey(), false);
+		return OpenClassic.getGame().getConfig().getBoolean(this.getName(), false);
 	}
 	
 	/**
@@ -24,7 +24,7 @@ public class BooleanSetting extends Setting {
 	 * @param The setting's value.
 	 */
 	public void setValue(boolean value) {
-		OpenClassic.getGame().getConfig().setValue(this.getConfigKey(), value);
+		OpenClassic.getGame().getConfig().setValue(this.getName(), value);
 		OpenClassic.getGame().getConfig().save();
 	}
 	
@@ -33,8 +33,8 @@ public class BooleanSetting extends Setting {
 	 * @param The setting's default value.
 	 */
 	public void setDefault(boolean value) {
-		if(!OpenClassic.getGame().getConfig().contains(this.getConfigKey())) {
-			OpenClassic.getGame().getConfig().setValue(this.getConfigKey(), value);
+		if(!OpenClassic.getGame().getConfig().contains(this.getName())) {
+			OpenClassic.getGame().getConfig().setValue(this.getName(), value);
 			OpenClassic.getGame().getConfig().save();
 		}
 	}

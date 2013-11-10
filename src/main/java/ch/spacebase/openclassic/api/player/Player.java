@@ -4,6 +4,7 @@ import java.net.SocketAddress;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.Position;
+import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.command.Sender;
 import ch.spacebase.openclassic.api.data.NBTData;
 import ch.spacebase.openclassic.api.level.Level;
@@ -185,5 +186,134 @@ public interface Player extends Sender {
 	 * @return If this player can see the other player.
 	 */
 	public boolean canSee(Player player);
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's remaining invulnerable time.
+	 * @return The player's invulnerable time.
+	 */
+	public int getInvulnerableTime();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns whether the player is underwater.
+	 * @return Whether the player is underwater.
+	 */
+	public boolean isUnderwater();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's health.
+	 * @return The player's health.
+	 */
+	public int getHealth();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Sets the player's health.
+	 * @param health The player's new health.
+	 */
+	public void setHealth(int health);
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns whether the player is dead.
+	 * @return Whether the player is dead.
+	 */
+	public boolean isDead();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's previous health.
+	 * @return The player's previous health.
+	 */
+	public int getPreviousHealth();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's remaining air.
+	 * @return The player's remaining air.
+	 */
+	public int getAir();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Sets the player's air.
+	 * @param air The player's new air value.
+	 */
+	public void setAir(int air);
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's score.
+	 * @return The player's score.
+	 */
+	public int getScore();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Sets the player's score.
+	 * @param score The player's new score.
+	 */
+	public void setScore(int score);
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's remaining arrows.
+	 * @return The player's remaining arrows.
+	 */
+	public int getArrows();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Sets the player's arrows.
+	 * @param arrows The player's new arrow count.
+	 */
+	public void setArrows(int arrows);
+	
+	/**
+	 * !! CLIENT ONLY !!
+	 * Returns the player's selected hotbar slot.
+	 * @return The player's selected hotbar slot.
+	 */
+	public int getSelectedSlot();
+	
+	/**
+	 * !! CLIENT ONLY !!
+	 * Returns the player's hotbar contents.
+	 * @return The player's hotbar contents.
+	 */
+	public int[] getInventoryContents();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's hotbar amounts.
+	 * @return The player's hotbar amounts.
+	 */
+	public int[] getInventoryAmounts();
+	
+	/**
+	 * !! CLIENT SURVIVAL ONLY !!
+	 * Returns the player's hotbar pop times.
+	 * @return The player's hotbar pop times.
+	 */
+	public int[] getInventoryPopTimes();
+	
+	/**
+	 * !! CLIENT ONLY !!
+	 * Replaces the selected slot with the given block, swapping blocks with another
+	 * slot if the block is already in another slot.
+	 * @param block Block to replace with.
+	 */
+	public void replaceSelected(BlockType block);
+	
+	/**
+	 * Respawns the player at the spawn point.
+	 */
+	public void respawn();
+
+	public boolean canBreakBedrock();
+	
+	public void setCanBreakBedrock(boolean canBreak);
 	
 }

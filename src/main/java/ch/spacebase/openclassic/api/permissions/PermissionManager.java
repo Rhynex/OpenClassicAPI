@@ -167,9 +167,9 @@ public class PermissionManager {
 		if(OpenClassic.getServer().getPlayer(player) != null) {
 			if(old != null) {
 				if(!old.hasPermission("openclassic.commands.solid") && group.hasPermission("openclassic.commands.solid")) {
-					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(Constants.OP));
+					OpenClassic.getServer().getPlayer(player).setCanBreakBedrock(true);
 				} else if(old.hasPermission("openclassic.commands.solid") && !group.hasPermission("openclassic.commands.solid")) {
-					OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(Constants.NOT_OP));
+					OpenClassic.getServer().getPlayer(player).setCanBreakBedrock(false);
 				}
 			} else if(group.hasPermission("openclassic.commands.solid")) {
 				OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(Constants.OP));

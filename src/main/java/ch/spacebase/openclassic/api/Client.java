@@ -5,6 +5,7 @@ import ch.spacebase.openclassic.api.gui.MainScreen;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.player.Player;
 import ch.spacebase.openclassic.api.settings.Settings;
+import ch.spacebase.openclassic.api.settings.bindings.Bindings;
 
 /**
  * Represents the OpenClassic Client.
@@ -16,6 +17,18 @@ public interface Client extends Game {
 	 * @return The client's settings.
 	 */
 	public Settings getSettings();
+	
+	/**
+	 * Gets the client's hack settings.
+	 * @return The client's hack settings.
+	 */
+	public Settings getHackSettings();
+	
+	/**
+	 * Gets the client's key bindings.
+	 * @return The client's key bindings.
+	 */
+	public Bindings getBindings();
 	
 	/**
 	 * Gets the client's player.
@@ -39,6 +52,12 @@ public interface Client extends Game {
 	 * Saves the current level.
 	 */
 	public void saveLevel();
+	
+	/**
+	 * Saves the current level under another name.
+	 * @param name Name to save under.
+	 */
+	public void saveLevel(String name);
 
 	/**
 	 * Sets the current visible GuiScreen.
@@ -67,13 +86,13 @@ public interface Client extends Game {
 	/**
 	 * Exits the current level and returns to the main menu.
 	 */
-	public void exitLevel();
+	public void exitGameSession();
 	
 	/**
-	 * Exits the current level and returns to the main menu.
-	 * @param save Whether to save before exiting.
+	 * Gets whether the game is in a multiplayer session.
+	 * @return Whether the game is in multiplayer.
 	 */
-	public void exitLevel(boolean save);
+	public boolean isInMultiplayer();
 	
 	/**
 	 * Returns true if the client is connected to an OpenClassic server.
@@ -92,5 +111,23 @@ public interface Client extends Game {
 	 * @return The client's progress bar display.
 	 */
 	public ProgressBar getProgressBar();
+
+	/**
+	 * Returns true if the HUD is hidden.
+	 * @return Whether the HUD is hidden.
+	 */
+	public boolean isHUDHidden();
+	
+	/**
+	 * Returns true if the client is in survival mode.
+	 * @return Whether the client is in survival mode.
+	 */
+	public boolean isInSurvival();
+
+	/**
+	 * Joins a server.
+	 * @param url URL of the server.
+	 */
+	public void joinServer(String url);
 	
 }

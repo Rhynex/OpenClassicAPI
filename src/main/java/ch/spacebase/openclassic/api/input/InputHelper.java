@@ -60,5 +60,12 @@ public abstract class InputHelper {
 	 * @param enabled Whether keyboard repeat events are enabled.
 	 */
 	public abstract void enableRepeatEvents(boolean enabled);
+
+	/**
+	 * Gets a key name from a key id.
+	 * @param key Key id to get the name of.
+	 * @return The key's name.
+	 */
+	public abstract String getKeyName(int key);
 	
 }
