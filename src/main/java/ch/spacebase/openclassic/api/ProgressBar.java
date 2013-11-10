@@ -51,6 +51,18 @@ public interface ProgressBar {
 	public void setProgress(int progress);
 	
 	/**
+	 * Returns true if the progress bar subtitle is scaled.
+	 * @return True if the progress bar subtitle is scaled.
+	 */
+	public boolean isSubtitleScaled();
+	
+	/**
+	 * Sets whether the progress bar subtitle is scaled.
+	 * @param scaled Whether the progress bar subtitle is scaled.
+	 */
+	public void setSubtitleScaled(boolean scaled);
+	
+	/**
 	 * Returns true if the progress bar is currently visible.
 	 * @return True if the progress bar is visible.
 	 */

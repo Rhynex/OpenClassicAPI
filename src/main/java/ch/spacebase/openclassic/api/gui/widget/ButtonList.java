@@ -68,6 +68,14 @@ public class ButtonList extends Widget {
 	}
 	
 	/**
+	 * Gets the visible contents of the list.
+	 * @return The list's visible contents.
+	 */
+	public List<String> getVisibleContents() {
+		return new ArrayList<String>(this.visible);
+	}
+	
+	/**
 	 * Gets the current page the list is on.
 	 * @return The current page.
 	 */
