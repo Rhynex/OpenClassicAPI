@@ -50,14 +50,16 @@ public interface Client extends Game {
 	
 	/**
 	 * Saves the current level.
+	 * @return Whether the level was saved.
 	 */
-	public void saveLevel();
+	public boolean saveLevel();
 	
 	/**
 	 * Saves the current level under another name.
 	 * @param name Name to save under.
+	 * @return Whether the level was saved.
 	 */
-	public void saveLevel(String name);
+	public boolean saveLevel(String name);
 
 	/**
 	 * Sets the current visible GuiScreen.

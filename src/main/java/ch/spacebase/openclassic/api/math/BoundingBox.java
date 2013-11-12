@@ -1,4 +1,6 @@
-package ch.spacebase.openclassic.api.block.model;
+package ch.spacebase.openclassic.api.math;
+
+import ch.spacebase.openclassic.api.block.model.Vertex;
 
 public class BoundingBox implements Cloneable {
 	

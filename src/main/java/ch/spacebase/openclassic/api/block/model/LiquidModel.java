@@ -6,6 +6,7 @@ import ch.spacebase.openclassic.api.Client;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.BlockFace;
 import ch.spacebase.openclassic.api.block.BlockType;
+import ch.spacebase.openclassic.api.math.BoundingBox;
 import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**

@@ -8,7 +8,7 @@ public class Constants {
 	/**
 	 * OpenClassic's current version.
 	 */
-	public static final String VERSION = "1.3.9-SNAPSHOT";
+	public static final String VERSION = "1.3.9";
 	
 	/**
 	 * The protocol version.
@@ -31,7 +31,7 @@ public class Constants {
 	public static final int TICK_MILLISECONDS = 1000 / TICKS_PER_SECOND;
 	
 	/**
-	 * Number of milliseconds between each physics tick
+	 * Number of physics ticks per second.
 	 */
 	public static final int PHYSICS_PER_SECOND = 10;
 	

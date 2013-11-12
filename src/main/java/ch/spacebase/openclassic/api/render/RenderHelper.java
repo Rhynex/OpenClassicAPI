@@ -453,9 +453,8 @@ public abstract class RenderHelper {
 	
 	/**
 	 * Gets the renderer's mipmap mode.
-	 * (0 = none, 1 = GL 3.0, 2 = Framebuffer Extension, 3 = GL 1.4)
 	 * @return The renderer's mipmap mode.
 	 */
-	public abstract int getMipmapMode();
+	public abstract MipmapMode getMipmapMode();
 	
 }

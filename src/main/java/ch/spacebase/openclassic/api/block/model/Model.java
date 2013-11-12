@@ -3,6 +3,8 @@ package ch.spacebase.openclassic.api.block.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.spacebase.openclassic.api.math.BoundingBox;
+
 /**
  * Represents a block's model.
  */
