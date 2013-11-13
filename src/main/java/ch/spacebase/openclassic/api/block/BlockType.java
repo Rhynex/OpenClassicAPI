@@ -30,6 +30,7 @@ public class BlockType {
 	private int fogGreen = -1;
 	private int fogBlue = -1;
 	private float fogDensity = -1;
+	private int liquidId = -1;
 	
 	public BlockType(int id, StepSound sound, int texture) {
 		this(id, sound, TERRAIN_TEXTURE, texture);
@@ -386,6 +387,24 @@ public class BlockType {
 	 */
 	public BlockType setFogDensity(float density) {
 		this.fogDensity = density;
+		return this;
+	}
+	
+	/**
+	 * Gets the block's liquid id for matching liquids of different block ids.
+	 * @return The block's liquid id. (-1 for unique liquid)
+	 */
+	public int getLiquidId() {
+		return this.liquidId;
+	}
+	
+	/**
+	 * Sets the block's liquid id for matching liquids of different block ids.
+	 * @param id The block's liquid id. (-1 for unique liquid)
+	 * @return This block type.
+	 */
+	public BlockType setLiquidId(int id) {
+		this.liquidId = id;
 		return this;
 	}
 	
