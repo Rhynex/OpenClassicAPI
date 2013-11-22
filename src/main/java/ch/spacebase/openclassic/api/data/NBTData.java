@@ -2,18 +2,14 @@ package ch.spacebase.openclassic.api.data;
 
 import java.io.EOFException;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.io.IOUtils;
-
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.opennbt.stream.NBTInputStream;
-import ch.spacebase.opennbt.stream.NBTOutputStream;
+import ch.spacebase.opennbt.NBTFileIO;
 import ch.spacebase.opennbt.tag.*;
 import ch.spacebase.opennbt.tag.custom.*;
 
@@ -50,15 +46,12 @@ public class NBTData {
 			return;
 		}
 		
-		NBTInputStream in = null;
-		
 		try {
-			in = new NBTInputStream(new FileInputStream(f));
-			CompoundTag tag = (CompoundTag) in.readTag();
+			CompoundTag tag = NBTFileIO.readFile(f);
 			this.data.clear();
 			
 			for(String name : tag.keySet()) {
-				this.data.put(name, tag.get(name));
+				this.data.put(tag.get(name));
 			}
 		} catch (EOFException e) {
 			this.data.clear();
@@ -67,8 +60,6 @@ public class NBTData {
 			OpenClassic.getLogger().severe("Failed to open stream for NBTData " + this.data.getName() + "!");
 			e.printStackTrace();
 			return;
-		} finally {
-			IOUtils.closeQuietly(in);
 		}
 	}
 	
@@ -92,17 +83,12 @@ public class NBTData {
 			}
 		}
 		
-		NBTOutputStream out = null;
-		
 		try {
-			out = new NBTOutputStream(new FileOutputStream(f));
-			out.writeTag(this.data);
+			NBTFileIO.writeFile(this.data, f);
 		} catch (IOException e) {
 			OpenClassic.getLogger().severe("Failed to open stream for NBTData " + this.data.getName() + "!");
 			e.printStackTrace();
 			return;
-		} finally {
-			IOUtils.closeQuietly(out);
 		}
 	}
 	
@@ -113,7 +99,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, byte b) {
-		return this.data.put(name, new ByteTag(name, b));
+		return this.data.put(new ByteTag(name, b));
 	}
 	
 	/**
@@ -123,7 +109,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, byte b[]) {
-		return this.data.put(name, new ByteArrayTag(name, b));
+		return this.data.put(new ByteArrayTag(name, b));
 	}
 	
 	/**
@@ -132,7 +118,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(CompoundTag compound) {
-		return this.data.put(compound.getName(), compound);
+		return this.data.put(compound);
 	}
 	
 	/**
@@ -142,7 +128,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, double d) {
-		return this.data.put(name, new DoubleTag(name, d));
+		return this.data.put(new DoubleTag(name, d));
 	}
 	
 	/**
@@ -152,16 +138,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, double d[]) {
-		return this.data.put(name, new DoubleArrayTag(name, d));
-	}
-	
-	/**
-	 * Puts an EndTag.
-	 * @param tag Tag to put.
-	 * @return The resulting Tag.
-	 */
-	public Tag put(EndTag tag) {
-		return this.data.put(tag.getName(), tag);
+		return this.data.put(new DoubleArrayTag(name, d));
 	}
 	
 	/**
@@ -171,7 +148,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, float f) {
-		return this.data.put(name, new FloatTag(name, f));
+		return this.data.put(new FloatTag(name, f));
 	}
 	
 	/**
@@ -181,7 +158,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, float f[]) {
-		return this.data.put(name, new FloatArrayTag(name, f));
+		return this.data.put(new FloatArrayTag(name, f));
 	}
 	
 	/**
@@ -191,7 +168,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, int i) {
-		return this.data.put(name, new IntTag(name, i));
+		return this.data.put(new IntTag(name, i));
 	}
 	
 	/**
@@ -201,7 +178,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, int i[]) {
-		return this.data.put(name, new IntArrayTag(name, i));
+		return this.data.put(new IntArrayTag(name, i));
 	}
 	
 	/**
@@ -212,7 +189,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public <T extends Tag> Tag put(String name, Class<T> clazz, List<T> l) {
-		return this.data.put(name, new ListTag<T>(name, clazz, l));
+		return this.data.put(new ListTag<T>(name, clazz, l));
 	}
 	
 	/**
@@ -222,7 +199,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, long l) {
-		return this.data.put(name, new LongTag(name, l));
+		return this.data.put(new LongTag(name, l));
 	}
 	
 	/**
@@ -232,7 +209,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, long l[]) {
-		return this.data.put(name, new LongArrayTag(name, l));
+		return this.data.put(new LongArrayTag(name, l));
 	}
 	
 	/**
@@ -242,7 +219,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, short s) {
-		return this.data.put(name, new ShortTag(name, s));
+		return this.data.put(new ShortTag(name, s));
 	}
 	
 	/**
@@ -252,7 +229,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, short s[]) {
-		return this.data.put(name, new ShortArrayTag(name, s));
+		return this.data.put(new ShortArrayTag(name, s));
 	}
 	
 	/**
@@ -262,7 +239,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, String s) {
-		return this.data.put(name, new StringTag(name, s));
+		return this.data.put(new StringTag(name, s));
 	}
 	
 	/**
@@ -272,7 +249,7 @@ public class NBTData {
 	 * @return The resulting Tag.
 	 */
 	public Tag put(String name, String s[]) {
-		return this.data.put(name, new StringArrayTag(name, s));
+		return this.data.put(new StringArrayTag(name, s));
 	}
 	
 	/**
@@ -281,8 +258,8 @@ public class NBTData {
 	 * @param o Value to put.
 	 * @return The resulting Tag.
 	 */
-	public Tag put(String name, Object o) {
-		return this.data.put(name, new ObjectTag(name, o));
+	public Tag put(String name, Serializable o) {
+		return this.data.put(new SerializableTag(name, o));
 	}
 	
 	/**
@@ -291,8 +268,8 @@ public class NBTData {
 	 * @param o Value to put.
 	 * @return The resulting Tag.
 	 */
-	public Tag put(String name, Object o[]) {
-		return this.data.put(name, new ObjectArrayTag(name, o));
+	public Tag put(String name, Serializable o[]) {
+		return this.data.put(new SerializableArrayTag(name, o));
 	}
 	
 	/**
