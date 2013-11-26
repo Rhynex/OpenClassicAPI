@@ -1,6 +1,5 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
-import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.gui.Screen;
 
 /**
@@ -55,6 +54,14 @@ public abstract class Button extends Widget {
 	}
 	
 	/**
+	 * Gets the callback of this button.
+	 * @return This button's callback.
+	 */
+	public ButtonCallback getCallback() {
+		return this.callback;
+	}
+	
+	/**
 	 * Sets the callback of this button.
 	 * @param callback Callback of this button.
 	 * @return This button.
@@ -62,18 +69,6 @@ public abstract class Button extends Widget {
 	public Button setCallback(ButtonCallback callback) {
 		this.callback = callback;
 		return this;
-	}
-	
-	@Override
-	public void onMouseClick(int x, int y, int button) {
-		if(button != 0 || !this.isActive()) {
-			return;
-		}
-		
-		OpenClassic.getClient().getAudioManager().playSound("random.click", 1, 1);
-		if(this.callback != null) {
-			this.callback.onButtonClick(this);
-		}
 	}
 
 }

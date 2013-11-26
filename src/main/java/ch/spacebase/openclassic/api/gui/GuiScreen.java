@@ -3,6 +3,7 @@ package ch.spacebase.openclassic.api.gui;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.gui.widget.Widget;
 import ch.spacebase.openclassic.api.input.Keyboard;
+import ch.spacebase.openclassic.api.player.Player;
 
 /**
  * Represents a GUI screen.
@@ -41,7 +42,7 @@ public abstract class GuiScreen extends Screen {
 	/**
 	 * Called when the GuiScreen is opened.
 	 */
-	public void onOpen() {
+	public void onOpen(Player viewer) {
 	}
 	
 	/**

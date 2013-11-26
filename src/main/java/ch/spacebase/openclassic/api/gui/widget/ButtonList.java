@@ -130,6 +130,14 @@ public class ButtonList extends Widget {
 	}
 	
 	/**
+	 * Gets the callback of this button list.
+	 * @return This button list's callback.
+	 */
+	public ButtonListCallback getCallback() {
+		return this.callback;
+	}
+	
+	/**
 	 * Sets the callback of this button list.
 	 * @param callback Callback of this button list.
 	 * @return This button list.
