@@ -91,6 +91,10 @@ public class PlayerLoginEvent extends PlayerEvent {
 		return handlers;
 	}
     
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
+	
     /**
      * The result of a login attempt.
      */

@@ -39,4 +39,8 @@ public class PlayerJoinEvent extends PlayerEvent {
 		return handlers;
 	}
 	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
+	
 }

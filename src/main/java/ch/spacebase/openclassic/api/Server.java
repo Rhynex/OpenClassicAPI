@@ -4,7 +4,6 @@ import java.util.List;
 
 import ch.spacebase.openclassic.api.command.Console;
 import ch.spacebase.openclassic.api.level.Level;
-import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.permissions.PermissionManager;
 import ch.spacebase.openclassic.api.player.Player;
 
@@ -119,6 +118,12 @@ public interface Server extends Game {
 	 * @param online Whether the server verifies names.
 	 */
 	public void setOnlineMode(boolean online);
+	
+	/**
+	 * Gets the server's minecraft.net URL.
+	 * @return The server's minecraft.net URL.
+	 */
+	public String getURL();
 	
 	/**
 	 * Returns true if the server allows flight.
@@ -316,19 +321,6 @@ public interface Server extends Game {
 	 * @param level Level to save.
 	 */
 	public void saveLevel(Level level);
-	
-	/**
-	 * Sends a network message to all players on the server.
-	 * @param msg Message to send.
-	 */
-	public void sendToAll(Message msg);
-	
-	/**
-	 * Sends a network message to all players on the server except the given player.
-	 * @param player Player to skip.
-	 * @param msg Message to send.
-	 */
-	public void sendToAllExcept(Player player, Message msg);
 
 	/**
 	 * Gets the sender used to send console commands.

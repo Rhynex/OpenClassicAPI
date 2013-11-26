@@ -15,12 +15,6 @@ import ch.spacebase.openclassic.api.plugin.RemotePluginInfo;
  * Represents a player.
  */
 public interface Player extends Sender {
-
-	/**
-	 * Gets the player's network session.
-	 * @return The player's session.
-	 */
-	public Session getSession();
 	
 	/**
 	 * Gets the player's ID.
@@ -312,8 +306,23 @@ public interface Player extends Sender {
 	 */
 	public void respawn();
 
+	/**
+	 * Gets whether the player can break bedrock.
+	 * @return Whether the player can break bedrock.
+	 */
 	public boolean canBreakBedrock();
 	
+	/**
+	 * Sets whether the player can break bedrock.
+	 * @param canBreak Whether the player can break bedrock.
+	 */
 	public void setCanBreakBedrock(boolean canBreak);
+	
+	/**
+	 * Sends a custom packet message to the player.
+	 * @param id Id of the message.
+	 * @param data Data contained in the message.
+	 */
+	public void sendCustomMessage(String id, byte data[]);
 	
 }

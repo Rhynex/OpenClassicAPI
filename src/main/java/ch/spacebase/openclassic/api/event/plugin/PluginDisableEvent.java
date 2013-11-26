@@ -20,4 +20,8 @@ public class PluginDisableEvent extends PluginEvent {
 		return handlers;
 	}
 	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
+	
 }

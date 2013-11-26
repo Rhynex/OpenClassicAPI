@@ -32,5 +32,9 @@ public class BlockPhysicsEvent extends BlockEvent implements Cancellable {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 
 }

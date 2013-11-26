@@ -2,7 +2,6 @@ package ch.spacebase.openclassic.api.event.player;
 
 import com.zachsthings.onevent.HandlerList;
 
-import ch.spacebase.openclassic.api.network.msg.custom.CustomMessage;
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -12,23 +11,37 @@ public class CustomMessageEvent extends PlayerEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 	
-	private CustomMessage message;
+	private String id;
+	private byte data[];
 	
-	public CustomMessageEvent(Player player, CustomMessage message) {
+	public CustomMessageEvent(Player player, String id, byte data[]) {
 		super(player);
-		this.message = message;
+		this.id = id;
+		this.data = data;
 	}
 	
 	/**
-	 * Gets the message involved in this event.
-	 * @return The message involved in this event.
+	 * Gets the id of the message involved in this event.
+	 * @return The id of the message involved in this event.
 	 */
-	public CustomMessage getMessage() {
-		return this.message;
+	public String getId() {
+		return this.id;
+	}
+	
+	/**
+	 * Gets the data of the message involved in this event.
+	 * @return The data of the message involved in this event.
+	 */
+	public byte[] getData() {
+		return this.data;
 	}
 
 	@Override
 	public HandlerList getHandlers() {
+		return handlers;
+	}
+	
+	public static HandlerList getHandlerList() {
 		return handlers;
 	}
 

@@ -55,4 +55,8 @@ public class BlockBreakEvent extends BlockEvent implements Cancellable {
 		return handlers;
 	}
 
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
+
 }

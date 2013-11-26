@@ -64,5 +64,9 @@ public class CommandNotFoundEvent extends GameEvent {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 
 }

@@ -1,52 +1,24 @@
 package ch.spacebase.openclassic.api.block.model;
 
-import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.Validate;
-
-import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
  * A quad face used in models.
  */
-public class Quad {
+public interface Quad {
 
-	protected int id;
-	private Vertex vertices[] = new Vertex[4];
-	private SubTexture texture;
-	private Model parent;
-	
-	public Quad(int id, SubTexture texture) {
-		this.texture = texture;
-		this.id = id;
-	}
-	
-	public Quad(int id, SubTexture texture, Vertex v1, Vertex v2, Vertex v3, Vertex v4) {
-		this(id, texture);
-		this.addVertex(0, v1);
-		this.addVertex(1, v2);
-		this.addVertex(2, v3);
-		this.addVertex(3, v4);
-	}
-	
 	/**
 	 * Gets the ID of this quad.
 	 * @return This quad's ID.
 	 */
-	public int getId() {
-		return this.id;
-	}
+	public int getId();
 	
 	/**
 	 * Adds a vertex to this quad.
 	 * @param id ID of the vertex.
 	 * @param vertex Vertex to add.
 	 */
-	public void addVertex(int id, Vertex vertex) {
-		Validate.isTrue(id >= 0 && id <= 3, "Quad can only have 4 vertices with IDs 0 - 3!");
-		this.vertices[id] = vertex;
-	}
+	public void addVertex(int id, Vertex vertex);
 	
 	/**
 	 * Adds a vertex to this quad.
@@ -55,44 +27,32 @@ public class Quad {
 	 * @param y Y of the vertex.
 	 * @param z Z of the vertex.
 	 */
-	public void addVertex(int id, float x, float y, float z) {
-		this.addVertex(id, new Vertex(x, y, z));
-	}
+	public void addVertex(int id, float x, float y, float z);
 	
 	/**
 	 * Removes the vertex with the given ID.
 	 * @param id ID of the vertex to remove.
 	 */
-	public void removeVertex(int id) {
-		Validate.isTrue(id >= 0 && id <= 3, "Quad can only have 4 vertices with IDs 0 - 3!");
-		this.vertices[id] = null;
-	}
+	public void removeVertex(int id);
 	
 	/**
 	 * Gets the vertex with the given ID.
 	 * @param id ID to look for.
 	 * @return The vertex with the given ID.
 	 */
-	public Vertex getVertex(int id) {
-		Validate.isTrue(id >= 0 && id <= 3, "Quad can only have 4 vertices with IDs 0 - 3!");
-		return this.vertices[id];
-	}
+	public Vertex getVertex(int id);
 	
 	/**
 	 * Gets the quad's vertices.
 	 * @return The quad's vertices.
 	 */
-	public List<Vertex> getVertices() {
-		return Arrays.asList(this.vertices);
-	}
+	public List<Vertex> getVertices();
 	
 	/**
 	 * Gets the quad's texture.
 	 * @return The quad's texture.
 	 */
-	public SubTexture getTexture() {
-		return this.texture;
-	}
+	public SubTexture getTexture();
 	
 	/**
 	 * Renders the quad.
@@ -101,9 +61,7 @@ public class Quad {
 	 * @param z Z to render at.
 	 * @param brightness Brightness to render at.
 	 */
-	public void render(float x, float y, float z, float brightness) {
-		this.render(x, y, z, brightness, false);
-	}
+	public void render(float x, float y, float z, float brightness);
 	
 	/**
 	 * Renders the quad.
@@ -113,9 +71,18 @@ public class Quad {
 	 * @param brightness Brightness to render at.
 	 * @param batch Whether this render is part of an internal batch.
 	 */
-	public void render(float x, float y, float z, float brightness, boolean batch) {	
-		RenderHelper.getHelper().drawQuad(this, x, y, z, brightness, batch);
-	}
+	public void render(float x, float y, float z, float brightness, boolean batch);
+	
+	/**
+	 * Renders the quad.
+	 * @param x X to render at.
+	 * @param y Y to render at.
+	 * @param z Z to render at.
+	 * @param brightness Brightness to render at.
+	 * @param batch Whether this render is part of an internal batch.
+	 * @param cull Whether culling should be enabled for this render.
+	 */
+	public void render(float x, float y, float z, float brightness, boolean batch, boolean cull);
 	
 	/**
 	 * Renders the quad at the given scale.
@@ -125,20 +92,18 @@ public class Quad {
 	 * @param scale Scale to render at.
 	 * @param brightness Brightness to render at.
 	 */
-	public void renderScaled(float x, float y, float z, float scale, float brightness) {
-		RenderHelper.getHelper().drawScaledQuad(this, x, y, z, scale, brightness);
-	}
+	public void renderScaled(float x, float y, float z, float scale, float brightness);
 
 	/**
 	 * Gets the parent of this quad.
 	 * @return The quad's parent.
 	 */
-	public Model getParent() {
-		return this.parent;
-	}
+	public Model getParent();
 	
-	protected void setParent(Model parent) {
-		this.parent = parent;
-	}
+	/**
+	 * Sets the parent of this quad if it does not have one.
+	 * @param parent The quad's new parent.
+	 */
+	public void setParent(Model parent);
 	
 }

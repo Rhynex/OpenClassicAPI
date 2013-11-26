@@ -92,6 +92,10 @@ public class PlayerConnectEvent extends Event {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
     
     /**
      * The result of a login attempt.

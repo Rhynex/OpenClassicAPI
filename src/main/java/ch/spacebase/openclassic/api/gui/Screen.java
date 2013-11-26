@@ -111,7 +111,7 @@ public abstract class Screen {
 	/**
 	 * Called when a tick update occurs.
 	 */
-	public void update() {
+	public void update(int mouseX, int mouseY) {
 		for(Widget widget : this.getWidgets()) {
 			widget.update();
 		}

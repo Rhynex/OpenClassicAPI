@@ -32,5 +32,9 @@ public class LevelSaveEvent extends LevelEvent implements Cancellable {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 
 }

@@ -36,8 +36,8 @@ public class Texture {
 		
 		int count = 0;
 		for (int y = 0; y < height / subHeight; y++) {
-			for (int x = 0; x < width / subHeight; x++) {
-				this.subTextures.add(count, new SubTexture(this, count, x * subWidth, y * subHeight, subWidth, subHeight));
+			for (int x = 0; x < width / subWidth; x++) {
+				this.subTextures.add(count, new SubTexture(this, x * subWidth, y * subHeight, subWidth, subHeight));
 				count++;
 			}
 		}
@@ -50,6 +50,18 @@ public class Texture {
 	 */
 	public SubTexture getSubTexture(int id) {
 		return this.subTextures.get(id);
+	}
+	
+	/**
+	 * Gets the SubTexture with the given dimensions.
+	 * @param x X of the subtexture.
+	 * @param y Y of the subtexture.
+	 * @param width Width of the subtexture.
+	 * @param height Height of the subtexture.
+	 * @return The SubTexture with the given dimensions.
+	 */
+	public SubTexture getSubTexture(int x, int y, int width, int height) {
+		return new SubTexture(this, x, y, width, height);
 	}
 	
 	/**

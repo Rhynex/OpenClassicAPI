@@ -2,12 +2,11 @@ package ch.spacebase.openclassic.api.gui.widget;
 
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.gui.Screen;
-import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
  * A preview of a block, like in the inventory quickbar.
  */
-public class BlockPreview extends Widget {
+public abstract class BlockPreview extends Widget {
 
 	private BlockType type;
 	private float scale;
@@ -37,10 +36,13 @@ public class BlockPreview extends Widget {
 	public void setBlock(BlockType block) {
 		this.type = block;
 	}
-
-	@Override
-	public void render() {
-		RenderHelper.getHelper().drawRotatedBlock(x, y, this.type, this.scale);
+	
+	/**
+	 * Gets the scale of this block preview widget.
+	 * @return The preview's scale.
+	 */
+	public float getScale() {
+		return this.scale;
 	}
 
 }

@@ -2,9 +2,7 @@ package ch.spacebase.openclassic.api.gui;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.gui.widget.Button;
-import ch.spacebase.openclassic.api.gui.widget.ButtonList;
 import ch.spacebase.openclassic.api.gui.widget.Widget;
-import ch.spacebase.openclassic.api.input.InputHelper;
 import ch.spacebase.openclassic.api.input.Keyboard;
 
 /**
@@ -89,14 +87,6 @@ public abstract class GuiScreen extends Screen {
 	}
 	
 	/**
-	 * Called when a button belonging to a ButtonList widget is clicked.
-	 * @param list ButtonList the button belongs to.
-	 * @param button Button that was clicked.
-	 */
-	public void onButtonListClick(ButtonList list, Button button) {
-	}
-	
-	/**
 	 * Called when the mouse is clicked.
 	 * @param x X of the mouse.
 	 * @param y Y of the mouse.
@@ -118,7 +108,6 @@ public abstract class GuiScreen extends Screen {
 	public void onKeyPress(char c, int key) {
 		if (key == Keyboard.KEY_ESCAPE && OpenClassic.getClient().isInGame()) {
 			OpenClassic.getClient().setCurrentScreen(null);
-			InputHelper.getHelper().grabMouse();
 		} else {
 			for (Widget curr : this.getWidgets()) {
 				curr.onKeyPress(c, key);

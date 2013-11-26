@@ -69,4 +69,8 @@ public class PlayerChatEvent extends PlayerEvent implements Cancellable {
 		return handlers;
 	}
 	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
+	
 }

@@ -10,12 +10,11 @@ import java.io.IOException;
 import ch.spacebase.openclassic.api.gui.Screen;
 import ch.spacebase.openclassic.api.input.InputHelper;
 import ch.spacebase.openclassic.api.input.Keyboard;
-import ch.spacebase.openclassic.api.render.RenderHelper;
 
 /**
  * Represents a text box.
  */
-public class TextBox extends Widget {
+public abstract class TextBox extends Widget {
 
 	private static final String ALLOWED = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.:;-_\'*!\"#@%$/()=+?[]{}<>^";
 	
@@ -49,7 +48,7 @@ public class TextBox extends Widget {
 	}
 	
 	public TextBox(int id, int x, int y, Screen parent, int max, boolean chatbox) {
-		this(id, x, y, 200, 20, parent, chatbox);
+		this(id, x, y, 200, 20, parent, max, chatbox);
 	}
 	
 	public TextBox(int id, int x, int y, int width, int height, Screen parent, boolean chatbox) {
@@ -195,13 +194,6 @@ public class TextBox extends Widget {
 				}
 			}
 		}
-	}
-	
-	@Override
-	public void render() {
-		if(!this.chatbox) RenderHelper.getHelper().drawBox(this.x - 1, this.y - 1, this.x + this.width + 1, this.y + this.height + 1, -6250336);
-		RenderHelper.getHelper().drawBox(this.x, this.y, this.x + this.width, this.y + this.height, (!this.chatbox ? -16777216 : Integer.MIN_VALUE));
-		RenderHelper.getHelper().renderText(this.text.substring(0, this.cursor) + (this.blink && this.focus ? "|" : "") + this.text.substring(this.cursor, this.text.length()), this.x + 4, (this.chatbox ? this.y + 2 : this.y + 6), 14737632, false);
 	}
 
 }

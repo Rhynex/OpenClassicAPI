@@ -59,5 +59,9 @@ public class PreCommandEvent extends GameEvent implements Cancellable {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 
 }

@@ -31,5 +31,9 @@ public class SpawnChangeEvent extends LevelEvent {
 	public HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 
 }

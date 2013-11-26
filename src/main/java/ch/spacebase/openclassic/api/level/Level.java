@@ -6,7 +6,6 @@ import ch.spacebase.openclassic.api.Position;
 import ch.spacebase.openclassic.api.block.Block;
 import ch.spacebase.openclassic.api.block.BlockType;
 import ch.spacebase.openclassic.api.data.NBTData;
-import ch.spacebase.openclassic.api.network.msg.Message;
 import ch.spacebase.openclassic.api.player.Player;
 
 /**
@@ -194,6 +193,15 @@ public interface Level {
 	public boolean isLit(int x, int y, int z);
 	
 	/**
+	 * Gets the brightness of a block, where 0 and below is pitch black and 1 and above is fully bright.
+	 * @param x X of the block.
+	 * @param y Y of the block.
+	 * @param z Z of the block.
+	 * @return The block's brightness.
+	 */
+	public float getBrightness(int x, int y, int z);
+	
+	/**
 	 * Sets the block ID at the given position to the given byte.
 	 * @param pos Position of the block.
 	 * @param type Type ID to set.
@@ -260,19 +268,6 @@ public interface Level {
 	 * @param physics Whether to use physics.
 	 */
 	public boolean setBlockAt(int x, int y, int z, BlockType type, boolean physics);
-	
-	/**
-	 * Sends a network message to all players in the level.
-	 * @param message Message to send.
-	 */
-	public void sendToAll(Message message);
-	
-	/**
-	 * Sends a network message to all players in the level except the given player.
-	 * @param skip Player to skip.
-	 * @param message Message to send.
-	 */
-	public void sendToAllExcept(Player skip, Message message);
 
 	/**
 	 * Schedules a block to be ticked next time the server ticks.

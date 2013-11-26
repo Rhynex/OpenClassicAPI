@@ -7,8 +7,6 @@ import java.util.List;
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.config.Configuration;
 import ch.spacebase.openclassic.api.config.yaml.YamlConfig;
-import ch.spacebase.openclassic.api.network.msg.PlayerOpMessage;
-import ch.spacebase.openclassic.api.util.Constants;
 
 /**
  * Manages the server's permissions.
@@ -172,7 +170,7 @@ public class PermissionManager {
 					OpenClassic.getServer().getPlayer(player).setCanBreakBedrock(false);
 				}
 			} else if(group.hasPermission("openclassic.commands.solid")) {
-				OpenClassic.getServer().getPlayer(player).getSession().send(new PlayerOpMessage(Constants.OP));
+				OpenClassic.getServer().getPlayer(player).setCanBreakBedrock(true);
 			}
 		}
 	}

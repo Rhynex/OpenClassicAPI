@@ -81,6 +81,16 @@ public abstract class Widget {
 	}
 	
 	/**
+	 * Sets the position of this widget.
+	 * @param x X of the widget.
+	 * @param y Y of the widget.
+	 */
+	public void setPos(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/**
 	 * Gets this widget's parent.
 	 * @return The widget's parent.
 	 */

@@ -6,7 +6,7 @@ import ch.spacebase.openclassic.api.gui.widget.Button;
 /**
  * Represents a button with a state. The text in the button displays as so: "Text: State"
  */
-public final class StateButton extends Button {
+public abstract class StateButton extends Button {
 
 	private String state;
 	
@@ -32,14 +32,6 @@ public final class StateButton extends Button {
 	 */
 	public void setState(String state) {
 		this.state = state;
-	}
-	
-	@Override
-	public void render() {
-		String text = this.getText();
-		this.setText(text + ": " + state);
-		super.render();
-		this.setText(text);
 	}
 	
 }

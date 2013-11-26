@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.gui.GuiScreen;
 import ch.spacebase.openclassic.api.gui.Screen;
 
 /**
@@ -21,22 +20,24 @@ public class ButtonList extends Widget {
 	private int pages = 0;
 	private int index = 0;
 	
-	public ButtonList(int id, int parentWidth, int parentHeight, Screen parent) {
-		this(id, parentWidth, parentHeight, parent, false);
+	private ButtonListCallback callback;
+	
+	public ButtonList(int id, Screen parent) {
+		this(id, parent, false);
 	}
 	
-	public ButtonList(int id, int parentWidth, int parentHeight, Screen parent, boolean search) {
-		super(id, 0, 0, parentWidth, parentHeight, parent);
+	public ButtonList(int id, Screen parent, boolean search) {
+		super(id, 0, 0, parent.getWidth(), parent.getHeight(), parent);
 		
 		for (int button = 0; button < 5; button++) {
-			this.buttons.add(new Button(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, "---"));
-			this.buttons.get(id).setVisible(false);
-			this.buttons.get(id).setActive(false);
+			this.buttons.add(WidgetFactory.getFactory().newButton(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, "---"));
+			this.buttons.get(button).setVisible(false);
+			this.buttons.get(button).setActive(false);
 		}
 		
-		this.buttons.add(new Button(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.back")));
-		this.buttons.add(new Button(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.next")));
-		this.search = new TextBox(7, this.width / 2 - 100, this.height / 6 + 120, this.parent);
+		this.buttons.add(WidgetFactory.getFactory().newButton(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.back")));
+		this.buttons.add(WidgetFactory.getFactory().newButton(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.next")));
+		this.search = WidgetFactory.getFactory().newTextBox(7, this.width / 2 - 100, this.height / 6 + 120, this.parent);
 		this.getBackButton().setActive(false);
 		this.getNextButton().setActive(false);
 		this.useSearch = search;
@@ -103,6 +104,14 @@ public class ButtonList extends Widget {
 	}
 	
 	/**
+	 * Sets the callback of this button list.
+	 * @param callback Callback of this button list.
+	 */
+	public void setCallback(ButtonListCallback callback) {
+		this.callback = callback;
+	}
+	
+	/**
 	 * Called when a button on this list is clicked.
 	 * @param button Button that was clicked.
 	 */
@@ -117,8 +126,8 @@ public class ButtonList extends Widget {
 			button.setActive(this.index < this.pages);
 			this.getBackButton().setActive(this.index > 0);
 			this.updateContents();
-		} else if(this.parent instanceof GuiScreen) {
-			((GuiScreen) this.parent).onButtonListClick(this, button);
+		} else if(this.callback != null) {
+			this.callback.onButtonListClick(this, button);
 		}
 	}
 	
