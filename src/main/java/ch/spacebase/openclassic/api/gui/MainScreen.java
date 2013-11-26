@@ -8,10 +8,10 @@ import java.util.List;
 public abstract class MainScreen extends Screen {
 	
 	/**
-	 * Gets the last player clicked on the playerlist screen.
-	 * @return The last clicked player.
+	 * Gets the player hovered over on the player list display.
+	 * @return The hovered over player.
 	 */
-	public abstract String getClickedPlayer();
+	public abstract String getHoveredPlayer();
 	
 	/**
 	 * Adds a chat message to the chat history.

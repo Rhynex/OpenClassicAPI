@@ -117,15 +117,4 @@ public abstract class Screen {
 		}
 	}
 	
-	/**
-	 * Renders the Screen.
-	 */
-	public void render() {
-		for (Widget widget : this.getWidgets()) {
-			if (widget.isVisible()) {
-				widget.render();
-			}
-		}
-	}
-	
 }

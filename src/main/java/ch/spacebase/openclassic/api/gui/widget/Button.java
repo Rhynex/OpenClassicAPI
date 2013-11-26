@@ -1,7 +1,6 @@
 package ch.spacebase.openclassic.api.gui.widget;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.gui.GuiScreen;
 import ch.spacebase.openclassic.api.gui.Screen;
 
 /**
@@ -11,6 +10,7 @@ public abstract class Button extends Widget {
 	
 	private String text;
 	private boolean active = true;
+	private ButtonCallback callback;
 
 	public Button(int id, int x, int y, Screen parent, String text) {
 		this(id, x, y, 200, 20, parent, text);
@@ -54,20 +54,25 @@ public abstract class Button extends Widget {
 		this.active = active;
 	}
 	
+	/**
+	 * Sets the callback of this button.
+	 * @param callback Callback of this button.
+	 * @return This button.
+	 */
+	public Button setCallback(ButtonCallback callback) {
+		this.callback = callback;
+		return this;
+	}
+	
 	@Override
 	public void onMouseClick(int x, int y, int button) {
-		if(button != 0 || !this.isActive()) return;
-		
-		OpenClassic.getClient().getAudioManager().playSound("random.click", 1, 1);
-		for(Widget widget : this.parent.getWidgets()) {
-			if(widget instanceof ButtonList && ((ButtonList) widget).getButtons().contains(this)) {
-				((ButtonList) widget).onButtonClick(this);
-				return;
-			}
+		if(button != 0 || !this.isActive()) {
+			return;
 		}
 		
-		if(this.parent instanceof GuiScreen) {
-			((GuiScreen) this.parent).onButtonClick(this);
+		OpenClassic.getClient().getAudioManager().playSound("random.click", 1, 1);
+		if(this.callback != null) {
+			this.callback.onButtonClick(this);
 		}
 	}
 

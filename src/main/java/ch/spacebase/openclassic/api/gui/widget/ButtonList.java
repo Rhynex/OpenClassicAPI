@@ -30,13 +30,39 @@ public class ButtonList extends Widget {
 		super(id, 0, 0, parent.getWidth(), parent.getHeight(), parent);
 		
 		for (int button = 0; button < 5; button++) {
-			this.buttons.add(WidgetFactory.getFactory().newButton(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, "---"));
+			this.buttons.add(WidgetFactory.getFactory().newButton(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, "---").setCallback(new ButtonCallback() {
+				@Override
+				public void onButtonClick(Button button) {
+					if(callback != null) {
+						callback.onButtonListClick(ButtonList.this, button);
+					}
+				}
+			}));
+			
 			this.buttons.get(button).setVisible(false);
 			this.buttons.get(button).setActive(false);
 		}
 		
-		this.buttons.add(WidgetFactory.getFactory().newButton(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.back")));
-		this.buttons.add(WidgetFactory.getFactory().newButton(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.next")));
+		this.buttons.add(WidgetFactory.getFactory().newButton(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.back")).setCallback(new ButtonCallback() {
+			@Override
+			public void onButtonClick(Button button) {
+				index--;
+				button.setActive(index > 0);
+				getNextButton().setActive(index < pages);
+				updateContents();
+			}
+		}));
+		
+		this.buttons.add(WidgetFactory.getFactory().newButton(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.next")).setCallback(new ButtonCallback() {
+			@Override
+			public void onButtonClick(Button button) {
+				index++;
+				button.setActive(index < pages);
+				getBackButton().setActive(index > 0);
+				updateContents();
+			}
+		}));
+		
 		this.search = WidgetFactory.getFactory().newTextBox(7, this.width / 2 - 100, this.height / 6 + 120, this.parent);
 		this.getBackButton().setActive(false);
 		this.getNextButton().setActive(false);
@@ -106,29 +132,11 @@ public class ButtonList extends Widget {
 	/**
 	 * Sets the callback of this button list.
 	 * @param callback Callback of this button list.
+	 * @return This button list.
 	 */
-	public void setCallback(ButtonListCallback callback) {
+	public ButtonList setCallback(ButtonListCallback callback) {
 		this.callback = callback;
-	}
-	
-	/**
-	 * Called when a button on this list is clicked.
-	 * @param button Button that was clicked.
-	 */
-	public void onButtonClick(Button button) {
-		if (button.getId() == this.getBackButton().getId()) {
-			this.index--;
-			button.setActive(this.index > 0);
-			this.getNextButton().setActive(this.index < this.pages);
-			this.updateContents();
-		} else if (button.getId() == this.getNextButton().getId()) {
-			this.index++;
-			button.setActive(this.index < this.pages);
-			this.getBackButton().setActive(this.index > 0);
-			this.updateContents();
-		} else if(this.callback != null) {
-			this.callback.onButtonListClick(this, button);
-		}
+		return this;
 	}
 	
 	/**

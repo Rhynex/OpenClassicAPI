@@ -1,7 +1,6 @@
 package ch.spacebase.openclassic.api.gui;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.gui.widget.Button;
 import ch.spacebase.openclassic.api.gui.widget.Widget;
 import ch.spacebase.openclassic.api.input.Keyboard;
 
@@ -12,18 +11,6 @@ public abstract class GuiScreen extends Screen {
 	
 	private int width;
 	private int height;
-	private boolean grab;
-	
-	/**
-	 * Opens the GUI screen.
-	 * @param width Width of the screen.
-	 * @param height Height of the screen.
-	 */
-	public void open(int width, int height) {
-		this.width = width * 240 / height;
-		this.height = height * 240 / height;
-		this.onOpen();
-	}
 	
 	/**
 	 * Gets the screen's width.
@@ -52,22 +39,6 @@ public abstract class GuiScreen extends Screen {
 	}
 	
 	/**
-	 * Returns true if this GuiScreen grabs the mouse.
-	 * @return True if the screen grabs the mouse.
-	 */
-	public boolean grabsInput() {
-		return this.grab;
-	}
-	
-	/**
-	 * Sets whether the screen grabs the mouse.
-	 * @param grab Whether the screen grabs the mouse.
-	 */
-	public void setGrabsInput(boolean grab) {
-		this.grab = grab;
-	}
-	
-	/**
 	 * Called when the GuiScreen is opened.
 	 */
 	public void onOpen() {
@@ -77,13 +48,6 @@ public abstract class GuiScreen extends Screen {
 	 * Called when the GuiScreen is closed.
 	 */
 	public void onClose() {
-	}
-	
-	/**
-	 * Called when a button widget is clicked.
-	 * @param button Button that was clicked.
-	 */
-	public void onButtonClick(Button button) {
 	}
 	
 	/**
