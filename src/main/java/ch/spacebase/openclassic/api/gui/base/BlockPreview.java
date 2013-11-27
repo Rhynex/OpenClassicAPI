@@ -1,22 +1,22 @@
-package ch.spacebase.openclassic.api.gui.widget;
+package ch.spacebase.openclassic.api.gui.base;
 
 import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.gui.Screen;
+import ch.spacebase.openclassic.api.gui.GuiComponent;
 
 /**
  * A preview of a block, like in the inventory quickbar.
  */
-public abstract class BlockPreview extends Widget {
+public class BlockPreview extends GuiComponent {
 
 	private BlockType type;
 	private float scale;
 	
-	public BlockPreview(int id, int x, int y, Screen parent, BlockType type) {
-		this(id, x, y, parent, type, 0);
+	public BlockPreview(String name, int x, int y, BlockType type) {
+		this(name, x, y, type, 0);
 	}
 	
-	public BlockPreview(int id, int x, int y, Screen parent, BlockType type, float scale) {
-		super(id, x, y, 0, 0, parent);
+	public BlockPreview(String name, int x, int y, BlockType type, float scale) {
+		super(name, x, y, 0, 0);
 		this.type = type;
 		this.scale = scale;
 	}
@@ -43,6 +43,11 @@ public abstract class BlockPreview extends Widget {
 	 */
 	public float getScale() {
 		return this.scale;
+	}
+	
+	@Override
+	public void render(int mouseX, int mouseY) {
+		ComponentHelper.getHelper().renderBlockPreview(this);
 	}
 
 }

@@ -1,7 +1,7 @@
 package ch.spacebase.openclassic.api;
 
-import ch.spacebase.openclassic.api.gui.GuiScreen;
-import ch.spacebase.openclassic.api.gui.MainScreen;
+import ch.spacebase.openclassic.api.gui.GuiComponent;
+import ch.spacebase.openclassic.api.gui.HUDComponent;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.player.Player;
 import ch.spacebase.openclassic.api.settings.Settings;
@@ -60,18 +60,18 @@ public interface Client extends Game {
 	 * @return Whether the level was saved.
 	 */
 	public boolean saveLevel(String name);
-
-	/**
-	 * Sets the current visible GuiScreen.
-	 * @param screen Screen to set visible.
-	 */
-	public void setCurrentScreen(GuiScreen screen);
 	
 	/**
-	 * Gets the current visible GuiScreen.
-	 * @return Currently visible screen.
+	 * Gets the current active main GUI component.
+	 * @return The active component.
 	 */
-	public GuiScreen getCurrentScreen();
+	public GuiComponent getActiveComponent();
+	
+	/**
+	 * Sets the current active main GUI component.
+	 * @param component Component to set as active.
+	 */
+	public void setActiveComponent(GuiComponent component);
 
 	/**
 	 * Returns true if the client is in a game session.
@@ -80,10 +80,10 @@ public interface Client extends Game {
 	public boolean isInGame();
 
 	/**
-	 * Gets the main screen of the client.
-	 * @return The client's main screen. (null if not in a game session)
+	 * Gets the HUD of the client.
+	 * @return The client's HUD. (null if not in a game session)
 	 */
-	public MainScreen getMainScreen();
+	public HUDComponent getHUD();
 
 	/**
 	 * Exits the current level and returns to the main menu.

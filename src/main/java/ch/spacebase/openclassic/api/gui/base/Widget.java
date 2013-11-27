@@ -1,6 +1,6 @@
-package ch.spacebase.openclassic.api.gui.widget;
+package ch.spacebase.openclassic.api.gui.base;
 
-import ch.spacebase.openclassic.api.gui.Screen;
+import ch.spacebase.openclassic.api.gui.GuiComponent;
 
 /**
  * Represents a GUI widget.
@@ -9,13 +9,13 @@ public abstract class Widget {
 
 	private int id;
 	protected boolean visible = true;
-	protected Screen parent;
+	protected GuiComponent parent;
 	protected int x;
 	protected int y;
 	protected int width;
 	protected int height;
 	
-	public Widget(int id, int x, int y, int width, int height, Screen parent) {
+	public Widget(int id, int x, int y, int width, int height, GuiComponent parent) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -94,7 +94,7 @@ public abstract class Widget {
 	 * Gets this widget's parent.
 	 * @return The widget's parent.
 	 */
-	public Screen getParent() {
+	public GuiComponent getParent() {
 		return this.parent;
 	}
 	
@@ -102,7 +102,7 @@ public abstract class Widget {
 	 * Sets this widget's parent.
 	 * @param screen This widget's new parent.
 	 */
-	public void setParent(Screen screen) {
+	public void setParent(GuiComponent screen) {
 		this.parent = screen;
 	}
 	
@@ -138,14 +138,14 @@ public abstract class Widget {
 	 * Called when this widget is attached to a Screen.
 	 * @param screen Screen the widget is being attached to.
 	 */
-	public void onAttached(Screen screen) {
+	public void onAttached(GuiComponent screen) {
 	}
 	
 	/**
 	 * Called when this widget is removed from a Screen.
 	 * @param screen Screen the widget is being removed from.
 	 */
-	public void onRemoved(Screen screen) {
+	public void onRemoved(GuiComponent screen) {
 	}
 	
 }

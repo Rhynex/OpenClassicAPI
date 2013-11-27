@@ -1,17 +1,17 @@
-package ch.spacebase.openclassic.api.gui.widget;
+package ch.spacebase.openclassic.api.gui.base;
 
-import ch.spacebase.openclassic.api.gui.Screen;
+import ch.spacebase.openclassic.api.gui.GuiComponent;
 
 /**
  * A box that fades between two colors.
  */
-public abstract class FadingBox extends Widget {
+public class FadingBox extends GuiComponent {
 
 	private int color;
 	private int fadeTo;
 	
-	public FadingBox(int id, int x, int y, int width, int height, Screen parent, int color, int fadeTo) {
-		super(id, x, y, width, height, parent);
+	public FadingBox(String name, int x, int y, int width, int height, int color, int fadeTo) {
+		super(name, x, y, width, height);
 		this.color = color;
 		this.fadeTo = fadeTo;
 	}
@@ -30,6 +30,11 @@ public abstract class FadingBox extends Widget {
 	 */
 	public int getFadeColor() {
 		return this.fadeTo;
+	}
+	
+	@Override
+	public void render(int mouseX, int mouseY) {
+		ComponentHelper.getHelper().renderFadingBox(this);
 	}
 
 }

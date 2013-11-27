@@ -1,5 +1,8 @@
-package ch.spacebase.openclassic.api.gui.widget;
+package ch.spacebase.openclassic.api.gui.base;
 
+/**
+ * A callback for reacting to button clicks.
+ */
 public interface ButtonCallback {
 
 	/**

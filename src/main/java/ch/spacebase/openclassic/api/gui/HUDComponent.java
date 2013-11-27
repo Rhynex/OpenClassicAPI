@@ -5,8 +5,16 @@ import java.util.List;
 /**
  * Represents the main game screen.
  */
-public abstract class MainScreen extends Screen {
+public abstract class HUDComponent extends GuiComponent {
+
+	public HUDComponent(String name) {
+		super(name);
+	}
 	
+	public HUDComponent(String name, int x, int y, int width, int height) {
+		super(name, x, y, width, height);
+	}
+
 	/**
 	 * Gets the player hovered over on the player list display.
 	 * @return The hovered over player.

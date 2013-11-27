@@ -1,4 +1,4 @@
-package ch.spacebase.openclassic.api.gui.widget;
+package ch.spacebase.openclassic.api.gui.base;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -7,84 +7,67 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-import ch.spacebase.openclassic.api.gui.Screen;
+import ch.spacebase.openclassic.api.gui.GuiComponent;
 import ch.spacebase.openclassic.api.input.InputHelper;
 import ch.spacebase.openclassic.api.input.Keyboard;
 
 /**
  * Represents a text box.
  */
-public abstract class TextBox extends Widget {
+public class TextBox extends GuiComponent {
 
 	private static final String ALLOWED = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.:;-_\'*!\"#@%$/()=+?[]{}<>^";
 	
 	protected String text = "";
-	protected boolean focus;
 	protected int cursor = 0;
 	protected boolean blink = true;
 	protected int blinkDelay = 6;
 	protected int max;
-	
 	protected boolean chatbox;
+	private TextBoxCallback callback;
 	
-	public TextBox(int id, int x, int y, Screen parent) {
-		this(id, x, y, parent, 0);
+	public TextBox(String name, int x, int y) {
+		this(name, x, y, 0);
 	}
 	
-	public TextBox(int id, int x, int y, Screen parent, int max) {
-		this(id, x, y, 200, 20, parent, max);
+	public TextBox(String name, int x, int y, int max) {
+		this(name, x, y, 400, 40, max);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, Screen parent) {
-		this(id, x, y, width, height, parent, false);
+	public TextBox(String name, int x, int y, int width, int height) {
+		this(name, x, y, width, height, false);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, Screen parent, int max) {
-		this(id, x, y, width, height, parent, max, false);
+	public TextBox(String name, int x, int y, int width, int height, int max) {
+		this(name, x, y, width, height, max, false);
 	}
 	
-	public TextBox(int id, int x, int y, Screen parent, boolean chatbox) {
-		this(id, x, y, 200, 20, parent, chatbox);
+	public TextBox(String name, int x, int y, boolean chatbox) {
+		this(name, x, y, 400, 40, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, Screen parent, int max, boolean chatbox) {
-		this(id, x, y, 200, 20, parent, max, chatbox);
+	public TextBox(String name, int x, int y, int max, boolean chatbox) {
+		this(name, x, y, 400, 40, max, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, Screen parent, boolean chatbox) {
-		this(id, x, y, width, height, parent, 0, chatbox);
+	public TextBox(String name, int x, int y, int width, int height, boolean chatbox) {
+		this(name, x, y, width, height, 0, chatbox);
 	}
 	
-	public TextBox(int id, int x, int y, int width, int height, Screen parent, int max, boolean chatbox) {
-		super(id, x, y, width, height, parent);
+	public TextBox(String name, int x, int y, int width, int height, int max, boolean chatbox) {
+		super(name, x, y, width, height);
 		this.chatbox = chatbox;
 		this.max = max;
 	}
 	
 	@Override
-	public void onAttached(Screen screen) {
+	public void onAttached(GuiComponent parent) {
 		InputHelper.getHelper().enableRepeatEvents(true);
 	}
 	
 	@Override
-	public void onRemoved(Screen screen) {
+	public void onRemoved(GuiComponent parent) {
 		InputHelper.getHelper().enableRepeatEvents(false);
-	}
-	
-	/**
-	 * Returns true if the text box has the keyboard's focus.
-	 * @return True if the text box has focus.
-	 */
-	public boolean hasFocus() {
-		return this.focus;
-	}
-	
-	/**
-	 * Sets whether the text box has the keyboard's focus.
-	 * @param focus Whether the text box has focus.
-	 */
-	public void setFocus(boolean focus) {
-		this.focus = focus;
 	}
 	
 	/**
@@ -106,9 +89,51 @@ public abstract class TextBox extends Widget {
 		this.cursor = text.length();
 	}
 	
+	/**
+	 * Gets whether this text box is rendered as a chat box.
+	 * @return Whether this text box is a chat box.
+	 */
+	public boolean isChatBox() {
+		return this.chatbox;
+	}
+	
+	/**
+	 * Gets the cursor position of this text box.
+	 * @return The cursor position.
+	 */
+	public int getCursorPosition() {
+		return this.cursor;
+	}
+	
+	/**
+	 * Gets the blinking state of this text box.
+	 * @return The blinking state of this text box.
+	 */
+	public boolean getBlinkState() {
+		return this.blink;
+	}
+	
+	/**
+	 * Gets the callback of this text box.
+	 * @return This text box's callback.
+	 */
+	public TextBoxCallback getCallback() {
+		return this.callback;
+	}
+	
+	/**
+	 * Sets the callback of this text box.
+	 * @param callback Callback of this text box.
+	 * @return This text box.
+	 */
+	public TextBox setCallback(TextBoxCallback callback) {
+		this.callback = callback;
+		return this;
+	}
+	
 	@Override
-	public void update() {
-		if(!this.focus) {
+	public void update(int mouseX, int mouseY) {
+		if(!this.isFocused()) {
 			if(this.blinkDelay != 10 && !this.blink) {
 				this.blink = true;
 			}
@@ -123,15 +148,12 @@ public abstract class TextBox extends Widget {
 	
 	@Override
 	public void onKeyPress(char c, int key) {
-		if(!this.focus) return;
-		
 		if (key == Keyboard.KEY_BACK && this.text.length() > 0 && this.cursor > 0) {
+			String old = this.text;
 			this.text = this.text.substring(0, this.cursor - 1) + this.text.substring(this.cursor);
 			this.cursor--;
-			for(Widget widget : this.parent.getWidgets()) {
-				if(widget instanceof ButtonList && ((ButtonList) widget).getSearchBox().equals(this)) {
-					((ButtonList) widget).onType();
-				}
+			if(this.callback != null) {
+				this.callback.onType(this, old);
 			}
 		}
 		
@@ -149,10 +171,8 @@ public abstract class TextBox extends Widget {
 					}
 					
 					if(!old.equals(this.text)) {
-						for(Widget widget : this.parent.getWidgets()) {
-							if(widget instanceof ButtonList && ((ButtonList) widget).getSearchBox().equals(this)) {
-								((ButtonList) widget).onType();
-							}
+						if(this.callback != null) {
+							this.callback.onType(this, old);
 						}
 					}
 				} catch (UnsupportedFlavorException e) {
@@ -172,28 +192,18 @@ public abstract class TextBox extends Widget {
 		}
 
 		if (ALLOWED.indexOf(c) >= 0 && !((this.chatbox && this.text.length() >= 64) || (this.max > 0 && this.text.length() >= this.max))) {
+			String old = this.text;
 			this.text = this.text.substring(0, this.cursor) + c + this.text.substring(this.cursor, this.text.length());
 			this.cursor++;
-			for(Widget widget : this.parent.getWidgets()) {
-				if(widget instanceof ButtonList && ((ButtonList) widget).getSearchBox().equals(this)) {
-					((ButtonList) widget).onType();
-				}
+			if(this.callback != null) {
+				this.callback.onType(this, old);
 			}
 		}
 	}
 	
 	@Override
-	public void onMouseClick(int x, int y, int button) {
-		if(button != 0) return;
-		
-		if(!this.focus) {
-			this.focus = true;
-			for(Widget widget : this.parent.getWidgets()) {
-				if(widget instanceof TextBox && ((TextBox) widget).hasFocus() && widget.getId() != this.getId()) {
-					((TextBox) widget).setFocus(false);
-				}
-			}
-		}
+	public void render(int mouseX, int mouseY) {
+		ComponentHelper.getHelper().renderTextBox(this);
 	}
 
 }

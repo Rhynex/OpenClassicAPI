@@ -1,22 +1,23 @@
-package ch.spacebase.openclassic.api.gui.widget;
+package ch.spacebase.openclassic.api.gui.base;
 
-import ch.spacebase.openclassic.api.gui.Screen;
+import ch.spacebase.openclassic.api.OpenClassic;
+import ch.spacebase.openclassic.api.gui.GuiComponent;
 
 /**
  * Represents a button.
  */
-public abstract class Button extends Widget {
+public class Button extends GuiComponent {
 	
 	private String text;
 	private boolean active = true;
 	private ButtonCallback callback;
 
-	public Button(int id, int x, int y, Screen parent, String text) {
-		this(id, x, y, 200, 20, parent, text);
+	public Button(String name, int x, int y, String text) {
+		this(name, x, y, 400, 40, text);
 	}
 	
-	public Button(int id, int x, int y, int width, int height, Screen parent, String text) {
-		super(id, x, y, width, height, parent);
+	public Button(String name, int x, int y, int width, int height, String text) {
+		super(name, x, y, width, height);
 		this.text = text;
 	}
 	
@@ -69,6 +70,23 @@ public abstract class Button extends Widget {
 	public Button setCallback(ButtonCallback callback) {
 		this.callback = callback;
 		return this;
+	}
+	
+	@Override
+	public void onMouseClick(int x, int y, int button) {
+		if(button != 0 || !this.isActive()) {
+			return;
+		}
+		
+		OpenClassic.getGame().getAudioManager().playSound("random.click", 1, 1);
+		if(this.getCallback() != null) {
+			this.getCallback().onButtonClick(this);
+		}
+	}
+	
+	@Override
+	public void render(int mouseX, int mouseY) {
+		ComponentHelper.getHelper().renderButton(this, mouseX, mouseY);
 	}
 
 }

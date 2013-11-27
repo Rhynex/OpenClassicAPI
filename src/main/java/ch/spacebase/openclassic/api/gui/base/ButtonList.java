@@ -1,20 +1,18 @@
-package ch.spacebase.openclassic.api.gui.widget;
+package ch.spacebase.openclassic.api.gui.base;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.gui.Screen;
+import ch.spacebase.openclassic.api.gui.GuiComponent;
 
 /**
  * Represents a list consisting of buttons.
  */
-public class ButtonList extends Widget {
+public class ButtonList extends GuiComponent {
 
-	private List<Button> buttons = new ArrayList<Button>();
 	private List<String> contents = new ArrayList<String>();
 	private List<String> visible = new ArrayList<String>();
-	private TextBox search;
 	
 	private boolean useSearch;
 	private int pages = 0;
@@ -22,15 +20,19 @@ public class ButtonList extends Widget {
 	
 	private ButtonListCallback callback;
 	
-	public ButtonList(int id, Screen parent) {
-		this(id, parent, false);
+	public ButtonList(String name, int x, int y, int width, int height) {
+		this(name, x, y, width, height, false);
 	}
 	
-	public ButtonList(int id, Screen parent, boolean search) {
-		super(id, 0, 0, parent.getWidth(), parent.getHeight(), parent);
-		
+	public ButtonList(String name, int x, int y, int width, int height, boolean search) {
+		super(name, x, y, width, height);
+		this.useSearch = search;
+	}
+	
+	@Override
+	public void onAttached(GuiComponent parent) {
 		for (int button = 0; button < 5; button++) {
-			this.buttons.add(WidgetFactory.getFactory().newButton(button, this.width / 2 - 100, this.height / 6 + button * 24, this.parent, "---").setCallback(new ButtonCallback() {
+			this.attachComponent(new Button("button" + button, this.getX() + (this.getWidth() / 2 - 200), this.getY() + (this.getHeight() / 6 + button * 48), "---").setCallback(new ButtonCallback() {
 				@Override
 				public void onButtonClick(Button button) {
 					if(callback != null) {
@@ -39,11 +41,12 @@ public class ButtonList extends Widget {
 				}
 			}));
 			
-			this.buttons.get(button).setVisible(false);
-			this.buttons.get(button).setActive(false);
+			Button b = this.getComponent("button" + button, Button.class);
+			b.setVisible(false);
+			b.setActive(false);
 		}
 		
-		this.buttons.add(WidgetFactory.getFactory().newButton(5, this.width / 2 - 200, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.back")).setCallback(new ButtonCallback() {
+		this.attachComponent(new Button("backbutton", this.getX() + (this.getWidth() / 2 - 400), this.getY() + (this.getHeight() / 6 + 96), 100, 40, OpenClassic.getGame().getTranslator().translate("gui.list.back")).setCallback(new ButtonCallback() {
 			@Override
 			public void onButtonClick(Button button) {
 				index--;
@@ -53,7 +56,7 @@ public class ButtonList extends Widget {
 			}
 		}));
 		
-		this.buttons.add(WidgetFactory.getFactory().newButton(6, this.width / 2 + 150, this.height / 6 + 48, 50, 20, this.parent, OpenClassic.getGame().getTranslator().translate("gui.list.next")).setCallback(new ButtonCallback() {
+		this.attachComponent(new Button("nextbutton", this.getX() + (this.getWidth() / 2 + 300), this.getY() + (this.getHeight() / 6 + 96), 100, 40, OpenClassic.getGame().getTranslator().translate("gui.list.next")).setCallback(new ButtonCallback() {
 			@Override
 			public void onButtonClick(Button button) {
 				index++;
@@ -63,10 +66,32 @@ public class ButtonList extends Widget {
 			}
 		}));
 		
-		this.search = WidgetFactory.getFactory().newTextBox(7, this.width / 2 - 100, this.height / 6 + 120, this.parent);
+		if(this.useSearch) {
+			this.attachComponent(new TextBox("search", this.getX() + (this.getWidth() / 2 - 200), this.getY() + (this.getHeight() / 6 + 240)).setCallback(new TextBoxCallback() {
+				@Override
+				public void onType(TextBox box, String oldText) {
+					if(!useSearch) return;
+					List<String> cont = new ArrayList<String>();
+					for(String content : contents) {
+						if(content.toLowerCase().contains(box.getText().toLowerCase())) {
+							cont.add(content);
+						}
+					}
+					
+					visible = cont;
+					index = 0;
+					pages = (int) Math.ceil(visible.size() / 5);
+					if(pages > 0 && visible.size() > (pages - 1) * 5) {
+						getNextButton().setActive(true);
+					}
+					
+					updateContents();
+				}
+			}));
+		}
+		
 		this.getBackButton().setActive(false);
 		this.getNextButton().setActive(false);
-		this.useSearch = search;
 	}
 	
 	/**
@@ -84,7 +109,10 @@ public class ButtonList extends Widget {
 	public void setContents(List<String> contents) {
 		this.contents = contents;
 		this.visible = contents;
-		this.search.setText("");
+		if(this.useSearch) {
+			this.getSearchBox().setText("");
+		}
+		
 		this.index = 0;
 		this.pages = (int) Math.ceil(this.visible.size() / 5);
 		if(this.pages > 0 && this.visible.size() > (this.pages - 1) * 5) {
@@ -147,28 +175,6 @@ public class ButtonList extends Widget {
 		return this;
 	}
 	
-	/**
-	 * Called when this list's search box was typed in.
-	 */
-	public void onType() {
-		if(!this.useSearch) return;
-		List<String> cont = new ArrayList<String>();
-		for(String content : this.contents) {
-			if(content.toLowerCase().contains(this.search.getText().toLowerCase())) {
-				cont.add(content);
-			}
-		}
-		
-		this.visible = cont;
-		this.index = 0;
-		this.pages = (int) Math.ceil(this.visible.size() / 5);
-		if(this.pages > 0 && this.visible.size() > (this.pages - 1) * 5) {
-			this.getNextButton().setActive(true);
-		}
-		
-		this.updateContents();
-	}
-	
 	private void updateContents() {
 		for (int curr = this.index * 5; curr < (this.index + 1) * 5; curr++) {
 			boolean content = curr <= this.visible.size() - 1 && curr >= 0 && !this.visible.get(curr).equals("");
@@ -185,7 +191,7 @@ public class ButtonList extends Widget {
 	 * @return The button with the given ID.
 	 */
 	public Button getButton(int button) {
-		return this.buttons.get(button);
+		return this.getComponent("button" + button, Button.class);
 	}
 	
 	/**
@@ -193,7 +199,7 @@ public class ButtonList extends Widget {
 	 * @return The list's back button.
 	 */
 	public Button getBackButton() {
-		return this.buttons.get(5);
+		return this.getComponent("backbutton", Button.class);
 	}
 	
 	/**
@@ -201,15 +207,7 @@ public class ButtonList extends Widget {
 	 * @return The list's next button.
 	 */
 	public Button getNextButton() {
-		return this.buttons.get(6);
-	}
-	
-	/**
-	 * Gets all the buttons belonging to this list.
-	 * @return The list's buttons.
-	 */
-	public List<Button> getButtons() {
-		return this.buttons;
+		return this.getComponent("nextbutton", Button.class);
 	}
 	
 	/**
@@ -217,34 +215,7 @@ public class ButtonList extends Widget {
 	 * @return This button list's search box.
 	 */
 	public TextBox getSearchBox() {
-		return this.search;
-	}
-	
-	@Override
-	public void onKeyPress(char c, int key) {
-		this.search.onKeyPress(c, key);
-	}
-
-	@Override
-	public void onMouseClick(int x, int y, int button) {
-		for(Button b : this.getButtons()) {
-			if (x >= b.getX() && y >= b.getY() && x < b.getX() + b.getWidth() && y < b.getY() + b.getHeight()) {
-				b.onMouseClick(x, y, button);
-			}
-		}
-		
-		this.search.onMouseClick(x, y, button);
-	}
-	
-	@Override
-	public void render() {
-		for(Button button : this.buttons) {
-			button.render();
-		}
-		
-		if(this.useSearch) {
-			this.search.render();
-		}
+		return this.getComponent("search", TextBox.class);
 	}
 	
 }
