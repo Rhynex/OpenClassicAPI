@@ -40,7 +40,7 @@ public class GuiComponent {
 	}
 	
 	/**
-	 * Gets the component's x value relative to its parent.
+	 * Gets the component's x value.
 	 * @return The component's x value.
 	 */
 	public int getX() {
@@ -48,7 +48,7 @@ public class GuiComponent {
 	}
 	
 	/**
-	 * Gets the component's y value relative to its parent.
+	 * Gets the component's y value.
 	 * @return The component's y value.
 	 */
 	public int getY() {
@@ -56,7 +56,7 @@ public class GuiComponent {
 	}
 	
 	/**
-	 * Sets the position of this component relative to its parent.
+	 * Sets the position of this component.
 	 * @param x The component's new x value.
 	 * @param y The component's new y value.
 	 */
@@ -85,7 +85,6 @@ public class GuiComponent {
 	 * Sets the size of this component.
 	 * @param width The component's new width.
 	 * @param height The component's new height.
-	 * @param recalculate Whether to redefine this component's components and their positions.
 	 */
 	public void setSize(int width, int height) {
 		this.width = width;
@@ -161,8 +160,8 @@ public class GuiComponent {
 	
 	/**
 	 * Called when the mouse is clicked in this component.
-	 * @param x X of the mouse relative to the parent component.
-	 * @param y Y of the mouse relative to the parent component.
+	 * @param x X of the mouse relative to the component.
+	 * @param y Y of the mouse relative to the component.
 	 * @param button ID of the clicked button.
 	 */
 	public void onMouseClick(int x, int y, int button) {
@@ -172,7 +171,7 @@ public class GuiComponent {
 		
 		for(GuiComponent curr : this.getComponents()) {
 			if(x >= curr.getX() && y >= curr.getY() && x < curr.getX() + curr.getWidth() && y < curr.getY() + curr.getHeight()) {
-				curr.onMouseClick(x - this.getX(), y - this.getY(), button);
+				curr.onMouseClick(x - curr.getX(), y - curr.getY(), button);
 			}
 		}
 	}
@@ -289,21 +288,27 @@ public class GuiComponent {
 	
 	/**
 	 * Called when a tick update occurs.
-	 * @param mouseX The x value of the mouse relative to the parent component.
-	 * @param mouseX The x value of the mouse relative to the parent component.
+	 * @param mouseX The x value of the mouse relative to the component.
+	 * @param mouseY The y value of the mouse relative to the component.
 	 */
 	public void update(int mouseX, int mouseY) {
 		for(GuiComponent component : this.getComponents()) {
-			component.update(mouseX - this.getX(), mouseY - this.getY());
+			component.update(mouseX - component.getX(), mouseY - component.getY());
 		}
 	}
 
 	/**
 	 * Renders the component.
+	 * @param mouseX The x value of the mouse relative to the component.
+	 * @param mouseY The y value of the mouse relative to the component.
 	 */
 	public void render(int mouseX, int mouseY) {
-		for(GuiComponent component : this.getComponents()) {
-			component.render(mouseX, mouseY);
+		if(this.isVisible()) {
+			for(GuiComponent component : this.getComponents()) {
+				if(component.isVisible()) {
+					component.render(mouseX - component.getX(), mouseY - component.getY());
+				}
+			}
 		}
 	}
 	

@@ -12,6 +12,7 @@ import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.level.LevelInfo;
 import ch.spacebase.openclassic.api.level.generator.Generator;
 import ch.spacebase.openclassic.api.pkg.PackageManager;
+import ch.spacebase.openclassic.api.player.Player;
 import ch.spacebase.openclassic.api.plugin.PluginManager;
 import ch.spacebase.openclassic.api.scheduler.Scheduler;
 import ch.spacebase.openclassic.api.sound.AudioManager;
@@ -89,6 +90,26 @@ public interface Game {
 	 * Shuts down the game.
 	 */
 	public void shutdown();
+	
+	/**
+	 * Gets a list of players.
+	 * @return A list of all players.
+	 */
+	public List<Player> getPlayers();
+	
+	/**
+	 * Returns the player with the given name.
+	 * @param name The name of the player.
+	 * @return The player.
+	 */
+	public Player getPlayer(String name);
+	
+	/**
+	 * Returns a list of players that have a name with the given string in it.
+	 * @param name Name to look for.
+	 * @return Players with the string in their name.
+	 */
+	public List<Player> matchPlayer(String name);
 	
 	/**
 	 * Creates a level with the given info.

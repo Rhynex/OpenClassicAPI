@@ -17,12 +17,6 @@ import ch.spacebase.openclassic.api.plugin.RemotePluginInfo;
 public interface Player extends Sender {
 	
 	/**
-	 * Gets the player's ID.
-	 * @return The player's ID.
-	 */
-	public byte getPlayerId();
-	
-	/**
 	 * Gets the player's current position.
 	 * @return The player's position.
 	 */
@@ -285,13 +279,6 @@ public interface Player extends Sender {
 	 * @return The player's hotbar amounts.
 	 */
 	public int[] getInventoryAmounts();
-	
-	/**
-	 * !! CLIENT SURVIVAL ONLY !!
-	 * Returns the player's hotbar pop times.
-	 * @return The player's hotbar pop times.
-	 */
-	public int[] getInventoryPopTimes();
 	
 	/**
 	 * !! CLIENT ONLY !!

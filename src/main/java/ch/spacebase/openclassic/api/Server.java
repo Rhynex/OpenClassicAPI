@@ -5,7 +5,6 @@ import java.util.List;
 import ch.spacebase.openclassic.api.command.Console;
 import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.permissions.PermissionManager;
-import ch.spacebase.openclassic.api.player.Player;
 
 /**
  * Represents the OpenClassic Server.
@@ -26,26 +25,6 @@ public interface Server extends Game {
 	 * @param message The message to broadcast.
 	 */
 	public void broadcastMessage(String message, Object... args);
-	
-	/**
-	 * Gets a list of online players.
-	 * @return Online players.
-	 */
-	public List<Player> getPlayers();
-	
-	/**
-	 * Returns the player with the given name.
-	 * @param name The name of the player.
-	 * @return The player.
-	 */
-	public Player getPlayer(String name);
-	
-	/**
-	 * Returns a list of players that have a name with the given string in it.
-	 * @param name Name to look for.
-	 * @return Players with the string in their name.
-	 */
-	public List<Player> matchPlayer(String name);
 	
 	/**
 	 * Gets the server's MOTD.
@@ -327,12 +306,5 @@ public interface Server extends Game {
 	 * @return The console command sender.
 	 */
 	public Console getConsoleSender();
-
-	/**
-	 * Gets the player with the given player ID.
-	 * @param id ID to look for.
-	 * @return The player with the given ID.
-	 */
-	public Player getPlayer(byte id);
 	
 }

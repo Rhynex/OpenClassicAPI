@@ -39,7 +39,7 @@ public abstract class ComponentHelper {
 	 * Renders a block preview component.
 	 * @param preview Component to render.
 	 */
-	public abstract void renderBlockPreview(BlockPreview preview);
+	public abstract void renderBlockPreview(BlockPreview preview, int popTime);
 
 	/**
 	 * Renders a button component.

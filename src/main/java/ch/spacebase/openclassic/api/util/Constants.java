@@ -33,7 +33,7 @@ public class Constants {
 	/**
 	 * Max air of a player.
 	 */
-	public static final int MAX_AIR = 20;
+	public static final int MAX_AIR = 300;
 	
 	/**
 	 * Max arrows of a player.

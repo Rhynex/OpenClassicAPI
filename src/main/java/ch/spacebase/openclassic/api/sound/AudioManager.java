@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api.sound;
 
 import java.net.URL;
 
+import ch.spacebase.openclassic.api.level.Level;
 import ch.spacebase.openclassic.api.player.Player;
 
 public interface AudioManager {
@@ -33,13 +34,23 @@ public interface AudioManager {
 	
 	/**
 	 * Plays the given sound.
-	 * @param Player to play for.
+	 * @param player Player to play for.
 	 * @param sound Sound to play.
 	 * @param volume Volume to play at.
 	 * @param pitch Pitch to play at. (0 for default)
 	 * @return True if the sound was found in the registry.
 	 */
 	public boolean playSound(Player player, String sound, float volume, float pitch);
+	
+	/**
+	 * Plays the given sound.
+	 * @param level Level to play the sound in.
+	 * @param sound Sound to play.
+	 * @param volume Volume to play at.
+	 * @param pitch Pitch to play at. (0 for default)
+	 * @return True if the sound was found in the registry.
+	 */
+	public boolean playSound(Level level, String sound, float volume, float pitch);
 	
 	/**
 	 * Plays the given sound.
@@ -55,7 +66,7 @@ public interface AudioManager {
 	
 	/**
 	 * Plays the given sound.
-	 * @param Player to play for.
+	 * @param player Player to play for.
 	 * @param sound Sound to play.
 	 * @param x X to play at.
 	 * @param y Y to play at.
@@ -67,6 +78,19 @@ public interface AudioManager {
 	public boolean playSound(Player player, String sound, float x, float y, float z, float volume, float pitch);
 	
 	/**
+	 * Plays the given sound.
+	 * @param level Level to play the sound in.
+	 * @param sound Sound to play.
+	 * @param x X to play at.
+	 * @param y Y to play at.
+	 * @param z Z to play at.
+	 * @param volume Volume to play at.
+	 * @param pitch Pitch to play at. (0 for default)
+	 * @return True if the sound was found in the registry.
+	 */
+	public boolean playSound(Level level, String sound, float x, float y, float z, float volume, float pitch);
+	
+	/**
 	 * Plays the given music.
 	 * @param music Music to play.
 	 * @return True if the music was found in the registry.
@@ -75,11 +99,19 @@ public interface AudioManager {
 	
 	/**
 	 * Plays the given music.
-	 * @param Player to play for.
+	 * @param player Player to play for.
 	 * @param music Music to play.
 	 * @return True if the music was found in the registry.
 	 */
 	public boolean playMusic(Player player, String music);
+	
+	/**
+	 * Plays the given music.
+	 * @param level Level to play the music in.
+	 * @param music Music to play.
+	 * @return True if the music was found in the registry.
+	 */
+	public boolean playMusic(Level level, String music);
 	
 	/**
 	 * Plays the given music.
@@ -91,12 +123,21 @@ public interface AudioManager {
 	
 	/**
 	 * Plays the given music.
-	 * @param Player to play for.
+	 * @param player Player to play for.
 	 * @param music Music to play.
 	 * @param loop Whether to loop the music.
 	 * @return True if the music was found in the registry.
 	 */
 	public boolean playMusic(Player player, String music, boolean loop);
+	
+	/**
+	 * Plays the given music.
+	 * @param level Level to play the music in.
+	 * @param music Music to play.
+	 * @param loop Whether to loop the music.
+	 * @return True if the music was found in the registry.
+	 */
+	public boolean playMusic(Level level, String music, boolean loop);
 	
 	/**
 	 * Checks if any music is playing.

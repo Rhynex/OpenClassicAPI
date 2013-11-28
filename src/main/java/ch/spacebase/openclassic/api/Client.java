@@ -113,12 +113,6 @@ public interface Client extends Game {
 	 * @return The client's progress bar display.
 	 */
 	public ProgressBar getProgressBar();
-
-	/**
-	 * Returns true if the HUD is hidden.
-	 * @return Whether the HUD is hidden.
-	 */
-	public boolean isHUDHidden();
 	
 	/**
 	 * Returns true if the client is in survival mode.

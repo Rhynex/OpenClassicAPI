@@ -1,5 +1,7 @@
 package ch.spacebase.openclassic.api;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * Represents a chat color.
  */
@@ -104,6 +106,7 @@ public enum Color {
 	 * @return Message without color codes.
 	 */
 	public static String stripColor(String message) {
+		Validate.notNull(message, "Message cannot be null.");
 		StringBuilder builder = new StringBuilder();
 		for(int index = 0; index < message.length(); index++) {
 			char curr = message.charAt(index);

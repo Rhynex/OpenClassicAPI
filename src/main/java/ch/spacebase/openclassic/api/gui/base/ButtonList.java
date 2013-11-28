@@ -32,7 +32,8 @@ public class ButtonList extends GuiComponent {
 	@Override
 	public void onAttached(GuiComponent parent) {
 		for (int button = 0; button < 5; button++) {
-			this.attachComponent(new Button("button" + button, this.getX() + (this.getWidth() / 2 - 200), this.getY() + (this.getHeight() / 6 + button * 48), "---").setCallback(new ButtonCallback() {
+			int offset = ((button - 2) * 48) - 20;
+			this.attachComponent(new Button("button" + button, this.getX() + (this.getWidth() / 2 - 200), this.getY() + (this.getHeight() / 2 + offset), "---").setCallback(new ButtonCallback() {
 				@Override
 				public void onButtonClick(Button button) {
 					if(callback != null) {
@@ -46,7 +47,7 @@ public class ButtonList extends GuiComponent {
 			b.setActive(false);
 		}
 		
-		this.attachComponent(new Button("backbutton", this.getX() + (this.getWidth() / 2 - 400), this.getY() + (this.getHeight() / 6 + 96), 100, 40, OpenClassic.getGame().getTranslator().translate("gui.list.back")).setCallback(new ButtonCallback() {
+		this.attachComponent(new Button("backbutton", this.getX() + (this.getWidth() / 2 - 400), this.getY() + (this.getHeight() / 2 - 20), 100, 40, OpenClassic.getGame().getTranslator().translate("gui.list.back")).setCallback(new ButtonCallback() {
 			@Override
 			public void onButtonClick(Button button) {
 				index--;
@@ -56,7 +57,7 @@ public class ButtonList extends GuiComponent {
 			}
 		}));
 		
-		this.attachComponent(new Button("nextbutton", this.getX() + (this.getWidth() / 2 + 300), this.getY() + (this.getHeight() / 6 + 96), 100, 40, OpenClassic.getGame().getTranslator().translate("gui.list.next")).setCallback(new ButtonCallback() {
+		this.attachComponent(new Button("nextbutton", this.getX() + (this.getWidth() / 2 + 300), this.getY() + (this.getHeight() / 2 - 20), 100, 40, OpenClassic.getGame().getTranslator().translate("gui.list.next")).setCallback(new ButtonCallback() {
 			@Override
 			public void onButtonClick(Button button) {
 				index++;
@@ -67,7 +68,7 @@ public class ButtonList extends GuiComponent {
 		}));
 		
 		if(this.useSearch) {
-			this.attachComponent(new TextBox("search", this.getX() + (this.getWidth() / 2 - 200), this.getY() + (this.getHeight() / 6 + 240)).setCallback(new TextBoxCallback() {
+			this.attachComponent(new TextBox("search", this.getX() + (this.getWidth() / 2 - 200), this.getY() + (this.getHeight() / 2 + 124)).setCallback(new TextBoxCallback() {
 				@Override
 				public void onType(TextBox box, String oldText) {
 					if(!useSearch) return;
