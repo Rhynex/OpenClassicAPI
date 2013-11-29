@@ -27,19 +27,20 @@ public abstract class Generator {
 	public Position findSpawn(Level level) {
 		int attempts = 0;
 		int x = 0;
-		int y = 0;
 		int z = 0;
-		while (y <= 0) {
+		int y = 0;
+		while(y <= level.getWaterLevel()) {
 			attempts++;
 			x = rand.nextInt(level.getWidth() / 2) + level.getWidth() / 4;
-			z = rand.nextInt(level.getDepth() / 2) + level.getDepth() / 4;
 			y = level.getHighestBlockY(x, z) + 1;
-			if (attempts == 10000) {
+			z = rand.nextInt(level.getDepth() / 2) + level.getDepth() / 4;
+			if(attempts == 10000) {
+				y = level.getGroundLevel();
 				break;
 			}
 		}
 		
-		return new Position(level, x, y + 0.5f, z);	
+		return new Position(level, x, y, z);	
 	}
 	
 }

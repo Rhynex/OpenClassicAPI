@@ -294,16 +294,16 @@ public interface Player extends Sender {
 	public void respawn();
 
 	/**
-	 * Gets whether the player can break bedrock.
-	 * @return Whether the player can break bedrock.
+	 * Gets whether the player can break unbreakable blocks.
+	 * @return Whether the player can break unbreakable blocks.
 	 */
-	public boolean canBreakBedrock();
+	public boolean canBreakUnbreakables();
 	
 	/**
-	 * Sets whether the player can break bedrock.
-	 * @param canBreak Whether the player can break bedrock.
+	 * Sets whether the player can break unbreakable blocks.
+	 * @param canBreak Whether the player can break unbreakable blocks.
 	 */
-	public void setCanBreakBedrock(boolean canBreak);
+	public void setCanBreakUnbreakables(boolean canBreak);
 	
 	/**
 	 * Sends a custom packet message to the player.

@@ -2,10 +2,6 @@ package ch.spacebase.openclassic.api.block.model;
 
 import org.apache.commons.lang3.Validate;
 
-import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.block.BlockFace;
-import ch.spacebase.openclassic.api.block.BlockType;
-
 /**
  * A cuboid-shaped model.
  */
@@ -85,64 +81,6 @@ public class CuboidModel extends Model {
 		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0, x1, y1, z1, x2, y2, z2);
 	}
 
-	@Override
-	public boolean render(float x, float y, float z, float brightness, boolean batch) {
-		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y, (int) z);
-		if(block == null) return false;
-		boolean result = false;
-
-		for(Quad quad : this.getQuads()) {
-			BlockFace face = quadToFace(quad.getId());
-			float mod = 0;
-			switch(face) {
-				case DOWN:
-					mod = 0.5F;
-					break;
-				case UP:
-					mod = 1;
-					break;
-				case WEST:
-				case EAST:
-					mod = 0.8F;
-					break;
-				case SOUTH:
-				case NORTH:
-					mod = 0.6F;
-					break;
-			}
-
-			quad.render(x, y, z, OpenClassic.getClient().getLevel().getBrightness((int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod, batch);
-			result = true;
-		}
-
-		return result;
-	}
-
-	@Override
-	public void renderAll(float x, float y, float z, float brightness) {
-		this.getQuad(0).render(x, y, z, brightness * 0.5F);
-		this.getQuad(1).render(x, y, z, brightness * 1);
-		this.getQuad(2).render(x, y, z, brightness * 0.8F);
-		this.getQuad(3).render(x, y, z, brightness * 0.8F);
-		this.getQuad(4).render(x, y, z, brightness * 0.6F);
-		this.getQuad(5).render(x, y, z, brightness * 0.6F);
-	}
-
-	@Override
-	public void renderScaled(float x, float y, float z, float scale, float brightness) {
-		this.getQuad(0).renderScaled(x, y, z, scale, brightness * 0.5F);
-		this.getQuad(1).renderScaled(x, y, z, scale, brightness * 1);
-		this.getQuad(2).renderScaled(x, y, z, scale, brightness * 0.8F);
-		this.getQuad(3).renderScaled(x, y, z, scale, brightness * 0.8F);
-		this.getQuad(4).renderScaled(x, y, z, scale, brightness * 0.6F);
-		this.getQuad(5).renderScaled(x, y, z, scale, brightness * 0.6F);
-	}
-
-	@Override
-	public Class<? extends Model> getNetworkClass() {
-		return CuboidModel.class;
-	}
-
 	/**
 	 * Gets whether the model is a full cube.
 	 * @return Whether the model is a full cube.
@@ -197,30 +135,6 @@ public class CuboidModel extends Model {
 	 */
 	public float getZ2() {
 		return this.z2;
-	}
-
-	/**
-	 * Converts a quad ID to a BlockFace.
-	 * @param quad Quad ID to convert.
-	 * @return The BlockFace the quad ID converts to.
-	 */
-	public static BlockFace quadToFace(int quad) {
-		switch(quad) {
-			case 0:
-				return BlockFace.DOWN;
-			case 1:
-				return BlockFace.UP;
-			case 2:
-				return BlockFace.WEST;
-			case 3:
-				return BlockFace.EAST;
-			case 4:
-				return BlockFace.SOUTH;
-			case 5:
-				return BlockFace.NORTH;
-			default:
-				return null;
-		}
 	}
 
 }

@@ -41,7 +41,7 @@ public class FallingBlockPhysics implements BlockPhysics {
 		if(relative != null && relative.getType().canPlaceIn()) {
 			block.setType(VanillaBlock.AIR);
 			relative.setType(this.block);
-			block.getLevel().delayTick(relative.getPosition(), this.block.getId());
+			block.getLevel().delayTick(relative.getPosition());
 		}
 	}
 

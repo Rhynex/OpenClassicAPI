@@ -147,8 +147,8 @@ public class Model {
 	 * @param brightness Brightness to render at.
 	 * @return Whether anything was rendered.
 	 */
-	public boolean render(float x, float y, float z, float brightness) {
-		return this.render(x, y, z, brightness, false);
+	public void render(float x, float y, float z, float brightness) {
+		this.render(x, y, z, brightness, false);
 	}
 	
 	/**
@@ -160,20 +160,10 @@ public class Model {
 	 * @param batch Whether this model is part of an internal batch.
 	 * @return Whether anything was rendered.
 	 */
-	public boolean render(float x, float y, float z, float brightness, boolean batch) {
+	public void render(float x, float y, float z, float brightness, boolean batch) {
 		for(Quad quad : this.quads) {
 			quad.render(x, y, z, brightness, batch);
 		}
-		
-		return true;
-	}
-	
-	/**
-	 * Gets the type of model this is for use in client to server communications.
-	 * @return The type of model.
-	 */
-	public Class<? extends Model> getNetworkClass() {
-		return Model.class;
 	}
 
 	/**

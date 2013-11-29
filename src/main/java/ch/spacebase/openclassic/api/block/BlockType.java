@@ -1,19 +1,24 @@
 package ch.spacebase.openclassic.api.block;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ch.spacebase.openclassic.api.block.model.CubeModel;
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.Texture;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
+import ch.spacebase.openclassic.api.level.Level;
 
 /**
  * Represents a block type.
  */
 public class BlockType {
 	
-	public static final Texture TERRAIN_TEXTURE = new Texture("/terrain.png", true, 256, 256, 16);
+	public static final Texture TERRAIN_TEXTURE = new Texture("/textures/level/terrain.png", true, 256, 256, 16);
 	
 	private byte id;
 	private Model model;
+	private Map<Model, BlockFace[]> outwardModels = new HashMap<Model, BlockFace[]>();
 	private StepSound sound;
 	private boolean preventsRendering = true;
 	private boolean preventsOwnRendering = false;
@@ -23,14 +28,14 @@ public class BlockType {
 	private boolean liquid = false;
 	private int tickDelay = 0;
 	private boolean placeIn = false;
-	private boolean gas = false;
 	private float brightness = 0;
 	private float speedModifier = 1;
 	private int fogRed = -1;
 	private int fogGreen = -1;
 	private int fogBlue = -1;
 	private float fogDensity = -1;
-	private int liquidId = -1;
+	private String liquidName = null;
+	private boolean unbreakable = false;
 	
 	public BlockType(int id, StepSound sound, int texture) {
 		this(id, sound, TERRAIN_TEXTURE, texture);
@@ -68,6 +73,47 @@ public class BlockType {
 	 */
 	public Model getModel() {
 		return this.model;
+	}
+	
+	/**
+	 * Gets the block's models shown when the block has none of its kind to certain sides.
+	 * @return This block's outward models.
+	 */
+	public Map<Model, BlockFace[]> getOutwardModels() {
+		return new HashMap<Model, BlockFace[]>(this.outwardModels);
+	}
+	
+	/**
+	 * Adds an outward model to this block.
+	 * @param model Model to add.
+	 * @param faces Faces that must not be of this type to display the model.
+	 * @return This block type.
+	 */
+	public BlockType addOutwardModel(Model model, BlockFace... faces) {
+		this.outwardModels.put(model, faces);
+		return this;
+	}
+	
+	/**
+	 * Gets the model of this block at a position in a level, taking outward models into account.
+	 * @param level Level of the model.
+	 * @param x X of the model.
+	 * @param y Y of the model.
+	 * @param z Z of the model.
+	 * @return The block's model.
+	 */
+	public Model getModel(Level level, int x, int y, int z) {
+		for(Model model : this.outwardModels.keySet()) {
+			BlockFace faces[] = this.outwardModels.get(model);
+			for(BlockFace face : faces) {
+				BlockType block = level.getBlockTypeAt(x + face.getModX(), y + face.getModY(), z + face.getModZ());
+				if(block == null || block.getId() != this.getId() && (block.getLiquidName() == null || !block.getLiquidName().equals(this.getLiquidName()))) {
+					return model;
+				}
+			}
+		}
+		
+		return this.getModel();
 	}
 	
 	/**
@@ -251,24 +297,6 @@ public class BlockType {
 	}
 	
 	/**
-	 * Gets whether a block is a gas, such as air.
-	 * @return Whether this block is a gas.
-	 */
-	public boolean isGas() {
-		return this.gas;
-	}
-	
-	/**
-	 * Sets whether a block is a gas, such as air.
-	 * @param placeIn Whether this block is a gas.
-	 * @return This block type.
-	 */
-	public BlockType setGas(boolean gas) {
-		this.gas = gas;
-		return this;
-	}
-	
-	/**
 	 * Gets the block's permanent brightness level.
 	 * @return The block's brightness, or 0 for default level brightness.
 	 */
@@ -391,20 +419,38 @@ public class BlockType {
 	}
 	
 	/**
-	 * Gets the block's liquid id for matching liquids of different block ids.
-	 * @return The block's liquid id. (-1 for unique liquid)
+	 * Gets the block's liquid name for matching liquids of different block ids.
+	 * @return The block's liquid name. (null for unique liquid)
 	 */
-	public int getLiquidId() {
-		return this.liquidId;
+	public String getLiquidName() {
+		return this.liquidName;
 	}
 	
 	/**
-	 * Sets the block's liquid id for matching liquids of different block ids.
-	 * @param id The block's liquid id. (-1 for unique liquid)
+	 * Sets the block's liquid name for matching liquids of different block ids.
+	 * @param name The block's liquid name. (null for unique liquid)
 	 * @return This block type.
 	 */
-	public BlockType setLiquidId(int id) {
-		this.liquidId = id;
+	public BlockType setLiquidName(String name) {
+		this.liquidName = name;
+		return this;
+	}
+	
+	/**
+	 * Gets whether the block is unbreakable.
+	 * @return True if the block is unbreakable.
+	 */
+	public boolean isUnbreakable() {
+		return this.unbreakable;
+	}
+	
+	/**
+	 * Sets whether the block is unbreakable.
+	 * @param unbreakable Whether the block is unbreakable.
+	 * @return This block type.
+	 */
+	public BlockType setUnbreakable(boolean unbreakable) {
+		this.unbreakable = unbreakable;
 		return this;
 	}
 	

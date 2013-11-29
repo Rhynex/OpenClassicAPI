@@ -53,7 +53,7 @@ public class LiquidPhysics implements BlockPhysics {
 		}
 
 		if (moving) {
-			block.getLevel().delayTick(new Position(block.getLevel(), block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()), this.block.getId());
+			block.getLevel().delayTick(new Position(block.getLevel(), block.getPosition().getBlockX(), y, block.getPosition().getBlockZ()));
 		}
 	}
 	
@@ -81,7 +81,7 @@ public class LiquidPhysics implements BlockPhysics {
 			}
 
 			if (level.setBlockAt(x, y, z, this.block)) {
-				level.delayTick(new Position(level, x, y, z), this.block.getId());
+				level.delayTick(new Position(level, x, y, z));
 			}
 		}
 
@@ -90,7 +90,7 @@ public class LiquidPhysics implements BlockPhysics {
 
 	@Override
 	public void onPlace(Block block) {
-		block.getLevel().delayTick(block.getPosition(), this.block.getId());
+		block.getLevel().delayTick(block.getPosition());
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class LiquidPhysics implements BlockPhysics {
 
 	@Override
 	public void onNeighborChange(Block block, Block neighbor) {
-		block.getLevel().delayTick(block.getPosition(), block.getTypeId());
+		block.getLevel().delayTick(block.getPosition());
 	}
 	
 	public boolean canSoak() {

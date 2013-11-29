@@ -1,77 +1,16 @@
 package ch.spacebase.openclassic.api.block.model;
 
-import java.util.List;
-
-import ch.spacebase.openclassic.api.Client;
-import ch.spacebase.openclassic.api.OpenClassic;
-import ch.spacebase.openclassic.api.block.BlockFace;
-import ch.spacebase.openclassic.api.block.BlockType;
-import ch.spacebase.openclassic.api.math.BoundingBox;
-
 /**
  * A model used in liquids.
  */
 public class LiquidModel extends CubeModel {
-
-	private BoundingBox top = new BoundingBox(0, 0, 0, 1, 0.95f, 1);
-
-	public LiquidModel(Texture texture, int textureIds[]) {
+	
+	public LiquidModel(Texture texture, int textureIds[], boolean top) {
 		super(texture, textureIds);
 		this.setCollisionBox(null);
 		this.setSelectionBox(null);
-	}
-
-	public LiquidModel(Texture texture, int textureId) {
-		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId });
-	}
-
-	public LiquidModel(String texture, int textureSize) {
-		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
-	}
-
-	@Override
-	public BoundingBox getSelectionBox(int x, int y, int z) {
-		if(OpenClassic.getGame() instanceof Client && OpenClassic.getClient().getLevel() != null && OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt(x, y + 1, z).isLiquid()) {
-			return this.top;
-		}
-
-		return super.getSelectionBox(x, y, z);
-	}
-
-	@Override
-	public boolean render(float x, float y, float z, float brightness, boolean batch) {
-		BlockType block = OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y, (int) z);
-		if(block == null) return false;
-		boolean result = false;
-
-		boolean top = false;
-		List<Quad> quads = this.getQuads();
-		if(OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y + 1, (int) z) != null && !OpenClassic.getClient().getLevel().getBlockTypeAt((int) x, (int) y + 1, (int) z).isLiquid()) {
-			top = true;
-		}
-
-		int count = 0;
-		for(Quad quad : quads) {
-			BlockFace face = quadToFace(count);
-			float mod = 0;
-			switch(face) {
-				case DOWN:
-					mod = 0.5F;
-					break;
-				case UP:
-					mod = 1;
-					break;
-				case WEST:
-				case EAST:
-					mod = 0.8F;
-					break;
-				case SOUTH:
-				case NORTH:
-					mod = 0.6F;
-					break;
-			}
-
-			if(top) {
+		if(top) {
+			for(Quad quad : this.getQuads()) {
 				for(int vert = 0; vert < quad.getVertices().size(); vert++) {
 					Vertex v = quad.getVertices().get(vert);
 					if(v.getY() == 1) {
@@ -79,27 +18,15 @@ public class LiquidModel extends CubeModel {
 					}
 				}
 			}
-
-			quad.render(x, y, z, OpenClassic.getClient().getLevel().getBrightness((int) x + face.getModX(), (int) y + face.getModY(), (int) z + face.getModZ()) * mod, batch, false);
-			if(top) {
-				for(int vert = 0; vert < quad.getVertices().size(); vert++) {
-					Vertex v = quad.getVertices().get(vert);
-					if(v.getY() == 0.95f) {
-						quad.addVertex(vert, new Vertex(v.getX(), 1, v.getZ()));
-					}
-				}
-			}
-
-			result = true;
-			count++;
 		}
-		
-		return result;
 	}
 
-	@Override
-	public Class<? extends Model> getNetworkClass() {
-		return LiquidModel.class;
+	public LiquidModel(Texture texture, int textureId, boolean top) {
+		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, top);
+	}
+
+	public LiquidModel(String texture, int textureSize, boolean top) {
+		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0, top);
 	}
 
 }

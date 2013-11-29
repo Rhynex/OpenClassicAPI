@@ -14,22 +14,10 @@ import ch.spacebase.openclassic.api.player.Player;
 public interface Level {
 	
 	/**
-	 * Adds a player to the level.
-	 * @param player Player to add.
+	 * Gets all players in this world.
+	 * @return All players in the world.
 	 */
-	public void addPlayer(Player player);
-	
-	/**
-	 * Removes a player from this level.
-	 * @param player Player to remove.
-	 */
-	public void removePlayer(String player);
-	
-	/**
-	 * Removes a player from this level.
-	 * @param id ID of the player to remove.
-	 */
-	public void removePlayer(byte id);
+	public List<Player> getPlayers();
 	
 	/**
 	 * Gets whether physics are enabled on this world.
@@ -42,12 +30,6 @@ public interface Level {
 	 * @param enabled Whether physics are enabled.
 	 */
 	public void setPhysicsEnabled(boolean enabled);
-	
-	/**
-	 * Gets all players in this world.
-	 * @return All players in the world.
-	 */
-	public List<Player> getPlayers();
 	
 	/**
 	 * Gets this level's name.
@@ -102,6 +84,12 @@ public interface Level {
 	 * @return The level's water level.
 	 */
 	public short getWaterLevel();
+	
+	/**
+	 * Gets the ground level of the level.
+	 * @return The level's ground level.
+	 */
+	public short getGroundLevel();
 	
 	/**
 	 * Gets an array of all the block IDs in the level.
@@ -185,12 +173,26 @@ public interface Level {
 	
 	/**
 	 * Returns true if the given block would be lit.
+	 * @param pos Position of the block.
+	 * @return Whether the block would be lit.
+	 */
+	public boolean isLit(Position pos);
+	
+	/**
+	 * Returns true if the given block would be lit.
 	 * @param x X of the block.
 	 * @param y Y of the block.
 	 * @param z Z of the block.
 	 * @return Whether the block would be lit.
 	 */
 	public boolean isLit(int x, int y, int z);
+	
+	/**
+	 * Gets the brightness of a block, where 0 and below is pitch black and 1 and above is fully bright.
+	 * @param pos Position of the block.
+	 * @return The block's brightness.
+	 */
+	public float getBrightness(Position pos);
 	
 	/**
 	 * Gets the brightness of a block, where 0 and below is pitch black and 1 and above is fully bright.
@@ -272,9 +274,9 @@ public interface Level {
 	/**
 	 * Schedules a block to be ticked next time the server ticks.
 	 * @param pos Position to schedule.
-	 * @param id ID of the block to tick.
+	 * @param block Type of the block to tick.
 	 */
-	public void delayTick(Position pos, byte id);
+	public void delayTick(Position pos);
 
 	/**
 	 * Attempts to grow a tree at the given coordinates.

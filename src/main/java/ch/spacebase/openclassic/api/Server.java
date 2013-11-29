@@ -105,18 +105,6 @@ public interface Server extends Game {
 	public String getURL();
 	
 	/**
-	 * Returns true if the server allows flight.
-	 * @return True if the server allows flight.
-	 */
-	public boolean isFlightAllowed();
-	
-	/**
-	 * Sets whether the server allows flight.
-	 * @param flight Whether the server allows flight.
-	 */
-	public void setAllowFlight(boolean flight);
-	
-	/**
 	 * Returns true if the server uses a whitelist.
 	 * @return True if the server uses a whitelist.
 	 */

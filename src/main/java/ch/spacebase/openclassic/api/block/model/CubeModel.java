@@ -17,9 +17,4 @@ public class CubeModel extends CuboidModel {
 		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
 	}
 	
-	@Override
-	public Class<? extends Model> getNetworkClass() {
-		return CubeModel.class;
-	}
-	
 }

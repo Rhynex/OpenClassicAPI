@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.model.CuboidModel;
-import ch.spacebase.openclassic.api.block.model.EmptyModel;
+import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.PlantModel;
 import ch.spacebase.openclassic.api.block.model.LiquidModel;
 import ch.spacebase.openclassic.api.block.physics.FallingBlockPhysics;
@@ -21,18 +21,18 @@ import ch.spacebase.openclassic.api.block.physics.SpreadPhysics;
  */
 public class VanillaBlock {
 
-	public static final BlockType AIR = new BlockType(0, StepSound.NONE, new EmptyModel()).setGas(true).setPreventsRendering(false).setOpaque(false).setSelectable(false).setPlaceIn(true);
+	public static final BlockType AIR = new BlockType(0, StepSound.NONE, new Model()).setPreventsRendering(false).setOpaque(false).setSelectable(false).setPlaceIn(true);
 	public static final BlockType STONE = new BlockType(1, StepSound.STONE, 1);
 	public static final BlockType GRASS = new BlockType(2, StepSound.GRASS, new int[] { 2, 0, 3, 3, 3, 3 }).setSelectable(false);
 	public static final BlockType DIRT = new BlockType(3, StepSound.GRAVEL, 2);
 	public static final BlockType COBBLESTONE = new BlockType(4, StepSound.STONE, 16);
 	public static final BlockType WOOD = new BlockType(5, StepSound.WOOD, 4);
 	public static final BlockType SAPLING = new BlockType(6, StepSound.GRASS, new PlantModel(BlockType.TERRAIN_TEXTURE, 15)).setPreventsRendering(false).setOpaque(false);
-	public static final BlockType BEDROCK = new BlockType(7, StepSound.STONE, 17).setSelectable(false);
-	public static final BlockType WATER = new BlockType(8, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 14)).setTickDelay(5).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setFogDensity(0.1f).setFogColor(5, 5, 51).setSpeedModifier(0.8f).setLiquidId(0);
-	public static final BlockType STATIONARY_WATER = new BlockType(9, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 14)).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setFogDensity(0.1f).setFogColor(5, 5, 51).setSpeedModifier(0.8f).setLiquidId(0);
-	public static final BlockType LAVA = new BlockType(10, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30)).setTickDelay(20).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setBrightness(1).setFogDensity(2).setFogColor(153, 26, 0).setSpeedModifier(0.5f).setLiquidId(1);
-	public static final BlockType STATIONARY_LAVA = new BlockType(11, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30)).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setBrightness(1).setFogDensity(2).setFogColor(153, 26, 0).setSpeedModifier(0.5f).setLiquidId(1);
+	public static final BlockType BEDROCK = new BlockType(7, StepSound.STONE, 17).setSelectable(false).setUnbreakable(false);
+	public static final BlockType WATER = new BlockType(8, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 14, false)).addOutwardModel(new LiquidModel(BlockType.TERRAIN_TEXTURE, 14, true), BlockFace.UP).setTickDelay(5).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setFogDensity(0.1f).setFogColor(5, 5, 51).setSpeedModifier(0.8f).setLiquidName("water");
+	public static final BlockType STATIONARY_WATER = new BlockType(9, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 14, false)).addOutwardModel(new LiquidModel(BlockType.TERRAIN_TEXTURE, 14, true), BlockFace.UP).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setFogDensity(0.1f).setFogColor(5, 5, 51).setSpeedModifier(0.8f).setLiquidName("water");
+	public static final BlockType LAVA = new BlockType(10, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30, false)).addOutwardModel(new LiquidModel(BlockType.TERRAIN_TEXTURE, 30, true), BlockFace.UP).setTickDelay(20).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setBrightness(1).setFogDensity(2).setFogColor(153, 26, 0).setSpeedModifier(0.5f).setLiquidName("lava");
+	public static final BlockType STATIONARY_LAVA = new BlockType(11, StepSound.NONE, new LiquidModel(BlockType.TERRAIN_TEXTURE, 30, false)).addOutwardModel(new LiquidModel(BlockType.TERRAIN_TEXTURE, 30, true), BlockFace.UP).setLiquid(true).setPreventsRendering(false).setSelectable(false).setPlaceIn(true).setBrightness(1).setFogDensity(2).setFogColor(153, 26, 0).setSpeedModifier(0.5f).setLiquidName("lava");
 	public static final BlockType SAND = new BlockType(12, StepSound.SAND, 18).setTickDelay(1);
 	public static final BlockType GRAVEL = new BlockType(13, StepSound.GRAVEL, 19).setTickDelay(1);
 	public static final BlockType GOLD_ORE = new BlockType(14, StepSound.STONE, 32);

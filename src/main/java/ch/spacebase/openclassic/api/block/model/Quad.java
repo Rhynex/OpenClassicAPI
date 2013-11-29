@@ -74,17 +74,6 @@ public interface Quad {
 	public void render(float x, float y, float z, float brightness, boolean batch);
 	
 	/**
-	 * Renders the quad.
-	 * @param x X to render at.
-	 * @param y Y to render at.
-	 * @param z Z to render at.
-	 * @param brightness Brightness to render at.
-	 * @param batch Whether this render is part of an internal batch.
-	 * @param cull Whether culling should be enabled for this render.
-	 */
-	public void render(float x, float y, float z, float brightness, boolean batch, boolean cull);
-	
-	/**
 	 * Renders the quad at the given scale.
 	 * @param x X to render at.
 	 * @param y Y to render at.
@@ -105,5 +94,12 @@ public interface Quad {
 	 * @param parent The quad's new parent.
 	 */
 	public void setParent(Model parent);
+
+	/**
+	 * Creates a copy of this quad with reversed vertex order.
+	 * @param newId Id of the resulting quad.
+	 * @return The resulting quad.
+	 */
+	public Quad reverseVertices(int newId);
 	
 }
