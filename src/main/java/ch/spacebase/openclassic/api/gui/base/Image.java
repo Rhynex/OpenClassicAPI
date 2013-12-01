@@ -1,6 +1,6 @@
 package ch.spacebase.openclassic.api.gui.base;
 
-import ch.spacebase.openclassic.api.block.model.SubTexture;
+import ch.spacebase.openclassic.api.block.model.Texture;
 import ch.spacebase.openclassic.api.gui.GuiComponent;
 
 /**
@@ -8,13 +8,13 @@ import ch.spacebase.openclassic.api.gui.GuiComponent;
  */
 public class Image extends GuiComponent {
 
-	private SubTexture tex;
+	private Texture tex;
 	
-	public Image(String name, int x, int y, SubTexture tex) {
-		this(name, x, y, (int) Math.abs(tex.getX2() - tex.getX1()), (int) Math.abs(tex.getY2() - tex.getY1()), tex);
+	public Image(String name, int x, int y, Texture tex) {
+		this(name, x, y, tex.getWidth(), tex.getHeight(), tex);
 	}
 	
-	public Image(String name, int x, int y, int width, int height, SubTexture tex) {
+	public Image(String name, int x, int y, int width, int height, Texture tex) {
 		super(name, x, y, width, height);
 		this.tex = tex;
 	}
@@ -23,7 +23,7 @@ public class Image extends GuiComponent {
 	 * Gets the texture being displayed.
 	 * @return The texture being displayed.
 	 */
-	public SubTexture getTexture() {
+	public Texture getTexture() {
 		return this.tex;
 	}
 	
@@ -31,10 +31,10 @@ public class Image extends GuiComponent {
 	 * Sets the texture being displayed.
 	 * @param tex The new texture being displayed.
 	 */
-	public void setTexture(SubTexture tex, boolean resizeToImage) {
+	public void setTexture(Texture tex, boolean resizeToImage) {
 		this.tex = tex;
 		if(resizeToImage) {
-			this.setSize((int) Math.abs(tex.getX2() - tex.getX1()), (int) Math.abs(tex.getY2() - tex.getY1()));
+			this.setSize(tex.getWidth(), tex.getHeight());
 		}
 	}
 	

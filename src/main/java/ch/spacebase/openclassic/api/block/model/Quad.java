@@ -52,7 +52,7 @@ public interface Quad {
 	 * Gets the quad's texture.
 	 * @return The quad's texture.
 	 */
-	public SubTexture getTexture();
+	public Texture getTexture();
 	
 	/**
 	 * Renders the quad.
@@ -69,7 +69,7 @@ public interface Quad {
 	 * @param y Y to render at.
 	 * @param z Z to render at.
 	 * @param brightness Brightness to render at.
-	 * @param batch Whether this render is part of an internal batch.
+	 * @param batch Whether this render is part of a level rendering batch.
 	 */
 	public void render(float x, float y, float z, float brightness, boolean batch);
 	

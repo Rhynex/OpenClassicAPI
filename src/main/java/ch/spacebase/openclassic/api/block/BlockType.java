@@ -3,9 +3,11 @@ package ch.spacebase.openclassic.api.block;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.block.model.CubeModel;
 import ch.spacebase.openclassic.api.block.model.Model;
 import ch.spacebase.openclassic.api.block.model.Texture;
+import ch.spacebase.openclassic.api.block.model.TextureFactory;
 import ch.spacebase.openclassic.api.block.physics.BlockPhysics;
 import ch.spacebase.openclassic.api.level.Level;
 
@@ -14,7 +16,7 @@ import ch.spacebase.openclassic.api.level.Level;
  */
 public class BlockType {
 	
-	public static final Texture TERRAIN_TEXTURE = new Texture("/textures/level/terrain.png", true, 256, 256, 16);
+	public static final Texture TERRAIN_TEXTURE = TextureFactory.getFactory().newTexture(OpenClassic.class.getResource("/textures/level/terrain.png"));
 	
 	private byte id;
 	private Model model;

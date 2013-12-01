@@ -1,131 +1,120 @@
 package ch.spacebase.openclassic.api.block.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
 
 /**
- * Represents a texture.
+ * A texture for use in rendering.
  */
-public class Texture {
-
-	private String texture;
-	private boolean jar;
-	
-	private int width;
-	private int height;
-	private int subWidth;
-	private int subHeight;
-	private List<SubTexture> subTextures;
-	
-	public Texture(String texture, boolean jar, int width, int height) {
-		this(texture, jar, width, height, width, height);
-	}
-	
-	public Texture(String texture, boolean jar, int width, int height, int subSize) {
-		this(texture, jar, width, height, subSize, subSize);
-	}
-	
-	public Texture(String texture, boolean jar, int width, int height, int subWidth, int subHeight) {
-		this.texture = texture;
-		this.jar = jar;
-		this.width = width;
-		this.height = height;
-		this.subWidth = subWidth;
-		this.subHeight = subHeight;
-		this.subTextures = new ArrayList<SubTexture>((width / subWidth) * (height / subHeight));
-		
-		int count = 0;
-		for (int y = 0; y < height / subHeight; y++) {
-			for (int x = 0; x < width / subWidth; x++) {
-				this.subTextures.add(count, new SubTexture(this, x * subWidth, y * subHeight, subWidth, subHeight));
-				count++;
-			}
-		}
-	}
-	
-	/**
-	 * Gets the SubTexture with the given ID.
-	 * @param id ID of the SubTexture.
-	 * @return The SubTexture with the given ID.
-	 */
-	public SubTexture getSubTexture(int id) {
-		return this.subTextures.get(id);
-	}
-	
-	/**
-	 * Gets the SubTexture with the given dimensions.
-	 * @param x X of the subtexture.
-	 * @param y Y of the subtexture.
-	 * @param width Width of the subtexture.
-	 * @param height Height of the subtexture.
-	 * @return The SubTexture with the given dimensions.
-	 */
-	public SubTexture getSubTexture(int x, int y, int width, int height) {
-		return new SubTexture(this, x, y, width, height);
-	}
-	
-	/**
-	 * Gets the path of this texture's file.
-	 * @return The path of this texture's file.
-	 */
-	public String getTexture() {
-		return this.texture;
-	}
-	
-	/**
-	 * Sets the texture file of this texture.
-	 * @param path Path of the texture file.
-	 */
-	public void setTexture(String texture) {
-		this.texture = texture;
-	}
-	
-	/**
-	 * Returns true if this texture is in the minecraft client jar file.
-	 * @return True if the texture is in the minecraft jar.
-	 */
-	public boolean isInJar() {
-		return this.jar;
-	}
+public interface Texture {
 
 	/**
-	 * Gets the width of each SubTexture belonging to this texture.
-	 * @return Each SubTexture's width.
+	 * Gets the path of this texture, mainly used as an identifier.
+	 * @return The texture's path.
 	 */
-	public int getSubTextureWidth() {
-		return this.subWidth;
-	}
+	public String getPath();
 	
 	/**
-	 * Gets the height of each SubTexture belonging to this texture.
-	 * @return Each SubTexture's height.
+	 * Gets the URL of this texture.
+	 * @return The texture's URL.
 	 */
-	public int getSubTextureHeight() {
-		return this.subHeight;
-	}
-
+	public URL getURL();
+	
+	/**
+	 * Gets the RGBA values of this texture.
+	 * @return The texture's pixels.
+	 */
+	public int[] getRGBA();
+	
+	/**
+	 * Gets the RGBA value at the given texture coordinates.
+	 * @param x X coordinate.
+	 * @param y Y coordinate.
+	 * @return The RGBA value at the given coordinates.
+	 */
+	public int getRGB(int x, int y);
+	
+	/**
+	 * Gets the rendering X of this texture relative to the X of the first non-subtexture parent of this texture.
+	 * @return The texture's X.
+	 */
+	public int getX();
+	
+	/**
+	 * Gets the rendering Y of this texture relative to the X of the first non-subtexture parent of this texture.
+	 * @return The texture's Y.
+	 */
+	public int getY();
+	
 	/**
 	 * Gets the width of this texture.
 	 * @return The texture's width.
 	 */
-	public int getWidth() {
-		return this.width;
-	}
-
+	public int getWidth();
+	
 	/**
 	 * Gets the height of this texture.
 	 * @return The texture's height.
 	 */
-	public int getHeight() {
-		return this.height;
-	}
-
+	public int getHeight();
+	
 	/**
-	 * Gets the number of subtextures in this texture.
-	 * @return The number of subtextures in this texture.
+	 * Gets the full width of this texture, returning this texture's width if it is a full texture or the width of the first non-subtexture parent of this texture if it is a sub texture.
+	 * @return The texture's full width.
 	 */
-	public int getSubTextures() {
-		return this.subTextures.size();
-	}
+	public int getFullWidth();
+	
+	/**
+	 * Gets the full height of this texture, returning this texture's height if it is a full texture or the height of the first non-subtexture parent of this texture if it is a sub texture.
+	 * @return The texture's full height.
+	 */
+	public int getFullHeight();
+	
+	/**
+	 * Gets a sub texture from this texture.
+	 * @param id Id to derive coordinates from. ((id % (getWidth() / width)) * (getWidth() / width), (id / (getHeight() / height)) * (getHeight() / height))
+	 * @param width Width of sub texture.
+	 * @param height Height of the sub texture.
+	 * @return The resulting sub texture.
+	 */
+	public Texture getSubTexture(int id, int width, int height);
+	
+	/**
+	 * Gets a sub texture from this texture.
+	 * @param x X of the sub texture.
+	 * @param y Y of the sub texture.
+	 * @param width Width of sub texture.
+	 * @param height Height of the sub texture.
+	 * @return The resulting sub texture.
+	 */
+	public Texture getSubTexture(int x, int y, int width, int height);
+	
+	/**
+	 * Gets whether this texture is currently bound.
+	 * @return Whether this texture is bound.
+	 */
+	public boolean isBound();
+	
+	/**
+	 * Binds this texture for rendering.
+	 */
+	public void bind();
+	
+	/**
+	 * Gets the frame width of this texture, or -1 if it is not animated.
+	 * @return The texture's frame width.
+	 */
+	public int getFrameWidth();
+	
+	/**
+	 * Gets the frame height of this texture, or -1 if it is not animated.
+	 * @return The texture's frame height.
+	 */
+	public int getFrameHeight();
+	
+	/**
+	 * Gets the frame speed of this texture, or -1 if it is not animated.
+	 * @return The texture's frame speed.
+	 */
+	public int getFrameSpeed();
 	
 }

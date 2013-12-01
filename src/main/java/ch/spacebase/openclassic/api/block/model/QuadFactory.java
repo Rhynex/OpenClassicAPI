@@ -33,7 +33,7 @@ public abstract class QuadFactory {
 	 * @param texture Texture of the quad.
 	 * @return The created quad.
 	 */
-	public abstract Quad newQuad(int id, SubTexture texture);
+	public abstract Quad newQuad(int id, Texture texture);
 	
 	/**
 	 * Creates a new quad.
@@ -45,6 +45,6 @@ public abstract class QuadFactory {
 	 * @param v4 Fourth vertex of the quad.
 	 * @return The created quad.
 	 */
-	public abstract Quad newQuad(int id, SubTexture texture, Vertex v1, Vertex v2, Vertex v3, Vertex v4);
+	public abstract Quad newQuad(int id, Texture texture, Vertex v1, Vertex v2, Vertex v3, Vertex v4);
 	
 }

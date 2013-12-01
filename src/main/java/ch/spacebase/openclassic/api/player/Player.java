@@ -41,16 +41,16 @@ public interface Player extends Sender {
 	public void setDisplayName(String name);
 	
 	/**
-	 * Gets the current ID of the block placement mode the player has.
-	 * @return The block ID of the current block mode.
+	 * Gets the player's block placement mode.
+	 * @return The current block placement mode
 	 */
-	public byte getPlaceMode();
+	public BlockType getPlaceMode();
 	
 	/**
-	 * Sets the block ID of the current block placement mode the player has.
-	 * @param type Block ID to set it to.
+	 * Sets the player's block placement mode.
+	 * @param type Block to set it to.
 	 */
-	public void setPlaceMode(int type);
+	public void setPlaceMode(BlockType type);
 	
 	/**
 	 * Moves the player to the given position.

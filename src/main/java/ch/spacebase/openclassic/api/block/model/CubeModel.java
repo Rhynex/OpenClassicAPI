@@ -13,8 +13,4 @@ public class CubeModel extends CuboidModel {
 		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId });
 	}
 	
-	public CubeModel(String texture, int textureSize) {
-		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0);
-	}
-	
 }

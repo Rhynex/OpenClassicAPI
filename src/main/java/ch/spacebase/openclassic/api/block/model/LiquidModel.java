@@ -25,8 +25,4 @@ public class LiquidModel extends CubeModel {
 		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, top);
 	}
 
-	public LiquidModel(String texture, int textureSize, boolean top) {
-		this(new Texture(texture, false, textureSize, textureSize, textureSize), 0, top);
-	}
-
 }
