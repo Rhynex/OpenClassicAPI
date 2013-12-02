@@ -14,8 +14,10 @@ public class CuboidModel extends Model {
 	private float x2;
 	private float y2;
 	private float z2;
+	private int subWidth;
+	private int subHeight;
 
-	public CuboidModel(Texture texture, int[] textureIds, float x1, float y1, float z1, float x2, float y2, float z2) {
+	public CuboidModel(Texture texture, int[] textureIds, float x1, float y1, float z1, float x2, float y2, float z2, int subWidth, int subHeight) {
 		Validate.isTrue(textureIds.length == 6, "Texture ID array must have length of 6!");
 		this.x1 = x1;
 		this.y1 = y1;
@@ -23,6 +25,8 @@ public class CuboidModel extends Model {
 		this.x2 = x2;
 		this.y2 = y2;
 		this.z2 = z2;
+		this.subWidth = subWidth;
+		this.subHeight = subHeight;
 		if(x1 == 0 && y1 == 0 && z1 == 0 && x2 == 1 && y2 == 1 && z2 == 1) {
 			this.cube = true;
 		}
@@ -73,8 +77,8 @@ public class CuboidModel extends Model {
 		this.addQuad(face4);
 	}
 
-	public CuboidModel(Texture texture, int textureId, float x1, float y1, float z1, float x2, float y2, float z2) {
-		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, x1, y1, z1, x2, y2, z2);
+	public CuboidModel(Texture texture, int textureId, float x1, float y1, float z1, float x2, float y2, float z2, int subWidth, int subHeight) {
+		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, x1, y1, z1, x2, y2, z2, subWidth, subHeight);
 	}
 
 	/**
@@ -131,6 +135,22 @@ public class CuboidModel extends Model {
 	 */
 	public float getZ2() {
 		return this.z2;
+	}
+	
+	/**
+	 * Gets the model's sub texture width.
+	 * @return The model's sub texture width.
+	 */
+	public int getSubWidth() {
+		return this.subWidth;
+	}
+
+	/**
+	 * Gets the model's sub texture height.
+	 * @return The model's sub texture height.
+	 */
+	public int getSubHeight() {
+		return this.subHeight;
 	}
 
 }

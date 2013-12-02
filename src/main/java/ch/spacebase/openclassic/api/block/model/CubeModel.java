@@ -5,12 +5,12 @@ package ch.spacebase.openclassic.api.block.model;
  */
 public class CubeModel extends CuboidModel {
 
-	public CubeModel(Texture texture, int textureIds[]) {
-		super(texture, textureIds, 0, 0, 0, 1, 1, 1);
+	public CubeModel(Texture texture, int textureIds[], int subWidth, int subHeight) {
+		super(texture, textureIds, 0, 0, 0, 1, 1, 1, subWidth, subHeight);
 	}
 	
-	public CubeModel(Texture texture, int textureId) {
-		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId });
+	public CubeModel(Texture texture, int textureId, int subWidth, int subHeight) {
+		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, subWidth, subHeight);
 	}
 	
 }

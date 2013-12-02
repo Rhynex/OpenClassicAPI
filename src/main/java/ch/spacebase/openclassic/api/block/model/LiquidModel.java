@@ -5,8 +5,9 @@ package ch.spacebase.openclassic.api.block.model;
  */
 public class LiquidModel extends CubeModel {
 	
-	public LiquidModel(Texture texture, int textureIds[], boolean top) {
-		super(texture, textureIds);
+	public LiquidModel(Texture texture, int textureIds[], boolean top, int subWidth, int subHeight) {
+		super(texture, textureIds, subWidth, subHeight);
+		this.setUseCulling(false);
 		this.setCollisionBox(null);
 		this.setSelectionBox(null);
 		if(top) {
@@ -14,15 +15,15 @@ public class LiquidModel extends CubeModel {
 				for(int vert = 0; vert < quad.getVertices().size(); vert++) {
 					Vertex v = quad.getVertices().get(vert);
 					if(v.getY() == 1) {
-						quad.addVertex(vert, new Vertex(v.getX(), 0.95f, v.getZ()));
+						quad.setVertex(vert, new Vertex(v.getX(), 0.95f, v.getZ()));
 					}
 				}
 			}
 		}
 	}
 
-	public LiquidModel(Texture texture, int textureId, boolean top) {
-		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, top);
+	public LiquidModel(Texture texture, int textureId, boolean top, int subWidth, int subHeight) {
+		this(texture, new int[] { textureId, textureId, textureId, textureId, textureId, textureId }, top, subWidth, subHeight);
 	}
 
 }

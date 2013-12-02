@@ -14,11 +14,11 @@ public interface Quad {
 	public int getId();
 	
 	/**
-	 * Adds a vertex to this quad.
-	 * @param id ID of the vertex.
-	 * @param vertex Vertex to add.
+	 * Sets the given vertex id to the given vertex.
+	 * @param id Id of the vertex.
+	 * @param vertex Vertex to set.
 	 */
-	public void addVertex(int id, Vertex vertex);
+	public void setVertex(int id, Vertex vertex);
 	
 	/**
 	 * Adds a vertex to this quad.

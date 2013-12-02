@@ -52,7 +52,7 @@ public class BlockType {
 	}
 	
 	public BlockType(int id, StepSound sound, Texture tex, int[] textures) {
-		this(id, sound, new CubeModel(tex, textures));
+		this(id, sound, new CubeModel(tex, textures, 16, 16));
 	}
 	
 	public BlockType(int id, StepSound sound, Model model) {

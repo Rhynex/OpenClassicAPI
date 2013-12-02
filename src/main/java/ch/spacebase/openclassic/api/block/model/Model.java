@@ -13,6 +13,7 @@ public class Model {
 	private List<Quad> quads = new ArrayList<Quad>();
 	private BoundingBox collision;
 	private BoundingBox selection;
+	private boolean culling = true;
 	
 	/**
 	 * Adds a quad to this model.
@@ -61,7 +62,10 @@ public class Model {
 	 * @return This model's collision box.
 	 */
 	public BoundingBox getCollisionBox(int x, int y, int z) {
-		if(this.collision == null) return null;
+		if(this.collision == null) {
+			return null;
+		}
+		
 		BoundingBox bb = this.collision.clone();
 		bb.move(x, y, z);
 		return bb;
@@ -104,7 +108,10 @@ public class Model {
 	 * @return This model's selection box.
 	 */
 	public BoundingBox getSelectionBox(int x, int y, int z) {
-		if(this.selection == null) return null;
+		if(this.selection == null) {
+			return null;
+		}
+		
 		BoundingBox bb = this.selection.clone();
 		bb.move(x, y, z);
 		return bb;
@@ -140,6 +147,29 @@ public class Model {
 	}
 	
 	/**
+	 * Gets whether this model should have face culling enabled.
+	 * @return Whether this model should use culling.
+	 */
+	public boolean useCulling() {
+		return this.culling;
+	}
+	
+	/**
+	 * Sets whether this model should have face culling enabled.
+	 * @return Whether this model should use culling.
+	 */
+	public void setUseCulling(boolean culling) {
+		this.culling = culling;
+	}
+	
+	/**
+	 * Clears the quads in a model.
+	 */
+	public void clearQuads() {
+		this.quads.clear();
+	}
+	
+	/**
 	 * Renders the model.
 	 * @param x X to render at.
 	 * @param y Y to render at.
@@ -162,15 +192,10 @@ public class Model {
 	 */
 	public void render(float x, float y, float z, float brightness, boolean batch) {
 		for(Quad quad : this.quads) {
-			quad.render(x, y, z, brightness, batch);
+			if(quad != null) {
+				quad.render(x, y, z, brightness, batch);
+			}
 		}
-	}
-
-	/**
-	 * Clears the quads in a model.
-	 */
-	public void clearQuads() {
-		this.quads.clear();
 	}
 
 	/**
