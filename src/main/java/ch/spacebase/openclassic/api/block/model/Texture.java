@@ -89,12 +89,6 @@ public interface Texture {
 	public Texture getSubTexture(int x, int y, int width, int height);
 	
 	/**
-	 * Gets whether this texture is currently bound.
-	 * @return Whether this texture is bound.
-	 */
-	public boolean isBound();
-	
-	/**
 	 * Binds this texture for rendering.
 	 */
 	public void bind();

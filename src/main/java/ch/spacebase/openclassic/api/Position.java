@@ -72,6 +72,30 @@ public class Position implements Cloneable {
 	}
 	
 	/**
+	 * Gets the previous X coordinate of this position.
+	 * @return The X coordinate.
+	 */
+	public float getPreviousX() {
+		return this.prevX;
+	}
+	
+	/**
+	 * Gets the previous Y coordinate of this position.
+	 * @return The Y coordinate.
+	 */
+	public float getPreviousY() {
+		return this.prevY;
+	}
+	
+	/**
+	 * Gets the previous Z coordinate of this position.
+	 * @return The Z coordinate.
+	 */
+	public float getPreviousZ() {
+		return this.prevZ;
+	}
+	
+	/**
 	 * Gets the interpolated X coordinate of this position.
 	 * @param interpolation Interpolation to use.
 	 * @return The interpolated X coordinate.
@@ -385,17 +409,40 @@ public class Position implements Cloneable {
      * @param pos Other position.
      * @return Distance between the positions.
      */
-    public double distance(Position pos) {
-        return Math.sqrt(this.distanceSquared(pos));
+    public float distance(Position pos) {
+        return this.distance(pos.getX(), pos.getY(), pos.getZ());
     }
 
+    /**
+     * Gets the distance between this position and another.
+     * WARNING: Very costly.
+     * @param x X coordinate of the other position.
+     * @param y Y coordinate of the other position.
+     * @param z Z coordinate of the other position.
+     * @return Distance between the positions.
+     */
+    public float distance(float x, float y, float z) {
+        return (float) Math.sqrt(this.distanceSquared(x, y, z));
+    }
+    
     /**
      * Get the squared distance between this position and another.
      * @param pos Other position.
      * @return Square distance between the positions.
      */
-    public double distanceSquared(Position pos) {
-        return Math.pow(this.x - pos.x, 2) + Math.pow(this.y - pos.y, 2) + Math.pow(this.z - pos.z, 2);
+    public float distanceSquared(Position pos) {
+    	return this.distanceSquared(pos.getX(), pos.getY(), pos.getZ());
+    }
+    
+    /**
+     * Get the squared distance between this position and another.
+     * @param x X coordinate of the other position.
+     * @param y Y coordinate of the other position.
+     * @param z Z coordinate of the other position.
+     * @return Square distance between the positions.
+     */
+    public float distanceSquared(float x, float y, float z) {
+        return (float) (Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2) + Math.pow(this.z - z, 2));
     }
     
     /**
@@ -415,13 +462,24 @@ public class Position implements Cloneable {
     
     /**
      * Converts this position into a position vector.
+     * @return The resulting position vector.
      */
     public Vector toPosVector() {
     	return new Vector(this.x, this.y, this.z);
     }
     
     /**
+     * Converts this position into a position vector, interpolating the coordinate values.
+     * @param interpolation Value to use for interpolation. 
+     * @return The resulting position vector.
+     */
+    public Vector toPosVector(float interpolation) {
+    	return new Vector(this.getInterpolatedX(interpolation), this.getInterpolatedY(interpolation), this.getInterpolatedZ(interpolation));
+    }
+    
+    /**
      * Converts this position into a direction vector.
+     * @return The resulting direction vector.
      */
     public Vector toDirVector() {
     	return MathHelper.toForwardVec(this.yaw, this.pitch);

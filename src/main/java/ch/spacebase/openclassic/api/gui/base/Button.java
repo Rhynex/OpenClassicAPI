@@ -2,6 +2,7 @@ package ch.spacebase.openclassic.api.gui.base;
 
 import ch.spacebase.openclassic.api.OpenClassic;
 import ch.spacebase.openclassic.api.gui.GuiComponent;
+import ch.spacebase.openclassic.api.input.Mouse;
 
 /**
  * Represents a button.
@@ -74,7 +75,7 @@ public class Button extends GuiComponent {
 	
 	@Override
 	public void onMouseClick(int x, int y, int button) {
-		if(button != 0 || !this.isActive()) {
+		if(button != Mouse.LEFT_BUTTON || !this.isActive()) {
 			return;
 		}
 		

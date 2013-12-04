@@ -25,35 +25,11 @@ public abstract class InputHelper {
 	}
 	
 	/**
-	 * Returns true if the given mouse button is down.
-	 * @param button Button to check.
-	 * @return True if the button is down.
-	 */
-	public abstract boolean isMouseButtonDown(int button);
-	
-	/**
 	 * Returns true if the given key is down.
 	 * @param key Key to check.
 	 * @return True if the key is down.
 	 */
 	public abstract boolean isKeyDown(int key);
-
-	/**
-	 * Gets the X of the mouse.
-	 * @return The X of the mouse.
-	 */
-	public abstract int getMouseX();
-
-	/**
-	 * Gets the Y of the mouse.
-	 * @return The Y of the mouse.
-	 */
-	public abstract int getMouseY();
-
-	/**
-	 * Returns mouse focus to the MainScreen.
-	 */
-	public abstract void grabMouse();
 
 	/**
 	 * Sets whether keyboard repeat events are enabled.

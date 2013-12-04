@@ -81,10 +81,7 @@ public class Vector implements Cloneable {
 	 * @param vec Vector to get the coordinates from.
 	 */
 	public Vector set(Vector vec) {
-		this.x = vec.getX();
-		this.y = vec.getY();
-		this.z = vec.getZ();
-		return this;
+		return this.set(vec.getX(), vec.getY(), vec.getZ());
 	}
 	
 	/**
@@ -189,8 +186,8 @@ public class Vector implements Cloneable {
      * @param vec Other vector.
      * @return Distance between the vectors.
      */
-    public double distance(Vector vec) {
-        return Math.sqrt(this.distanceSquared(vec));
+    public float distance(Vector vec) {
+        return (float) Math.sqrt(this.distanceSquared(vec));
     }
 
     /**
@@ -198,8 +195,8 @@ public class Vector implements Cloneable {
      * @param vec Other vector.
      * @return Square distance between the vectors.
      */
-    public double distanceSquared(Vector vec) {
-        return Math.pow(this.x - vec.x, 2) + Math.pow(this.y - vec.y, 2) + Math.pow(this.z - vec.z, 2);
+    public float distanceSquared(Vector vec) {
+        return (float) (Math.pow(this.x - vec.x, 2) + Math.pow(this.y - vec.y, 2) + Math.pow(this.z - vec.z, 2));
     }
     
     /**
