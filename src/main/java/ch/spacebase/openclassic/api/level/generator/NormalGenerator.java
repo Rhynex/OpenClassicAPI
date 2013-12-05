@@ -51,8 +51,8 @@ public final class NormalGenerator extends Generator {
 		for(int x = 0; x < level.getWidth(); x++) {
 			this.setProgress(x * 100 / (level.getWidth() - 1));
 			for(int z = 0; z < level.getDepth(); z++) {
-				double val1 = erodeNoise1.compute((x << 1), (z << 1)) / 8.0D;
-				int val2 = erodeNoise2.compute((x << 1), (z << 1)) > 0.0D ? 1 : 0;
+				double val1 = erodeNoise1.compute((x << 1), (z << 1)) / 8;
+				int val2 = erodeNoise2.compute((x << 1), (z << 1)) > 0 ? 1 : 0;
 				if(val1 > 2) {
 					int val = ((flatNoise[x + z * level.getWidth()] - val2) / 2 << 1) + val2;
 					flatNoise[x + z * level.getWidth()] = val;
@@ -65,7 +65,7 @@ public final class NormalGenerator extends Generator {
 		for(int x = 0; x < level.getWidth(); x++) {
 			this.setProgress(x * 100 / (level.getWidth() - 1));
 			for(int z = 0; z < level.getDepth(); z++) {
-				int val = (int) (soilNoise.compute(x, z) / 24.0D) - 4;
+				int val = (int) (soilNoise.compute(x, z) / 24) - 4;
 				int base = flatNoise[x + z * level.getWidth()] + level.getWaterLevel();
 				int height = base + val;
 				flatNoise[x + z * level.getWidth()] = Math.max(base, height);
@@ -114,18 +114,17 @@ public final class NormalGenerator extends Generator {
 				baseX += MathHelper.sin(theta1) * MathHelper.cos(theta2);
 				baseZ += MathHelper.cos(theta1) * MathHelper.cos(theta2);
 				baseY += MathHelper.sin(theta2);
-				theta1 += theta1Mod * 0.2F;
-				theta1Mod = (theta1Mod *= 0.9F) + (this.random.nextFloat() - this.random.nextFloat());
-				theta2 = (theta2 + theta2Mod * 0.5F) * 0.5F;
-				theta2Mod = (theta2Mod *= 0.75F) + (this.random.nextFloat() - this.random.nextFloat());
-				if(this.random.nextFloat() >= 0.25F) {
-					float cx = baseX + (this.random.nextFloat() * 4.0F - 2.0F) * 0.2F;
-					float cy = baseY + (this.random.nextFloat() * 4.0F - 2.0F) * 0.2F;
-					float cz = baseZ + (this.random.nextFloat() * 4.0F - 2.0F) * 0.2F;
+				theta1 += theta1Mod * 0.18f;
+				theta1Mod = theta1Mod + (this.random.nextFloat() - this.random.nextFloat());
+				theta2 = (theta2 + theta2Mod * 0.5f) * 0.375f;
+				theta2Mod = theta2Mod + (this.random.nextFloat() - this.random.nextFloat());
+				if(this.random.nextFloat() >= 0.25f) {
+					float cx = baseX + (this.random.nextFloat() * 4 - 2) * 0.2f;
+					float cy = baseY + (this.random.nextFloat() * 4 - 2) * 0.2f;
+					float cz = baseZ + (this.random.nextFloat() * 4 - 2) * 0.2f;
 					float radius = (level.getHeight() - cy) / level.getHeight();
-					radius = 1.2F + (radius * 3.5F + 1.0F) * rad;
+					radius = 1.2F + (radius * 3.5f + 1) * rad;
 					radius = MathHelper.sin(count * (float) Math.PI / total) * radius;
-
 					for(int bx = (int) (cx - radius); bx <= (int) (cx + radius); bx++) {
 						for(int by = (int) (cy - radius); by <= (int) (cy + radius); by++) {
 							for(int bz = (int) (cz - radius); bz <= (int) (cz + radius); bz++) {
@@ -282,7 +281,6 @@ public final class NormalGenerator extends Generator {
 			this.setProgress(tree * 50 / (trees - 1) + 50);
 			int x = this.random.nextInt(level.getWidth());
 			int z = this.random.nextInt(level.getDepth());
-
 			for(int xc = 0; xc < 20; xc++) {
 				int tx = x;
 				int tz = z;
@@ -361,21 +359,21 @@ public final class NormalGenerator extends Generator {
 			float bx = this.random.nextFloat() * level.getWidth();
 			float by = this.random.nextFloat() * level.getHeight();
 			float bz = this.random.nextFloat() * level.getDepth();
-			int total = (int) ((this.random.nextFloat() + this.random.nextFloat()) * 75.0F * chance / 100.0F);
-			float theta1 = this.random.nextFloat() * (float) Math.PI * 2.0F;
-			float theta1Mod = 0.0F;
-			float theta2 = this.random.nextFloat() * (float) Math.PI * 2.0F;
-			float theta2Mod = 0.0F;
+			int total = (int) ((this.random.nextFloat() + this.random.nextFloat()) * 75 * chance / 100f);
+			float theta1 = this.random.nextFloat() * MathHelper.TWO_PI;
+			float theta1Mod = 0;
+			float theta2 = this.random.nextFloat() * MathHelper.TWO_PI;
+			float theta2Mod = 0;
 
 			for(int count = 0; count < total; count++) {
 				bx += MathHelper.sin(theta1) * MathHelper.cos(theta2);
 				bz += MathHelper.cos(theta1) * MathHelper.cos(theta2);
 				by += MathHelper.sin(theta2);
-				theta1 += theta1Mod * 0.2F;
-				theta1Mod = (theta1Mod * 0.9F) + (this.random.nextFloat() - this.random.nextFloat());
-				theta2 = (theta2 + theta2Mod * 0.5F) * 0.5F;
-				theta2Mod = (theta2Mod * 0.9F) + (this.random.nextFloat() - this.random.nextFloat());
-				float radius = MathHelper.sin(count * (float) Math.PI / total) * chance / 100.0F + 1.0F;
+				theta1 += theta1Mod * 0.2f;
+				theta1Mod = (theta1Mod * 0.9f) + (this.random.nextFloat() - this.random.nextFloat());
+				theta2 = (theta2 + theta2Mod * 0.5f) * 0.5f;
+				theta2Mod = (theta2Mod * 0.9f) + (this.random.nextFloat() - this.random.nextFloat());
+				float radius = MathHelper.sin(count * MathHelper.PI / total) * chance / 100f + 1;
 				for(int ox = (int) (bx - radius); ox <= (int) (bx + radius); ox++) {
 					for(int oy = (int) (by - radius); oy <= (int) (by + radius); oy++) {
 						for(int oz = (int) (bz - radius); oz <= (int) (bz + radius); oz++) {
